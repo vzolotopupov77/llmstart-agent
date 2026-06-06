@@ -2,6 +2,7 @@
 
 import json
 import logging
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 
 from langchain.agents import create_agent
@@ -64,7 +65,7 @@ class ReactRunner:
         history: list[BaseMessage],
         user_message: str,
         callbacks: list[BaseCallbackHandler] | None = None,
-        metadata: dict[str, object] | None = None,
+        metadata: Mapping[str, object] | None = None,
     ) -> TurnResult:
         """Execute one user turn and parse agent output."""
         messages = [*history, HumanMessage(content=user_message)]
@@ -72,7 +73,7 @@ class ReactRunner:
         if callbacks:
             run_config["callbacks"] = callbacks
         if metadata:
-            run_config["metadata"] = metadata
+            run_config["metadata"] = dict(metadata)
 
         try:
             result = self._agent.invoke(  # type: ignore[call-overload]
