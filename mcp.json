@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "langchain-docs": {
+      "url": "https://docs.langchain.com/mcp",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    "context7": {
+      "url": "https://mcp.context7.com/mcp",
+      "envFile": "${workspaceFolder}/.env",
+      "headers": {
+        "CONTEXT7_API_KEY": "${env:CONTEXT7_API_KEY}"
+      }
+    },
+    "langfuse-docs": {
+      "url": "https://langfuse.com/api/mcp",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    "langfuse": {
+      "url": "${env:LANGFUSE_MCP_URL}",
+      "envFile": "${workspaceFolder}/.env",
+      "headers": {
+        "Authorization": "Basic ${env:LANGFUSE_BASIC_AUTH}"
+      }
+    }
+  }
+}

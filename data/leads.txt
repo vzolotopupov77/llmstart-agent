@@ -1,0 +1,9 @@
+# LLMStart leads (JSON Lines, one object per line)
+{"email": "buyer@example.com", "phone": "+79990000001", "name": "Покупатель", "product_id": "ai-agents-combo", "channel": "web", "segment": "b2c", "ts": "2026-06-05T13:51:02.337010Z"}
+{"email": "user@example.com", "phone": "+79990001122", "name": "Иван", "product_id": "agents", "channel": "web", "segment": "b2c", "ts": "2026-06-05T13:51:02.381165Z"}
+{"email": "lead@example.com", "phone": "+79991112233", "name": "Мария", "product_id": "deep-agents", "channel": "telegram", "segment": "b2b", "ts": "2026-06-05T13:51:02.783549Z"}
+{"email": "buyer@example.com", "phone": "+79990000001", "name": "Покупатель", "product_id": "ai-agents-combo", "channel": "web", "segment": "b2c", "ts": "2026-06-05T13:51:46.291636Z"}
+{"email": "user@example.com", "phone": "+79990001122", "name": "Иван", "product_id": "agents", "channel": "web", "segment": "b2c", "ts": "2026-06-05T13:51:46.630451Z"}
+{"email": "lead@example.com", "phone": "+79991112233", "name": "Мария", "product_id": "deep-agents", "channel": "telegram", "segment": "b2b", "ts": "2026-06-05T13:51:46.706364Z"}
+{"email": "test@example.com", "phone": "+79990000099", "name": "Test", "product_id": "agents", "channel": "web", "segment": "b2c", "ts": "2026-06-05T14:15:17.897824Z"}
+{"email": "ivan@mail.ru", "phone": "+79991234567", "name": "Иван", "product_id": "agents", "channel": "telegram", "segment": "b2c", "ts": "2026-06-06T15:48:33.158127Z"}

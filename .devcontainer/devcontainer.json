@@ -1,0 +1,28 @@
+{
+  "name": "LLMStart Agent",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers-extra/features/uv:1": {},
+    "ghcr.io/devcontainers-extra/features/pnpm:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "charliermarsh.ruff",
+        "dbaeumer.vscode-eslint"
+      ]
+    }
+  },
+  "postCreateCommand": "cd backend && uv sync && cd ../frontend && pnpm install && echo 'Copy .env.example to .env and fill secrets'",
+  "postStartCommand": "make up || true",
+  "forwardPorts": [3002, 3001, 8003],
+  "remoteUser": "vscode"
+}

@@ -1,0 +1,87 @@
+# Дополнения к .gitignore для проектов на AI-Driven Methodology
+# Добавь нужные строки в корневой .gitignore проекта
+
+# ============================
+# Environment & Secrets
+# ============================
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+service-account.json
+*-secret.json
+*-credentials.json
+
+# ============================
+# Python
+# ============================
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.uv/
+*.egg-info/
+dist/
+build/
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# ============================
+# Node / JavaScript / TypeScript
+# ============================
+node_modules/
+.next/
+.nuxt/
+dist/
+build/
+.output/
+.cache/
+*.tsbuildinfo
+
+# ============================
+# IDE & Editor
+# ============================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# ============================
+# OS
+# ============================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ============================
+# Docker
+# ============================
+# (docker-compose.override.yml может содержать секреты)
+docker-compose.override.yml
+
+# ============================
+# Methodology artifacts (private drafts)
+# ============================
+.private/
+*.draft.md

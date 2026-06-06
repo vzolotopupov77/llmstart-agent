@@ -1,0 +1,46 @@
+{
+  "items": [
+    {
+      "code": "ai-agents-combo",
+      "title": "Комбо из 4 программ",
+      "price": 9900000,
+      "currency": "RUB",
+      "description": "Пакет из четырёх программ LLMStart: agents, deep-agents, fullstack-aidd и vibe-coding-intensive со скидкой."
+    },
+    {
+      "code": "vibe-coding-intensive",
+      "title": "Интенсив по Cursor",
+      "price": 2900000,
+      "currency": "RUB",
+      "description": "Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов."
+    },
+    {
+      "code": "fullstack-aidd",
+      "title": "AI-driven Fullstack",
+      "price": 4900000,
+      "currency": "RUB",
+      "description": "Fullstack-разработка с AI: backend, frontend, DevOps и агентные паттерны в одном курсе."
+    },
+    {
+      "code": "agents",
+      "title": "Базовый курс по ИИ-агентам",
+      "price": 3900000,
+      "currency": "RUB",
+      "description": "Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде."
+    },
+    {
+      "code": "deep-agents",
+      "title": "Продвинутый курс Deep Agents",
+      "price": 5900000,
+      "currency": "RUB",
+      "description": "Продвинутые агентные архитектуры: планирование, human-in-the-loop, мультиагентные сценарии."
+    },
+    {
+      "code": "consultation",
+      "title": "Консультация с экспертом",
+      "price": 1500000,
+      "currency": "RUB",
+      "description": "Индивидуальная консультация по выбору программы, внедрению AI в продукт или обучению команды."
+    }
+  ]
+}

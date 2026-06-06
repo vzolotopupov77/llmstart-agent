@@ -1,0 +1,165 @@
+# GitHub Actions — Базовый CI
+# Шаблон для проектов на AI-Driven Methodology
+#
+# Инструкция по использованию:
+# 1. Скопируй этот файл в .github/workflows/ci.yml
+# 2. Замени все [PLACEHOLDER] значения под свой стек
+# 3. Настрой paths для своей структуры директорий
+# 4. Добавь секреты в GitHub → Settings → Secrets
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Отменить предыдущий запуск при новом push в ту же ветку
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ============================================================
+  # Backend (Python / FastAPI)
+  # Активируется только при изменениях в backend/
+  # ============================================================
+  backend:
+    name: Backend
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || contains(toJson(github.event.pull_request.changed_files), 'backend/')
+
+    # Используем paths-filter для эффективного запуска
+    # Раскомментируй и замени пути под свою структуру:
+    # paths:
+    #   - 'backend/**'
+    #   - 'pyproject.toml'
+
+    defaults:
+      run:
+        working-directory: backend  # [PLACEHOLDER: путь к backend]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'  # [PLACEHOLDER: версия Python]
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Install dependencies
+        run: uv sync --dev
+
+      - name: Lint (ruff)
+        run: uv run ruff check .
+
+      - name: Format check (ruff)
+        run: uv run ruff format --check .
+
+      - name: Type check (mypy)
+        run: uv run mypy .
+
+      - name: Tests
+        run: uv run pytest
+        env:
+          # Добавь нужные переменные окружения для тестов
+          DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
+          # [PLACEHOLDER: другие переменные]
+
+  # ============================================================
+  # Frontend (Next.js / TypeScript)
+  # Активируется только при изменениях в frontend/
+  # ============================================================
+  frontend:
+    name: Frontend
+    runs-on: ubuntu-latest
+    # paths:
+    #   - 'frontend/**'
+    #   - 'package.json'
+    #   - 'pnpm-lock.yaml'
+
+    defaults:
+      run:
+        working-directory: frontend  # [PLACEHOLDER: путь к frontend]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # [PLACEHOLDER: версия Node]
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9  # [PLACEHOLDER: версия pnpm]
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Type check
+        run: pnpm type-check
+
+      - name: Build
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          # [PLACEHOLDER: другие переменные]
+
+  # ============================================================
+  # Bot (Python / aiogram)
+  # Активируется только при изменениях в bot/
+  # ============================================================
+  bot:
+    name: Bot
+    runs-on: ubuntu-latest
+    # paths:
+    #   - 'bot/**'
+
+    defaults:
+      run:
+        working-directory: bot  # [PLACEHOLDER: путь к bot]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Install dependencies
+        run: uv sync --dev
+
+      - name: Lint (ruff)
+        run: uv run ruff check .
+
+      - name: Format check (ruff)
+        run: uv run ruff format --check .
+
+# ============================================================
+# Примечания:
+#
+# 1. Для эффективного paths-filter используй:
+#    https://github.com/dorny/paths-filter
+#
+# 2. Для деплоя добавь отдельный workflow deploy.yml,
+#    который триггерится только на push в main.
+#
+# 3. Secrets настраиваются в:
+#    GitHub → Repository → Settings → Secrets and variables → Actions
+#
+# 4. Для Docker build/push используй:
+#    https://github.com/docker/build-push-action
+# ============================================================
