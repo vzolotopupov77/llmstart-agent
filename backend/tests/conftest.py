@@ -77,7 +77,9 @@ class FakeReactRunner:
         history: list[object],
         user_message: str,
         callbacks: list[object] | None = None,
+        metadata: object | None = None,
     ) -> TurnResult:
+        del metadata
         if "корпоратив" in user_message.lower():
             tools = [
                 ToolCallRecord(
