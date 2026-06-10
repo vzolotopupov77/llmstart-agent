@@ -1,7 +1,7 @@
 # Roadmap — LLMStart Agent
 
 > **Vision:** [concept/vision.md](concept/vision.md)  
-> **Последнее обновление:** 2026-06-06 (v0.1 MVP закрыт)
+> **Последнее обновление:** 2026-06-10 (sprint-07 langfuse-v3)
 
 ---
 
@@ -56,7 +56,7 @@
 | 3 | Запрос оплаты → мок-URL → «оплатил» → запись лида (6 полей) в `leads.txt` |
 | 4 | Web: SSE-поток с `reasoning`, `tool`, `products`, `payment_link`, `done` |
 | 5 | Telegram: `message_html`, диалог с тем же `session_id` после deep link |
-| 6 | Langfuse UI доступен (`make up`); трейсы в UI — **v0.2** (см. ниже) |
+| 6 | Langfuse UI доступен (`make up`); трейсы в UI — **sprint-07** (v0.2) |
 
 ---
 
@@ -66,19 +66,19 @@
 
 **Ключевые результаты:**
 
-- [ ] **Langfuse v3 self-hosted:** апгрейд `devops/docker-compose.yml` с `langfuse:2.95.11` на v3+ (ClickHouse, Redis, S3/Blob); end-to-end трейсы LLM + tool spans в UI
+- [x] **Langfuse v3 self-hosted:** апгрейд `devops/docker-compose.yml` с `langfuse:2.95.11` на v3+ (ClickHouse, Redis, S3/Blob); end-to-end трейсы LLM + tool spans в UI — sprint-07
 - [ ] Guardrails: валидация ввода, ограничение тематики, безопасные ответы
 - [ ] Rate limiting и базовая защита от DDoS / абьюза
 - [ ] Лимиты на длину диалога / стоимость запросов к LLM
 - [ ] Проверки безопасности (секреты, заголовки, CORS)
 
-**Контекст Langfuse (отложено из v0.1):** backend уже инициализирует SDK v3 (`init_langfuse`, `CallbackHandler`, metadata `session_id`/`channel`), но self-hosted **v2.95.11** не принимает OTLP (`/api/public/otel/v1/traces` → 404). До апгрейда сервера трейсы в UI не появляются.
+**Контекст Langfuse:** backend на SDK v3 (`init_langfuse`, `CallbackHandler`); self-hosted **v3** (sprint-07) принимает OTLP. Runbook trace: `backend/README.md`, `devops/README.md`.
 
-**Спринты:** будут детализированы после закрытия v0.1.
+**Спринты:**
 
 | # | Sprint | Цель | Статус | Документ |
 |---|--------|------|--------|----------|
-| — | TBD | Langfuse v2 → v3: compose, миграция dev-данных, DoD «trace за turn» | 📋 | — |
+| 07 | [langfuse-v3](sprints/sprint-07-langfuse-v3/README.md) | Langfuse v2→v3 compose, clean start, DoD «trace за turn» | ✅ | sprint-07 |
 | — | TBD | Guardrails + policy layer в Core | 📋 | — |
 | — | TBD | Rate limits, квоты LLM, observability алертов | 📋 | — |
 | — | TBD | Security review: CORS production, headers, secrets CI | 📋 | — |
@@ -127,6 +127,7 @@ flowchart LR
 
 | Дата | Изменение |
 |------|-----------|
+| 2026-06-10 | Закрыт sprint-07 langfuse-v3: self-hosted Langfuse v3, trace за turn |
 | 2026-06-06 | Закрыт sprint-06 telegram-funnel; **v0.1 MVP** завершён |
 | 2026-06-06 | Апгрейд Langfuse v2→v3 перенесён в v0.2; критерий трейсов v0.1 смягчён |
 | 2026-06-05 | Закрыт sprint-05 web-widget |

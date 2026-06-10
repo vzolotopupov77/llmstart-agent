@@ -8,10 +8,11 @@
 
 | Задача | Документ |
 |--------|----------|
+| Быстрый старт, make-команды | [../README.md](../README.md) |
 | Понять продукт и MVP | [concept/idea.md](concept/idea.md) |
 | Техническое видение, компоненты, роли | [concept/vision.md](concept/vision.md) |
 | План реализации по спринтам | [roadmap.md](roadmap.md) |
-| Текущий спринт | [sprints/](sprints/) (создаётся по мере работы) |
+| Текущий этап | [roadmap.md](roadmap.md) — **v0.2 hardening** (v0.1 MVP ✅) |
 
 ---
 
@@ -35,7 +36,7 @@
 
 | Документ | Содержание |
 |----------|------------|
-| [roadmap.md](roadmap.md) | v0.1 MVP → v0.2 hardening → v1.0 production, спринты 01–06 |
+| [roadmap.md](roadmap.md) | v0.1 MVP ✅ → v0.2 hardening → v1.0 production |
 
 ### Спринты (`sprints/`)
 
@@ -43,10 +44,11 @@
 |--------|--------|--------|
 | 01 infra-bootstrap | ✅ Done | [sprint-01-infra-bootstrap](sprints/sprint-01-infra-bootstrap/README.md) |
 | 02 mcp-tools-rag | ✅ Done | [sprint-02-mcp-tools-rag](sprints/sprint-02-mcp-tools-rag/README.md) |
-| 03 agent-core | 📋 Planned | [sprint-03-agent-core](sprints/sprint-03-agent-core/README.md) |
-| 04 api-stream-catalog | 📋 Planned | [sprint-04-api-stream-catalog](sprints/sprint-04-api-stream-catalog/README.md) |
-| 05 web-widget | 📋 Planned | [sprint-05-web-widget](sprints/sprint-05-web-widget/README.md) |
-| 06 telegram-funnel | 📋 Planned | [sprint-06-telegram-funnel](sprints/sprint-06-telegram-funnel/README.md) |
+| 03 agent-core | ✅ Done | [sprint-03-agent-core](sprints/sprint-03-agent-core/README.md) |
+| 04 api-stream-catalog | ✅ Done | [sprint-04-api-stream-catalog](sprints/sprint-04-api-stream-catalog/README.md) |
+| 05 web-widget | ✅ Done | [sprint-05-web-widget](sprints/sprint-05-web-widget/README.md) |
+| 06 telegram-funnel | ✅ Done | [sprint-06-telegram-funnel](sprints/sprint-06-telegram-funnel/README.md) |
+| 07 langfuse-v3 | ✅ Done | [sprint-07-langfuse-v3](sprints/sprint-07-langfuse-v3/README.md) |
 
 В каждом спринте: `README.md`, `tasks/<NN-task>/plan.md`, `summary.md`.
 
@@ -108,4 +110,4 @@ docs/
 
 ---
 
-*Последнее обновление навигатора: 2026-06-05*
+*Последнее обновление навигатора: 2026-06-10*

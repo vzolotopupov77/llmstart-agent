@@ -1,0 +1,61 @@
+# Validation Report
+
+**Версия:** v2  
+**Дата:** auto-run  
+**Статус:** PASS
+
+## Структурная проверка
+
+- B2C записей: **72**
+- B2B записей: **15**
+- Уникальные id: **да**
+- Ошибки: **0**
+- Предупреждения: **4**
+
+### Предупреждения
+- [routing] b2c-syn-segment-001: b2c-segment with expected segment=b2b (OK for routing eval)
+- [routing] b2c-syn-segment-003: b2c-segment with expected segment=b2b (OK for routing eval)
+- [routing] b2c-syn-segment-m01: b2c-segment with expected segment=b2b (OK for routing eval)
+- [routing] b2c-syn-segment-005: b2c-segment with expected segment=b2b (OK for routing eval)
+
+## Покрытие B2C
+
+### По типам
+
+- b2c-objection: 21
+- b2c-product: 13
+- b2c-rag: 19
+- b2c-segment: 8
+- b2c-tools: 11
+
+### По группам
+
+- G1: 9
+- G2: 13
+- G3: 6
+- G4: 9
+- G5: 8
+- G6: 4
+- G7: 8
+- G8: 7
+- G9: 8
+
+### turn_mode: single=55, multi=17
+
+## Покрытие B2B
+
+- b2b-nurture: 4
+- b2b-rag: 7
+- b2b-segment: 4
+
+## Семантические заметки (выборочно)
+
+- G4: все записи проверены на явный отказ «публичного демо нет»
+- G9 рассрочка (b2c-syn-rag-003): must_not на обещание рассрочки
+- B2B: нет create_payment_link — корректно для корп. сделок
+- Chunk ids / Hit Rate@k: не применялось
+- v2: G9.4 = payment tool-flow; reconstruction source для B2B segment
+
+## Validation Sample
+
+Выборка для ревью человеком: [`validation-sample-v2.md`](validation-sample-v2.md) (9 B2C + 3 B2B)

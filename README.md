@@ -27,7 +27,7 @@ make dev
 | Backend (health / chat) | http://localhost:8003/health , `POST /api/v1/chat` |
 | Frontend (виджет) | http://localhost:3002 |
 | Telegram-бот | long polling (`make dev-bot`, нужен `TELEGRAM_BOT_TOKEN`) |
-| Langfuse UI | http://localhost:3001 |
+| Langfuse UI (v3) | http://localhost:3001 |
 
 ## Структура проекта
 
@@ -38,22 +38,25 @@ llmstart-agent/
 ├── bot/               # Telegram-бот (aiogram)
 ├── mcp_server/        # MCP-сервер инструментов (RAG, каталог, лиды)
 ├── data/              # База знаний, каталог, leads.txt
+├── datasets/          # Валидационные датасеты, скрипты загрузки в Langfuse
 ├── devops/            # docker-compose, Langfuse
 └── docs/              # Концепт, roadmap, спринты
 ```
 
 ## Команды (make)
 
+Полный список: **`make help`** (или просто `make`).
+
 | Команда | Описание |
 |---------|----------|
 | `make dev` | Langfuse + backend :8003 + frontend :3002 + Telegram-бот |
-| `make dev-bot` | Только Telegram-бот (backend должен быть запущен) |
-| `make up` / `make down` | Docker Compose (Langfuse) |
-| `make lint` / `make format` | Качество кода |
+| `make dev-backend` / `dev-frontend` / `dev-bot` | Отдельные сервисы |
+| `make up` / `make down` | Docker Compose (Langfuse v3) |
+| `make lint` / `make format` / `make typecheck` | Качество кода |
 | `make test` / `make ci` | Тесты и полный CI-цикл |
-| `make test-mcp` | Тесты MCP-сервера |
-| `make test-bot` | Тесты Telegram-бота |
 | `make reindex` | Переиндексация RAG (Chroma в `data/.chroma/`) |
+| `make upload-langfuse-dataset` | Загрузка JSONL-датасета в Langfuse (upsert) |
+| `make reload-langfuse-dataset` | Полная перезагрузка датасета в Langfuse |
 
 ## MCP-сервер (stdio)
 
@@ -101,4 +104,6 @@ make dev-bot
 
 ## Roadmap
 
-Текущий спринт: [sprint-06-telegram-funnel](docs/sprints/sprint-06-telegram-funnel/README.md).
+**v0.1 MVP** завершён (sprint-01…06). Текущий этап — **v0.2 hardening**; закрыт [sprint-07 langfuse-v3](docs/sprints/sprint-07-langfuse-v3/README.md) (трейсы в UI).
+
+Сводка: [`docs/roadmap.md`](docs/roadmap.md).

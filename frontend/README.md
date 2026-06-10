@@ -14,6 +14,8 @@ make dev
 
 Откройте [http://localhost:3002](http://localhost:3002). Backend — `:8003` (см. `Makefile` / `.env`).
 
+Полный список make-целей: `make help`.
+
 ## Переменные окружения
 
 Задаются в корневом `.env` (см. `.env.example`):
@@ -66,10 +68,15 @@ frontend/
 ## Качество
 
 ```bash
+# из корня репо
+make lint-frontend
+make typecheck-frontend
+make test-frontend
+make ci
+
+# или локально в frontend/
 pnpm lint
 pnpm typecheck
 pnpm test
 pnpm build
 ```
-
-Или из корня: `make lint`, `make typecheck`, `make test-frontend`, `make ci`.

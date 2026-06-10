@@ -25,7 +25,7 @@ backend/app/
 | `OPENAI_BASE_URL` | ❌ | Default: `https://openrouter.ai/api/v1` |
 | `OPENAI_MODEL` | ❌ | Default: `openai/gpt-4o-mini` |
 | `DATA_DIR` | ❌ | Путь к `data/` |
-| `CORS_ORIGINS` | ❌ | Default: `http://localhost:3000` |
+| `CORS_ORIGINS` | ❌ | Default: `http://localhost:3002` |
 | `LANGFUSE_PUBLIC_KEY` | ❌ | Tracing (опционально) |
 | `LANGFUSE_SECRET_KEY` | ❌ | Tracing |
 | `LANGFUSE_HOST` | ❌ | напр. `http://localhost:3001` |
@@ -39,10 +39,12 @@ backend/app/
 make dev-backend
 
 # или
-cd backend && uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+cd backend && uv run uvicorn app.main:app --host 127.0.0.1 --port 8003
 ```
 
 При старте: RAG index (`ensure_index`) + регистрация MCP tools in-process.
+
+Полный список make-целей: `make help`.
 
 ## API
 
@@ -53,12 +55,12 @@ cd backend && uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 | `POST` | `/api/v1/chat` | Диалог: JSON (`Accept: application/json`) или SSE (`Accept: text/event-stream`) |
 | `GET` | `/api/v1/products` | B2C-каталог для виджета (пагинация) |
 
-OpenAPI: http://localhost:8000/docs
+OpenAPI: http://localhost:8003/docs
 
 ### Пример JSON-чата
 
 ```bash
-curl -s -X POST http://localhost:8000/api/v1/chat \
+curl -s -X POST http://localhost:8003/api/v1/chat \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -d '{"message":"Какой курс новичку?","channel":"web"}'
@@ -69,7 +71,7 @@ curl -s -X POST http://localhost:8000/api/v1/chat \
 ### Пример SSE-чата (виджет)
 
 ```bash
-curl -N -X POST http://localhost:8000/api/v1/chat \
+curl -N -X POST http://localhost:8003/api/v1/chat \
   -H "Content-Type: application/json" \
   -H "Accept: text/event-stream" \
   -d '{"message":"Какой курс новичку?","channel":"web"}'
@@ -80,18 +82,65 @@ curl -N -X POST http://localhost:8000/api/v1/chat \
 ### Пример каталога
 
 ```bash
-curl -s "http://localhost:8000/api/v1/products?limit=20&offset=0"
+curl -s "http://localhost:8003/api/v1/products?limit=20&offset=0"
 ```
 
 ## Langfuse
 
-При заполненных `LANGFUSE_*` каждый turn пишет trace с LLM- и tool-spans. UI: http://localhost:3001 (`make up`).
+При заполненных `LANGFUSE_*` каждый turn пишет trace с LLM- и tool-spans. UI: http://localhost:3001 (`make up`, Langfuse **v3**).
 
 При недоступном Langfuse диалог продолжается; ошибки только в логах.
+
+### Проверка trace за turn (E2E)
+
+Предусловия: `make up` (v3 stack healthy), `OPENAI_API_KEY` и `LANGFUSE_*` в `.env`.
+
+```bash
+make dev-backend
+```
+
+```bash
+curl -s -X POST http://127.0.0.1:8003/api/v1/chat \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{"message":"Какие B2C курсы есть?","channel":"web"}'
+```
+
+В UI http://localhost:3001 → **Tracing** → Traces (подождите ~30 с):
+
+- один trace на turn;
+- metadata: `session_id` из ответа API;
+- tag `channel:web`;
+- nested spans: LLM generation + tool call(s).
+
+Подробнее: [devops/README.md](../devops/README.md).
+
+### Live-тест (опционально)
+
+```bash
+cd backend && uv run pytest -m live tests/test_langfuse_live.py
+```
+
+Требует запущенный Langfuse v3 и `LANGFUSE_*` в окружении. В CI не запускается.
+
+### Загрузка eval-датасета в Langfuse
+
+```bash
+# из корня репо — upsert items из datasets/b2c/v2/dataset.jsonl
+make upload-langfuse-dataset
+
+# полная перезагрузка (удалить items, загрузить заново)
+make reload-langfuse-dataset
+```
+
+Скрипт: [`datasets/scripts/upload_langfuse_dataset.py`](../datasets/scripts/upload_langfuse_dataset.py). Переменные: `DATASET_NAME`, `DATASET_SOURCE` (см. `make help`).
 
 ## Тесты
 
 ```bash
+make lint-backend
+make format-backend
+make typecheck-backend
 make test-backend
 # или
 cd backend && uv run pytest

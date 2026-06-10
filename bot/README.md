@@ -30,6 +30,8 @@ make dev-bot
 make dev
 ```
 
+Полный список make-целей: `make help`.
+
 Только бот (backend уже запущен):
 
 ```bash
@@ -100,4 +102,4 @@ make test-bot
 
 - [api-contracts.md](../docs/concept/api-contracts.md) — контракт `/chat`
 - [integrations.md § Telegram](../docs/concept/integrations.md#5-telegram-bot-api)
-- [sprint-06 README](../docs/sprints/sprint-06-telegram-funnel/README.md)
+- [roadmap.md](../docs/roadmap.md) — v0.1 MVP (sprint-06) завершён

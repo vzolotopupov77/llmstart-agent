@@ -93,17 +93,19 @@
 |----------|----------|
 | Назначение | Трассировка диалогов, LLM-вызовов, tool calls |
 | Направление | Out (backend → Langfuse) |
-| Протокол | HTTPS (SDK: traces, generations) |
+| Протокол | HTTPS + OTLP (`/api/public/otel/v1/traces`) |
 | Критичность | **Важно**, не блокирует MVP-функции |
 
-### Развёртывание (MVP)
+### Развёртывание
 
 Допускаются оба варианта:
 
 | Вариант | `LANGFUSE_HOST` |
 |---------|-----------------|
 | **Langfuse Cloud** | `https://cloud.langfuse.com` (или регион US/JP) |
-| **Self-hosted** | `http://langfuse:3000` в docker-compose (`devops/`) |
+| **Self-hosted v3** | `http://localhost:3001` (`make up`, `devops/docker-compose.yml`) |
+
+Self-hosted stack (sprint-07): `langfuse-web` + `langfuse-worker`, Postgres, ClickHouse, Redis, MinIO. Backend SDK v3 (`langfuse>=3.15`) совместим с server **≥ 3.125.0**.
 
 ### Переменные окружения
 

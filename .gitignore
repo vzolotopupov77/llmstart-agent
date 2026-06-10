@@ -70,3 +70,5 @@ data/.chroma/
 # Methodology artifacts (private drafts)
 .private/
 *.draft.md
+
+data/real_data/
