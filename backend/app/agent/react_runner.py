@@ -64,7 +64,7 @@ class ReactRunner:
         }
         if temperature is not None:
             llm_kwargs["temperature"] = temperature
-        model = ChatOpenAI(**llm_kwargs)  # type: ignore[arg-type]
+        model = ChatOpenAI(**llm_kwargs)
         self.model_name = str(llm_kwargs["model"])
         self.system_prompt = system_prompt or SYSTEM_PROMPT
         self._agent = create_agent(
