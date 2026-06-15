@@ -1,0 +1,27 @@
+config_id: baseline-react-chroma
+comment: "MVP-база: LangChain ReAct, embedded Chroma, промпт из кода"
+benchmark_only: false
+
+agent:
+  impl: langchain-react
+  api_url: http://127.0.0.1:8003/api/v1/chat
+
+retrieval:
+  backend: chroma-embedded
+
+model:
+  provider: openrouter
+  name: openai/gpt-4o-mini
+  temperature: 0.0
+
+judge:
+  provider: openrouter
+  name: google/gemini-2.5-flash-lite
+  temperature: 0.0
+
+prompt:
+  source: code
+  name: agent-system-prompt-v1
+
+datasets:
+  e2e-qa: v001

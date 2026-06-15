@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help dev dev-backend dev-frontend dev-bot up down lint format typecheck test test-backend test-mcp test-bot test-frontend ci reindex upload-langfuse-dataset reload-langfuse-dataset
+.PHONY: help dev dev-backend dev-frontend dev-bot up down lint format typecheck test test-backend test-mcp test-bot test-frontend ci reindex upload-langfuse-dataset reload-langfuse-dataset eval-validate eval-sync eval-experiment eval-analyze eval-compare eval-backfill-runs
 
 COMPOSE_FILE := devops/docker-compose.yml
 BACKEND_PORT ?= 8003
@@ -50,6 +50,14 @@ help:
 	@echo   upload-langfuse-dataset   Upload JSONL dataset to Langfuse (upsert)
 	@echo   reload-langfuse-dataset     Delete all items and re-upload dataset
 	@echo.
+	@echo Eval
+	@echo   eval-validate         Pydantic + integrity tests for eval contour
+	@echo   eval-sync             Sync datasets to Langfuse (stub until task 04)
+	@echo   eval-experiment       Run experiment (stub until task 05)
+	@echo   eval-analyze          Analyze run report (JSON to markdown)
+	@echo   eval-compare          Compare two runs (stub until v0.2)
+	@echo   eval-backfill-runs    Backfill Langfuse dataset_run_items from JSON (RUN=optional)
+	@echo.
 	@echo Variables
 	@echo   BACKEND_PORT=$(BACKEND_PORT)   Backend listen port
 	@echo   FRONTEND_PORT=$(FRONTEND_PORT)  Frontend dev port
@@ -70,6 +78,7 @@ dev-bot:
 	cd bot && uv run python -m bot.main
 
 up:
+	docker compose --env-file .env -f $(COMPOSE_FILE) pull langfuse-web langfuse-worker
 	docker compose --env-file .env -f $(COMPOSE_FILE) up -d
 
 down:
@@ -143,3 +152,21 @@ test-frontend:
 	cd frontend && pnpm test && pnpm build
 
 ci: lint typecheck test
+
+eval-validate:
+	$(MAKE) -C evals validate
+
+eval-sync:
+	$(MAKE) -C evals sync
+
+eval-experiment:
+	$(MAKE) -C evals experiment
+
+eval-analyze:
+	$(MAKE) -C evals analyze
+
+eval-compare:
+	$(MAKE) -C evals compare
+
+eval-backfill-runs:
+	$(MAKE) -C evals backfill-runs RUN="$(RUN)"

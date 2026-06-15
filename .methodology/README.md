@@ -12,8 +12,9 @@
 .methodology/
 ├── METHODOLOGY.md          # цельное описание: 5 слоёв, иерархия, поток работы
 ├── GLOSSARY.md             # словарь терминов
+├── eval/                   # eval-трек: ядро и справочник метрик
 ├── rules/                  # правила для .cursor/rules/
-├── templates/              # шаблоны для всех слоёв
+├── templates/              # шаблоны для всех слоёв (включая templates/eval/)
 ├── onboarding/             # точки входа для агента (3 режима)
 ├── ci/                     # стартер CI/Git
 └── examples/               # живые примеры заполненной методологии
@@ -70,4 +71,15 @@ cp .methodology/rules/*.mdc /path/to/your-project/.cursor/rules/methodology/
 | Написать спецификацию фичи | [templates/specs/spec-template.md](templates/specs/spec-template.md) |
 | Зафиксировать архитектурное решение | [templates/decisions/adr-template.md](templates/decisions/adr-template.md) |
 | Настроить CI/Git | [ci/git-conventions.md](ci/git-conventions.md) |
+| Запустить измерительный контур качества (eval) | [eval/eval-methodology.md](eval/eval-methodology.md) |
+| Выбрать метрики для оценки агента | [eval/metrics-guide.md](eval/metrics-guide.md) |
 
+---
+
+## Eval-трек
+
+Расширение методологии для измерительного контура качества LLM-агентов — от построения датасетов до сравнения конфигураций и регрессионного гейта. Основан на AI Engineering Loop (Langfuse Academy) и ADK (Google). Запускается единой kickoff-фразой, описанной в ядре.
+
+→ Ядро и поток работы: [eval/eval-methodology.md](eval/eval-methodology.md)
+→ Справочник метрик (категории A–E, инструменты): [eval/metrics-guide.md](eval/metrics-guide.md)
+→ Шаблоны: [templates/eval/](templates/eval/)

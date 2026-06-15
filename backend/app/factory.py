@@ -9,6 +9,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from langchain_core.tools import BaseTool
 
+from app.agent.config_registry import AgentConfigRegistry
 from app.agent.react_runner import ReactRunner
 from app.api.routes.chat import router as chat_router
 from app.api.routes.health import router as health_router
@@ -57,12 +58,20 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         settings,
         list(langchain_tool_list),
     )
+    config_registry: AgentConfigRegistry | None = None
+    if app.state.injected_react_runner is None:
+        config_registry = AgentConfigRegistry(
+            settings,
+            list(langchain_tool_list),
+            settings.eval_configs_dir,
+        )
     session_store = SessionStore(ttl_hours=settings.session_ttl_hours)
     agent_service = AgentService(
         session_store=session_store,
         react_runner=react_runner,
         tools_ready=tools_ready,
         settings=settings,
+        config_registry=config_registry,
     )
 
     catalog_service = CatalogService()
@@ -70,6 +79,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     app.state.mcp_client = mcp_client
     app.state.tools_ready = tools_ready
     app.state.agent_service = agent_service
+    app.state.config_registry = config_registry
     app.state.session_store = session_store
     app.state.catalog_service = catalog_service
 

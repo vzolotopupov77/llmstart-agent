@@ -1,0 +1,34 @@
+# Шаблон: конфигурация запуска (E-5…E-9)
+# Файл: evals/configs/<config_id>.yaml
+# Правила: изменение системы = новый файл (E-7); baseline неприкосновенен;
+# между сравниваемыми конфигами — ровно один отличающийся параметр.
+
+config_id: baseline-react-chroma        # = имя файла без .yaml
+comment: "MVP-база: LangChain ReAct, embedded Chroma"
+benchmark_only: false                   # true = в продукт не выдаётся (E-8)
+
+agent:
+  impl: langchain-react                 # ключ реестра конфигураций Agent Core (E-6)
+  api_url: http://localhost:8000/chat
+
+retrieval:
+  backend: chroma-embedded              # chroma-embedded | qdrant | ...
+
+model:
+  provider: openrouter
+  name: anthropic/claude-sonnet-4.5
+  temperature: 0.0
+
+judge:                                  # обязательно: отдельная модель оценщика (E-17)
+  provider: openrouter
+  name: google/gemini-2.5-flash-lite    # фиксированная модель — без предвзятости к агенту
+  temperature: 0.0
+
+prompt:
+  source: langfuse                      # промпты — в Prompt Management (E-10)
+  name: agent-system-prompt
+  label: production                     # или version: N; резолвится в точный
+                                        # номер при запуске → run_metadata (E-9)
+
+datasets:                               # пины версий (E-16)
+  e2e-qa: v001                          # = файл v001_*.yaml в папке датасета

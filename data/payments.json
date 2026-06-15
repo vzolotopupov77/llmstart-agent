@@ -80,6 +80,123 @@
       "token": "n5qX-VWHYl2LRVropTwEOQ",
       "created_at": "2026-06-06T15:59:03.417368Z",
       "confirmed_at": null
+    },
+    "089693f7-8f65-4c4b-8dc7-e3f1dacbdd92:agents": {
+      "session_id": "089693f7-8f65-4c4b-8dc7-e3f1dacbdd92",
+      "product_id": "agents",
+      "status": "pending",
+      "url": "https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=089693f7-8f65-4c4b-8dc7-e3f1dacbdd92&token=4Z-X3Ln0RvyXQFu8xLlmEg",
+      "token": "4Z-X3Ln0RvyXQFu8xLlmEg",
+      "created_at": "2026-06-14T18:20:35.395234Z",
+      "confirmed_at": null
+    },
+    "66bfa90b-0f11-4c8d-8d14-5fd46907e25b:agents": {
+      "session_id": "66bfa90b-0f11-4c8d-8d14-5fd46907e25b",
+      "product_id": "agents",
+      "status": "pending",
+      "url": "https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=66bfa90b-0f11-4c8d-8d14-5fd46907e25b&token=wiEVm61CKrxBwZywwYbMlw",
+      "token": "wiEVm61CKrxBwZywwYbMlw",
+      "created_at": "2026-06-14T18:22:46.391316Z",
+      "confirmed_at": null
+    },
+    "6c4c8ac3-c967-4872-8a4c-cb4660bd8ea6:agents": {
+      "session_id": "6c4c8ac3-c967-4872-8a4c-cb4660bd8ea6",
+      "product_id": "agents",
+      "status": "pending",
+      "url": "https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=6c4c8ac3-c967-4872-8a4c-cb4660bd8ea6&token=6uuy0FqA25JQnOwhU_4qxg",
+      "token": "6uuy0FqA25JQnOwhU_4qxg",
+      "created_at": "2026-06-14T18:26:17.851932Z",
+      "confirmed_at": null
+    },
+    "cc2eb296-bf1e-4c96-a6d4-d571a61e1a95:agents": {
+      "session_id": "cc2eb296-bf1e-4c96-a6d4-d571a61e1a95",
+      "product_id": "agents",
+      "status": "pending",
+      "url": "https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=cc2eb296-bf1e-4c96-a6d4-d571a61e1a95&token=9A9AdNXeeClaFLW-DKU7JA",
+      "token": "9A9AdNXeeClaFLW-DKU7JA",
+      "created_at": "2026-06-15T08:32:00.781782Z",
+      "confirmed_at": null
+    },
+    "792759e5-f7a8-4e54-85aa-54d7709074d4:agents": {
+      "session_id": "792759e5-f7a8-4e54-85aa-54d7709074d4",
+      "product_id": "agents",
+      "status": "pending",
+      "url": "https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=792759e5-f7a8-4e54-85aa-54d7709074d4&token=4QwYVbr8haey59sobmSHPg",
+      "token": "4QwYVbr8haey59sobmSHPg",
+      "created_at": "2026-06-15T08:36:26.380573Z",
+      "confirmed_at": null
+    },
+    "26d7fcf1-9295-4c3e-b41a-7083c4081b6f:agents": {
+      "session_id": "26d7fcf1-9295-4c3e-b41a-7083c4081b6f",
+      "product_id": "agents",
+      "status": "pending",
+      "url": "https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=26d7fcf1-9295-4c3e-b41a-7083c4081b6f&token=0FXfbUJXg7gASYUQubOakQ",
+      "token": "0FXfbUJXg7gASYUQubOakQ",
+      "created_at": "2026-06-15T09:46:55.157789Z",
+      "confirmed_at": null
+    },
+    "c8a72473-3d7b-4064-a2dd-11efdc437d8e:agents": {
+      "session_id": "c8a72473-3d7b-4064-a2dd-11efdc437d8e",
+      "product_id": "agents",
+      "status": "pending",
+      "url": "https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=c8a72473-3d7b-4064-a2dd-11efdc437d8e&token=w2Eq6uVlKe3IlYw_0zbz8Q",
+      "token": "w2Eq6uVlKe3IlYw_0zbz8Q",
+      "created_at": "2026-06-15T09:49:58.192573Z",
+      "confirmed_at": null
+    },
+    "40e13aeb-422a-4d48-829a-2e8b1dfd4449:agents": {
+      "session_id": "40e13aeb-422a-4d48-829a-2e8b1dfd4449",
+      "product_id": "agents",
+      "status": "pending",
+      "url": "https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=40e13aeb-422a-4d48-829a-2e8b1dfd4449&token=cn0tSu7EWVZVEzMV2vZ0yg",
+      "token": "cn0tSu7EWVZVEzMV2vZ0yg",
+      "created_at": "2026-06-15T10:07:53.994385Z",
+      "confirmed_at": null
+    },
+    "7629e99b-35d9-4e16-a322-9e708068deed:agents": {
+      "session_id": "7629e99b-35d9-4e16-a322-9e708068deed",
+      "product_id": "agents",
+      "status": "pending",
+      "url": "https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=7629e99b-35d9-4e16-a322-9e708068deed&token=bHraJC78qS3AkCvIeGqs7g",
+      "token": "bHraJC78qS3AkCvIeGqs7g",
+      "created_at": "2026-06-15T10:09:23.606901Z",
+      "confirmed_at": null
+    },
+    "377526f6-1628-476c-888f-4a191dd88038:agents": {
+      "session_id": "377526f6-1628-476c-888f-4a191dd88038",
+      "product_id": "agents",
+      "status": "pending",
+      "url": "https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=377526f6-1628-476c-888f-4a191dd88038&token=-vxGOJbqodwB9MqOTvlz9Q",
+      "token": "-vxGOJbqodwB9MqOTvlz9Q",
+      "created_at": "2026-06-15T14:50:08.013788Z",
+      "confirmed_at": null
+    },
+    "023f2356-15e1-4b9d-abe8-fb043321da8b:agents": {
+      "session_id": "023f2356-15e1-4b9d-abe8-fb043321da8b",
+      "product_id": "agents",
+      "status": "pending",
+      "url": "https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=023f2356-15e1-4b9d-abe8-fb043321da8b&token=v86wjRxeNccbnSi59j0W7g",
+      "token": "v86wjRxeNccbnSi59j0W7g",
+      "created_at": "2026-06-15T14:53:57.587350Z",
+      "confirmed_at": null
+    },
+    "ab6f757f-a207-47d6-9597-e1e674dea6b9:agents": {
+      "session_id": "ab6f757f-a207-47d6-9597-e1e674dea6b9",
+      "product_id": "agents",
+      "status": "pending",
+      "url": "https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=ab6f757f-a207-47d6-9597-e1e674dea6b9&token=rZ_VRELnnMElpORMOS7jdA",
+      "token": "rZ_VRELnnMElpORMOS7jdA",
+      "created_at": "2026-06-15T15:11:47.653499Z",
+      "confirmed_at": null
+    },
+    "23fafc36-beb9-4f09-add5-6deb518963bf:agents": {
+      "session_id": "23fafc36-beb9-4f09-add5-6deb518963bf",
+      "product_id": "agents",
+      "status": "pending",
+      "url": "https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=23fafc36-beb9-4f09-add5-6deb518963bf&token=m8g7TbqGN7cCPDe73QsIhA",
+      "token": "m8g7TbqGN7cCPDe73QsIhA",
+      "created_at": "2026-06-15T15:15:34.684389Z",
+      "confirmed_at": null
     }
   }
 }

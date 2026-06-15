@@ -1327,6 +1327,7 @@ dependencies = [
     { name = "markdown" },
     { name = "mcp" },
     { name = "pydantic-settings" },
+    { name = "pyyaml" },
     { name = "uvicorn", extra = ["standard"] },
 ]
 
@@ -1351,6 +1352,7 @@ requires-dist = [
     { name = "markdown", specifier = ">=3.10.2" },
     { name = "mcp", specifier = ">=1.27.2" },
     { name = "pydantic-settings", specifier = ">=2.6.0" },
+    { name = "pyyaml", specifier = ">=6.0.2" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.32.0" },
 ]
 

@@ -1,0 +1,186 @@
+{
+  "schema_version": 2,
+  "run_name": "baseline-react-chroma--e2e-qa--476018c9--20260614T182021Z",
+  "config_id": "baseline-react-chroma",
+  "dataset_slug": "e2e-qa",
+  "langfuse_dataset": "e2e/e2e-qa/v001",
+  "git_sha": "476018c97c239cc00d070ef36292709d9d63f18a",
+  "started_at": "2026-06-14T18:20:21.942207+00:00",
+  "finished_at": "2026-06-14T18:21:04.937262+00:00",
+  "timing": {
+    "total_duration_ms": 42995,
+    "items_total": 1,
+    "items_with_timing": 1
+  },
+  "judge": {
+    "provider": "openrouter",
+    "name": "google/gemini-2.5-flash-lite",
+    "temperature": 0.0
+  },
+  "run_metadata": {
+    "config_id": "baseline-react-chroma",
+    "git_sha": "476018c97c239cc00d070ef36292709d9d63f18a",
+    "dataset_slug": "e2e-qa",
+    "dataset_version": "v001",
+    "langfuse_dataset": "e2e/e2e-qa/v001",
+    "manifest_path": "evals\\datasets\\e2e\\e2e-qa\\v001_2026-06-14.yaml",
+    "judge": {
+      "provider": "openrouter",
+      "name": "google/gemini-2.5-flash-lite",
+      "temperature": 0.0
+    },
+    "agent_model": {
+      "provider": "openrouter",
+      "name": "openai/gpt-4o-mini",
+      "temperature": 0.0
+    },
+    "prompt": {
+      "source": "code",
+      "name": "agent-system-prompt-v1",
+      "label": null,
+      "version": null
+    },
+    "retrieval": {
+      "backend": "chroma-embedded"
+    }
+  },
+  "full_config_snapshot": {
+    "config_id": "baseline-react-chroma",
+    "comment": "MVP-база: LangChain ReAct, embedded Chroma, промпт из кода",
+    "benchmark_only": false,
+    "agent": {
+      "impl": "langchain-react",
+      "api_url": "http://127.0.0.1:8003/api/v1/chat"
+    },
+    "retrieval": {
+      "backend": "chroma-embedded"
+    },
+    "model": {
+      "provider": "openrouter",
+      "name": "openai/gpt-4o-mini",
+      "temperature": 0.0
+    },
+    "judge": {
+      "provider": "openrouter",
+      "name": "google/gemini-2.5-flash-lite",
+      "temperature": 0.0
+    },
+    "prompt": {
+      "source": "code",
+      "name": "agent-system-prompt-v1",
+      "label": null,
+      "version": null
+    },
+    "datasets": {
+      "e2e-qa": "v001"
+    }
+  },
+  "items": [
+    {
+      "input": [
+        {
+          "role": "user",
+          "content": "Посоветуйте курс для первого LangChain-агента с RAG."
+        },
+        {
+          "role": "assistant",
+          "content": "Для старта рекомендую agents: ReAct, tools, RAG и observability на учебном стенде."
+        },
+        {
+          "role": "user",
+          "content": "Ок, беру agents. Дайте ссылку на оплату."
+        }
+      ],
+      "output": {
+        "message": "Вот ссылка для оплаты курса **Базовый курс по ИИ-агентам**: [Оплатить курс](https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=089693f7-8f65-4c4b-8dc7-e3f1dacbdd92&token=4Z-X3Ln0RvyXQFu8xLlmEg).\n\nПосле оплаты, пожалуйста, подтвердите и укажите ваш email, телефон и имя, чтобы я мог завершить регистрацию.",
+        "message_html": "Вот ссылка для оплаты курса **Базовый курс по ИИ-агентам**: [Оплатить курс](https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=089693f7-8f65-4c4b-8dc7-e3f1dacbdd92&token=4Z-X3Ln0RvyXQFu8xLlmEg).\n\nПосле оплаты, пожалуйста, подтвердите и укажите ваш email, телефон и имя, чтобы я мог завершить регистрацию.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Создание ссылки на оплату\nФормирование рекомендации.",
+        "session_id": "089693f7-8f65-4c4b-8dc7-e3f1dacbdd92",
+        "tools": [
+          {
+            "name": "create_payment_link",
+            "status": "done",
+            "title": "Создание ссылки на оплату"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "{\"items\": [{\"code\": \"ai-agents-combo\", \"title\": \"Комбо из 4 программ\", \"price\": 9900000, \"currency\": \"RUB\", \"description\": \"Пакет из четырёх программ LLMStart: agents, deep-agents, fullstack-aidd и vibe-coding-intensive со скидкой.\"}, {\"code\": \"vibe-coding-intensive\", \"title\": \"Интенсив по Cursor\", \"price\": 2900000, \"currency\": \"RUB\", \"description\": \"Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов.\"}, {\"code\": \"fullstack-aidd\", \"title\": \"AI-driven Fullstack\", \"price\": 4900000, \"currency\": \"RUB\", \"description\": \"Fullstack-разработка с AI: backend, frontend, DevOps и агентные паттерны в одном курсе.\"}, {\"code\": \"agents\", \"title\": \"Базовый курс по ИИ-агентам\", \"price\": 3900000, \"currency\": \"RUB\", \"description\": \"Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде.\"}, {\"code\": \"deep-agents\", \"title\": \"Продвинутый курс Deep Agents\", \"price\": 5900000, \"currency\": \"RUB\", \"description\": \"Продвинутые агентные архитектуры: планирование, human-in-the-loop, мультиагентные сценарии.\"}, {\"code\": \"consultation\", \"title\": \"Консультация с экспертом\", \"price\": 1500000, \"currency\": \"RUB\", \"description\": \"Индивидуальная консультация по выбору программы, внедрению AI в продукт или обучению команды.\"}]}"
+        ],
+        "input_text": "user: Посоветуйте курс для первого LangChain-агента с RAG.\nassistant: Для старта рекомендую agents: ReAct, tools, RAG и observability на учебном стенде.\nuser: Ок, беру agents. Дайте ссылку на оплату."
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 0.0,
+          "comment": "expected=b2c, actual=None",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 1.0,
+          "comment": "The agent successfully created a payment link for the 'agents' course as requested in the input. The output also confirms that the product recommendation ('agents') was not changed, aligning with the input's original recommendation and the user's confirmation. Both key points are addressed.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 1.0,
+          "comment": "The assistant successfully advised on a course ('agents') relevant to the task and provided a payment link for a related course ('Basic AI Agents Course'), fulfilling both aspects of the request.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "500d998d8205b97c2e5f4dfd4bae9879"
+    }
+  ],
+  "run_scores": [
+    {
+      "name": "error_rate",
+      "value": 0.0,
+      "comment": "0/1 items failed",
+      "data_type": null
+    },
+    {
+      "name": "avg_answer_correctness",
+      "value": 1.0,
+      "comment": "Average of 1 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_faithfulness",
+      "value": 1.0,
+      "comment": "Average of 1 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_task_completion",
+      "value": 1.0,
+      "comment": "Average of 1 items",
+      "data_type": null
+    },
+    {
+      "name": "segment_match_rate",
+      "value": 0.0,
+      "comment": "Matched 0.0/1 items",
+      "data_type": null
+    }
+  ],
+  "langfuse": {
+    "dataset_run_id": "a44d6f4b-eb04-4fd9-9135-19f713b5685b",
+    "dataset_run_url": "http://localhost:3001/project/cmq0y543r0006ujmnyb937ki7/datasets/cmqe0gb320001qf07auwu9h56/runs/a44d6f4b-eb04-4fd9-9135-19f713b5685b",
+    "linked": true,
+    "dataset_id": "cmqe0gb320001qf07auwu9h56"
+  },
+  "source": "experiment"
+}

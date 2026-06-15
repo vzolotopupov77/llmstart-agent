@@ -131,6 +131,17 @@ def test_app() -> Generator[Any, None, None]:
 
 
 @pytest.fixture
+def registry_client() -> Generator[TestClient, None, None]:
+    """Client with eval config registry (no injected ReactRunner)."""
+    get_settings.cache_clear()
+    apply_mcp_server_env(get_settings())
+    app = create_app(mcp_client=FakeMcpClient())  # type: ignore[arg-type]
+    with TestClient(app) as test_client:
+        yield test_client
+    get_settings.cache_clear()
+
+
+@pytest.fixture
 def client(test_app: Any) -> Generator[TestClient, None, None]:
     with TestClient(test_app) as test_client:
         yield test_client

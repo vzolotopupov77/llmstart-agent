@@ -1,0 +1,27 @@
+config_id: benchmark-gpt-4o
+comment: "Benchmark-only: baseline + openai/gpt-4o (E-8)"
+benchmark_only: true
+
+agent:
+  impl: langchain-react
+  api_url: http://127.0.0.1:8003/api/v1/chat
+
+retrieval:
+  backend: chroma-embedded
+
+model:
+  provider: openrouter
+  name: openai/gpt-4o
+  temperature: 0.0
+
+judge:
+  provider: openrouter
+  name: google/gemini-2.5-flash-lite
+  temperature: 0.0
+
+prompt:
+  source: code
+  name: agent-system-prompt-v1
+
+datasets:
+  e2e-qa: v001

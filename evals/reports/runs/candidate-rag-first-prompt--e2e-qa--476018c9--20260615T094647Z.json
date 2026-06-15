@@ -1,0 +1,1581 @@
+{
+  "schema_version": 2,
+  "run_name": "candidate-rag-first-prompt--e2e-qa--476018c9--20260615T094647Z",
+  "config_id": "candidate-rag-first-prompt",
+  "dataset_slug": "e2e-qa",
+  "langfuse_dataset": "e2e/e2e-qa/v001",
+  "git_sha": "476018c97c239cc00d070ef36292709d9d63f18a",
+  "started_at": "2026-06-15T09:46:47.803034+00:00",
+  "finished_at": "2026-06-15T09:54:51.845051+00:00",
+  "timing": {
+    "total_duration_ms": 484042,
+    "items_total": 26,
+    "items_with_timing": 26
+  },
+  "judge": {
+    "provider": "openrouter",
+    "name": "google/gemini-2.5-flash-lite",
+    "temperature": 0.0
+  },
+  "run_metadata": {
+    "config_id": "candidate-rag-first-prompt",
+    "git_sha": "476018c97c239cc00d070ef36292709d9d63f18a",
+    "dataset_slug": "e2e-qa",
+    "dataset_version": "v001",
+    "langfuse_dataset": "e2e/e2e-qa/v001",
+    "manifest_path": "evals\\datasets\\e2e\\e2e-qa\\v001_2026-06-14.yaml",
+    "judge": {
+      "provider": "openrouter",
+      "name": "google/gemini-2.5-flash-lite",
+      "temperature": 0.0
+    },
+    "agent_model": {
+      "provider": "openrouter",
+      "name": "openai/gpt-4o-mini",
+      "temperature": 0.0
+    },
+    "prompt": {
+      "source": "code",
+      "name": "agent-system-prompt-v2",
+      "label": null,
+      "version": null
+    },
+    "retrieval": {
+      "backend": "chroma-embedded"
+    }
+  },
+  "full_config_snapshot": {
+    "config_id": "candidate-rag-first-prompt",
+    "comment": "Baseline + agent-system-prompt-v2 (RAG-first, E-7 single-parameter candidate)",
+    "benchmark_only": false,
+    "agent": {
+      "impl": "langchain-react",
+      "api_url": "http://127.0.0.1:8003/api/v1/chat"
+    },
+    "retrieval": {
+      "backend": "chroma-embedded"
+    },
+    "model": {
+      "provider": "openrouter",
+      "name": "openai/gpt-4o-mini",
+      "temperature": 0.0
+    },
+    "judge": {
+      "provider": "openrouter",
+      "name": "google/gemini-2.5-flash-lite",
+      "temperature": 0.0
+    },
+    "prompt": {
+      "source": "code",
+      "name": "agent-system-prompt-v2",
+      "label": null,
+      "version": null
+    },
+    "datasets": {
+      "e2e-qa": "v001"
+    }
+  },
+  "items": [
+    {
+      "input": [
+        {
+          "role": "user",
+          "content": "Посоветуйте курс для первого LangChain-агента с RAG."
+        },
+        {
+          "role": "assistant",
+          "content": "Для старта рекомендую agents: ReAct, tools, RAG и observability на учебном стенде."
+        },
+        {
+          "role": "user",
+          "content": "Ок, беру agents. Дайте ссылку на оплату."
+        }
+      ],
+      "output": {
+        "message": "Вот ссылка на оплату курса \"Базовый курс по ИИ-агентам\": [Оплатить курс](https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=26d7fcf1-9295-4c3e-b41a-7083c4081b6f&token=0FXfbUJXg7gASYUQubOakQ).\n\nПосле оплаты, пожалуйста, подтвердите, и укажите ваше имя, телефон и email для завершения оформления.",
+        "message_html": "Вот ссылка на оплату курса \"Базовый курс по ИИ-агентам\": [Оплатить курс](https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=26d7fcf1-9295-4c3e-b41a-7083c4081b6f&token=0FXfbUJXg7gASYUQubOakQ).\n\nПосле оплаты, пожалуйста, подтвердите, и укажите ваше имя, телефон и email для завершения оформления.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Создание ссылки на оплату\nФормирование рекомендации.",
+        "session_id": "26d7fcf1-9295-4c3e-b41a-7083c4081b6f",
+        "tools": [
+          {
+            "name": "create_payment_link",
+            "status": "done",
+            "title": "Создание ссылки на оплату"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "{\"items\": [{\"code\": \"ai-agents-combo\", \"title\": \"Комбо из 4 программ\", \"price\": 9900000, \"currency\": \"RUB\", \"description\": \"Пакет из четырёх программ LLMStart: agents, deep-agents, fullstack-aidd и vibe-coding-intensive со скидкой.\"}, {\"code\": \"vibe-coding-intensive\", \"title\": \"Интенсив по Cursor\", \"price\": 2900000, \"currency\": \"RUB\", \"description\": \"Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов.\"}, {\"code\": \"fullstack-aidd\", \"title\": \"AI-driven Fullstack\", \"price\": 4900000, \"currency\": \"RUB\", \"description\": \"Fullstack-разработка с AI: backend, frontend, DevOps и агентные паттерны в одном курсе.\"}, {\"code\": \"agents\", \"title\": \"Базовый курс по ИИ-агентам\", \"price\": 3900000, \"currency\": \"RUB\", \"description\": \"Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде.\"}, {\"code\": \"deep-agents\", \"title\": \"Продвинутый курс Deep Agents\", \"price\": 5900000, \"currency\": \"RUB\", \"description\": \"Продвинутые агентные архитектуры: планирование, human-in-the-loop, мультиагентные сценарии.\"}, {\"code\": \"consultation\", \"title\": \"Консультация с экспертом\", \"price\": 1500000, \"currency\": \"RUB\", \"description\": \"Индивидуальная консультация по выбору программы, внедрению AI в продукт или обучению команды.\"}]}"
+        ],
+        "input_text": "user: Посоветуйте курс для первого LangChain-агента с RAG.\nassistant: Для старта рекомендую agents: ReAct, tools, RAG и observability на учебном стенде.\nuser: Ок, беру agents. Дайте ссылку на оплату."
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 1.0,
+          "comment": "The agent correctly identified the user's last request to create a payment link for 'agents' and provided a relevant payment link. The agent also adhered to the instruction not to change the product recommendation.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 1.0,
+          "comment": "The assistant successfully created a payment link for the specified product ('Базовый курс по ИИ-агентам') and did not alter the product recommendation, fulfilling both criteria of the task.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "dd54757fe89545b80581d5e0604fe89c"
+    },
+    {
+      "input": [
+        {
+          "role": "user",
+          "content": "Есть курс по AI-кодингу веб-проектов в записях?"
+        },
+        {
+          "role": "assistant",
+          "content": "Отдельного веб-only курса нет; методика agents и fullstack-aidd подходит для веба. Можно пройти в записи или в текущем потоке."
+        },
+        {
+          "role": "user",
+          "content": "Я бы купил курс, но до 15 сентября очень загружен. Следующий поток когда? Будет ли набор в сентябре?"
+        }
+      ],
+      "output": {
+        "message": "К сожалению, в базе данных нет информации о следующем потоке курсов или наборе в сентябре. Рекомендую следить за обновлениями на сайте или подписаться на рассылку, чтобы не пропустить информацию о новых потоках. Если у вас есть другие вопросы или интерес к курсам, дайте знать!",
+        "message_html": "К сожалению, в базе данных нет информации о следующем потоке курсов или наборе в сентябре. Рекомендую следить за обновлениями на сайте или подписаться на рассылку, чтобы не пропустить информацию о новых потоках. Если у вас есть другие вопросы или интерес к курсам, дайте знать!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "3fb94f43-f833-4e5a-bc0e-de421395b2d6",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## vibe-coding-intensive\\n\\nИнтенсив по **Cursor** и AI-assisted coding. Подходит тем, кто хочет ускорить ежедневную разработку: рефакторинг, тесты, code review с LLM, настройка rules и skills.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## fullstack-aidd\\n\\nAI-driven fullstack: от API и БД до Next.js-виджета. Студент собирает учебный, но прикладной стенд — как публичный агент llmstart.ru.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## Обзор программ\\n\\nLLMStart предлагает практические программы по AI-агентам и AI-driven разработке. Все курсы построены на production-паттернах: FastAPI, LangChain, MCP, observability.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## ai-agents-combo\\n\\nКомбо включает четыре ключевые программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Выгоднее, чем покупать курсы по отдельности — единый доступ ко всем материалам и обновлениям.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "user: Есть курс по AI-кодингу веб-проектов в записях?\nassistant: Отдельного веб-only курса нет; методика agents и fullstack-aidd подходит для веба. Можно пройти в записи или в текущем потоке.\nuser: Я бы купил курс, но до 15 сентября очень загружен. Следующий поток когда? Будет ли набор в сентябре?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.4,
+          "comment": "The response acknowledges the user's time constraint ('до 15 сентября очень загружен') by not pushing for immediate enrollment. It correctly avoids promising a specific date for the next stream, as per step 5. However, it fails to propose a clear next step or reminder as required by step 6, instead suggesting general actions like checking the website or subscribing to a newsletter. It also doesn't explicitly address the user's question about a September intake, only stating that information is unavailable.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.6,
+          "comment": "The system acknowledged the time barrier and suggested checking the website or newsletter for updates, which indirectly addresses the need to avoid promising a specific date. However, it did not explicitly propose a next step or fix an intention for a reminder/contact, and the recommendation to check the website might lead to a loss of interest if the user doesn't find the information easily.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "879bda8067f4c7ccb544b934ab6f3c87"
+    },
+    {
+      "input": [
+        {
+          "role": "assistant",
+          "content": "Новый поток интенсива по AI-driven разработке в Cursor — первый урок в выходной день. Подробности на llmstart.ru."
+        },
+        {
+          "role": "user",
+          "content": "Во сколько? А то в эту субботу я в Сан-Франциско"
+        }
+      ],
+      "output": {
+        "message": "К сожалению, в базе данных нет информации о времени начала курсов. Могу помочь с выбором курса или другой информацией?",
+        "message_html": "К сожалению, в базе данных нет информации о времени начала курсов. Могу помочь с выбором курса или другой информацией?",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "8d2c263f-3aa8-49ea-99f9-7c68d1aeeee3",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## vibe-coding-intensive\\n\\nИнтенсив по **Cursor** и AI-assisted coding. Подходит тем, кто хочет ускорить ежедневную разработку: рефакторинг, тесты, code review с LLM, настройка rules и skills.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## Чем отличается ai-agents-combo от покупки курсов по отдельности?\\n\\nВ комбо вы получаете все четыре программы (agents, deep-agents, fullstack-aidd, vibe-coding-intensive) по сниженной цене и единый доступ к обновлениям материалов.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## Есть ли рассрочка?\\n\\nНа MVP оплата демонстрируется через мок-ссылку. В production планируются реальные платёжные провайдеры.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## ai-agents-combo\\n\\nКомбо включает четыре ключевые программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Выгоднее, чем покупать курсы по отдельности — единый доступ ко всем материалам и обновлениям.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "assistant: Новый поток интенсива по AI-driven разработке в Cursor — первый урок в выходной день. Подробности на llmstart.ru.\nuser: Во сколько? А то в эту субботу я в Сан-Франциско"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "The agent's response does not address the user's request to know the time of the event, nor does it acknowledge the user's location in San Francisco. It fails to provide the requested time in MSK or comment on the suitability for the user's timezone (SF), and it does not assess if the event is suitable for travel.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.0,
+          "comment": "The actual outcome indicates that the assistant could not find the requested information, failing to meet any of the specified criteria for the task.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "d88ceaf68a8ca9bd09876b29194d2793"
+    },
+    {
+      "input": [
+        {
+          "role": "user",
+          "content": "Привет. У меня вопрос про интеснив. По каким дням и во сколько семинары?"
+        },
+        {
+          "role": "assistant",
+          "content": "Интенсив vibe-coding-intensive: основной созвон в пятницу днём, неделя поддержки в чате, финальный разбор на следующей неделе. Подробности на llmstart.ru."
+        },
+        {
+          "role": "user",
+          "content": "Нет так со мной не сработает. Я знаю что я не посмотрю в итоге видео. Синхрон это важно. Есть более привычные форматы — 2 или 3 раза в неделю созвоны после рабочего дня. А я работаю и собираюсь продолжать."
+        }
+      ],
+      "output": {
+        "message": "Понимаю, что вам важен синхронный формат обучения. Рекомендую рассмотреть интенсив по Cursor, который включает практические занятия по AI-assisted разработке. \n\nВот его детали:\n- **Название:** Интенсив по Cursor\n- **Цена:** 29,000 руб.\n- **Описание:** Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов.\n\nЕсли вас это заинтересовало, я могу создать ссылку для оплаты. Как вам?",
+        "message_html": "Понимаю, что вам важен синхронный формат обучения. Рекомендую рассмотреть интенсив по Cursor, который включает практические занятия по AI-assisted разработке. \n\nВот его детали:\n- **Название:** Интенсив по Cursor\n- **Цена:** 29,000 руб.\n- **Описание:** Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов.\n\nЕсли вас это заинтересовало, я могу создать ссылку для оплаты. Как вам?",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Каталог курсов\nФормирование рекомендации.",
+        "session_id": "e145f01c-28be-4680-9682-110a856227bc",
+        "tools": [
+          {
+            "name": "list_b2c_products",
+            "status": "done",
+            "title": "Каталог курсов"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## vibe-coding-intensive\\n\\nИнтенсив по **Cursor** и AI-assisted coding. Подходит тем, кто хочет ускорить ежедневную разработку: рефакторинг, тесты, code review с LLM, настройка rules и skills.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## Есть ли рассрочка?\\n\\nНа MVP оплата демонстрируется через мок-ссылку. В production планируются реальные платёжные провайдеры.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## agents и deep-agents\\n\\n**agents** — базовый курс: ReAct, tools, RAG, Langfuse. **deep-agents** — продвинутый уровень: планирование, HITL, сложные воронки и интеграции.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## consultation\\n\\nРазовая консультация с экспертом: подбор программы, разбор вашего кейса, рекомендации по внедрению AI в команду.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "user: Привет. У меня вопрос про интеснив. По каким дням и во сколько семинары?\nassistant: Интенсив vibe-coding-intensive: основной созвон в пятницу днём, неделя поддержки в чате, финальный разбор на следующей неделе. Подробности на llmstart.ru.\nuser: Нет так со мной не сработает. Я знаю что я не посмотрю в итоге видео. Синхрон это важно. Есть более привычные форматы — 2 или 3 раза в неделю созвоны после рабочего дня. А я работаю и собираюсь продолжать."
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.2,
+          "comment": "The response acknowledges the user's need for synchronous learning but fails to address several key requirements. It does not explicitly state that the previous intensive is unsuitable, nor does it offer an alternative with evening or weekend scheduling. Instead, it proposes a different intensive without confirming if it meets the user's preferred format (2-3 times a week after work) and incorrectly implies it's a synchronous solution without providing specific scheduling details. It also doesn't avoid promising specific dates, as no dates are mentioned at all.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.5,
+          "comment": "The score is 0.50 because the actual output incorrectly states the intensive course is named 'Intensive on Cursor' and 'Practical intensive on AI-assisted development in Cursor: from prompts to production patterns', when the retrieval context describes it as 'vibe-coding-intensive course focuses on Cursor and AI-assisted coding'. Additionally, the actual output incorrectly claims the AI creates payment links, whereas the retrieval context clarifies that in MVP, payment is demonstrated via a mock link, and in production, real payment providers are planned.",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.0,
+          "comment": "The actual outcome completely failed to meet any of the criteria outlined in the task. It did not acknowledge the unsuitability of the recordings, did not avoid insisting on async, and did not offer the alternative of a stream with evening or weekend scheduling. Instead, it focused on an unrelated intensive course and payment.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "82ad099e1c3617e308f8ee4634cabad5"
+    },
+    {
+      "input": "Есть ли рассрочка на комбо?",
+      "output": {
+        "message": "На данный момент информация о рассрочке на комбо отсутствует. Однако, в будущем планируется внедрение реальных платёжных провайдеров, что может включать возможность рассрочки. Если вас интересует комбо, оно включает четыре программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive** по сниженной цене.",
+        "message_html": "На данный момент информация о рассрочке на комбо отсутствует. Однако, в будущем планируется внедрение реальных платёжных провайдеров, что может включать возможность рассрочки. Если вас интересует комбо, оно включает четыре программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive** по сниженной цене.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "9065f4dc-56d2-46dd-a033-4db684618209",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## Чем отличается ai-agents-combo от покупки курсов по отдельности?\\n\\nВ комбо вы получаете все четыре программы (agents, deep-agents, fullstack-aidd, vibe-coding-intensive) по сниженной цене и единый доступ к обновлениям материалов.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## ai-agents-combo\\n\\nКомбо включает четыре ключевые программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Выгоднее, чем покупать курсы по отдельности — единый доступ ко всем материалам и обновлениям.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## Есть ли рассрочка?\\n\\nНа MVP оплата демонстрируется через мок-ссылку. В production планируются реальные платёжные провайдеры.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## vibe-coding-intensive\\n\\nИнтенсив по **Cursor** и AI-assisted coding. Подходит тем, кто хочет ускорить ежедневную разработку: рефакторинг, тесты, code review с LLM, настройка rules и skills.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "Есть ли рассрочка на комбо?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.7,
+          "comment": "The response correctly states that information about installment payments for combos is currently unavailable (Step 3). It also avoids promising real installment plans or specific banks (Steps 4, 6, and 7). The mention of future payment providers aligns with Step 5. However, it doesn't explicitly mention the MVP demo mock link for payment, which was a key detail for the MVP stage.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.7,
+          "comment": "The agent correctly avoided promising real installment plans and specific banks. It also mentioned future integration of payment providers. However, it did not explicitly mention the MVP demo mock link for payment, which was a key MVP criterion. The information about the combo and its programs is relevant but secondary to the payment aspect.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "5bcb1bfcbb43d4b34898455d0c6eb97a"
+    },
+    {
+      "input": "Скиньте хотя бы один урок в открытый доступ — иначе не понимаю, за что платить.",
+      "output": {
+        "message": "К сожалению, у нас нет открытых уроков для просмотра. Однако я могу рассказать о курсах, которые мы предлагаем. Например, у нас есть курс **agents** — базовый курс, который охватывает темы ReAct, tools, RAG и Langfuse. \n\nЕсли вас интересует что-то конкретное, дайте знать, и я помогу выбрать подходящий курс!",
+        "message_html": "К сожалению, у нас нет открытых уроков для просмотра. Однако я могу рассказать о курсах, которые мы предлагаем. Например, у нас есть курс **agents** — базовый курс, который охватывает темы ReAct, tools, RAG и Langfuse. \n\nЕсли вас интересует что-то конкретное, дайте знать, и я помогу выбрать подходящий курс!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "8de21678-2c4f-49e5-9f28-cadd9414d7f3",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"# FAQ B2C — частые вопросы\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## fullstack-aidd\\n\\nAI-driven fullstack: от API и БД до Next.js-виджета. Студент собирает учебный, но прикладной стенд — как публичный агент llmstart.ru.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## vibe-coding-intensive\\n\\nИнтенсив по **Cursor** и AI-assisted coding. Подходит тем, кто хочет ускорить ежедневную разработку: рефакторинг, тесты, code review с LLM, настройка rules и skills.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## agents и deep-agents\\n\\n**agents** — базовый курс: ReAct, tools, RAG, Langfuse. **deep-agents** — продвинутый уровень: планирование, HITL, сложные воронки и интеграции.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "Скиньте хотя бы один урок в открытый доступ — иначе не понимаю, за что платить."
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.7,
+          "comment": "The response correctly states that there are no public demos or open lessons (Step 3). It also describes a program from the catalog (Step 4) and does not promise to send a lesson (Step 5) or a demo (Step 6). However, it does not explicitly state that there are no public demos, only that there are no open lessons. The response also does not provide a fabricated link (Step 7).",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.7,
+          "comment": "The system correctly stated that there are no public demos or open lessons. It also described a program from the catalog ('agents' course) and did not promise to send a lesson or a fake link. However, it did not explicitly state that there are no open lessons, only that there are no *free* lessons, which is a slight deviation from the prompt's criteria.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "c02d0874518089ad6287fd185bffc945"
+    },
+    {
+      "input": "Нужно обучить 30 инженеров в компании, есть бюджет на корпоративный договор. Вы делаете такое?",
+      "output": {
+        "message": "Да, мы проводим корпоративное обучение. У нас есть программы для инженерных команд, включая воркшопы и корпоративные треки. \n\n### Форматы обучения:\n- **Воркшопы** (1–3 дня): темы могут включать AI-агентов, RAG, MCP и другие.\n- **Корпоративный трек** (4–8 недель): адаптация под ваши внутренние сервисы.\n\nЕсли вас интересует конкретная программа или формат, дайте знать, и я помогу с деталями!",
+        "message_html": "Да, мы проводим корпоративное обучение. У нас есть программы для инженерных команд, включая воркшопы и корпоративные треки. \n\n### Форматы обучения:\n- **Воркшопы** (1–3 дня): темы могут включать AI-агентов, RAG, MCP и другие.\n- **Корпоративный трек** (4–8 недель): адаптация под ваши внутренние сервисы.\n\nЕсли вас интересует конкретная программа или формат, дайте знать, и я помогу с деталями!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "53383057-b75c-4dd2-8ec5-b7eca7268e1a",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"# Корпоративное обучение LLMStart (B2B)\", \"source\": \"corporate-training.md\", \"segment\": \"b2b\"}, {\"text\": \"## Программы для команд\\n\\nLLMStart проводит корпоративное обучение по AI-агентам и AI-driven разработке для инженерных команд и product-офисов.\", \"source\": \"corporate-training.md\", \"segment\": \"b2b\"}, {\"text\": \"## Форматы\\n\\n- **Воркшопы** (1–3 дня): agents, RAG, MCP, observability на вашем стеке.\\n- **Корпоративный трек** (4–8 недель): fullstack-aidd с адаптацией под внутренние сервисы.\\n- **Executive briefing**: стратегия внедрения AI для руководителей (не заменяет consultation B2C).\", \"source\": \"corporate-training.md\", \"segment\": \"b2b\"}, {\"text\": \"## Типовые проекты\\n\\n- Публичный sales-бот с RAG по базе знаний компании.\\n- Внутренний copilot для поддержки или HR.\\n- Интеграция с CRM и платёжными системами (post-MVP паттерны на учебном стенде).\", \"source\": \"custom-development.md\", \"segment\": \"b2b\"}]"
+        ],
+        "input_text": "Нужно обучить 30 инженеров в компании, есть бюджет на корпоративный договор. Вы делаете такое?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 0.0,
+          "comment": "expected=b2b, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.8,
+          "comment": "The agent correctly identified the B2B context (company, contract, training) and avoided B2C checkout suggestions. The response aligns with the 'corporate training' route and briefly mentions B2B formats (workshops, corporate tracks) as requested. The score is not a perfect 10 because the response could have more explicitly mentioned 'contract' as a B2B element, although it is implied by 'corporate договор'.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.6,
+          "comment": "The actual outcome addresses the B2B aspect by offering corporate training formats and mentioning adaptation to company services. However, it doesn't explicitly recognize 'команда', 'компания', or 'договор' as requested. It also doesn't mention 'consultation' or 'бриф' as part of the route, focusing solely on training. The constraint about not offering 30 B2C purchases is implicitly met by focusing on B2B services, but not explicitly confirmed.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "43e95c730f267dba4d5951206c7c651c"
+    },
+    {
+      "input": "Уже делал RAG и tools в проде, хочу продвинутые агентные воронки. Сразу deep-agents?",
+      "output": {
+        "message": "Да, для продвинутых агентных воронок рекомендую курс \"Продвинутый курс Deep Agents\" (код: deep-agents). Он охватывает продвинутые агентные архитектуры, планирование, human-in-the-loop и мультиагентные сценарии.\n\nЕсли вас это устраивает, я могу подготовить ссылку для оплаты.",
+        "message_html": "Да, для продвинутых агентных воронок рекомендую курс \"Продвинутый курс Deep Agents\" (код: deep-agents). Он охватывает продвинутые агентные архитектуры, планирование, human-in-the-loop и мультиагентные сценарии.\n\nЕсли вас это устраивает, я могу подготовить ссылку для оплаты.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Каталог курсов\nФормирование рекомендации.",
+        "session_id": "71021c82-0769-4121-8b22-6a4834b6b37f",
+        "tools": [
+          {
+            "name": "list_b2c_products",
+            "status": "done",
+            "title": "Каталог курсов"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "{\"items\": [{\"code\": \"ai-agents-combo\", \"title\": \"Комбо из 4 программ\", \"price\": 9900000, \"currency\": \"RUB\", \"description\": \"Пакет из четырёх программ LLMStart: agents, deep-agents, fullstack-aidd и vibe-coding-intensive со скидкой.\"}, {\"code\": \"vibe-coding-intensive\", \"title\": \"Интенсив по Cursor\", \"price\": 2900000, \"currency\": \"RUB\", \"description\": \"Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов.\"}, {\"code\": \"fullstack-aidd\", \"title\": \"AI-driven Fullstack\", \"price\": 4900000, \"currency\": \"RUB\", \"description\": \"Fullstack-разработка с AI: backend, frontend, DevOps и агентные паттерны в одном курсе.\"}, {\"code\": \"agents\", \"title\": \"Базовый курс по ИИ-агентам\", \"price\": 3900000, \"currency\": \"RUB\", \"description\": \"Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде.\"}, {\"code\": \"deep-agents\", \"title\": \"Продвинутый курс Deep Agents\", \"price\": 5900000, \"currency\": \"RUB\", \"description\": \"Продвинутые агентные архитектуры: планирование, human-in-the-loop, мультиагентные сценарии.\"}, {\"code\": \"consultation\", \"title\": \"Консультация с экспертом\", \"price\": 1500000, \"currency\": \"RUB\", \"description\": \"Индивидуальная консультация по выбору программы, внедрению AI в продукт или обучению команды.\"}]}"
+        ],
+        "input_text": "Уже делал RAG и tools в проде, хочу продвинутые агентные воронки. Сразу deep-agents?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.9,
+          "comment": "The response directly addresses the user's request for advanced agent funnels, confirming the relevance of 'deep-agents' given their prior experience with RAG and tools (Step 3). It also explicitly mentions 'human-in-the-loop' and 'multi-agent scenarios' (Step 4). The response focuses solely on the last user query (Step 1) and does not require actions from previous turns (Step 2). While it doesn't explicitly state that agents are used to fill knowledge gaps (Step 5), the overall alignment with the other steps is very strong.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.9,
+          "comment": "The system successfully recommended the 'deep-agents' course and mentioned HITL and multi-agent scenarios. It also implicitly addressed the need to close knowledge gaps by recommending a course on advanced agent architectures. The only minor omission is explicitly stating that 'agents' are used to close gaps in the knowledge base, though this is implied by the course content.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "b23d1d89d3b5efeae8781cd805d672f9"
+    },
+    {
+      "input": "Как выбрать между agents и deep-agents? Я никогда не писал LangChain-агентов.",
+      "output": {
+        "message": "Если вы никогда не писали LangChain-агентов, рекомендуется начать с курса **\"Базовый курс по ИИ-агентам\" (agents)**. Этот курс охватывает основы, такие как ReAct, инструменты, RAG и Langfuse. \n\nКурс **\"Продвинутый курс Deep Agents\" (deep-agents)** предназначен для тех, кто уже имеет опыт с базовыми концепциями и хочет углубить свои знания, включая планирование и сложные воронки.\n\nТакже есть возможность приобрести **комбо из 4 программ** (ai-agents-combo), которое включает оба курса и другие, по более выгодной цене.\n\nЕсли вас интересует базовый курс, я могу создать ссылку для оплаты. Хотите продолжить?",
+        "message_html": "Если вы никогда не писали LangChain-агентов, рекомендуется начать с курса **\"Базовый курс по ИИ-агентам\" (agents)**. Этот курс охватывает основы, такие как ReAct, инструменты, RAG и Langfuse. \n\nКурс **\"Продвинутый курс Deep Agents\" (deep-agents)** предназначен для тех, кто уже имеет опыт с базовыми концепциями и хочет углубить свои знания, включая планирование и сложные воронки.\n\nТакже есть возможность приобрести **комбо из 4 программ** (ai-agents-combo), которое включает оба курса и другие, по более выгодной цене.\n\nЕсли вас интересует базовый курс, я могу создать ссылку для оплаты. Хотите продолжить?",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nВызов инструмента: Каталог курсов\nФормирование рекомендации.",
+        "session_id": "bc97793f-aaef-4896-9d4c-e6de6f06b1f3",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          },
+          {
+            "name": "list_b2c_products",
+            "status": "done",
+            "title": "Каталог курсов"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "{\"items\": [{\"code\": \"ai-agents-combo\", \"title\": \"Комбо из 4 программ\", \"price\": 9900000, \"currency\": \"RUB\", \"description\": \"Пакет из четырёх программ LLMStart: agents, deep-agents, fullstack-aidd и vibe-coding-intensive со скидкой.\"}, {\"code\": \"vibe-coding-intensive\", \"title\": \"Интенсив по Cursor\", \"price\": 2900000, \"currency\": \"RUB\", \"description\": \"Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов.\"}, {\"code\": \"fullstack-aidd\", \"title\": \"AI-driven Fullstack\", \"price\": 4900000, \"currency\": \"RUB\", \"description\": \"Fullstack-разработка с AI: backend, frontend, DevOps и агентные паттерны в одном курсе.\"}, {\"code\": \"agents\", \"title\": \"Базовый курс по ИИ-агентам\", \"price\": 3900000, \"currency\": \"RUB\", \"description\": \"Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде.\"}, {\"code\": \"deep-agents\", \"title\": \"Продвинутый курс Deep Agents\", \"price\": 5900000, \"currency\": \"RUB\", \"description\": \"Продвинутые агентные архитектуры: планирование, human-in-the-loop, мультиагентные сценарии.\"}, {\"code\": \"consultation\", \"title\": \"Консультация с экспертом\", \"price\": 1500000, \"currency\": \"RUB\", \"description\": \"Индивидуальная консультация по выбору программы, внедрению AI в продукт или обучению команды.\"}]}",
+          "[{\"text\": \"## agents и deep-agents\\n\\n**agents** — базовый курс: ReAct, tools, RAG, Langfuse. **deep-agents** — продвинутый уровень: планирование, HITL, сложные воронки и интеграции.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## Как выбрать между agents и deep-agents?\\n\\nНачните с **agents**, если вы впервые строите LangChain-агентов. **deep-agents** — для тех, кто уже прошёл базовый курс или имеет опыт с tools и RAG.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## ai-agents-combo\\n\\nКомбо включает четыре ключевые программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Выгоднее, чем покупать курсы по отдельности — единый доступ ко всем материалам и обновлениям.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## Чем отличается ai-agents-combo от покупки курсов по отдельности?\\n\\nВ комбо вы получаете все четыре программы (agents, deep-agents, fullstack-aidd, vibe-coding-intensive) по сниженной цене и единый доступ к обновлениям материалов.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "Как выбрать между agents и deep-agents? Я никогда не писал LangChain-агентов."
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 1.0,
+          "comment": "The response directly addresses the user's question about choosing between 'agents' and 'deep-agents' based on their experience level. It correctly recommends 'agents' for beginners and 'deep-agents' for those with prior experience, aligning with evaluation steps 3 and 4. The response also accurately summarizes the key concepts covered in each, mentioning ReAct, tools, and RAG for 'agents', and planning and HITL (implied by 'сложные воронки') for 'deep-agents', fulfilling evaluation step 5.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.6,
+          "comment": "The actual outcome correctly identifies 'agents' as the course for beginners and 'deep-agents' for experienced users. However, it fails to mention the specific technologies covered in each (ReAct, tools, RAG for 'agents'; planning, HITL for 'deep-agents') and incorrectly suggests a combo package and offers to create a payment link, which were not part of the original task.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "6ef00abcde193f22690dcefcee18e298"
+    },
+    {
+      "input": "Оплатил agents, вот чек не прикладываю — просто подтверждаю оплату.",
+      "output": {
+        "message": "Спасибо за подтверждение оплаты! Пожалуйста, укажите ваше имя, телефон и email, чтобы я мог завершить процесс.",
+        "message_html": "Спасибо за подтверждение оплаты! Пожалуйста, укажите ваше имя, телефон и email, чтобы я мог завершить процесс.",
+        "reasoning": "Анализ запроса пользователя.\nПодготовка ответа без инструментов.",
+        "session_id": "287c19a8-03c0-4f91-8940-47732817b751",
+        "tools": [],
+        "segment": null,
+        "retrieval_context": [],
+        "input_text": "Оплатил agents, вот чек не прикладываю — просто подтверждаю оплату."
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 0.0,
+          "comment": "expected=b2c, actual=None",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "The agent's response does not reflect the acceptance of a payment confirmation (mock) or confirm successful payment via a tool, as required by evaluation steps 3 and 4. Instead, it requests additional user information.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No retrieval context in trace (skipped)",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.2,
+          "comment": "The actual outcome did not fulfill the task requirements. The task specified to confirm successful payment via a tool, but the system instead requested user information to complete the process, indicating that payment confirmation had not yet occurred.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "0d1873d71ef57e2b347500ecea6f27da"
+    },
+    {
+      "input": "Решил, беру agents. Как оплатить?",
+      "output": {
+        "message": "Для оплаты курса \"Агенты\" перейдите по [ссылке для оплаты](https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=c8a72473-3d7b-4064-a2dd-11efdc437d8e&token=w2Eq6uVlKe3IlYw_0zbz8Q). \n\nПосле оплаты, пожалуйста, сообщите мне ваше имя, телефон и email для завершения регистрации.",
+        "message_html": "Для оплаты курса \"Агенты\" перейдите по [ссылке для оплаты](https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=c8a72473-3d7b-4064-a2dd-11efdc437d8e&token=w2Eq6uVlKe3IlYw_0zbz8Q). \n\nПосле оплаты, пожалуйста, сообщите мне ваше имя, телефон и email для завершения регистрации.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Создание ссылки на оплату\nФормирование рекомендации.",
+        "session_id": "c8a72473-3d7b-4064-a2dd-11efdc437d8e",
+        "tools": [
+          {
+            "name": "create_payment_link",
+            "status": "done",
+            "title": "Создание ссылки на оплату"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "{\"url\": \"https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=c8a72473-3d7b-4064-a2dd-11efdc437d8e&token=w2Eq6uVlKe3IlYw_0zbz8Q\"}"
+        ],
+        "input_text": "Решил, беру agents. Как оплатить?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 1.0,
+          "comment": "The response successfully created a mock payment link for 'agents' and briefly confirmed the product choice, fulfilling all evaluation steps.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 1.0,
+          "comment": "The agent successfully created a mock payment link for 'agents' and briefly confirmed the product choice by mentioning the 'Agents' course. The actual outcome fully meets the specified criteria.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "e407feefc369d94274130cbea9089bb4"
+    },
+    {
+      "input": "Хочу пройти обучение для себя, не от компании. Это к вам как к физлицу?",
+      "output": {
+        "message": "Да, это сегмент B2C. Какой именно курс вас интересует? Могу помочь подобрать подходящие варианты.",
+        "message_html": "Да, это сегмент B2C. Какой именно курс вас интересует? Могу помочь подобрать подходящие варианты.",
+        "reasoning": "Анализ запроса пользователя.\nПодготовка ответа без инструментов.",
+        "session_id": "6783dbf5-8852-4bd2-8c60-706630e4944c",
+        "tools": [],
+        "segment": null,
+        "retrieval_context": [],
+        "input_text": "Хочу пройти обучение для себя, не от компании. Это к вам как к физлицу?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 0.0,
+          "comment": "expected=b2c, actual=None",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 1.0,
+          "comment": "The agent correctly identified the scenario as B2C, offered to help select a course, and did not ask B2B-related questions about the team or contract, aligning with all evaluation steps.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No retrieval context in trace (skipped)",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.9,
+          "comment": "The agent confirmed it's a B2C scenario and asked about course interests to suggest products, fulfilling all criteria. It avoided B2B questions.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "7cf533f81e3f59dcc01142ffbf99ef49"
+    },
+    {
+      "input": "А по веб проектам — есть ли что-то для физлица, или только корпоративным?",
+      "output": {
+        "message": "Для физических лиц у нас есть несколько курсов по веб-проектам и разработке с использованием ИИ:\n\n1. **Базовый курс по ИИ-агентам** (код: agents) - Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде. Цена: 39 000 руб.\n\n2. **Продвинутый курс Deep Agents** (код: deep-agents) - Продвинутые агентные архитектуры: планирование, human-in-the-loop, мультиагентные сценарии. Цена: 59 000 руб.\n\n3. **Интенсив по Cursor** (код: vibe-coding-intensive) - Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов. Цена: 29 000 руб.\n\nЕсли вас интересует один из этих курсов, дайте знать, и я помогу с оплатой!",
+        "message_html": "Для физических лиц у нас есть несколько курсов по веб-проектам и разработке с использованием ИИ:\n\n1. **Базовый курс по ИИ-агентам** (код: agents) - Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде. Цена: 39 000 руб.\n\n2. **Продвинутый курс Deep Agents** (код: deep-agents) - Продвинутые агентные архитектуры: планирование, human-in-the-loop, мультиагентные сценарии. Цена: 59 000 руб.\n\n3. **Интенсив по Cursor** (код: vibe-coding-intensive) - Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов. Цена: 29 000 руб.\n\nЕсли вас интересует один из этих курсов, дайте знать, и я помогу с оплатой!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Каталог курсов\nФормирование рекомендации.",
+        "session_id": "684953dc-e7d4-4873-95c3-534d57eeaeed",
+        "tools": [
+          {
+            "name": "list_b2c_products",
+            "status": "done",
+            "title": "Каталог курсов"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "{\"items\": [{\"code\": \"ai-agents-combo\", \"title\": \"Комбо из 4 программ\", \"price\": 9900000, \"currency\": \"RUB\", \"description\": \"Пакет из четырёх программ LLMStart: agents, deep-agents, fullstack-aidd и vibe-coding-intensive со скидкой.\"}, {\"code\": \"vibe-coding-intensive\", \"title\": \"Интенсив по Cursor\", \"price\": 2900000, \"currency\": \"RUB\", \"description\": \"Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов.\"}, {\"code\": \"fullstack-aidd\", \"title\": \"AI-driven Fullstack\", \"price\": 4900000, \"currency\": \"RUB\", \"description\": \"Fullstack-разработка с AI: backend, frontend, DevOps и агентные паттерны в одном курсе.\"}, {\"code\": \"agents\", \"title\": \"Базовый курс по ИИ-агентам\", \"price\": 3900000, \"currency\": \"RUB\", \"description\": \"Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде.\"}, {\"code\": \"deep-agents\", \"title\": \"Продвинутый курс Deep Agents\", \"price\": 5900000, \"currency\": \"RUB\", \"description\": \"Продвинутые агентные архитектуры: планирование, human-in-the-loop, мультиагентные сценарии.\"}, {\"code\": \"consultation\", \"title\": \"Консультация с экспертом\", \"price\": 1500000, \"currency\": \"RUB\", \"description\": \"Индивидуальная консультация по выбору программы, внедрению AI в продукт или обучению команды.\"}]}"
+        ],
+        "input_text": "А по веб проектам — есть ли что-то для физлица, или только корпоративным?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 1.0,
+          "comment": "The response directly addresses the user's question about offerings for individuals ('физлица') regarding web projects. It correctly identifies and lists B2C courses, including 'fullstack-aidd с веб-компонентом' implicitly through the AI-assisted development courses. The response avoids mentioning B2B offerings or consultation, as the user's query was specifically about individual options.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.25,
+          "comment": "The score is 0.25 because the actual output incorrectly states the prices for multiple courses. Specifically, it lists the 'agents' course at 39,000 rubles instead of the correct 3,900,000 RUB, the 'deep-agents' course at 59,000 rubles instead of 5,900,000 RUB, and the 'vibe-coding-intensive' course at 29,000 rubles instead of 2,900,000 RUB.",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.7,
+          "comment": "The system provided information on B2C courses as requested for individuals, including AI and web development. However, it did not explicitly address the criteria for corporate custom web programs (B2B) or the specific actions to take if corporate training is of interest (consultation or B2B brief).",
+          "data_type": null
+        }
+      ],
+      "trace_id": "ce234a3bcd7b1c7499aa18a30dd4ae2c"
+    },
+    {
+      "input": "Стоит ли платить такие большие деньги за курс, если я не вижу, что именно внутри?",
+      "output": {
+        "message": "Понимаю ваши сомнения. Важно знать, что курсы, которые мы предлагаем, имеют онлайн-формат с практическими заданиями и учебным репозиторием. Также предусмотрена поддержка в чате и возможность консультации с экспертом.\n\nЕсли вас интересует конкретный курс, я могу предоставить информацию о его содержании и преимуществах. Например, у нас есть комбо-курс **ai-agents-combo**, который включает четыре программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Это выгоднее, чем покупать курсы по отдельности, так как вы получаете единый доступ ко всем материалам и обновлениям.\n\nЕсли хотите, могу рассказать подробнее о каком-то из курсов или помочь с оплатой.",
+        "message_html": "Понимаю ваши сомнения. Важно знать, что курсы, которые мы предлагаем, имеют онлайн-формат с практическими заданиями и учебным репозиторием. Также предусмотрена поддержка в чате и возможность консультации с экспертом.\n\nЕсли вас интересует конкретный курс, я могу предоставить информацию о его содержании и преимуществах. Например, у нас есть комбо-курс **ai-agents-combo**, который включает четыре программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Это выгоднее, чем покупать курсы по отдельности, так как вы получаете единый доступ ко всем материалам и обновлениям.\n\nЕсли хотите, могу рассказать подробнее о каком-то из курсов или помочь с оплатой.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "2fce48e7-a838-41a7-bdde-0b7754db68de",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## Формат обучения\\n\\nОнлайн, с практическими заданиями и учебным репозиторием. Поддержка в чате курса; консультация с экспертом — отдельный продукт **consultation**.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"# Курсы LLMStart для физических лиц (B2C)\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## Чем отличается ai-agents-combo от покупки курсов по отдельности?\\n\\nВ комбо вы получаете все четыре программы (agents, deep-agents, fullstack-aidd, vibe-coding-intensive) по сниженной цене и единый доступ к обновлениям материалов.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## ai-agents-combo\\n\\nКомбо включает четыре ключевые программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Выгоднее, чем покупать курсы по отдельности — единый доступ ко всем материалам и обновлениям.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "Стоит ли платить такие большие деньги за курс, если я не вижу, что именно внутри?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.7,
+          "comment": "The response correctly addresses the user's concern about not seeing the course content by explaining the value through the combo offer and practical format (Step 4). It also details what's included in the programs, mentioning production patterns and the repository (Step 5). Crucially, it avoids pressuring the user for payment (Step 6 & 7) and does not promise demo lessons (Step 8). However, it doesn't explicitly state that there is no public demo, which was a requirement (Step 3).",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.5,
+          "comment": "The score is 0.50 because the actual output incorrectly implies that consultation with an expert is part of the general support, when the retrieval context clarifies it's a separate product. Additionally, while the combo course offers benefits like reduced pricing and unified access to updates, the actual output incorrectly states it provides unified access to *all* materials, which is not explicitly mentioned in the retrieval context.",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.7,
+          "comment": "The AI addressed most of the user's request by explaining the value of the combo, describing course contents, and avoiding payment pressure. However, it did not explicitly state that there is no public demo, which was a specific negative constraint.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "6320ef44d02c8dab26ba8d89066ec473"
+    },
+    {
+      "input": "ИТ разработка, в основном в области ИИ. Но код сам не пишу. Ближе к CPO. Хочу руку набить на инструменте, что-то сам прототипировать. Подойдёт комбо?",
+      "output": {
+        "message": "Для вашей цели подойдёт \"Комбо из 4 программ\" (код: ai-agents-combo). Это пакет, включающий курсы по ИИ-агентам, AI-driven Fullstack, интенсив по Cursor и другие, что позволит вам получить практические навыки в прототипировании и разработке.\n\nЦена комбо составляет 99 000 рублей. Хотите перейти к оплате?",
+        "message_html": "Для вашей цели подойдёт \"Комбо из 4 программ\" (код: ai-agents-combo). Это пакет, включающий курсы по ИИ-агентам, AI-driven Fullstack, интенсив по Cursor и другие, что позволит вам получить практические навыки в прототипировании и разработке.\n\nЦена комбо составляет 99 000 рублей. Хотите перейти к оплате?",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Каталог курсов\nФормирование рекомендации.",
+        "session_id": "e116623e-cf93-4f98-a317-c218417b55a2",
+        "tools": [
+          {
+            "name": "list_b2c_products",
+            "status": "done",
+            "title": "Каталог курсов"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "{\"items\": [{\"code\": \"ai-agents-combo\", \"title\": \"Комбо из 4 программ\", \"price\": 9900000, \"currency\": \"RUB\", \"description\": \"Пакет из четырёх программ LLMStart: agents, deep-agents, fullstack-aidd и vibe-coding-intensive со скидкой.\"}, {\"code\": \"vibe-coding-intensive\", \"title\": \"Интенсив по Cursor\", \"price\": 2900000, \"currency\": \"RUB\", \"description\": \"Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов.\"}, {\"code\": \"fullstack-aidd\", \"title\": \"AI-driven Fullstack\", \"price\": 4900000, \"currency\": \"RUB\", \"description\": \"Fullstack-разработка с AI: backend, frontend, DevOps и агентные паттерны в одном курсе.\"}, {\"code\": \"agents\", \"title\": \"Базовый курс по ИИ-агентам\", \"price\": 3900000, \"currency\": \"RUB\", \"description\": \"Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде.\"}, {\"code\": \"deep-agents\", \"title\": \"Продвинутый курс Deep Agents\", \"price\": 5900000, \"currency\": \"RUB\", \"description\": \"Продвинутые агентные архитектуры: планирование, human-in-the-loop, мультиагентные сценарии.\"}, {\"code\": \"consultation\", \"title\": \"Консультация с экспертом\", \"price\": 1500000, \"currency\": \"RUB\", \"description\": \"Индивидуальная консультация по выбору программы, внедрению AI в продукт или обучению команды.\"}]}"
+        ],
+        "input_text": "ИТ разработка, в основном в области ИИ. Но код сам не пишу. Ближе к CPO. Хочу руку набить на инструменте, что-то сам прототипировать. Подойдёт комбо?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.7,
+          "comment": "The response correctly identifies that the combo is suitable for AI-driven development and prototyping, aligning with steps 3 and 4. It also implicitly addresses step 5 by suggesting the combo will provide practical skills, implying a need for hands-on engagement. However, it doesn't explicitly mention the need for a basic coding level or willingness to learn, which is a component of step 5, nor does it directly address step 6 by stating that coding will be required.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.75,
+          "comment": "The score is 0.75 because the actual output incorrectly stated the price for 'ai-agents-combo' as 99,000 rubles, when the retrieval context clearly indicates it is 9,900,000 RUB.",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.9,
+          "comment": "The actual outcome addresses all the criteria mentioned in the task. It confirms the combo is suitable for AI-driven development and agents, mentions the coding-intensive vibe with Cursor and AI prototyping, states the honesty requirement about needing basic coding skills or willingness to learn, and implicitly avoids promising no coding will be needed by highlighting the practical development aspect. The only minor point is that it doesn't explicitly state 'не обещать, что код писать не понадобится' but the overall tone and content align well.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "f5ffaa81be55bcc2e92aa649bedcc605"
+    },
+    {
+      "input": [
+        {
+          "role": "user",
+          "content": "все таки хочется посмотреть на какую то часть ваших уроков, чтобы иметь представление, за что перечислять деньги"
+        },
+        {
+          "role": "assistant",
+          "content": "Публичных отрывков уроков нет. Могу рассказать про программу курсов из каталога. Какой курс вас интересует?"
+        },
+        {
+          "role": "user",
+          "content": "зачем вам моя цель? вам надо привлечь меня, чтобы я заплатил вам порядочную сумму"
+        }
+      ],
+      "output": {
+        "message": "Понимаю, ваша цель важна для того, чтобы предложить наиболее подходящий курс, который действительно соответствует вашим интересам и потребностям. Это поможет вам получить максимальную пользу от обучения. Если вы поделитесь, что именно вас интересует или какие навыки вы хотите развить, я смогу предложить наиболее релевантные варианты.",
+        "message_html": "Понимаю, ваша цель важна для того, чтобы предложить наиболее подходящий курс, который действительно соответствует вашим интересам и потребностям. Это поможет вам получить максимальную пользу от обучения. Если вы поделитесь, что именно вас интересует или какие навыки вы хотите развить, я смогу предложить наиболее релевантные варианты.",
+        "reasoning": "Анализ запроса пользователя.\nПодготовка ответа без инструментов.",
+        "session_id": "f4c7426d-6f2f-48ea-891f-1ccfd4754916",
+        "tools": [],
+        "segment": null,
+        "retrieval_context": [
+          "{\"items\": [{\"code\": \"ai-agents-combo\", \"title\": \"Комбо из 4 программ\", \"price\": 9900000, \"currency\": \"RUB\", \"description\": \"Пакет из четырёх программ LLMStart: agents, deep-agents, fullstack-aidd и vibe-coding-intensive со скидкой.\"}, {\"code\": \"vibe-coding-intensive\", \"title\": \"Интенсив по Cursor\", \"price\": 2900000, \"currency\": \"RUB\", \"description\": \"Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов.\"}, {\"code\": \"fullstack-aidd\", \"title\": \"AI-driven Fullstack\", \"price\": 4900000, \"currency\": \"RUB\", \"description\": \"Fullstack-разработка с AI: backend, frontend, DevOps и агентные паттерны в одном курсе.\"}, {\"code\": \"agents\", \"title\": \"Базовый курс по ИИ-агентам\", \"price\": 3900000, \"currency\": \"RUB\", \"description\": \"Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде.\"}, {\"code\": \"deep-agents\", \"title\": \"Продвинутый курс Deep Agents\", \"price\": 5900000, \"currency\": \"RUB\", \"description\": \"Продвинутые агентные архитектуры: планирование, human-in-the-loop, мультиагентные сценарии.\"}, {\"code\": \"consultation\", \"title\": \"Консультация с экспертом\", \"price\": 1500000, \"currency\": \"RUB\", \"description\": \"Индивидуальная консультация по выбору программы, внедрению AI в продукт или обучению команды.\"}]}"
+        ],
+        "input_text": "user: все таки хочется посмотреть на какую то часть ваших уроков, чтобы иметь представление, за что перечислять деньги\nassistant: Публичных отрывков уроков нет. Могу рассказать про программу курсов из каталога. Какой курс вас интересует?\nuser: зачем вам моя цель? вам надо привлечь меня, чтобы я заплатил вам порядочную сумму"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 0.0,
+          "comment": "expected=b2c, actual=None",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.2,
+          "comment": "The response fails to adhere to evaluation step 3, as it reiterates the need for the user's goal after the user explicitly pushed back on it. The response also does not focus on the value proposition as per step 4, instead continuing to press for the user's goal. It does not offer a consultation as an option (step 6) and does not make promises about public demos (step 5).",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.2,
+          "comment": "The assistant repeated the persistent request for the user's goal, which was explicitly forbidden. While it did not offer a demo or pressure for a consultation, it failed on a key negative constraint.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "85de7d60f75aabccbc5e695260b36b81"
+    },
+    {
+      "input": [
+        {
+          "role": "user",
+          "content": "подскажите в каком формате проходят занятия?"
+        },
+        {
+          "role": "assistant",
+          "content": "Курсы в комбо — онлайн-эфиры и задания; записи доступны. Формат практический, с учебным репозиторием."
+        },
+        {
+          "role": "user",
+          "content": "можете показать какие то отрывки материалов прошлого курса? пока не понимаю что за предмет вы преподаете. стоит ли платить такие большие деньги"
+        }
+      ],
+      "output": {
+        "message": "К сожалению, у меня нет возможности предоставить отрывки материалов курсов. Однако могу рассказать о содержании курсов. Например, курс **agents** охватывает темы, такие как ReAct, инструменты, RAG и Langfuse. Курс **deep-agents** предлагает более продвинутые темы, включая планирование и сложные интеграции.\n\nЕсли вас интересует более глубокое понимание, я могу порекомендовать вам записаться на курс или комбо-программу, чтобы получить доступ ко всем материалам и обновлениям.",
+        "message_html": "К сожалению, у меня нет возможности предоставить отрывки материалов курсов. Однако могу рассказать о содержании курсов. Например, курс **agents** охватывает темы, такие как ReAct, инструменты, RAG и Langfuse. Курс **deep-agents** предлагает более продвинутые темы, включая планирование и сложные интеграции.\n\nЕсли вас интересует более глубокое понимание, я могу порекомендовать вам записаться на курс или комбо-программу, чтобы получить доступ ко всем материалам и обновлениям.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "f79ed7aa-be59-4bc7-a99f-0123cc1117a7",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## Формат обучения\\n\\nОнлайн, с практическими заданиями и учебным репозиторием. Поддержка в чате курса; консультация с экспертом — отдельный продукт **consultation**.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## vibe-coding-intensive\\n\\nИнтенсив по **Cursor** и AI-assisted coding. Подходит тем, кто хочет ускорить ежедневную разработку: рефакторинг, тесты, code review с LLM, настройка rules и skills.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## fullstack-aidd\\n\\nAI-driven fullstack: от API и БД до Next.js-виджета. Студент собирает учебный, но прикладной стенд — как публичный агент llmstart.ru.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## agents и deep-agents\\n\\n**agents** — базовый курс: ReAct, tools, RAG, Langfuse. **deep-agents** — продвинутый уровень: планирование, HITL, сложные воронки и интеграции.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "user: подскажите в каком формате проходят занятия?\nassistant: Курсы в комбо — онлайн-эфиры и задания; записи доступны. Формат практический, с учебным репозиторием.\nuser: можете показать какие то отрывки материалов прошлого курса? пока не понимаю что за предмет вы преподаете. стоит ли платить такие большие деньги"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.6,
+          "comment": "The response correctly states that there are no public demos or lesson excerpts (Step 3). It briefly describes the content of the 'agents' and 'deep-agents' courses (Step 4). It does not promise a demo link or only refer to returns (Step 5) and does not promise to send lesson fragments (Step 7) or invent preview URLs (Step 8). However, it does not gently clarify which course the user is interested in (Step 6).",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.9,
+          "comment": "The assistant successfully addressed all the negative constraints and fulfilled the positive requirements of the task. It avoided promising demo excerpts, described the content of the 'agents' and 'deep-agents' courses, and gently prompted the user to specify their interest without making false promises or directing them solely to a refund. The only minor point is that it didn't explicitly mention other courses like 'fullstack' or 'intensive' as requested in the task, but it did provide a good overview of the available agent-related courses.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "e85915ddd89af7577c6596e516af2ea6"
+    },
+    {
+      "input": "Хочу иметь представление до оплаты, а не покупать и потом просить возврат. Почему нельзя посмотреть часть урока заранее?",
+      "output": {
+        "message": "К сожалению, у нас нет возможности предоставить доступ к части урока заранее. Все курсы проводятся в онлайн-формате с практическими заданиями и поддержкой в чате. Если у вас есть вопросы о содержании курсов, я могу помочь с информацией о конкретных курсах. \n\nЕсли вас интересует, например, курс \"agents\" или \"deep-agents\", дайте знать, и я расскажу подробнее!",
+        "message_html": "К сожалению, у нас нет возможности предоставить доступ к части урока заранее. Все курсы проводятся в онлайн-формате с практическими заданиями и поддержкой в чате. Если у вас есть вопросы о содержании курсов, я могу помочь с информацией о конкретных курсах. \n\nЕсли вас интересует, например, курс \"agents\" или \"deep-agents\", дайте знать, и я расскажу подробнее!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "d2303863-1ea1-4428-954b-f3a411ca75bf",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## Формат обучения\\n\\nОнлайн, с практическими заданиями и учебным репозиторием. Поддержка в чате курса; консультация с экспертом — отдельный продукт **consultation**.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## Чем отличается ai-agents-combo от покупки курсов по отдельности?\\n\\nВ комбо вы получаете все четыре программы (agents, deep-agents, fullstack-aidd, vibe-coding-intensive) по сниженной цене и единый доступ к обновлениям материалов.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## fullstack-aidd\\n\\nAI-driven fullstack: от API и БД до Next.js-виджета. Студент собирает учебный, но прикладной стенд — как публичный агент llmstart.ru.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## ai-agents-combo\\n\\nКомбо включает четыре ключевые программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Выгоднее, чем покупать курсы по отдельности — единый доступ ко всем материалам и обновлениям.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "Хочу иметь представление до оплаты, а не покупать и потом просить возврат. Почему нельзя посмотреть часть урока заранее?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.7,
+          "comment": "The response correctly states that there are no public demos or lesson excerpts (Step 3). It also avoids promising a demo link (Step 7) and doesn't promise to send materials later (Step 6). However, it doesn't explicitly offer to describe a program from the catalog as requested in Step 4, instead asking if the user is interested in specific courses.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.6,
+          "comment": "The agent correctly stated that there are no public demos or lesson excerpts and did not promise to send materials later. However, it did not explicitly offer a description of a program from the catalog, and the mention of 'return' as an additional fact was not clearly demonstrated in the outcome. The outcome also did not explicitly state that a demo link would not be provided, which was a prohibition.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "f174652c950a49349909082a67ac338e"
+    },
+    {
+      "input": "Мне не подходит по формату — не смогу потратить рабочую пятницу днём на созвон. Есть вечерний поток?",
+      "output": {
+        "message": "К сожалению, в базе данных нет информации о вечерних потоках. Могу предложить вам рассмотреть другие курсы, если они вас заинтересуют. Например, интенсив по **Cursor** и AI-assisted coding или курс по AI-driven fullstack. Если вам нужно больше информации о конкретных курсах, дайте знать!",
+        "message_html": "К сожалению, в базе данных нет информации о вечерних потоках. Могу предложить вам рассмотреть другие курсы, если они вас заинтересуют. Например, интенсив по **Cursor** и AI-assisted coding или курс по AI-driven fullstack. Если вам нужно больше информации о конкретных курсах, дайте знать!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "d77ea15b-dc71-43e0-a510-ff72096e00be",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## vibe-coding-intensive\\n\\nИнтенсив по **Cursor** и AI-assisted coding. Подходит тем, кто хочет ускорить ежедневную разработку: рефакторинг, тесты, code review с LLM, настройка rules и skills.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## fullstack-aidd\\n\\nAI-driven fullstack: от API и БД до Next.js-виджета. Студент собирает учебный, но прикладной стенд — как публичный агент llmstart.ru.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## Есть ли рассрочка?\\n\\nНа MVP оплата демонстрируется через мок-ссылку. В production планируются реальные платёжные провайдеры.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"# FAQ B2C — частые вопросы\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "Мне не подходит по формату — не смогу потратить рабочую пятницу днём на созвон. Есть вечерний поток?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.4,
+          "comment": "The agent acknowledges the user's constraint regarding working hours (Step 3). However, it fails to offer an alternative schedule like evenings or weekends as requested (Step 4). Instead, it suggests other courses, which is not the primary goal of the user's request.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.4,
+          "comment": "The system acknowledged the limitation of working hours by stating there's no information about evening courses. However, it failed to offer an alternative schedule (like weekends) and instead pushed for alternative course topics. It also didn't explicitly address the user's potential need for a booking, as it wasn't requested.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "c84dc17006f3111aa20331e646b1bd85"
+    },
+    {
+      "input": "У вас несколько курсов — из какого вы могли бы показать описание программы? Меня интересует именно содержание, не отзывы.",
+      "output": {
+        "message": "Вот описание нескольких курсов:\n\n1. **Базовый курс по ИИ-агентам** (код: agents)  \n   Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде.\n\n2. **Продвинутый курс Deep Agents** (код: deep-agents)  \n   Продвинутые агентные архитектуры: планирование, human-in-the-loop, мультиагентные сценарии.\n\n3. **AI-driven Fullstack** (код: fullstack-aidd)  \n   Fullstack-разработка с AI: backend, frontend, DevOps и агентные паттерны в одном курсе.\n\nЕсли вас интересует более подробная информация о каком-то конкретном курсе, дайте знать!",
+        "message_html": "Вот описание нескольких курсов:\n\n1. **Базовый курс по ИИ-агентам** (код: agents)  \n   Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде.\n\n2. **Продвинутый курс Deep Agents** (код: deep-agents)  \n   Продвинутые агентные архитектуры: планирование, human-in-the-loop, мультиагентные сценарии.\n\n3. **AI-driven Fullstack** (код: fullstack-aidd)  \n   Fullstack-разработка с AI: backend, frontend, DevOps и агентные паттерны в одном курсе.\n\nЕсли вас интересует более подробная информация о каком-то конкретном курсе, дайте знать!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Каталог курсов\nФормирование рекомендации.",
+        "session_id": "8b629305-cfc6-44e3-ad97-81a65077d55d",
+        "tools": [
+          {
+            "name": "list_b2c_products",
+            "status": "done",
+            "title": "Каталог курсов"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "{\"items\": [{\"code\": \"ai-agents-combo\", \"title\": \"Комбо из 4 программ\", \"price\": 9900000, \"currency\": \"RUB\", \"description\": \"Пакет из четырёх программ LLMStart: agents, deep-agents, fullstack-aidd и vibe-coding-intensive со скидкой.\"}, {\"code\": \"vibe-coding-intensive\", \"title\": \"Интенсив по Cursor\", \"price\": 2900000, \"currency\": \"RUB\", \"description\": \"Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов.\"}, {\"code\": \"fullstack-aidd\", \"title\": \"AI-driven Fullstack\", \"price\": 4900000, \"currency\": \"RUB\", \"description\": \"Fullstack-разработка с AI: backend, frontend, DevOps и агентные паттерны в одном курсе.\"}, {\"code\": \"agents\", \"title\": \"Базовый курс по ИИ-агентам\", \"price\": 3900000, \"currency\": \"RUB\", \"description\": \"Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде.\"}, {\"code\": \"deep-agents\", \"title\": \"Продвинутый курс Deep Agents\", \"price\": 5900000, \"currency\": \"RUB\", \"description\": \"Продвинутые агентные архитектуры: планирование, human-in-the-loop, мультиагентные сценарии.\"}, {\"code\": \"consultation\", \"title\": \"Консультация с экспертом\", \"price\": 1500000, \"currency\": \"RUB\", \"description\": \"Индивидуальная консультация по выбору программы, внедрению AI в продукт или обучению команды.\"}]}"
+        ],
+        "input_text": "У вас несколько курсов — из какого вы могли бы показать описание программы? Меня интересует именно содержание, не отзывы."
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.8,
+          "comment": "The response correctly identifies and lists the available courses, including their codes (agents, deep-agents, fullstack-aidd), which aligns with step 3. It provides textual descriptions for each course, fulfilling step 4 by offering content descriptions instead of relying solely on reviews. The response avoids referencing reviews, adhering to step 5. However, it doesn't explicitly ask the user to clarify their interest among the specific course types (agents, deep-agents, fullstack, intensive, or combo) as requested in step 3, which is a minor omission.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.6,
+          "comment": "The system provided descriptions for some courses but did not explicitly ask the user to clarify their interest among the specified options (agents, deep-agents, fullstack, intensive, or combo). It also did not mention the absence of a public demo or provide a text description from a catalog as requested. While it avoided relying solely on reviews, it missed key requirements of the task.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "8a212a1838136d9e7c69b587464b9d9c"
+    },
+    {
+      "input": "Чем комбо отличается от покупки курсов по отдельности?",
+      "output": {
+        "message": "Комбо курсов включает в себя четыре программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Основное отличие от покупки курсов по отдельности заключается в том, что в комбо вы получаете все эти программы по сниженной цене и единый доступ к обновлениям материалов. Это делает комбо более выгодным вариантом.",
+        "message_html": "Комбо курсов включает в себя четыре программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Основное отличие от покупки курсов по отдельности заключается в том, что в комбо вы получаете все эти программы по сниженной цене и единый доступ к обновлениям материалов. Это делает комбо более выгодным вариантом.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "d543a0d3-3bc8-4936-ab3d-206248124232",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## ai-agents-combo\\n\\nКомбо включает четыре ключевые программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Выгоднее, чем покупать курсы по отдельности — единый доступ ко всем материалам и обновлениям.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## Чем отличается ai-agents-combo от покупки курсов по отдельности?\\n\\nВ комбо вы получаете все четыре программы (agents, deep-agents, fullstack-aidd, vibe-coding-intensive) по сниженной цене и единый доступ к обновлениям материалов.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## Формат обучения\\n\\nОнлайн, с практическими заданиями и учебным репозиторием. Поддержка в чате курса; консультация с экспертом — отдельный продукт **consultation**.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"# Курсы LLMStart для физических лиц (B2C)\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "Чем комбо отличается от покупки курсов по отдельности?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 1.0,
+          "comment": "The response accurately reflects all four programs (agents, deep-agents, fullstack-aidd, vibe-coding-intensive) as required by step 3. It also correctly states the reduced price and unified access to updates, fulfilling steps 4 and 5. The response focuses solely on the last user query, adhering to step 1.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 1.0,
+          "comment": "The actual outcome perfectly addresses all criteria of the task: it confirms the inclusion of all four specified programs in the combo, mentions the reduced price, and highlights the unified access to updates.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "e7702f61a97b2f41e3a40ac371e94d07"
+    },
+    {
+      "input": "Привет. У меня вопрос про интеснив. По каким дням и во сколько семинары?",
+      "output": {
+        "message": "К сожалению, в доступной информации нет конкретных данных о днях и времени семинаров по интенсиву. Если вас интересует определённый курс или тема, дайте знать, и я постараюсь помочь!",
+        "message_html": "К сожалению, в доступной информации нет конкретных данных о днях и времени семинаров по интенсиву. Если вас интересует определённый курс или тема, дайте знать, и я постараюсь помочь!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "0816597e-18aa-4315-a972-a00bfeaa63ff",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## vibe-coding-intensive\\n\\nИнтенсив по **Cursor** и AI-assisted coding. Подходит тем, кто хочет ускорить ежедневную разработку: рефакторинг, тесты, code review с LLM, настройка rules и skills.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## Есть ли рассрочка?\\n\\nНа MVP оплата демонстрируется через мок-ссылку. В production планируются реальные платёжные провайдеры.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## agents и deep-agents\\n\\n**agents** — базовый курс: ReAct, tools, RAG, Langfuse. **deep-agents** — продвинутый уровень: планирование, HITL, сложные воронки и интеграции.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## consultation\\n\\nРазовая консультация с экспертом: подбор программы, разбор вашего кейса, рекомендации по внедрению AI в команду.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "Привет. У меня вопрос про интеснив. По каким дням и во сколько семинары?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "The agent failed to recognize the user's request as being about the 'Cursor' intensive. It also did not provide the requested structure of calls, practice, and chat support, nor did it clarify that the request was about the vibe-coding-intensive.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.2,
+          "comment": "The actual outcome states that information about the intensive seminars is missing, which means the agent could not fulfill the task of recognizing the request, providing a structure, or clarifying the topic. Therefore, the task was not achieved at all.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "be42ea42b45408bab646cc57c8252c17"
+    },
+    {
+      "input": "Не могу найти на сайте расписание и формат — где это посмотреть?",
+      "output": {
+        "message": "Формат обучения — онлайн, с практическими заданиями и учебным репозиторием. Также предусмотрена поддержка в чате курса и возможность консультации с экспертом (отдельный продукт).\n\nЕсли вам нужно расписание, уточните, пожалуйста, для какого курса или программы вы ищете информацию.",
+        "message_html": "Формат обучения — онлайн, с практическими заданиями и учебным репозиторием. Также предусмотрена поддержка в чате курса и возможность консультации с экспертом (отдельный продукт).\n\nЕсли вам нужно расписание, уточните, пожалуйста, для какого курса или программы вы ищете информацию.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "bb004d43-b9d3-4ccb-a242-eb6ddfd500a4",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## Формат обучения\\n\\nОнлайн, с практическими заданиями и учебным репозиторием. Поддержка в чате курса; консультация с экспертом — отдельный продукт **consultation**.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## Есть ли рассрочка?\\n\\nНа MVP оплата демонстрируется через мок-ссылку. В production планируются реальные платёжные провайдеры.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"# FAQ B2C — частые вопросы\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## consultation\\n\\nРазовая консультация с экспертом: подбор программы, разбор вашего кейса, рекомендации по внедрению AI в команду.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "Не могу найти на сайте расписание и формат — где это посмотреть?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 1.0,
+          "comment": "The agent correctly addresses the user's last request about the learning format and does not refer to previous turns. The response accurately reflects the learning format from the KB, mentioning it's online with practical assignments and chat support. It also correctly asks for clarification on the specific course when the product is unclear, fulfilling all evaluation steps.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.9,
+          "comment": "The agent successfully addressed all criteria: provided information about the online format, practical assignments, and chat support from the KB without solely linking to the website. It also correctly identified the need to clarify the specific course if the product was unclear.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "d5881ccd8255ec0f1ba194bc3cc44875"
+    },
+    {
+      "input": "подскажите в какое время будут проходить занятия и какая продолжительность?",
+      "output": {
+        "message": "К сожалению, в полученной информации нет конкретных данных о времени занятий и их продолжительности. Если вас интересует определённый курс, я могу помочь с его выбором и уточнением деталей.",
+        "message_html": "К сожалению, в полученной информации нет конкретных данных о времени занятий и их продолжительности. Если вас интересует определённый курс, я могу помочь с его выбором и уточнением деталей.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "4fa7d973-fa81-45e6-a1d7-44cc75b5258b",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## Формат обучения\\n\\nОнлайн, с практическими заданиями и учебным репозиторием. Поддержка в чате курса; консультация с экспертом — отдельный продукт **consultation**.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## vibe-coding-intensive\\n\\nИнтенсив по **Cursor** и AI-assisted coding. Подходит тем, кто хочет ускорить ежедневную разработку: рефакторинг, тесты, code review с LLM, настройка rules и skills.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## Чем отличается ai-agents-combo от покупки курсов по отдельности?\\n\\nВ комбо вы получаете все четыре программы (agents, deep-agents, fullstack-aidd, vibe-coding-intensive) по сниженной цене и единый доступ к обновлениям материалов.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## agents и deep-agents\\n\\n**agents** — базовый курс: ReAct, tools, RAG, Langfuse. **deep-agents** — продвинутый уровень: планирование, HITL, сложные воронки и интеграции.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "подскажите в какое время будут проходить занятия и какая продолжительность?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "The agent's response does not reflect any of the required information points: duration up to 2 hours, exact slot times may not be determined yet, evening or weekend slots as a guideline, and recordings will be available. The response explicitly states that specific data on time and duration is unavailable, failing to address any of the evaluation criteria.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.0,
+          "comment": "The actual outcome explicitly states that the system could not find the specific information required by the task, which was to answer the user's last request satisfying the given criteria. Therefore, the task was not achieved at all.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "9fe7fd743e78ec00444c5c10a7810449"
+    },
+    {
+      "input": "подскажите в каком формате проходят занятия?",
+      "output": {
+        "message": "Занятия проходят в онлайн-формате с практическими заданиями и учебным репозиторием. Также предусмотрена поддержка в чате курса и возможность консультации с экспертом (отдельный продукт).",
+        "message_html": "Занятия проходят в онлайн-формате с практическими заданиями и учебным репозиторием. Также предусмотрена поддержка в чате курса и возможность консультации с экспертом (отдельный продукт).",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "0b4ac599-fe7b-4928-93dd-89a6827e7811",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## Формат обучения\\n\\nОнлайн, с практическими заданиями и учебным репозиторием. Поддержка в чате курса; консультация с экспертом — отдельный продукт **consultation**.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## vibe-coding-intensive\\n\\nИнтенсив по **Cursor** и AI-assisted coding. Подходит тем, кто хочет ускорить ежедневную разработку: рефакторинг, тесты, code review с LLM, настройка rules и skills.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## fullstack-aidd\\n\\nAI-driven fullstack: от API и БД до Next.js-виджета. Студент собирает учебный, но прикладной стенд — как публичный агент llmstart.ru.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## agents и deep-agents\\n\\n**agents** — базовый курс: ReAct, tools, RAG, Langfuse. **deep-agents** — продвинутый уровень: планирование, HITL, сложные воронки и интеграции.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "подскажите в каком формате проходят занятия?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.8,
+          "comment": "The response correctly identifies the online format with practical tasks, aligning with evaluation step 3. However, it does not mention the 'combo 2026' or the availability of recordings for self-paced learning, which are specified in evaluation steps 4 and 5.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.6,
+          "comment": "The actual outcome mentions that classes are held online with practical assignments, which aligns with the first criterion. However, it does not mention the 'combo 2026' aspect or explicitly state that recordings are available for self-paced learning, which are key parts of the desired task.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "ef1a318079355e4f127b61e6fb8da876"
+    },
+    {
+      "input": "Добрый день. Заинтересовал комбо курс. Скажите, какой формат у курсов? Можно будет проходить в свое удобное время? Или есть какое-то расписание? Не могу найти его на сайте.",
+      "output": {
+        "message": "Курсы проходят в онлайн-формате с практическими заданиями и учебным репозиторием. Вы можете обучаться в удобное для вас время. Также предусмотрена поддержка в чате курса и возможность консультации с экспертом (это отдельный продукт).\n\nЕсли вас интересует комбо-курс, он включает четыре программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Это выгоднее, чем покупать курсы по отдельности, так как вы получаете единый доступ ко всем материалам и обновлениям.\n\nЕсли хотите, могу помочь с оформлением заказа на комбо-курс.",
+        "message_html": "Курсы проходят в онлайн-формате с практическими заданиями и учебным репозиторием. Вы можете обучаться в удобное для вас время. Также предусмотрена поддержка в чате курса и возможность консультации с экспертом (это отдельный продукт).\n\nЕсли вас интересует комбо-курс, он включает четыре программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Это выгоднее, чем покупать курсы по отдельности, так как вы получаете единый доступ ко всем материалам и обновлениям.\n\nЕсли хотите, могу помочь с оформлением заказа на комбо-курс.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "47a9816b-5df8-49e2-b522-b124c4c136ec",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## Формат обучения\\n\\nОнлайн, с практическими заданиями и учебным репозиторием. Поддержка в чате курса; консультация с экспертом — отдельный продукт **consultation**.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"# Курсы LLMStart для физических лиц (B2C)\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## Чем отличается ai-agents-combo от покупки курсов по отдельности?\\n\\nВ комбо вы получаете все четыре программы (agents, deep-agents, fullstack-aidd, vibe-coding-intensive) по сниженной цене и единый доступ к обновлениям материалов.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## ai-agents-combo\\n\\nКомбо включает четыре ключевые программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Выгоднее, чем покупать курсы по отдельности — единый доступ ко всем материалам и обновлениям.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "Добрый день. Заинтересовал комбо курс. Скажите, какой формат у курсов? Можно будет проходить в свое удобное время? Или есть какое-то расписание? Не могу найти его на сайте."
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.8,
+          "comment": "The response correctly identifies the online format with practical tasks and a learning repository (Step 3). It also accurately lists the components of the combo course: agents, deep-agents, fullstack-aidd, and vibe-coding-intensive (Step 4). The response confirms self-paced learning and chat support (Step 5). It also correctly states that expert consultation is a separate product (Step 6). However, it does not explicitly mention the 'vibe-coding-intensive' component in the initial description of the combo course, only in the subsequent list.",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.8333333333333334,
+          "comment": "The score is 0.83 because the actual output incorrectly stated that the combo course offers unified access to all materials, when the retrieval context clarifies it only offers unified access to updates. Additionally, the actual output mentioned that it is more profitable to buy courses separately, which contradicts the retrieval context's assertion that buying a combo course is more profitable.",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 1.0,
+          "comment": "The actual outcome perfectly matches all the criteria specified in the task. It confirms the online format with practical assignments and a learning repository, self-paced learning with chat support, and the inclusion of all four specified combo courses. It also correctly notes that expert consultation is a separate product.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "b12efb22fc2b64fe67223d8a369d6053"
+    }
+  ],
+  "run_scores": [
+    {
+      "name": "error_rate",
+      "value": 0.0,
+      "comment": "0/26 items failed",
+      "data_type": null
+    },
+    {
+      "name": "avg_answer_correctness",
+      "value": 0.6307692307692307,
+      "comment": "Average of 26 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_faithfulness",
+      "value": 0.8397435897435896,
+      "comment": "Average of 26 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_task_completion",
+      "value": 0.6115384615384616,
+      "comment": "Average of 26 items",
+      "data_type": null
+    },
+    {
+      "name": "segment_match_rate",
+      "value": 0.8461538461538461,
+      "comment": "Matched 22.0/26 items",
+      "data_type": null
+    }
+  ],
+  "langfuse": {
+    "dataset_run_id": "8fa14e85-b1a3-42fa-97c7-78f67f6476bb",
+    "dataset_run_url": "http://localhost:3001/project/cmq0y543r0006ujmnyb937ki7/datasets/cmqe0gb320001qf07auwu9h56/runs/8fa14e85-b1a3-42fa-97c7-78f67f6476bb",
+    "linked": true,
+    "dataset_id": "cmqe0gb320001qf07auwu9h56"
+  },
+  "source": "experiment"
+}

@@ -1,0 +1,31 @@
+[project]
+name = "llmstart-agent-evals"
+version = "0.1.0"
+description = "Eval contour scripts and tests for LLMStart Agent"
+requires-python = ">=3.12"
+dependencies = [
+    "deepeval>=4.0.6",
+    "httpx>=0.28.1",
+    "llmstart-agent-backend",
+    "pyyaml>=6.0.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.0",
+    "ruff>=0.8.0",
+]
+
+[tool.uv.sources]
+llmstart-agent-backend = { path = "../backend" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]

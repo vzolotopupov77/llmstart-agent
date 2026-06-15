@@ -86,12 +86,23 @@ def shutdown_langfuse() -> None:
         _langfuse_client = None
 
 
-def build_langfuse_metadata(*, session_id: str, channel: str) -> dict[str, str | list[str]]:
+def build_langfuse_metadata(
+    *,
+    session_id: str,
+    channel: str,
+    config_id: str | None = None,
+    model: str | None = None,
+) -> dict[str, str | list[str]]:
     """Runnable metadata for LangChain → Langfuse trace attributes."""
-    return {
+    metadata: dict[str, str | list[str]] = {
         "langfuse_session_id": session_id,
         "langfuse_tags": [f"channel:{channel}"],
     }
+    if config_id is not None:
+        metadata["config_id"] = config_id
+    if model is not None:
+        metadata["model"] = model
+    return metadata
 
 
 def build_callbacks(

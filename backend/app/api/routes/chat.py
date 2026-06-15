@@ -5,6 +5,7 @@ from fastapi.responses import StreamingResponse
 
 from app.api.schemas.chat import ChatRequest, ChatResponse
 from app.core.exceptions import (
+    ConfigNotFoundError,
     LlmUnavailableError,
     McpUnavailableError,
     SessionNotFoundError,
@@ -64,7 +65,13 @@ def _chat_json(agent_service: AgentService, body: ChatRequest) -> ChatResponse:
             message=body.message,
             session_id=body.session_id,
             channel=body.channel,
+            config_id=body.config_id,
         )
+    except ConfigNotFoundError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(exc),
+        ) from exc
     except SessionNotFoundError as exc:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -88,7 +95,13 @@ def _chat_sse(agent_service: AgentService, body: ChatRequest) -> StreamingRespon
             message=body.message,
             session_id=body.session_id,
             channel=body.channel,
+            config_id=body.config_id,
         )
+    except ConfigNotFoundError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(exc),
+        ) from exc
     except SessionNotFoundError as exc:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,

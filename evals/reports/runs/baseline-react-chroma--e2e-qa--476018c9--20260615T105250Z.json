@@ -1,0 +1,173 @@
+{
+  "schema_version": 2,
+  "run_name": "baseline-react-chroma--e2e-qa--476018c9--20260615T105250Z",
+  "config_id": "baseline-react-chroma",
+  "dataset_slug": "e2e-qa",
+  "langfuse_dataset": "e2e/e2e-qa/v001",
+  "git_sha": "476018c97c239cc00d070ef36292709d9d63f18a",
+  "started_at": "2026-06-15T10:52:50.553339+00:00",
+  "finished_at": "2026-06-15T10:53:25.602917+00:00",
+  "timing": {
+    "total_duration_ms": 35049,
+    "items_total": 1,
+    "items_with_timing": 1
+  },
+  "judge": {
+    "provider": "openrouter",
+    "name": "google/gemini-2.5-flash-lite",
+    "temperature": 0.0
+  },
+  "run_metadata": {
+    "config_id": "baseline-react-chroma",
+    "git_sha": "476018c97c239cc00d070ef36292709d9d63f18a",
+    "dataset_slug": "e2e-qa",
+    "dataset_version": "v001",
+    "langfuse_dataset": "e2e/e2e-qa/v001",
+    "manifest_path": "evals\\datasets\\e2e\\e2e-qa\\v001_2026-06-14.yaml",
+    "judge": {
+      "provider": "openrouter",
+      "name": "google/gemini-2.5-flash-lite",
+      "temperature": 0.0
+    },
+    "agent_model": {
+      "provider": "openrouter",
+      "name": "openai/gpt-4o-mini",
+      "temperature": 0.0
+    },
+    "prompt": {
+      "source": "code",
+      "name": "agent-system-prompt-v1",
+      "label": null,
+      "version": null
+    },
+    "retrieval": {
+      "backend": "chroma-embedded"
+    }
+  },
+  "full_config_snapshot": {
+    "config_id": "baseline-react-chroma",
+    "comment": "MVP-база: LangChain ReAct, embedded Chroma, промпт из кода",
+    "benchmark_only": false,
+    "agent": {
+      "impl": "langchain-react",
+      "api_url": "http://127.0.0.1:8003/api/v1/chat"
+    },
+    "retrieval": {
+      "backend": "chroma-embedded"
+    },
+    "model": {
+      "provider": "openrouter",
+      "name": "openai/gpt-4o-mini",
+      "temperature": 0.0
+    },
+    "judge": {
+      "provider": "openrouter",
+      "name": "google/gemini-2.5-flash-lite",
+      "temperature": 0.0
+    },
+    "prompt": {
+      "source": "code",
+      "name": "agent-system-prompt-v1",
+      "label": null,
+      "version": null
+    },
+    "datasets": {
+      "e2e-qa": "v001"
+    }
+  },
+  "items": [
+    {
+      "input": "Добрый день. Заинтересовал комбо курс. Скажите, какой формат у курсов? Можно будет проходить в свое удобное время? Или есть какое-то расписание? Не могу найти его на сайте.",
+      "output": {
+        "message": "Курсы проходят в онлайн-формате с практическими заданиями и учебным репозиторием. Вы можете обучаться в удобное для вас время, так как расписания нет — все материалы доступны для самостоятельного изучения.\n\nЕсли вас интересует комбо-курс, он включает четыре программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Это выгоднее, чем покупать курсы по отдельности, и вы получите единый доступ ко всем материалам и обновлениям.",
+        "message_html": "Курсы проходят в онлайн-формате с практическими заданиями и учебным репозиторием. Вы можете обучаться в удобное для вас время, так как расписания нет — все материалы доступны для самостоятельного изучения.\n\nЕсли вас интересует комбо-курс, он включает четыре программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Это выгоднее, чем покупать курсы по отдельности, и вы получите единый доступ ко всем материалам и обновлениям.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Поиск в базе знаний\nФормирование рекомендации.",
+        "session_id": "b168c2d3-eff8-4e92-8517-4fad3b334aac",
+        "tools": [
+          {
+            "name": "search_knowledge_base",
+            "status": "done",
+            "title": "Поиск в базе знаний"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "[{\"text\": \"## Формат обучения\\n\\nОнлайн, с практическими заданиями и учебным репозиторием. Поддержка в чате курса; консультация с экспертом — отдельный продукт **consultation**.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"# Курсы LLMStart для физических лиц (B2C)\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}, {\"text\": \"## Чем отличается ai-agents-combo от покупки курсов по отдельности?\\n\\nВ комбо вы получаете все четыре программы (agents, deep-agents, fullstack-aidd, vibe-coding-intensive) по сниженной цене и единый доступ к обновлениям материалов.\", \"source\": \"faq-b2c.md\", \"segment\": \"b2c\"}, {\"text\": \"## ai-agents-combo\\n\\nКомбо включает четыре ключевые программы: **agents**, **deep-agents**, **fullstack-aidd** и **vibe-coding-intensive**. Выгоднее, чем покупать курсы по отдельности — единый доступ ко всем материалам и обновлениям.\", \"source\": \"courses-overview.md\", \"segment\": \"b2c\"}]"
+        ],
+        "input_text": "Добрый день. Заинтересовал комбо курс. Скажите, какой формат у курсов? Можно будет проходить в свое удобное время? Или есть какое-то расписание? Не могу найти его на сайте."
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "segment_match",
+          "value": 1.0,
+          "comment": "expected=b2c, actual=b2c",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.7,
+          "comment": "The response correctly identifies the online format with practical tasks and a learning repository (Step 3). It also accurately lists the included courses: agents, deep-agents, fullstack-aidd, and vibe-coding-intensive (Step 4). The response confirms self-paced learning and chat support (Step 5). However, it fails to mention that expert consultations are a separate product (Step 6).",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        },
+        {
+          "name": "task_completion",
+          "value": 0.9,
+          "comment": "The actual outcome addresses all the criteria mentioned in the task, including the format, the specific combo courses, self-paced learning with chat support, and clarifies that expert consultation is a separate product. The only minor omission is explicitly stating the 'learning repository' as mentioned in the task, though 'unified access to all materials' implies it.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "f3f1e2d22c25694a0f54b1993f24874c"
+    }
+  ],
+  "run_scores": [
+    {
+      "name": "error_rate",
+      "value": 0.0,
+      "comment": "0/1 items failed",
+      "data_type": null
+    },
+    {
+      "name": "avg_answer_correctness",
+      "value": 0.7,
+      "comment": "Average of 1 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_faithfulness",
+      "value": 1.0,
+      "comment": "Average of 1 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_task_completion",
+      "value": 0.9,
+      "comment": "Average of 1 items",
+      "data_type": null
+    },
+    {
+      "name": "segment_match_rate",
+      "value": 1.0,
+      "comment": "Matched 1.0/1 items",
+      "data_type": null
+    }
+  ],
+  "langfuse": {
+    "dataset_run_id": "a0c1fe71-2521-4a38-8638-df727949fe0e",
+    "dataset_run_url": "http://localhost:3001/project/cmq0y543r0006ujmnyb937ki7/datasets/cmqe0gb320001qf07auwu9h56/runs/a0c1fe71-2521-4a38-8638-df727949fe0e",
+    "linked": true,
+    "dataset_id": "cmqe0gb320001qf07auwu9h56"
+  },
+  "source": "experiment"
+}

@@ -2,7 +2,7 @@
 
 ## Langfuse v3 (self-hosted)
 
-Локальная observability: **Langfuse v3** (`langfuse-web` **3.125.0**) в Docker Compose.
+Локальная observability: **Langfuse v3** (`langfuse-web` **3.185.0**) в Docker Compose.
 
 Стек: `langfuse-web`, `langfuse-worker`, Postgres, ClickHouse, Redis, MinIO. UI на **:3001**.
 
@@ -138,6 +138,21 @@ Default: датасет `llmstart-agent-v1` из `datasets/b2c/v2/dataset.jsonl`
 
 ### Troubleshooting
 
+#### Dataset Runs без items / метрик в UI
+
+**Симптом:** в Langfuse Dataset → Runs run есть, но items/scores пустые; `dataset_run_items.list()` → 0.
+
+**Частая причина:** рассинхрон `langfuse-web` и `langfuse-worker` (разные версии образов) или неприменённые миграции Postgres.
+
+```bash
+# мягкий путь: pull + recreate (данные сохраняются)
+make up
+# дождаться healthy langfuse-web и "All migrations have been successfully applied" в логах
+make eval-validate   # включает check_langfuse_contracts
+```
+
+Если не помогло — проверить worker logs (`dataset-run-item-upsert` / Prisma errors). Крайний случай: `down -v` + `make up` + `make eval-sync` (потеря локальных traces/datasets).
+
 #### P1000 (неверный пароль Postgres)
 
 Пароль в `.env` не совпадает с тем, что записан в Docker volume при первом запуске.
@@ -191,8 +206,8 @@ LANGFUSE_HOST=https://cloud.langfuse.com
 
 | Сервис | Образ |
 |--------|-------|
-| langfuse-web | `langfuse/langfuse:3.125.0` |
-| langfuse-worker | digest-pinned (см. `docker-compose.yml`) |
+| langfuse-web | `langfuse/langfuse:3.185.0` |
+| langfuse-worker | `langfuse/langfuse-worker:3.185.0` (тег должен совпадать с web) |
 | clickhouse | `clickhouse/clickhouse-server:24.8` |
 | redis | `redis:7.4.2-alpine` |
 | minio | `minio/minio:RELEASE.2024-11-07T00-52-20Z` |

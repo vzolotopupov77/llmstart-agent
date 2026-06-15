@@ -1,0 +1,29 @@
+# Шаблон: манифест датасета (E-11, E-12)
+# Файл: evals/datasets/<group>/<name>/vNNN_YYYY-MM-DD.yaml
+# Правила: файл иммутабелен — правка датасета = новый файл vNNN+1 (E-11);
+# формат на выбор (YAML/JSON/JSONL/CSV), критерий — читается в diff без
+# декодера (E-12); эталоны утверждает человек до простановки reviewed_by (E-13).
+
+dataset: e2e-qa
+group: e2e                       # e2e | rag | behavior | edge (E-11)
+version: v001
+created: 2026-06-10
+description: "End-to-end QA по базе знаний, реальные формулировки клиентов"
+
+items:
+  - id: e2e-qa-0001              # стабильный ключ upsert, не меняется между версиями
+    input:
+      message: "Чем отличается базовый курс по агентам от Deep Agents?"
+    # Паттерны expected_output (К-4): exact match | reference answer |
+    # evaluation criteria | null (reference-free) | комбинация.
+    expected_output:
+      answer: "…эталонный ответ, читаемый без декодера…"
+      criteria:                  # опц.: список требований для judge
+        - "упоминает разницу в глубине программы"
+    metadata:
+      segment: b2c               # b2c | b2b
+      intent: compare_products
+      source: real_dialog        # real_dialog | synthetic
+      source_trace_id: null      # если item взят из прод-трейса — ссылка (К-4)
+      gt_quality: verified       # verified | approximate (E-14)
+      reviewed_by: alex          # пусто = не пройдёт валидацию (E-13)

@@ -50,6 +50,11 @@ class Settings(BaseSettings):
     )
     rag_top_k: int = Field(default=4, alias="RAG_TOP_K")
 
+    eval_configs_dir: Path = Field(
+        default=REPO_ROOT / "evals" / "configs",
+        alias="EVAL_CONFIGS_DIR",
+    )
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def parse_cors_origins(cls, value: str | list[str]) -> list[str]:

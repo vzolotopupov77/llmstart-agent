@@ -36,8 +36,8 @@ x-langfuse-env: &langfuse-env
 
 services:
   langfuse-worker:
-    # Worker image has no 3.125.0 tag on Docker Hub; digest-pinned pair with langfuse-web.
-    image: langfuse/langfuse-worker@sha256:b1d0e8a1fe276f55b1f2c29b78e36c509e776ea02e83f8460b5ae1835d2ae0fe
+    # Keep worker tag in sync with langfuse-web (digest pin caused 3.181 worker vs 3.125 web skew).
+    image: langfuse/langfuse-worker:3.185.0
     restart: unless-stopped
     networks:
       - langfuse_net
@@ -54,7 +54,7 @@ services:
       <<: *langfuse-env
 
   langfuse-web:
-    image: langfuse/langfuse:3.125.0
+    image: langfuse/langfuse:3.185.0
     restart: unless-stopped
     networks:
       - langfuse_net

@@ -46,18 +46,31 @@ class TurnResult:
 class ReactRunner:
     """Wraps create_agent for a single conversation turn."""
 
-    def __init__(self, settings: Settings, tools: list[BaseTool]) -> None:
+    def __init__(
+        self,
+        settings: Settings,
+        tools: list[BaseTool],
+        *,
+        model_name: str | None = None,
+        temperature: float | None = None,
+        system_prompt: str | None = None,
+    ) -> None:
         """Initialize ReAct agent with LLM and MCP-backed tools."""
-        model = ChatOpenAI(
-            model=settings.openai_model,
-            api_key=settings.openai_api_key,
-            base_url=settings.openai_base_url,
-            timeout=settings.openai_timeout_seconds,
-        )
+        llm_kwargs: dict[str, object] = {
+            "model": model_name or settings.openai_model,
+            "api_key": settings.openai_api_key,
+            "base_url": settings.openai_base_url,
+            "timeout": settings.openai_timeout_seconds,
+        }
+        if temperature is not None:
+            llm_kwargs["temperature"] = temperature
+        model = ChatOpenAI(**llm_kwargs)  # type: ignore[arg-type]
+        self.model_name = str(llm_kwargs["model"])
+        self.system_prompt = system_prompt or SYSTEM_PROMPT
         self._agent = create_agent(
             model=model,
             tools=tools,
-            system_prompt=SYSTEM_PROMPT,
+            system_prompt=self.system_prompt,
         )
 
     def run_turn(

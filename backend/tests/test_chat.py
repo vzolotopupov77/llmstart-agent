@@ -101,3 +101,21 @@ def test_ready_returns_ok(client: object) -> None:
     body = response.json()
     assert body["status"] == "ready"
     assert body["mcp_tools"] == 5
+
+
+def test_chat_unknown_config_id_returns_400(registry_client: object) -> None:
+    """Unknown config_id returns 400."""
+    response = registry_client.post(  # type: ignore[attr-defined]
+        "/api/v1/chat",
+        headers={
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        },
+        json={
+            "message": "Привет",
+            "channel": "web",
+            "config_id": "nonexistent-config",
+        },
+    )
+    assert response.status_code == 400
+    assert "Unknown config_id" in response.json()["detail"]

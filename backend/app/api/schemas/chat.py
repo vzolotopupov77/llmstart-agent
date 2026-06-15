@@ -14,6 +14,10 @@ class ChatRequest(BaseModel):
     message: str = Field(..., min_length=1, max_length=4000)
     session_id: UUID | None = None
     channel: Literal["web", "telegram"]
+    config_id: str | None = Field(
+        default=None,
+        description="Eval run config from evals/configs/ (E-6); omitted = env defaults",
+    )
 
     @field_validator("message")
     @classmethod

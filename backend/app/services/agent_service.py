@@ -10,6 +10,7 @@ from uuid import UUID
 
 from langchain_core.messages import HumanMessage
 
+from app.agent.config_registry import AgentConfigRegistry
 from app.agent.react_runner import ReactRunner, ToolCallRecord, TurnResult
 from app.agent.streaming_callbacks import ToolEventCollector
 from app.api.schemas.chat import ChatResponse, ToolStatusItem
@@ -53,9 +54,11 @@ class AgentService:
         react_runner: ReactRunner,
         tools_ready: bool,
         settings: Settings,
+        config_registry: AgentConfigRegistry | None = None,
     ) -> None:
         self._session_store = session_store
         self._react_runner = react_runner
+        self._config_registry = config_registry
         self._tools_ready = tools_ready
         self._settings = settings
 
@@ -65,12 +68,14 @@ class AgentService:
         message: str,
         session_id: UUID | None,
         channel: str,
+        config_id: str | None = None,
     ) -> ChatResponse:
         """Process one chat turn and return JSON response."""
         session, turn, _tool_collector = self._execute_turn(
             message=message,
             session_id=session_id,
             channel=channel,
+            config_id=config_id,
         )
 
         products = _map_products(turn.products)
@@ -103,6 +108,7 @@ class AgentService:
         message: str,
         session_id: UUID | None,
         channel: str,
+        config_id: str | None = None,
     ) -> Iterator[str]:
         """Stream SSE events during the turn, not only after agent completion."""
         if not self._tools_ready:
@@ -115,6 +121,7 @@ class AgentService:
             message=message,
             channel=channel,
             session=session,
+            config_id=config_id,
         )
 
     def _generate_chat_turn_stream(
@@ -123,6 +130,7 @@ class AgentService:
         message: str,
         channel: str,
         session: Session,
+        config_id: str | None = None,
     ) -> Iterator[str]:
         event_queue: queue.Queue[str | object] = queue.Queue()
         holder = _StreamTurnHolder()
@@ -149,18 +157,21 @@ class AgentService:
             tool_collector = ToolEventCollector(on_event=on_tool_event)
             set_turn_context(TurnContext(session_id=str(session.id), channel=channel))
             try:
+                runner, resolved_config_id, model_name = self._resolve_runner(config_id)
                 callbacks = build_callbacks(
                     self._settings,
                     session_id=str(session.id),
                     channel=channel,
                 )
-                turn = self._react_runner.run_turn(
+                turn = runner.run_turn(
                     history=list(session.messages),
                     user_message=message,
                     callbacks=[*callbacks, tool_collector],
                     metadata=build_langfuse_metadata(
                         session_id=str(session.id),
                         channel=channel,
+                        config_id=resolved_config_id,
+                        model=model_name,
                     ),
                 )
                 flush_callbacks(callbacks)
@@ -219,6 +230,7 @@ class AgentService:
         session_id: UUID | None,
         channel: str,
         collect_tool_events: bool = False,
+        config_id: str | None = None,
     ) -> tuple[Session, TurnResult, ToolEventCollector | None]:
         if not self._tools_ready:
             raise McpUnavailableError(McpUnavailableError.DEFAULT_MESSAGE)
@@ -229,6 +241,7 @@ class AgentService:
         tool_collector = ToolEventCollector() if collect_tool_events else None
         set_turn_context(TurnContext(session_id=str(session.id), channel=channel))
         try:
+            runner, resolved_config_id, model_name = self._resolve_runner(config_id)
             callbacks = build_callbacks(
                 self._settings,
                 session_id=str(session.id),
@@ -237,13 +250,15 @@ class AgentService:
             if tool_collector is not None:
                 callbacks = [*callbacks, tool_collector]
 
-            turn = self._react_runner.run_turn(
+            turn = runner.run_turn(
                 history=list(session.messages),
                 user_message=message,
                 callbacks=callbacks,
                 metadata=build_langfuse_metadata(
                     session_id=str(session.id),
                     channel=channel,
+                    config_id=resolved_config_id,
+                    model=model_name,
                 ),
             )
             flush_callbacks(callbacks)
@@ -254,6 +269,18 @@ class AgentService:
         session.messages.extend(turn.new_messages)
 
         return session, turn, tool_collector
+
+    def _resolve_runner(
+        self,
+        config_id: str | None,
+    ) -> tuple[ReactRunner, str | None, str]:
+        if self._config_registry is not None:
+            return self._config_registry.resolve_runner(config_id)
+        return (
+            self._react_runner,
+            config_id,
+            getattr(self._react_runner, "model_name", self._settings.openai_model),
+        )
 
 
 def _map_products(items: list[dict[str, str | int]] | None) -> list[ProductItem] | None:

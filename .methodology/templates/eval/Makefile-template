@@ -1,0 +1,26 @@
+# Шаблон: evals/Makefile — рекомендованная точка входа операций контура (E-2).
+# Допустимы иные task-runner'ы/CI; недопустимы неповторяемые ручные операции.
+
+CONFIG  ?= configs/baseline-react-chroma.yaml
+DATASET ?= all            # <group>/<name> или all
+RUN     ?=                # имя рана для analyze
+RUN_A   ?=
+RUN_B   ?=
+
+.PHONY: validate sync experiment analyze compare
+
+validate:        ## Pydantic + integrity-тесты + reviewed_by (E-13, E-15)
+	uv run pytest tests/ -q
+	uv run scripts/sync_datasets.py --validate-only --dataset $(DATASET)
+
+sync: validate   ## файлы-версии -> Langfuse (upsert по id; fail-fast auth_check; E-16)
+	uv run scripts/sync_datasets.py --dataset $(DATASET)
+
+experiment: sync ## прогон по конфигу; имя рана {config_id}--{dataset}--{sha8}--{ts} (E-9)
+	uv run scripts/run_experiment.py --config $(CONFIG) --dataset $(DATASET)
+
+analyze:         ## отчёт по рану (по умолчанию — последний)
+	uv run scripts/analyze_run.py --run "$(RUN)" --out reports/
+
+compare:         ## diff двух ранов; отказ при разных версиях датасета (E-16)
+	uv run scripts/compare_runs.py --a "$(RUN_A)" --b "$(RUN_B)" --out reports/

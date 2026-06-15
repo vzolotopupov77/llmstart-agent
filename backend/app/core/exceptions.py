@@ -25,3 +25,7 @@ class CatalogUnavailableError(AppError):
     """Raised when B2C catalog cannot be loaded."""
 
     DEFAULT_MESSAGE = "Catalog unavailable"
+
+
+class ConfigNotFoundError(AppError):
+    """Raised when config_id is unknown in eval config registry."""
