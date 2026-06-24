@@ -7,6 +7,7 @@ import json
 import logging
 import os
 import statistics
+import sys
 import time
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -96,16 +97,15 @@ def _load_config(path: Path) -> dict[str, Any]:
 
 
 def _rss_mb() -> float:
-    try:
-        import resource  # unavailable on Windows
-
-        usage = resource.getrusage(resource.RUSAGE_SELF)  # type: ignore[attr-defined]
-        rss: int = usage.ru_maxrss
-        if rss > 1_000_000:
-            return rss / (1024 * 1024)
-        return rss / 1024
-    except (ImportError, AttributeError, ValueError):
+    if sys.platform == "win32":
         return 0.0
+    import resource
+
+    usage = resource.getrusage(resource.RUSAGE_SELF)
+    rss: int = usage.ru_maxrss
+    if rss > 1_000_000:
+        return rss / (1024 * 1024)
+    return rss / 1024
 
 
 def _chunk_file(path: Path, segment: str, chunk_size: int, chunk_overlap: int) -> list[TextChunk]:
