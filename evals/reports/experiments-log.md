@@ -18,3 +18,7 @@
 - 20260615T150903Z — failed v002 rebaseline (backend), см. exp-005
 -->
 † v001 vs v002 — разные criteria (E-16); Δ qualitative, не compare.
+| 2026-06-23 | `vector-db-baseline--e2e-qa--884a6423--20260623T143257Z` | `vector-db-baseline` | `e2e/e2e-qa/v002` | done |
+| 2026-06-24 | `vector-db-baseline--e2e-qa--884a6423--20260624T053801Z` | `vector-db-baseline` | `e2e/e2e-qa/v002` | done |
+| 2026-06-24 | `vector-db-baseline--e2e-qa--884a6423--20260624T062728Z` | `vector-db-baseline` | `e2e/e2e-qa/v002` | done |
+| 2026-06-24 | `vector-db-baseline--e2e-qa--884a6423--20260624T070642Z` | `vector-db-baseline` | `e2e/e2e-qa/v002` | done |

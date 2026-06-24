@@ -1,12 +1,15 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help dev dev-backend dev-frontend dev-bot up down lint format typecheck test test-backend test-mcp test-bot test-frontend ci reindex upload-langfuse-dataset reload-langfuse-dataset eval-validate eval-sync eval-experiment eval-analyze eval-compare eval-backfill-runs
+.PHONY: help dev dev-backend dev-frontend dev-bot up down lint format typecheck test test-backend test-mcp test-bot test-frontend ci index reindex upload-langfuse-dataset reload-langfuse-dataset eval-validate eval-sync eval-experiment eval-analyze eval-compare eval-backfill-runs bench bench-one
 
 COMPOSE_FILE := devops/docker-compose.yml
 BACKEND_PORT ?= 8003
 FRONTEND_PORT ?= 3002
 DATASET_NAME ?= llmstart-agent-v1
 DATASET_SOURCE ?= datasets/b2c/v2/dataset.jsonl
+RETRIEVER_BACKEND ?=
+BENCH_BACKENDS ?= qdrant chroma pgvector
+BENCH_SKIP_INDEX ?=
 
 help:
 	@echo Usage: make [target] [VAR=value ...]
@@ -46,6 +49,7 @@ help:
 	@echo   test-frontend       vitest + build — frontend
 	@echo.
 	@echo Data
+	@echo   index               Index knowledge base into Qdrant (md, txt, pdf)
 	@echo   reindex             Rebuild RAG vector index (Chroma)
 	@echo   upload-langfuse-dataset   Upload JSONL dataset to Langfuse (upsert)
 	@echo   reload-langfuse-dataset     Delete all items and re-upload dataset
@@ -58,11 +62,18 @@ help:
 	@echo   eval-compare          Compare two runs (stub until v0.2)
 	@echo   eval-backfill-runs    Backfill Langfuse dataset_run_items from JSON (RUN=optional)
 	@echo.
+	@echo Bench
+	@echo   bench                 Run retriever benchmark for all backends ($(BENCH_BACKENDS))
+	@echo   bench RETRIEVER_BACKEND=qdrant  Run benchmark for a single backend
+	@echo   bench BENCH_SKIP_INDEX=1        Skip re-index (use after make index)
+	@echo.
 	@echo Variables
 	@echo   BACKEND_PORT=$(BACKEND_PORT)   Backend listen port
 	@echo   FRONTEND_PORT=$(FRONTEND_PORT)  Frontend dev port
 	@echo   DATASET_NAME=$(DATASET_NAME)  Langfuse dataset name
 	@echo   DATASET_SOURCE=$(DATASET_SOURCE)  Path to JSONL source file
+	@echo   RETRIEVER_BACKEND=$(RETRIEVER_BACKEND)  Override backend for bench (empty = all)
+	@echo   BENCH_SKIP_INDEX=$(BENCH_SKIP_INDEX)  Set to 1 to skip re-index during bench
 
 dev: up
 	@echo "Starting backend (:$(BACKEND_PORT)), frontend (:$(FRONTEND_PORT)), bot. Press Ctrl+C to stop."
@@ -137,6 +148,21 @@ test-bot:
 reindex:
 	cd mcp_server && uv run python -c "from mcp_server.rag.indexer import reindex; print(f'indexed {reindex()} chunks')"
 
+index:
+ifdef BACKEND
+ifeq ($(BACKEND),qdrant)
+	cd mcp_server && uv run python -m mcp_server.rag.qdrant_indexer
+else ifeq ($(BACKEND),pgvector)
+	cd mcp_server && uv run python -m mcp_server.rag.pgvector_indexer
+else ifeq ($(BACKEND),chroma)
+	cd mcp_server && uv run python -c "from mcp_server.rag.indexer import reindex; print(f'indexed {reindex()} chunks')"
+else
+	$(error Unknown BACKEND: $(BACKEND). Use qdrant, chroma, or pgvector)
+endif
+else
+	cd mcp_server && uv run python -m mcp_server.rag.qdrant_indexer
+endif
+
 upload-langfuse-dataset:
 	cd backend && uv run python ../datasets/scripts/upload_langfuse_dataset.py \
 		--dataset-name $(DATASET_NAME) \
@@ -170,3 +196,18 @@ eval-compare:
 
 eval-backfill-runs:
 	$(MAKE) -C evals backfill-runs RUN="$(RUN)"
+
+bench:
+ifdef RETRIEVER_BACKEND
+	cd mcp_server && uv run python -m scripts.bench \
+		--config ../evals/configs/vector-db-$(RETRIEVER_BACKEND).yaml \
+		--backend $(RETRIEVER_BACKEND) \
+		--out ../evals/reports/ \
+		$(if $(BENCH_SKIP_INDEX),--skip-index,)
+else
+	cd mcp_server && uv run python -m scripts.bench_all \
+		--backends $(BENCH_BACKENDS) \
+		--configs-dir ../evals/configs/ \
+		--reports-dir ../evals/reports/ \
+		$(if $(BENCH_SKIP_INDEX),--skip-index,)
+endif

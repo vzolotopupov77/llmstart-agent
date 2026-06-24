@@ -1,7 +1,7 @@
 # Roadmap — LLMStart Agent
 
 > **Vision:** [concept/vision.md](concept/vision.md)  
-> **Последнее обновление:** 2026-06-10 (sprint-07 langfuse-v3)
+> **Последнее обновление:** 2026-06-24 (sprint-08 vector-db — закрыт)
 
 ---
 
@@ -46,6 +46,7 @@
 | 04 | [api-stream-catalog](sprints/sprint-04-api-stream-catalog/README.md) | `POST /chat` (SSE), `GET /products`, контракты API | ✅ | sprint-04 |
 | 05 | [web-widget](sprints/sprint-05-web-widget/README.md) | Next.js виджет: SSE UI, reasoning/tools, витрина, CTA Telegram | ✅ | sprint-05 |
 | 06 | [telegram-funnel](sprints/sprint-06-telegram-funnel/README.md) | Telegram-бот, handoff `session_id`, E2E воронка до лида | ✅ | sprint-06 |
+| 08 | [vector-db](sprints/sprint-08-vector-db/README.md) | Выбрать и перевести RAG-слой на выбранную векторную БД | ✅ | [sprint-08](sprints/sprint-08-vector-db/README.md) |
 
 **Критерии приёмки v0.1 (сводка):**
 
@@ -82,6 +83,8 @@
 | — | TBD | Guardrails + policy layer в Core | 📋 | — |
 | — | TBD | Rate limits, квоты LLM, observability алертов | 📋 | — |
 | — | TBD | Security review: CORS production, headers, secrets CI | 📋 | — |
+| — | TBD | RAG: hybrid search (dense + BM25/sparse) для точных term-запросов | 📋 | — |
+| — | TBD | RAG: PDF chunking — структурное разбиение (заголовки, таблицы) вместо слепого window | 📋 | — |
 
 ---
 
@@ -127,6 +130,9 @@ flowchart LR
 
 | Дата | Изменение |
 |------|-----------|
+| 2026-06-23 | sprint-08: payload index для `segment` в Qdrant; отдельный путь чанкинга PDF |
+| 2026-06-24 | Закрыт sprint-08 vector-db: Qdrant + pgvector + ChromaDB bench; production-бэкенд Qdrant |
+| 2026-06-22 | Добавлен sprint-08 vector-db (In Progress): RAG-слой на векторную БД |
 | 2026-06-10 | Закрыт sprint-07 langfuse-v3: self-hosted Langfuse v3, trace за turn |
 | 2026-06-06 | Закрыт sprint-06 telegram-funnel; **v0.1 MVP** завершён |
 | 2026-06-06 | Апгрейд Langfuse v2→v3 перенесён в v0.2; критерий трейсов v0.1 смягчён |

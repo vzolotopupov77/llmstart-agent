@@ -16,6 +16,38 @@ def test_load_baseline_config() -> None:
     assert config.datasets["e2e-qa"] == "v001"
 
 
+def test_load_vector_db_baseline_config() -> None:
+    config = load_run_config(CONFIGS / "vector-db-baseline.yaml")
+    assert config.config_id == "vector-db-baseline"
+    assert config.retrieval.backend == "qdrant"
+    assert config.retrieval.db_version == "v1.18.2"
+    assert config.retrieval.embedding_model == "openai/text-embedding-3-small"
+    assert config.retrieval.chunk_size == 800
+    assert config.retrieval.top_k == 4
+    assert config.datasets["e2e-qa"] == "v002"
+
+
+def test_load_vector_db_chroma_config() -> None:
+    config = load_run_config(CONFIGS / "vector-db-chroma.yaml")
+    assert config.config_id == "vector-db-chroma"
+    assert config.retrieval.backend == "chroma"
+    assert config.retrieval.top_k == 4
+
+
+def test_load_vector_db_pgvector_config() -> None:
+    config = load_run_config(CONFIGS / "vector-db-pgvector.yaml")
+    assert config.config_id == "vector-db-pgvector"
+    assert config.retrieval.backend == "pgvector"
+    assert config.retrieval.top_k == 4
+
+
+def test_load_vector_db_qdrant_config() -> None:
+    config = load_run_config(CONFIGS / "vector-db-qdrant.yaml")
+    assert config.config_id == "vector-db-qdrant"
+    assert config.retrieval.backend == "qdrant"
+    assert config.retrieval.top_k == 4
+
+
 def test_benchmark_differs_only_by_model() -> None:
     baseline = load_run_config(CONFIGS / "baseline-react-chroma.yaml")
     benchmark = load_run_config(CONFIGS / "benchmark-gpt-4o.yaml")

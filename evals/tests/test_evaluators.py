@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import os
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
+from app.agent.run_config import JudgeConfigBlock
 from langfuse import Evaluation
 
 from scripts.agent_task import extract_user_messages, format_input_for_eval, format_judge_input
@@ -14,6 +16,7 @@ from scripts.evaluators import (
     build_task_description,
     get_e2e_evaluators,
 )
+from scripts.judge_client import SyncOpenRouterJudge, create_judge_model
 from scripts.run_utils import build_run_name, resolve_dataset_slug
 
 JUDGE = SimpleNamespace(
@@ -128,6 +131,45 @@ def test_create_answer_correctness_metric_uses_evaluation_steps() -> None:
     assert "рассрочк" in joined
     assert "рассрочк" in criteria
     assert "ПОСЛЕДНИЙ" in criteria or "последн" in criteria.lower()
+
+
+def test_create_judge_model_returns_sync_judge() -> None:
+    judge = JudgeConfigBlock(
+        provider="openrouter",
+        name="google/gemini-2.5-flash-lite",
+        temperature=0.0,
+    )
+    with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}):
+        model = create_judge_model(judge)
+    assert isinstance(model, SyncOpenRouterJudge)
+
+
+@patch("deepeval.models.llms.gateway_model.AsyncOpenAI")
+@patch("deepeval.models.llms.gateway_model.OpenAI")
+def test_sync_judge_uses_sync_client(
+    mock_openai: MagicMock,
+    mock_async_openai: MagicMock,
+) -> None:
+    mock_client = MagicMock()
+    mock_completion = MagicMock()
+    mock_completion.choices = [MagicMock(message=MagicMock(content="ok"))]
+    mock_completion.usage.prompt_tokens = 1
+    mock_completion.usage.completion_tokens = 1
+    mock_client.chat.completions.create.return_value = mock_completion
+    mock_openai.return_value = mock_client
+
+    judge = JudgeConfigBlock(
+        provider="openrouter",
+        name="google/gemini-2.5-flash-lite",
+        temperature=0.0,
+    )
+    with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}):
+        model = create_judge_model(judge)
+    output, _ = model.generate("hello")
+
+    assert output == "ok"
+    mock_openai.assert_called()
+    mock_async_openai.assert_not_called()
 
 
 def test_create_task_completion_metric_sets_explicit_task() -> None:

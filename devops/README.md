@@ -188,6 +188,49 @@ make up
 3. Backend логи: `Langfuse client initialized`.
 4. Подождите ~30 с — ingestion асинхронный (ClickHouse).
 
+## Qdrant (Vector DB)
+
+RAG-слой (sprint-08). Поднимается вместе со стеком через `make up`.
+
+Порты (только localhost): REST `:6333`, gRPC `:6334`.
+
+### Проверка сервиса
+
+```bash
+# health endpoint
+curl http://127.0.0.1:6333/healthz
+# → OK
+
+# версия и статус
+curl http://127.0.0.1:6333/
+```
+
+```bash
+# compose status
+docker compose --env-file .env -f devops/docker-compose.yml ps qdrant
+```
+
+Ожидание: статус `healthy`.
+
+### Первый запуск
+
+После `make up` индекс пуст — наполнить через:
+
+```bash
+make index
+```
+
+### Persistence
+
+Данные хранятся в named volume `qdrant_data`. При `make down` данные **сохраняются**.
+Полный сброс (при смене модели или коллекции):
+
+```bash
+docker compose --env-file .env -f devops/docker-compose.yml down -v
+make up
+make index
+```
+
 ## Альтернатива: Langfuse Cloud
 
 В `.env` укажите облачный хост и ключи — compose для Langfuse не обязателен:
@@ -212,3 +255,4 @@ LANGFUSE_HOST=https://cloud.langfuse.com
 | redis | `redis:7.4.2-alpine` |
 | minio | `minio/minio:RELEASE.2024-11-07T00-52-20Z` |
 | postgres | `postgres:15` |
+| qdrant | `qdrant/qdrant:v1.18.2` |

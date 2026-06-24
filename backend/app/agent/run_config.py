@@ -18,6 +18,10 @@ class RetrievalConfigBlock(BaseModel):
     """Retrieval backend reference."""
 
     backend: str
+    db_version: str | None = None
+    embedding_model: str | None = None
+    chunk_size: int | None = None
+    top_k: int | None = None
 
 
 class ModelConfigBlock(BaseModel):

@@ -5,9 +5,7 @@ from typing import Literal
 
 from mcp.server.fastmcp import FastMCP
 
-from mcp_server.rag.embeddings import get_embedding_client
-from mcp_server.rag.indexer import ensure_index
-from mcp_server.rag.retriever import KnowledgeChunk
+from mcp_server.retriever.base import KnowledgeChunk
 from mcp_server.tools.list_b2c_products import handle_list_b2c_products
 from mcp_server.tools.payment import handle_confirm_payment, handle_create_payment_link
 from mcp_server.tools.save_lead import handle_save_lead
@@ -56,12 +54,8 @@ def save_lead(
 
 
 def main() -> None:
-    """Start stdio MCP server after ensuring RAG index."""
+    """Start stdio MCP server."""
     logging.basicConfig(level=logging.INFO)
-    try:
-        ensure_index(embedding_client=get_embedding_client())
-    except ValueError:
-        logger.warning("Skipping auto-reindex: OPENAI_API_KEY not configured")
     mcp.run()
 
 

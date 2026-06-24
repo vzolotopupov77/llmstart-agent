@@ -10,6 +10,8 @@ import pytest
 from mcp_server.config import Settings, get_settings
 from mcp_server.data_access import catalog as catalog_module
 from mcp_server.rag.embeddings import MockEmbeddings
+from mcp_server.retriever.factory import _cached_retriever
+from tests.mocks import MockRetriever
 
 
 @pytest.fixture
@@ -39,10 +41,18 @@ def settings_env(
     if payments_file.exists():
         payments_file.unlink()
     get_settings.cache_clear()
+    _cached_retriever.cache_clear()
     catalog_module.clear_cache()
     yield get_settings()
     get_settings.cache_clear()
+    _cached_retriever.cache_clear()
     catalog_module.clear_cache()
+
+
+@pytest.fixture
+def mock_retriever() -> MockRetriever:
+    """Deterministic retriever for tool tests without vector DB."""
+    return MockRetriever()
 
 
 @pytest.fixture

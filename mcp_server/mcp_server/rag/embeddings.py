@@ -2,9 +2,11 @@
 
 import hashlib
 import math
+import time
 from typing import Protocol
 
-from openai import OpenAI
+import httpx
+from openai import APIConnectionError, OpenAI
 
 from mcp_server.config import get_settings
 
@@ -17,6 +19,10 @@ class EmbeddingClient(Protocol):
     def embed_texts(self, texts: list[str]) -> list[list[float]]:
         """Return embeddings for each text."""
         ...
+
+
+_OUTER_RETRIES = 3
+_OUTER_RETRY_DELAY = 5.0
 
 
 class OpenRouterEmbeddings:
@@ -36,14 +42,39 @@ class OpenRouterEmbeddings:
         if not self._api_key:
             msg = "OPENAI_API_KEY is required for embeddings"
             raise ValueError(msg)
-        self._client = OpenAI(api_key=self._api_key, base_url=self._base_url)
+        self._timeout_seconds = runtime.openai_timeout_seconds
+        self._client = self._make_client()
+
+    def _make_client(self) -> OpenAI:
+        timeout = httpx.Timeout(
+            connect=self._timeout_seconds,
+            read=self._timeout_seconds,
+            write=self._timeout_seconds,
+            pool=self._timeout_seconds,
+        )
+        return OpenAI(
+            api_key=self._api_key,
+            base_url=self._base_url,
+            timeout=timeout,
+            max_retries=3,
+        )
 
     def embed_texts(self, texts: list[str]) -> list[list[float]]:
         if not texts:
             return []
-        response = self._client.embeddings.create(model=self._model, input=texts)
-        ordered = sorted(response.data, key=lambda item: item.index)
-        return [item.embedding for item in ordered]
+        last_exc: APIConnectionError | None = None
+        for attempt in range(_OUTER_RETRIES):
+            try:
+                response = self._client.embeddings.create(model=self._model, input=texts)
+                ordered = sorted(response.data, key=lambda item: item.index)
+                return [item.embedding for item in ordered]
+            except APIConnectionError as exc:
+                last_exc = exc
+                if attempt < _OUTER_RETRIES - 1:
+                    delay = _OUTER_RETRY_DELAY * (2**attempt)
+                    time.sleep(delay)
+                    self._client = self._make_client()
+        raise last_exc  # type: ignore[misc]
 
 
 class MockEmbeddings:

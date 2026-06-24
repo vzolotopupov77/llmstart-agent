@@ -17,6 +17,7 @@ def apply_mcp_server_env(settings: Settings) -> None:
     os.environ["DATA_DIR"] = str(settings.data_dir)
     os.environ["OPENAI_API_KEY"] = settings.openai_api_key
     os.environ["OPENAI_BASE_URL"] = settings.openai_base_url
+    os.environ["OPENAI_TIMEOUT_SECONDS"] = str(settings.openai_timeout_seconds)
     os.environ["EMBEDDING_MODEL"] = settings.embedding_model
     os.environ["RAG_TOP_K"] = str(settings.rag_top_k)
     get_mcp_settings.cache_clear()

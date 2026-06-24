@@ -1,0 +1,16 @@
+{
+  "backend": "qdrant",
+  "timestamp": "20260624T142750Z",
+  "dataset": "D:\\Repo\\llmstart-agent\\data",
+  "top_k": 4,
+  "score_threshold": null,
+  "indexed_chunks": 0,
+  "metrics": {
+    "index_time_s": 0.0,
+    "index_rss_mb": 0.0,
+    "p50_latency_ms": 6160.17,
+    "p95_latency_ms": 6198.61,
+    "precision_at_k": 0.25,
+    "recall_at_k": 1.0
+  }
+}

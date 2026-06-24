@@ -1,28 +1,12 @@
 """Knowledge base retrieval from Chroma."""
 
-from typing import Literal, TypedDict
-
 import chromadb
 
 from mcp_server.config import get_settings
 from mcp_server.paths import chroma_dir
 from mcp_server.rag.embeddings import EmbeddingClient, get_embedding_client
 from mcp_server.rag.indexer import COLLECTION_NAME
-
-Segment = Literal["b2b", "b2c"]
-
-
-class KnowledgeChunk(TypedDict):
-    """Single retrieved chunk."""
-
-    text: str
-    source: str
-    segment: str
-
-
-class IndexNotReadyError(Exception):
-    """Raised when Chroma index is missing or empty."""
-
+from mcp_server.retriever.base import IndexNotReadyError, KnowledgeChunk, Segment
 
 _INDEX_EMPTY_MSG = "knowledge base index is empty; run reindex first"
 

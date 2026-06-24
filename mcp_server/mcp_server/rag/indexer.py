@@ -7,21 +7,16 @@ import chromadb
 from chromadb.api.models.Collection import Collection
 
 from mcp_server.config import get_settings
-from mcp_server.paths import b2b_dir, b2c_dir, chroma_dir, index_manifest_path
-from mcp_server.rag.chunking import TextChunk, chunk_markdown
+from mcp_server.paths import chroma_dir, data_dir, index_manifest_path
+from mcp_server.rag.chunking import TextChunk
 from mcp_server.rag.embeddings import EmbeddingClient, get_embedding_client
+from mcp_server.rag.qdrant_indexer import _chunk_text, _read_text, _scan_files
 
 COLLECTION_NAME = "knowledge_base"
 
 
-def _scan_markdown_files() -> list[tuple[Path, str]]:
-    files: list[tuple[Path, str]] = []
-    for segment, directory in (("b2b", b2b_dir()), ("b2c", b2c_dir())):
-        if not directory.exists():
-            continue
-        for path in sorted(directory.glob("*.md")):
-            files.append((path, segment))
-    return files
+def _knowledge_files() -> list[tuple[Path, str]]:
+    return _scan_files(data_dir())
 
 
 def _source_mtime_map(files: list[tuple[Path, str]]) -> dict[str, float]:
@@ -46,7 +41,7 @@ def _save_manifest(source_mtimes: dict[str, float]) -> None:
 
 def index_is_stale() -> bool:
     """Return True when source files changed or index is empty."""
-    files = _scan_markdown_files()
+    files = _knowledge_files()
     if not files:
         return False
     current = _source_mtime_map(files)
@@ -73,24 +68,25 @@ def _get_collection(*, create_if_missing: bool = True) -> Collection | None:
 
 
 def _collect_chunks(files: list[tuple[Path, str]]) -> list[TextChunk]:
+    settings = get_settings()
     chunks: list[TextChunk] = []
     for path, segment in files:
-        content = path.read_text(encoding="utf-8")
+        content = _read_text(path)
         chunks.extend(
-            chunk_markdown(
+            _chunk_text(
                 content,
-                source=path.name,
+                path=path,
                 segment=segment,
-                chunk_size=get_settings().chunk_size,
-                chunk_overlap=get_settings().chunk_overlap,
+                chunk_size=settings.chunk_size,
+                chunk_overlap=settings.chunk_overlap,
             ),
         )
-    return chunks
+    return [chunk for chunk in chunks if chunk.text.strip()]
 
 
 def reindex(*, embedding_client: EmbeddingClient | None = None) -> int:
-    """Rebuild Chroma index from markdown sources. Returns chunk count."""
-    files = _scan_markdown_files()
+    """Rebuild Chroma index from knowledge sources. Returns chunk count."""
+    files = _knowledge_files()
     chunks = _collect_chunks(files)
     client = embedding_client or get_embedding_client()
 

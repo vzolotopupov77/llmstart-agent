@@ -3,7 +3,7 @@
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -28,6 +28,7 @@ class Settings(BaseSettings):
         default="https://openrouter.ai/api/v1",
         alias="OPENAI_BASE_URL",
     )
+    openai_timeout_seconds: float = Field(default=120.0, alias="OPENAI_TIMEOUT_SECONDS")
     embedding_model: str = Field(
         default="openai/text-embedding-3-small",
         alias="EMBEDDING_MODEL",
@@ -35,6 +36,34 @@ class Settings(BaseSettings):
     rag_top_k: int = Field(default=4, alias="RAG_TOP_K")
     chunk_size: int = Field(default=800, alias="RAG_CHUNK_SIZE")
     chunk_overlap: int = Field(default=100, alias="RAG_CHUNK_OVERLAP")
+    qdrant_url: str = Field(default="http://localhost:6333", alias="QDRANT_URL")
+    qdrant_collection: str = Field(default="knowledge_base", alias="QDRANT_COLLECTION")
+    qdrant_api_key: str | None = Field(default=None, alias="QDRANT_API_KEY")
+    embedding_dim: int = Field(default=1536, alias="EMBEDDING_DIM")
+    retriever_backend: str = Field(default="qdrant", alias="RETRIEVER_BACKEND")
+    pgvector_host: str = Field(default="localhost", alias="PGVECTOR_HOST")
+    pgvector_port: int = Field(default=5434, alias="PGVECTOR_PORT")
+    pgvector_db: str = Field(default="knowledge_base", alias="PGVECTOR_DB")
+    pgvector_user: str = Field(default="pgvector", alias="PGVECTOR_USER")
+    pgvector_password: str = Field(default="pgvector", alias="PGVECTOR_PASSWORD")
+    pgvector_table: str = Field(default="knowledge_chunks", alias="PGVECTOR_TABLE")
+
+    @property
+    def pgvector_conninfo(self) -> str:
+        """PostgreSQL connection string for pgvector."""
+        return (
+            f"host={self.pgvector_host} port={self.pgvector_port} "
+            f"dbname={self.pgvector_db} user={self.pgvector_user} "
+            f"password={self.pgvector_password}"
+        )
+
+    @field_validator("data_dir", mode="before")
+    @classmethod
+    def normalize_data_dir(cls, value: object) -> Path:
+        """Treat empty DATA_DIR as repo default."""
+        if value in ("", None):
+            return _default_data_dir()
+        return Path(str(value))
 
 
 @lru_cache
