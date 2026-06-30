@@ -8,6 +8,8 @@ dependencies = [
     "chromadb>=0.6.0",
     "email-validator>=2.2.0",
     "mcp>=1.12.0",
+    "neo4j==6.2.0",
+    "neo4j-graphrag==1.16.0",
     "openai>=1.60.0",
     "pgvector>=0.3.6",
     "psycopg[binary]>=3.2.0",
@@ -20,6 +22,7 @@ dependencies = [
 
 [project.optional-dependencies]
 bench = ["chromadb>=0.6.0"]
+reranker = ["sentence-transformers>=3.0.0"]
 
 [project.scripts]
 mcp-server = "mcp_server.server:main"
@@ -55,7 +58,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["S101", "ANN201", "PLR2004", "INP001", "PLC0415", "E501", "PT011", "B017", "D103", "ARG001", "D401", "PT017", "TRY003", "EM101"]
+"tests/**" = ["S101", "ANN201", "PLR2004", "INP001", "PLC0415", "E501", "PT011", "B017", "D103", "ARG001", "D401", "PT017", "TRY003", "EM101", "RUF001", "SLF001"]
 "tests/mocks.py" = ["D102"]
 "mcp_server/server.py" = ["PLR0913"]
 "mcp_server/tools/save_lead.py" = ["PLR0913"]
@@ -63,7 +66,9 @@ ignore = [
 "mcp_server/rag/qdrant_indexer.py" = ["D102", "D107"]
 "mcp_server/rag/pgvector_indexer.py" = ["D102", "D107", "S608"]
 "mcp_server/retriever/pgvector.py" = ["D102", "D107", "D401", "S608"]
-"scripts/**" = ["D103", "T201", "PLR2004", "PLC0415", "TC001", "E501", "PERF401"]
+"mcp_server/retriever/*.py" = ["TC001", "TC002", "TC003", "D102", "D107", "PLR0911", "PLR0912", "PLR0913", "PLR2004", "S608", "PLC0415", "RUF100", "RUF001", "C901", "E501", "PERF401", "TRY003", "EM101", "EM102"]
+"mcp_server/text2cypher/**" = ["TC002", "D102", "D107", "D401"]
+"scripts/**" = ["D103", "T201", "PLR2004", "PLC0415", "TC001", "E501", "PERF401", "S603"]
 "mcp_server/data_access/catalog.py" = ["PLR2004"]
 
 [tool.mypy]
@@ -80,7 +85,7 @@ module = ["chromadb.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
-module = ["qdrant_client.*", "pypdf.*", "httpx.*", "psycopg.*", "pgvector.*"]
+module = ["qdrant_client.*", "pypdf.*", "httpx.*", "psycopg.*", "pgvector.*", "neo4j.*", "sentence_transformers.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

@@ -12,7 +12,7 @@
 | Понять продукт и MVP | [concept/idea.md](concept/idea.md) |
 | Техническое видение, компоненты, роли | [concept/vision.md](concept/vision.md) |
 | План реализации по спринтам | [roadmap.md](roadmap.md) |
-| Текущий этап | [roadmap.md](roadmap.md) — **v0.2 hardening** (v0.1 MVP ✅) |
+| Текущий этап | [roadmap.md](roadmap.md) — **v0.2 Развитие RAG-ассистента** (v0.1 MVP ✅) |
 
 ---
 
@@ -36,7 +36,7 @@
 
 | Документ | Содержание |
 |----------|------------|
-| [roadmap.md](roadmap.md) | v0.1 MVP ✅ → v0.2 hardening → v1.0 production |
+| [roadmap.md](roadmap.md) | v0.1 MVP ✅ → v0.2 RAG-ассистент → v0.3 hardening → v1.0 production |
 
 ### Спринты (`sprints/`)
 
@@ -49,25 +49,29 @@
 | 05 web-widget | ✅ Done | [sprint-05-web-widget](sprints/sprint-05-web-widget/README.md) |
 | 06 telegram-funnel | ✅ Done | [sprint-06-telegram-funnel](sprints/sprint-06-telegram-funnel/README.md) |
 | 07 langfuse-v3 | ✅ Done | [sprint-07-langfuse-v3](sprints/sprint-07-langfuse-v3/README.md) |
+| 08 vector-db | ✅ Done | [sprint-08-vector-db](sprints/sprint-08-vector-db/README.md) |
+| 09 graphrag | 📋 Planned | [sprint-09-graphrag](sprints/sprint-09-graphrag/README.md) |
 
 В каждом спринте: `README.md`, `tasks/<NN-task>/plan.md`, `summary.md`.
 
 ---
 
-## Решения (`decisions/`)
+## Решения (`adrs/`)
 
-Архитектурные записи (ADR). Зафиксированы в vision, файлы — по мере реализации.
+Архитектурные записи (ADR). Файлы в `docs/adrs/`.
 
-| ADR | Тема |
-|-----|------|
-| 0001 | Единое Agent Core, тонкие каналы |
-| 0002 | Инструменты — отдельный MCP-сервер |
-| 0003 | LLM — OpenRouter (`OPENAI_*` env) |
-| 0004 | Платежи и CRM — моки |
-| 0005 | In-memory сессии |
-| 0006 | Один `/chat`, JSON vs SSE через `Accept` |
-| 0007 | Форматирование в Core по `channel` |
-| 0008 | HTTP 200 на `/chat` |
+| ADR | Тема | Файл |
+|-----|------|------|
+| 0001 | Единое Agent Core, тонкие каналы | [ADR-0001](adrs/ADR-0001-agent-core-channels.md) |
+| 0002 | Инструменты — отдельный MCP-сервер | [ADR-0002](adrs/ADR-0002-mcp-server.md) |
+| 0003 | LLM — OpenRouter (`OPENAI_*` env) | [ADR-0003](adrs/ADR-0003-openrouter-llm.md) |
+| 0004 | Платежи и CRM — моки | [ADR-0004](adrs/ADR-0004-payment-crm-mocks.md) |
+| 0005 | In-memory сессии | [ADR-0005](adrs/ADR-0005-in-memory-sessions.md) |
+| 0006 | Один `/chat`, JSON vs SSE через `Accept` | [ADR-0006](adrs/ADR-0006-chat-json-sse.md) |
+| 0007 | Форматирование в Core по `channel` | [ADR-0007](adrs/ADR-0007-channel-formatting.md) |
+| 0008 | HTTP 200 на `/chat` | [ADR-0008](adrs/ADR-0008-http-200-chat.md) |
+| 0009 | Vector DB для RAG-слоя — Qdrant | [ADR-0009](adrs/ADR-0009-vector-db.md) |
+| 0010 | Graph DB для GraphRAG — Neo4j | [ADR-0010](adrs/ADR-0010-graphrag.md) |
 
 ---
 
@@ -100,7 +104,7 @@ docs/
 │   ├── architecture.md
 │   ├── integrations.md
 │   └── api-contracts.md
-├── decisions/             # ADR (по мере создания)
+├── adrs/                  # ADR (архитектурные решения)
 ├── specs/                 # фичи (по необходимости)
 └── sprints/
     └── sprint-NN-<name>/
@@ -110,4 +114,4 @@ docs/
 
 ---
 
-*Последнее обновление навигатора: 2026-06-10*
+*Последнее обновление навигатора: 2026-06-25*

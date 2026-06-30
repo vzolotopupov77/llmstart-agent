@@ -231,6 +231,111 @@ make up
 make index
 ```
 
+## Neo4j (Graph DB)
+
+GraphRAG-слой (sprint-09). Поднимается вместе со стеком через `make up` или отдельно через `make graph-up`.
+
+Порты (только localhost): Browser **:7474**, Bolt **:7687**.
+
+Образ: `neo4j:2026.04.0-community` (ADR-0010), плагин APOC включён.
+
+### Переменные окружения
+
+| Переменная | Назначение |
+|------------|------------|
+| `NEO4J_URI` | Bolt URI для Python-клиента (default `bolt://localhost:7687`) |
+| `NEO4J_USER` | Admin-пользователь (default `neo4j`) |
+| `NEO4J_PASSWORD` | Пароль admin (compose: `NEO4J_AUTH`) |
+| `NEO4J_RO_USER` | Read-only пользователь для text2cypher (default `text2cypher_ro`) |
+| `NEO4J_RO_PASSWORD` | Пароль RO-пользователя |
+
+Dev-дефолты — в `.env.example`. Скопируйте секцию Neo4j в `.env` перед первым запуском.
+
+### Make-цели
+
+| Цель | Назначение |
+|------|------------|
+| `make graph-up` | Поднять только Neo4j |
+| `make graph-down` | Остановить Neo4j (данные в volume сохраняются) |
+| `make graph-status` | Статус контейнера + smoke (`Connection OK`) |
+| `make graph-shell` | Интерактивный cypher-shell (admin, без ручного `docker exec`) |
+| `make graph-init-ro` | Создать RO-пользователя `text2cypher_ro` (один раз после первого `graph-up`) |
+
+### Первый запуск
+
+```bash
+# 1. Убедитесь, что в .env есть секция Neo4j (см. .env.example)
+make graph-up
+# 2. Дождитесь healthy (~30–60 с)
+docker compose --env-file .env -f devops/docker-compose.yml ps neo4j
+# 3. RO-пользователь для text2cypher (Task 07)
+make graph-init-ro
+# 4. Проверка
+make graph-status
+# → Connection OK
+```
+
+Browser: http://127.0.0.1:7474 — логин `NEO4J_USER` / `NEO4J_PASSWORD`.
+
+Healthcheck в compose: `cypher-shell RETURN 1` через Bolt (endpoint `/db/neo4j/available` на 2026.04 возвращает 404).
+
+Проверка HTTP (без auth):
+
+```bash
+curl http://127.0.0.1:7474/
+```
+
+### Read-only пользователь (text2cypher)
+
+Guardrail #1 из ADR-0010: NL→Cypher выполняется под отдельным пользователем (`NEO4J_RO_*`), не под admin.
+
+> **Community Edition:** роль `reader` (`GRANT ROLE`) доступна только в Enterprise. На Community создаётся отдельный пользователь; write-блокировка обеспечивается guardrails 2–4 в Task 07 (regex, LIMIT, tool scope).
+
+Создание (idempotent):
+
+```bash
+make graph-init-ro
+```
+
+Реализация: Python-скрипт `mcp_server/scripts/neo4j_init_ro.py` (admin credentials из `.env`).
+
+```cypher
+CREATE USER text2cypher_ro IF NOT EXISTS
+  SET PASSWORD 'your-ro-password' CHANGE NOT REQUIRED;
+GRANT ROLE reader TO text2cypher_ro;
+```
+
+Справочный файл: [devops/neo4j/init-text2cypher-ro.cypher](neo4j/init-text2cypher-ro.cypher).
+
+Проверка RO (через `make graph-shell` от admin или отдельную сессию):
+
+```bash
+docker compose --env-file .env -f devops/docker-compose.yml exec neo4j \
+  cypher-shell -u text2cypher_ro -p "$NEO4J_RO_PASSWORD" -a bolt://localhost:7687 \
+  "RETURN 1 AS ok;"
+```
+
+Write-запрос от RO должен быть отклонён:
+
+```cypher
+CREATE (n:Test {id: 'x'});
+-- Expected: permission denied
+```
+
+### Persistence
+
+Данные хранятся в named volumes `neo4j_data` и `neo4j_logs`. При `make graph-down` данные **сохраняются**.
+
+Полный сброс:
+
+```bash
+docker compose --env-file .env -f devops/docker-compose.yml down -v
+make graph-up
+make graph-init-ro
+```
+
+Граф пуст до `make graph-index` (Task 05).
+
 ## Альтернатива: Langfuse Cloud
 
 В `.env` укажите облачный хост и ключи — compose для Langfuse не обязателен:
@@ -256,3 +361,5 @@ LANGFUSE_HOST=https://cloud.langfuse.com
 | minio | `minio/minio:RELEASE.2024-11-07T00-52-20Z` |
 | postgres | `postgres:15` |
 | qdrant | `qdrant/qdrant:v1.18.2` |
+| neo4j | `neo4j:2026.04.0-community` |
+| pgvector | `pgvector/pgvector:pg17` |

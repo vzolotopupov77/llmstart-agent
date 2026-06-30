@@ -1,0 +1,165 @@
+dataset: global
+group: graphrag
+version: v001
+created: '2026-06-26'
+description: 'GraphRAG global eval: catalog aggregations, cross-course counts, audience filters (sprint-09, Task 02)'
+items:
+- id: gr-gl-0001
+  input: Сколько B2C курсов в каталоге и как они называются?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - vibe-coding
+    - fullstack-aidd
+    - agents
+    - deep-agents
+    - ai-agents-combo
+    answer_key_points:
+    - в каталоге 4 отдельных B2C курса
+    - курсы — Интенсив AI-кодинг в Cursor (vibe-coding), AI-driven Fullstack (fullstack-aidd), AI-driven разработка ИИ-агентов (agents), Deep Agents (deep-agents)
+    - также есть комбо-пакет ai-agents-combo, объединяющий все 4 курса
+    required_entities:
+    - vibe-coding
+    - fullstack-aidd
+    - agents
+    - deep-agents
+  metadata:
+    segment: b2c
+    intent: graphrag.global
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: medium
+    graphrag_type: global
+
+- id: gr-gl-0002
+  input: Какие форматы обучения предлагает LLMStart?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - vibe-coding
+    - fullstack-aidd
+    - agents
+    - deep-agents
+    answer_key_points:
+    - в записи (self-paced) — vibe-coding и fullstack-aidd
+    - гибрид (8 live + 3 в записи) — agents, ~1,5 месяца
+    - онлайн live (12 занятий) — deep-agents, 2 месяца
+    - дополнительно — воркшопы, корпоративные программы, менторинг
+    required_entities:
+    - vibe-coding
+    - fullstack-aidd
+    - agents
+    - deep-agents
+  metadata:
+    segment: b2c
+    intent: graphrag.global
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: medium
+    graphrag_type: global
+
+- id: gr-gl-0003
+  input: В каких курсах каталога встречается тема MCP (Model Context Protocol)?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - fullstack-aidd
+    - agents
+    - deep-agents
+    answer_key_points:
+    - MCP есть в трёх курсах — fullstack-aidd, agents и deep-agents
+    - в agents MCP — отдельная тема 8 (2 часа, создание MCP-серверов)
+    - в deep-agents MCP используется для context engineering (тема 7)
+    - в vibe-coding MCP явно не выделяется как отдельная тема
+    required_entities:
+    - fullstack-aidd
+    - agents
+    - deep-agents
+    - MCP
+  metadata:
+    segment: b2c
+    intent: graphrag.global
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: medium
+    graphrag_type: global
+
+- id: gr-gl-0004
+  input: Какие курсы подходят для менеджеров и продактов без опыта программирования?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - vibe-coding
+    answer_key_points:
+    - для менеджеров и продактов без кода предназначен vibe-coding (Интенсив AI-кодинг в Cursor)
+    - vibe-coding явно нацелен на продактов, дизайнеров, аналитиков, тимлидов без написания кода
+    - остальные курсы (fullstack-aidd, agents, deep-agents) ориентированы на разработчиков
+    required_entities:
+    - vibe-coding
+  metadata:
+    segment: b2c
+    intent: graphrag.global
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: easy
+    graphrag_type: global
+
+- id: gr-gl-0005
+  input: Какова суммарная учебная нагрузка в академических часах по курсам комбо?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - fullstack-aidd
+    - agents
+    - deep-agents
+    answer_key_points:
+    - fullstack-aidd — 80 академических часов (26 онлайн + 54 самостоятельно)
+    - agents — 80 академических часов (24 онлайн + 56 самостоятельно)
+    - deep-agents — 104 академических часа (32 онлайн + 72 самостоятельно)
+    - итого по трём курсам с указанием часов — 264 академических часа
+    required_entities:
+    - fullstack-aidd
+    - agents
+    - deep-agents
+  metadata:
+    segment: b2c
+    intent: graphrag.global
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: hard
+    graphrag_type: global
+
+- id: gr-gl-0006
+  input: Кто ведёт курсы в каталоге LLMStart?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - vibe-coding
+    - agents
+    - deep-agents
+    answer_key_points:
+    - Смирнов Сергей (к.т.н., Head of AI, основатель LLMStart.ru) ведёт все программы
+    - Кожин Александр (AI Tech Lead, со-основатель LLMStart.ru) ведёт agents и deep-agents
+    - контакты — @smirnoff_ai и @akozhin в Telegram
+    required_entities:
+    - Смирнов Сергей
+    - Кожин Александр
+  metadata:
+    segment: b2c
+    intent: graphrag.global
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: easy
+    graphrag_type: global

@@ -22,6 +22,9 @@ class ItemMetadata(BaseModel):
     reviewed_by: str | None = None
     difficulty: Literal["easy", "medium", "hard"] | None = None
     legacy_id: str | None = Field(default=None, description="Original id from datasets/b2c/v2")
+    graphrag_type: Literal["single-hop", "multi-hop", "global"] | None = Field(
+        default=None, description="GraphRAG question segment (sprint-09)"
+    )
 
 
 class ExpectedOutputCriteria(BaseModel):
@@ -34,6 +37,10 @@ class ExpectedOutputCriteria(BaseModel):
     acceptable_clarifications: list[str] = Field(default_factory=list)
     must_not: list[str] = Field(default_factory=list)
     tools: list[dict[str, Any]] = Field(default_factory=list)
+    required_entities: list[str] = Field(
+        default_factory=list,
+        description="Entities that must appear in agent response (sprint-09 GraphRAG)",
+    )
 
     model_config = {"extra": "forbid"}
 
@@ -59,7 +66,7 @@ class DatasetManifest(BaseModel):
     """Top-level dataset manifest file."""
 
     dataset: str
-    group: Literal["e2e", "rag", "behavior", "edge"]
+    group: Literal["e2e", "rag", "behavior", "edge", "graphrag"]
     version: str
     created: str
     description: str

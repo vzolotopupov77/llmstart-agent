@@ -11,7 +11,10 @@ from app.mcp_client.sync_tools import execute_tool
 from app.mcp_client.tool_schemas import TOOL_ARGS_SCHEMAS
 
 TOOL_TITLES: dict[str, str] = {
-    "search_knowledge_base": "Поиск в базе знаний",
+    "vector_search": "Семантический поиск",
+    "graph_search": "Графовый поиск",
+    "global_catalog": "Обзор каталога",
+    "text2cypher_tool": "Структурный запрос к графу",
     "list_b2c_products": "Каталог курсов",
     "create_payment_link": "Создание ссылки на оплату",
     "confirm_payment": "Подтверждение оплаты",

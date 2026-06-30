@@ -62,6 +62,24 @@ alwaysApply: true
 | Docker, контейнеры, multi-stage, health checks | `docker-expert` | `.agents/skills/docker-expert/SKILL.md` |
 | GitHub Actions CI/CD | `github-actions-templates` | `.agents/skills/github-actions-templates/SKILL.md` |
 
+### Neo4j / Graph
+
+| Тип работы | Skill | Путь |
+|-----------|-------|------|
+| Старт нового Neo4j-проекта с нуля: Aura, загрузка, первый граф | `neo4j-getting-started-skill` | `~/.agents/skills/neo4j-getting-started-skill/SKILL.md` |
+| Проектирование онтологии, схемы, выбор нод/рёбер/свойств, ревью модели | `neo4j-modeling-skill` | `~/.agents/skills/neo4j-modeling-skill/SKILL.md` |
+| Написание, отладка, оптимизация Cypher-запросов | `neo4j-cypher-skill` | `~/.agents/skills/neo4j-cypher-skill/SKILL.md` |
+| Реализация GraphRAG: выбор ретривера (Vector/Hybrid/VectorCypher/Text2Cypher), GraphRAG pipeline | `neo4j-graphrag-skill` | `~/.agents/skills/neo4j-graphrag-skill/SKILL.md` |
+| Векторные индексы, ANN/kNN-поиск, хранение эмбеддингов на узлах | `neo4j-vector-index-skill` | `~/.agents/skills/neo4j-vector-index-skill/SKILL.md` |
+| Импорт документов (PDF, HTML, Markdown) в граф знаний, KG-pipeline | `neo4j-document-import-skill` | `~/.agents/skills/neo4j-document-import-skill/SKILL.md` |
+| Python-драйвер Neo4j v6: lifecycle, execute_query, транзакции, async, батчи, пул соединений | `neo4j-driver-python-skill` | `~/.agents/skills/neo4j-driver-python-skill/SKILL.md` |
+
+### LangChain / Агенты
+
+| Тип работы | Skill | Путь |
+|-----------|-------|------|
+| LangChain-агенты, create_agent, инструменты, human-in-the-loop, middleware | `langchain-fundamentals` | `~/.agents/skills/langchain-fundamentals/SKILL.md` |
+
 ### Eval / Метрики
 
 | Тип работы | Skill / Ресурс | Путь |

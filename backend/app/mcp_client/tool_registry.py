@@ -1,23 +1,45 @@
 """Static MCP tool definitions (mirrors mcp_server/server.py)."""
 
 from mcp.types import Tool
+from mcp_server.tools.search_knowledge_base import (
+    GLOBAL_CATALOG_TOOL_DESCRIPTION,
+    GRAPH_SEARCH_TOOL_DESCRIPTION,
+    VECTOR_SEARCH_TOOL_DESCRIPTION,
+)
+from mcp_server.tools.text2cypher import TEXT2CYPHER_TOOL_DESCRIPTION
 
 from app.mcp_client.tool_schemas import (
+    BranchSearchArgs,
     ConfirmPaymentArgs,
     CreatePaymentLinkArgs,
     ListB2cProductsArgs,
     SaveLeadArgs,
-    SearchKnowledgeBaseArgs,
 )
 
 
 def get_tool_definitions() -> list[Tool]:
-    """Return the five LLMStart tools for LangChain binding."""
+    """Return LLMStart tools for LangChain binding."""
+    branch_schema = BranchSearchArgs.model_json_schema()
     return [
         Tool(
-            name="search_knowledge_base",
-            description="Search B2B or B2C knowledge base and return relevant text chunks.",
-            inputSchema=SearchKnowledgeBaseArgs.model_json_schema(),
+            name="vector_search",
+            description=VECTOR_SEARCH_TOOL_DESCRIPTION,
+            inputSchema=branch_schema,
+        ),
+        Tool(
+            name="graph_search",
+            description=GRAPH_SEARCH_TOOL_DESCRIPTION,
+            inputSchema=branch_schema,
+        ),
+        Tool(
+            name="global_catalog",
+            description=GLOBAL_CATALOG_TOOL_DESCRIPTION,
+            inputSchema=branch_schema,
+        ),
+        Tool(
+            name="text2cypher_tool",
+            description=TEXT2CYPHER_TOOL_DESCRIPTION,
+            inputSchema=branch_schema,
         ),
         Tool(
             name="list_b2c_products",
@@ -48,4 +70,4 @@ def get_tool_definitions() -> list[Tool]:
     ]
 
 
-EXPECTED_TOOL_COUNT = 5
+EXPECTED_TOOL_COUNT = 8

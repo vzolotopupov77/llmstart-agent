@@ -1,8 +1,8 @@
 # Карта датасетов — LLMStart Agent (llmstart.ru)
 
 > **Создаётся:** задача 02 sprint-eval-01 · **Методология:** [.methodology/eval/eval-methodology.md](../../.methodology/eval/eval-methodology.md)
-> **Статус:** ✅ утверждена пользователем / 2026-06-14 — задача 03 (метрики) может начинаться после апрува плана задачи 03
-> **Последнее обновление:** 2026-06-14
+> **Статус:** ✅ утверждена пользователем / 2026-06-14; дополнена sprint-09 / 2026-06-26
+> **Последнее обновление:** 2026-06-26
 
 ---
 
@@ -146,6 +146,40 @@
 
 ---
 
+### graphrag/multi-hop
+
+| Поле | Значение |
+|---|---|
+| **Группа (слой)** | graphrag |
+| **Что проверяет** | Вопросы с переходом по двум и более связям в базе знаний: цепочки зависимостей между курсами, пересечения тем, агрегаты по нескольким документам. |
+| **Обоснование** | Гипотеза sprint-09: flat RAG не может обходить граф зависимостей (RECOMMENDED_BEFORE, тематические пересечения). Baseline для сравнения с graph_hybrid, text2cypher, agent_router. |
+| **Источник items** | synthetic: `data/real_data/b2c/programs/*.md` — составные вопросы по таксономии из analysis.md §1–3 |
+| **Схема item** | input: string · expected_output: `reference_answer`, `required_entities[]` · metadata: `graphrag_type: multi-hop`, `segment: b2c` |
+| **Размер (MVP)** | **12** (v002, 2026-06-26) |
+| **Ground truth** | approximate — синтез из KB; `required_entities` — verified (коды курсов из catalog) |
+| **Предполагаемый тип проверки** | judge (answer_correctness по reference_answer) + детерминированный (required_entity_recall) + guard (faithfulness) |
+| **Файл** | `evals/datasets/graphrag/multi-hop/v002_2026-06-26.yaml` |
+| **Baseline-отчёт** | [`evals/reports/graphrag-baseline.md`](../../evals/reports/graphrag-baseline.md) — answer_correctness 0.383, entity_recall 0.618, faithfulness 0.749 |
+
+---
+
+### graphrag/global
+
+| Поле | Значение |
+|---|---|
+| **Группа (слой)** | graphrag |
+| **Что проверяет** | «Глобальные» вопросы по всему каталогу: агрегация чисел по нескольким курсам, перечисление всех авторов / курсов / форматов, синтез из всей базы. |
+| **Обоснование** | Самый сложный тип: требует обхода всего подграфа, а не одного или двух нод. Flat RAG получает top-5 чанков — заведомо недостаточно для агрегации по 4+ документам. |
+| **Источник items** | synthetic: `data/real_data/b2c/programs/*.md` + `courses-overview.md`, `faq-b2c.md` — вопросы на уровне всего каталога |
+| **Схема item** | input: string · expected_output: `reference_answer`, `required_entities[]` · metadata: `graphrag_type: global`, `segment: b2c` |
+| **Размер (MVP)** | **6** (v001, 2026-06-26) |
+| **Ground truth** | approximate — агрегация из KB; `required_entities` — verified |
+| **Предполагаемый тип проверки** | judge + required_entity_recall + faithfulness |
+| **Файл** | `evals/datasets/graphrag/global/v001_2026-06-26.yaml` |
+| **Baseline-отчёт** | [`evals/reports/graphrag-baseline.md`](../../evals/reports/graphrag-baseline.md) — answer_correctness 0.200, entity_recall 0.292, faithfulness 0.767 |
+
+---
+
 ## Маппинг legacy v2 → eval-датасеты
 
 | Legacy `metadata.dataset_type` (v2) | Eval-датасет | Примечание |
@@ -185,6 +219,8 @@
 | 5 | `behavior/tool-trajectory` | eval-04 | v001 |
 | 6 | `rag/b2b-rag` | eval-04 | v001 |
 | 7 | `behavior/funnel-to-lead` + `scenarios.yaml` | eval-04 | user simulation (E-23) |
+| 8 | **graphrag/multi-hop** | sprint-09, задача 02 | ✅ `v002_2026-06-26.yaml` — baseline зафиксирован |
+| 9 | **graphrag/global** | sprint-09, задача 02 | ✅ `v001_2026-06-26.yaml` — baseline зафиксирован |
 
 **Зеркалирование Langfuse (E-16):** folders-as-versions — `e2e/e2e-qa/v001`, …
 

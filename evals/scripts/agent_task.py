@@ -112,7 +112,15 @@ class AgentTaskRunner:
 
         tool_names = {t.get("name") for t in last_response.get("tools", []) if isinstance(t, dict)}
         if segment is None and tool_names.intersection(
-            {"create_payment_link", "list_b2c_products", "search_knowledge_base"}
+            {
+                "create_payment_link",
+                "list_b2c_products",
+                "search_knowledge_base",
+                "vector_search",
+                "graph_search",
+                "global_catalog",
+                "text2cypher_tool",
+            }
         ):
             segment = "b2c"
 

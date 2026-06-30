@@ -7,7 +7,8 @@ from typing import Any, Literal, cast
 from mcp_server.tools.list_b2c_products import handle_list_b2c_products
 from mcp_server.tools.payment import handle_confirm_payment, handle_create_payment_link
 from mcp_server.tools.save_lead import handle_save_lead
-from mcp_server.tools.search_knowledge_base import handle_search_knowledge_base
+from mcp_server.tools.search_knowledge_base import handle_branch_search
+from mcp_server.tools.text2cypher import handle_text2cypher
 
 from app.core.exceptions import McpUnavailableError
 
@@ -17,9 +18,16 @@ Segment = Literal["b2b", "b2c"]
 Channel = Literal["web", "telegram"]
 
 
-def _run_search_knowledge_base(arguments: dict[str, Any]) -> Any:
+def _run_branch_search(
+    arguments: dict[str, Any], branch: Literal["vector", "graph", "global"]
+) -> Any:
     segment = cast("Segment", arguments["segment"])
-    return handle_search_knowledge_base(str(arguments["query"]), segment)
+    return handle_branch_search(str(arguments["query"]), segment, branch)
+
+
+def _run_text2cypher(arguments: dict[str, Any]) -> Any:
+    segment = cast("Segment", arguments["segment"])
+    return handle_text2cypher(str(arguments["query"]), segment)
 
 
 def _run_create_payment_link(arguments: dict[str, Any]) -> Any:
@@ -50,7 +58,10 @@ def _run_save_lead(arguments: dict[str, Any]) -> Any:
 
 
 _TOOL_HANDLERS: dict[str, Callable[[dict[str, Any]], Any]] = {
-    "search_knowledge_base": _run_search_knowledge_base,
+    "vector_search": lambda arguments: _run_branch_search(arguments, "vector"),
+    "graph_search": lambda arguments: _run_branch_search(arguments, "graph"),
+    "global_catalog": lambda arguments: _run_branch_search(arguments, "global"),
+    "text2cypher_tool": _run_text2cypher,
     "list_b2c_products": lambda _arguments: handle_list_b2c_products(),
     "create_payment_link": _run_create_payment_link,
     "confirm_payment": _run_confirm_payment,

@@ -1,0 +1,494 @@
+{
+  "schema_version": 2,
+  "run_name": "graphrag-baseline--multi-hop--f6c0db35--20260626T152530Z",
+  "config_id": "graphrag-baseline",
+  "dataset_slug": "multi-hop",
+  "langfuse_dataset": "graphrag/multi-hop/v001",
+  "git_sha": "f6c0db35fa0b41d7db8a5ab710f6308ac7fd3569",
+  "started_at": "2026-06-26T15:25:30.153817+00:00",
+  "finished_at": "2026-06-26T15:25:58.706285+00:00",
+  "timing": {
+    "total_duration_ms": 28552,
+    "items_total": 12,
+    "items_with_timing": 12
+  },
+  "judge": {
+    "provider": "openrouter",
+    "name": "google/gemini-2.5-flash-lite",
+    "temperature": 0.0
+  },
+  "run_metadata": {
+    "config_id": "graphrag-baseline",
+    "git_sha": "f6c0db35fa0b41d7db8a5ab710f6308ac7fd3569",
+    "dataset_slug": "multi-hop",
+    "dataset_version": "v001",
+    "langfuse_dataset": "graphrag/multi-hop/v001",
+    "manifest_path": "evals\\datasets\\graphrag\\multi-hop\\v001_2026-06-26.yaml",
+    "judge": {
+      "provider": "openrouter",
+      "name": "google/gemini-2.5-flash-lite",
+      "temperature": 0.0
+    },
+    "agent_model": {
+      "provider": "openrouter",
+      "name": "openai/gpt-4o-mini",
+      "temperature": 0.0
+    },
+    "prompt": {
+      "source": "code",
+      "name": "agent-system-prompt-v2",
+      "label": null,
+      "version": null
+    },
+    "retrieval": {
+      "backend": "qdrant",
+      "db_version": "v1.18.2",
+      "embedding_model": "openai/text-embedding-3-small",
+      "chunk_size": 800,
+      "top_k": 5
+    }
+  },
+  "full_config_snapshot": {
+    "config_id": "graphrag-baseline",
+    "comment": "GraphRAG Sprint-09 baseline — Qdrant-hybrid без графа. Замер просадок на multi-hop и global.",
+    "benchmark_only": false,
+    "agent": {
+      "impl": "langchain-react",
+      "api_url": "http://127.0.0.1:8003/api/v1/chat"
+    },
+    "retrieval": {
+      "backend": "qdrant",
+      "db_version": "v1.18.2",
+      "embedding_model": "openai/text-embedding-3-small",
+      "chunk_size": 800,
+      "top_k": 5
+    },
+    "model": {
+      "provider": "openrouter",
+      "name": "openai/gpt-4o-mini",
+      "temperature": 0.0
+    },
+    "judge": {
+      "provider": "openrouter",
+      "name": "google/gemini-2.5-flash-lite",
+      "temperature": 0.0
+    },
+    "prompt": {
+      "source": "code",
+      "name": "agent-system-prompt-v2",
+      "label": null,
+      "version": null
+    },
+    "datasets": {
+      "multi-hop": "v001",
+      "global": "v001"
+    }
+  },
+  "items": [
+    {
+      "input": "Какова суммарная стоимость всех курсов комбо, если покупать их по отдельности?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/5 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "d526f2d2985259cf14e9cacbc0d0d2f1"
+    },
+    {
+      "input": "Если мне нужен навык Evaluation с RAGAS и DeepEval для агентов, какой курс это даст?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/4 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "c8391dc52ae9f31bccbc67a31986736f"
+    },
+    {
+      "input": "Какие курсы покрывают тему Advanced RAG и что нужно знать перед её изучением?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/2 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "78a9fdf802300bef84d83465456d7d73"
+    },
+    {
+      "input": "Какой минимальный путь по курсам нужен, чтобы освоить HITL (Human-in-the-loop)?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/2 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "cb93c2db864d0624a3f05493f823ec50"
+    },
+    {
+      "input": "Какой курс нужно закончить, чтобы потом делать мультиагентные системы с A2A-протоколом?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/3 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "2558f46638c8b1edfdbeb7e421f6c61f"
+    },
+    {
+      "input": "Что общего в темах курсов fullstack-aidd и agents?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/4 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "ad9d376bd86ac16b4d255e24790e23ec"
+    },
+    {
+      "input": "Если я умею делать базовый RAG, какой следующий курс позволит изучить GraphRAG?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/3 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "51408e629222402af0fd87c96446d40c"
+    },
+    {
+      "input": "Входит ли курс с Векторными БД в комбо «ИИ-агенты»?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/2 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "a845587fc72d33d0248b1d65a69eed3c"
+    },
+    {
+      "input": "Покрывает ли курс agents темы, на которые опирается GraphRAG?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/3 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "2e153d9dd6e69d845bcd3927c8a93bf7"
+    },
+    {
+      "input": "Через какой курс можно добраться до изучения GraphRAG?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/3 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "8eaa5d0145bad26db4c9faa3d39b6336"
+    },
+    {
+      "input": "Какие темы охватывает комбо «ИИ-агенты» целиком по всем четырём курсам?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/5 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "582e732e6818ec4d11cabef1066a6068"
+    },
+    {
+      "input": "Что нужно пройти перед курсом Deep Agents?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/4 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "549dab0378c4ffe1623ecb7fafc0b73e"
+    }
+  ],
+  "run_scores": [
+    {
+      "name": "error_rate",
+      "value": 1.0,
+      "comment": "12/12 items failed",
+      "data_type": null
+    },
+    {
+      "name": "avg_answer_correctness",
+      "value": 0.0,
+      "comment": "Average of 12 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_required_entity_recall",
+      "value": 0.0,
+      "comment": "Average of 12 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_faithfulness",
+      "value": 0.0,
+      "comment": "Average of 12 items",
+      "data_type": null
+    }
+  ],
+  "langfuse": {
+    "dataset_run_id": "8a4bf155-3468-4336-a098-29b38260f178",
+    "dataset_run_url": "http://localhost:3001/project/cmq0y543r0006ujmnyb937ki7/datasets/cmqv31qnc0001rz07tyfgagzg/runs/8a4bf155-3468-4336-a098-29b38260f178",
+    "linked": false,
+    "dataset_id": "cmqv31qnc0001rz07tyfgagzg"
+  },
+  "source": "experiment"
+}

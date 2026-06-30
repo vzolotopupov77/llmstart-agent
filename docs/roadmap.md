@@ -1,7 +1,7 @@
 # Roadmap — LLMStart Agent
 
 > **Vision:** [concept/vision.md](concept/vision.md)  
-> **Последнее обновление:** 2026-06-24 (sprint-08 vector-db — закрыт)
+> **Последнее обновление:** 2026-06-30 (sprint-09 graphrag закрыт)
 
 ---
 
@@ -61,7 +61,32 @@
 
 ---
 
-### v0.2 — Промышленные атрибуты (hardening) 📋
+### v0.2 — Развитие RAG-ассистента 📋
+
+**Цель:** перейти от базового dense-RAG к GraphRAG + мультимодальности; заложить архитектуру агента с управляемой памятью и планированием.
+
+**Ключевые результаты:**
+
+- [ ] GraphRAG: Knowledge Graph в Neo4j, GraphRAG-ретривер заменяет/дополняет Qdrant
+- [ ] Мультимодальный RAG: поддержка изображений и визуального контента в PDF
+- [ ] Управление контекстным окном, памятью и состоянием агента; планирование, декомпозиция задач, Skills, Subagents, Long-term memory
+- [ ] RAG: hybrid search (dense + BM25/sparse) для точных term-запросов
+- [ ] RAG: PDF chunking — структурный парсер (заголовки, таблицы); сейчас `pypdf` → plain text → blind window
+
+**Контекст RAG:** Markdown чанкится структурно (по `##`-заголовкам, sprint-08 ✅). PDF извлекается `pypdf` страницами → слепое окно; структурного парсера нет. Hybrid search явно исключён из scope sprint-08.
+
+**Спринты:**
+
+| # | Sprint | Цель | Статус | Документ |
+|---|--------|------|--------|----------|
+| 09 | [graphrag](sprints/sprint-09-graphrag/README.md) | **GraphRAG** — KG каталога (Neo4j), graph/global/text2cypher retrieval, маршрутизация по типу вопроса, реранкер | ✅ | [sprint-09](sprints/sprint-09-graphrag/README.md) |
+| 10 | TBD | **Мультимодальный RAG** — мультимодальные эмбеддинги, структурный разбор PDF (таблицы, изображения), vision-контекст в ответах | 📋 | — |
+| 11 | TBD | **Context-engineering и агентное планирование** — sliding window / summarization, персистентная память (граф/БД), Plan-and-Execute, task decomposition, Skills, Subagents | 📋 | — |
+| 12 | TBD | **RAG-улучшения** — hybrid search (BM25 + dense), структурный PDF-чанкинг (заголовки, таблицы) | 📋 | — |
+
+---
+
+### v0.3 — Промышленные атрибуты (hardening) 📋
 
 **Цель:** превратить учебный стенд в систему, устойчивую к нагрузке и злоупотреблениям.
 
@@ -83,8 +108,6 @@
 | — | TBD | Guardrails + policy layer в Core | 📋 | — |
 | — | TBD | Rate limits, квоты LLM, observability алертов | 📋 | — |
 | — | TBD | Security review: CORS production, headers, secrets CI | 📋 | — |
-| — | TBD | RAG: hybrid search (dense + BM25/sparse) для точных term-запросов | 📋 | — |
-| — | TBD | RAG: PDF chunking — структурное разбиение (заголовки, таблицы) вместо слепого window | 📋 | — |
 
 ---
 
@@ -100,7 +123,7 @@
 - [ ] Эскалация на эксперта, выдача доступа после оплаты
 - [ ] Embed виджета на llmstart.ru, production deploy
 
-**Спринты:** будут детализированы после v0.2.
+**Спринты:** будут детализированы после v0.3.
 
 | # | Sprint | Цель | Статус | Документ |
 |---|--------|------|--------|----------|
@@ -131,6 +154,7 @@ flowchart LR
 | Дата | Изменение |
 |------|-----------|
 | 2026-06-23 | sprint-08: payload index для `segment` в Qdrant; отдельный путь чанкинга PDF |
+| 2026-06-25 | Добавлен v0.2 Развитие RAG-ассистента (GraphRAG, мультимодал, context-eng); hardening → v0.3 |
 | 2026-06-24 | Закрыт sprint-08 vector-db: Qdrant + pgvector + ChromaDB bench; production-бэкенд Qdrant |
 | 2026-06-22 | Добавлен sprint-08 vector-db (In Progress): RAG-слой на векторную БД |
 | 2026-06-10 | Закрыт sprint-07 langfuse-v3: self-hosted Langfuse v3, trace за turn |

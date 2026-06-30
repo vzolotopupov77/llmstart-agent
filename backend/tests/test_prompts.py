@@ -5,6 +5,8 @@ import pytest
 from app.agent.prompts import (
     SYSTEM_PROMPT_V1,
     SYSTEM_PROMPT_V2,
+    SYSTEM_PROMPT_V3,
+    SYSTEM_PROMPT_V4,
     get_system_prompt,
 )
 
@@ -26,6 +28,30 @@ def test_get_system_prompt_v3_differs_from_v2() -> None:
     assert v3.startswith(SYSTEM_PROMPT_V2)
     assert "vibe-coding-intensive" in v3
     assert "Multi-turn" in v3
+
+
+def test_get_system_prompt_v4_routing_rules() -> None:
+    v4 = get_system_prompt("agent-system-prompt-v4")
+    assert v4 != SYSTEM_PROMPT_V3
+    assert v4.startswith(SYSTEM_PROMPT_V3)
+    assert "vector_search" in v4
+    assert "graph_search" in v4
+    assert "global_catalog" in v4
+    assert "text2cypher_tool" in v4
+    assert "list_b2c_products" in v4
+    assert "расписание" in v4
+    assert "продолжения диалога о конкретном курсе" in v4
+
+
+def test_get_system_prompt_v5_generation_fixes() -> None:
+    v5 = get_system_prompt("agent-system-prompt-v5")
+    assert v5 != SYSTEM_PROMPT_V4
+    assert v5.startswith(SYSTEM_PROMPT_V4)
+    assert "ai-agents-combo" in v5
+    assert "consultation" in v5
+    assert "рассрочк" in v5
+    assert "vibe-coding-intensive" in v5
+    assert "до ~2 часов" in v5
 
 
 def test_get_system_prompt_unknown_raises() -> None:

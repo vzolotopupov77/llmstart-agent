@@ -35,6 +35,8 @@ def settings_env(
     """Point MCP settings to tmp data dir and clear cache."""
     monkeypatch.setenv("DATA_DIR", str(tmp_data_dir))
     monkeypatch.setenv("OPENAI_API_KEY", "test-key")
+    monkeypatch.setenv("RETRIEVER_BACKEND", "qdrant")
+    monkeypatch.setenv("RETRIEVER_BRANCH", "vector")
     leads_file = tmp_data_dir / "leads.txt"
     leads_file.write_text("# LLMStart leads (JSON Lines)\n", encoding="utf-8")
     payments_file = tmp_data_dir / "payments.json"

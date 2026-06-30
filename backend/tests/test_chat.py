@@ -91,7 +91,7 @@ def test_chat_b2b_uses_knowledge_search(client: object) -> None:
 
     assert response.status_code == 200
     tools = [item["name"] for item in response.json()["tools"]]
-    assert "search_knowledge_base" in tools
+    assert "vector_search" in tools
 
 
 def test_ready_returns_ok(client: object) -> None:
@@ -100,7 +100,7 @@ def test_ready_returns_ok(client: object) -> None:
     assert response.status_code == 200
     body = response.json()
     assert body["status"] == "ready"
-    assert body["mcp_tools"] == 5
+    assert body["mcp_tools"] == 8
 
 
 def test_chat_unknown_config_id_returns_400(registry_client: object) -> None:

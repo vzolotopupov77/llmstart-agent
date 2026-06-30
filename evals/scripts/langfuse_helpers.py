@@ -67,8 +67,22 @@ def dataset_run_ui_url(
 
 
 def count_dataset_run_items(client: Any, *, dataset_id: str, run_name: str) -> int:
-    response = client.api.dataset_run_items.list(dataset_id=dataset_id, run_name=run_name)
-    return len(response.data)
+    """Count linked run items with pagination (default page size is 10 — must paginate)."""
+    total = 0
+    page = 1
+    while True:
+        response = client.api.dataset_run_items.list(
+            dataset_id=dataset_id,
+            run_name=run_name,
+            page=page,
+            limit=100,
+        )
+        total += len(response.data)
+        total_pages = getattr(response.meta, "total_pages", page)
+        if page >= total_pages or not response.data:
+            break
+        page += 1
+    return total
 
 
 def resolve_dataset_run_url(

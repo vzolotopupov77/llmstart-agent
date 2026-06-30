@@ -1,0 +1,44 @@
+[
+  {
+    "id": "GL-01",
+    "segment": "global",
+    "question": "Сколько B2C курсов в каталоге и как они называются?",
+    "reference_answer": "В каталоге 4 курса B2C: 1) Интенсив AI-кодинг ИИ-агентов в Cursor (vibe-coding, 14 990 ₽), 2) AI-driven Fullstack разработка (fullstack-aidd, 39 990 ₽), 3) AI-driven разработка ИИ-агентов (agents, 39 990 ₽), 4) Deep Agents: продвинутая разработка ИИ-агентов (deep-agents, 44 990 ₽). Также есть комбо-пакет «ИИ-агенты» (ai-agents-combo, 59 990 ₽), объединяющий все 4 курса.",
+    "required_entities": ["vibe-coding", "fullstack-aidd", "agents", "deep-agents", "ai-agents-combo"]
+  },
+  {
+    "id": "GL-02",
+    "segment": "global",
+    "question": "Какие форматы обучения предлагает LLMStart?",
+    "reference_answer": "LLMStart предлагает следующие форматы: в записи (self-paced) — vibe-coding, fullstack-aidd; гибрид live + запись (8 live + 3 в записи) — agents; онлайн live (12 занятий) — deep-agents. Дополнительно: воркшопы (3–5 дней), корпоративные программы с адаптацией, менторинг с индивидуальным треком — как производные форматы на базе курсов.",
+    "required_entities": ["vibe-coding", "fullstack-aidd", "agents", "deep-agents", "self-paced", "hybrid", "live", "workshop", "corporate"]
+  },
+  {
+    "id": "GL-03",
+    "segment": "global",
+    "question": "В каких курсах каталога встречается тема MCP (Model Context Protocol)?",
+    "reference_answer": "Тема MCP встречается в трёх курсах: fullstack-aidd (в контексте AI-кодинг экосистемы), agents (тема 8: Model Context Protocol — отдельная тема, 2 часа), deep-agents (тема 1: интеграция MCP, и тема 7: context engineering через MCP). В vibe-coding MCP явно не выделяется.",
+    "required_entities": ["fullstack-aidd", "agents", "deep-agents", "MCP", "COVERS"]
+  },
+  {
+    "id": "GL-04",
+    "segment": "global",
+    "question": "Какие курсы подходят для менеджеров и продактов без опыта программирования?",
+    "reference_answer": "Для менеджеров, продактов, дизайнеров и аналитиков без опыта программирования предназначен курс Интенсив AI-кодинг ИИ-агентов в Cursor (vibe-coding, 14 990 ₽). Он явно нацелен на аудиторию «без написания кода». Остальные курсы (fullstack-aidd, agents, deep-agents) ориентированы на разработчиков, ИТ-специалистов и архитекторов.",
+    "required_entities": ["vibe-coding", "non-dev", "executive", "TARGETS"]
+  },
+  {
+    "id": "GL-05",
+    "segment": "global",
+    "question": "Какова суммарная учебная нагрузка (в академических часах) по всем курсам комбо?",
+    "reference_answer": "Суммарная нагрузка по всем ступеням комбо: vibe-coding — нет явного указания в академических часах (4 модуля, интенсив); fullstack-aidd — 80 ак. часов (26 онлайн + 54 самостоятельно); agents — 80 ак. часов (24 онлайн + 56 самостоятельно); deep-agents — 104 ак. часа (32 онлайн + 72 самостоятельно). Итого по трём курсам с указанием нагрузки: 264 ак. часа.",
+    "required_entities": ["ai-agents-combo", "fullstack-aidd", "agents", "deep-agents", "INCLUDES", "duration_hours"]
+  },
+  {
+    "id": "GL-06",
+    "segment": "global",
+    "question": "Кто ведёт курсы в каталоге LLMStart?",
+    "reference_answer": "Основные эксперты программ LLMStart: Смирнов Сергей (к.т.н., Head of AI, AI-архитектор и методолог, основатель LLMStart.ru, руководит AIRnD.ru) — ведёт все программы; Кожин Александр (AI Tech Lead, Full-Stack AI Developer, архитектор AI-систем, со-основатель LLMStart.ru) — ведёт agents и deep-agents. Контакты: @smirnoff_ai, @akozhin в Telegram.",
+    "required_entities": ["Смирнов Сергей", "Кожин Александр", "vibe-coding", "agents", "deep-agents", "TAUGHT_BY"]
+  }
+]

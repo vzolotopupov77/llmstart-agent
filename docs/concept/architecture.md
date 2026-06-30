@@ -11,6 +11,8 @@
 
 Пользователи (B2C, B2B, студенты) общаются с агентом через **веб-виджет** (Next.js, SSE) или **Telegram-бот** (aiogram). Оба канала вызывают **Agent Core** (FastAPI): ReAct-агент, in-memory сессии, форматирование под `channel`. Побочные эффекты и RAG — только через **MCP-сервер инструментов** (`mcp_server/`). LLM — **OpenRouter**; трассировка — **Langfuse** (Docker).
 
+RAG-слой использует **два хранилища**: **Qdrant** (семантический поиск по chunks) и **Neo4j** (граф структурных связей каталога), связанные по `id` (URL-slug курса).
+
 ```mermaid
 flowchart TB
     subgraph users["Пользователи"]
@@ -31,7 +33,12 @@ flowchart TB
         MCP["mcp_server/<br/>MCP tools"]
     end
 
-    subgraph data["Данные MVP"]
+    subgraph stores["Хранилища RAG"]
+        QD["Qdrant v1.18.2<br/>dense+sparse chunks"]
+        N4J["Neo4j 2026.04<br/>граф каталога"]
+    end
+
+    subgraph data["Данные"]
         DATA["data/b2b, b2c, leads.txt"]
     end
 
@@ -46,9 +53,12 @@ flowchart TB
     WEB -->|"HTTP /api/v1"| API
     BOT -->|"HTTP /api/v1"| API
     API -->|"MCP"| MCP
+    MCP --> QD
+    MCP --> N4J
     MCP --> DATA
     API --> OR
     API --> LF
+    QD -.->|"id (slug)"| N4J
 ```
 
 ---
@@ -58,11 +68,11 @@ flowchart TB
 | Компонент | Назначение | Технологии | Документация |
 |-----------|------------|------------|--------------|
 | **backend/** | Agent Core: `/chat`, `/products`, `/health`; сессии, ReAct, MCP-клиент, channel-адаптация, Langfuse | Python 3.12, FastAPI, LangChain | ADR-0001, ADR-0002, ADR-0006…0008 |
-| **mcp_server/** | Tools: RAG, каталог, лиды, мок-оплата; доступ к `data/` | Python 3.12, MCP SDK | ADR-0002 |
+| **mcp_server/** | Tools: RAG (vector + graph), каталог, лиды, мок-оплата; доступ к `data/`, Qdrant, Neo4j | Python 3.12, MCP SDK | ADR-0002, ADR-0009, ADR-0010 |
 | **frontend/** | Виджет: SSE UI, reasoning/tools/products; `GET /products` для витрины; CTA Telegram | Next.js, shadcn | — |
 | **bot/** | Long polling → Core API, `channel=telegram` | aiogram | ADR-0001 |
 | **data/** | B2B/B2C knowledge, `leads.txt`, каталог (файлы) | PDF, MD, JSON | — |
-| **devops/** | docker-compose, Langfuse, env, Makefile | Docker Compose | — |
+| **devops/** | docker-compose (Qdrant, Neo4j, Langfuse), env, Makefile | Docker Compose | ADR-0009, ADR-0010 |
 
 ---
 
@@ -73,8 +83,8 @@ flowchart TB
 | **Транспорт** | **stdio**: Core при старте поднимает `mcp_server` как subprocess; один хост разработки, минимум сетевой возни. |
 | **Альтернатива (post-MVP)** | HTTP MCP в отдельном контейнере — при масштабировании или внешних MCP-клиентах. |
 | **Контракт tools** | `search_knowledge_base`, `list_b2c_products`, `save_lead`, `create_payment_link`, `confirm_payment` |
-| **RAG** | Индексация и поиск в **mcp_server**; эмбеддинги через OpenRouter; **Chroma** persist в `data/.chroma/` (переиндексация при изменении файлов в `data/b2b`, `data/b2c`). |
-| **Каталог B2C** | `data/b2c/catalog.json` — 6 продуктов; `list_b2c_products` читает файл. |
+| **RAG** | Индексация и поиск в **mcp_server**; эмбеддинги через OpenRouter; **Qdrant** (dense+sparse, `make index`). Sprint-09: также **Neo4j** граф каталога (`make graph-index`). |
+| **Каталог B2C** | `data/b2c/catalog.json` — продукты; `list_b2c_products` читает файл. |
 | **CRM / оплата** | Append в `data/leads.txt`; мок-URL и confirm в памяти MCP или простом JSON-state в `data/` |
 
 Core **не** читает `data/` напрямую — только через MCP.
@@ -83,15 +93,16 @@ Core **не** читает `data/` напрямую — только через 
 sequenceDiagram
     participant AC as Agent Core
     participant MCP as mcp_server
-    participant KB as data/ + Chroma
+    participant QD as Qdrant
+    participant N4J as Neo4j
     participant OR as OpenRouter
 
     AC->>MCP: tools/call search_knowledge_base
-    MCP->>KB: retrieve + filter segment
+    MCP->>QD: vector search (dense+sparse)
+    MCP->>N4J: Cypher traversal (multi-hop / global)
     MCP->>OR: embeddings (if needed)
-    MCP-->>AC: chunks
+    MCP-->>AC: chunks + graph context
     AC->>MCP: tools/call save_lead
-    MCP->>KB: append leads.txt
     MCP-->>AC: ok
 ```
 
@@ -340,20 +351,22 @@ bot/
 
 ## Деплой — локально
 
-`devops/docker-compose.yml` (целевой состав MVP):
+`devops/docker-compose.yml` (целевой состав):
 
 | Сервис | Порт (host) | Назначение |
 |--------|-------------|------------|
 | `backend` | 8000 | Agent Core |
-| `mcp_server` | — | stdio subprocess от backend (не отдельный published port в MVP) |
+| `mcp_server` | — | stdio subprocess от backend |
 | `frontend` | 3000 | Next.js dev / preview |
 | `bot` | — | outbound к backend |
+| `qdrant` | 6333/6334 | Vector DB (dense+sparse) |
+| `neo4j` | 7474 (HTTP), 7687 (Bolt) | Graph DB (каталог курсов) |
 | `langfuse` | 3001 (UI) | Observability |
 | `langfuse-db` | — | Postgres для Langfuse (internal) |
 
 Запуск: `make dev` из корня → compose + локально `uv`/`pnpm` по README в `devops/`.
 
-Volumes: монтирование `./data` в `mcp_server` (и при stdio — тот же путь с хоста).
+Volumes: `qdrant_data`, `neo4j_data`, `neo4j_logs` — named volumes, данные сохраняются при перезапуске.
 
 ---
 
@@ -388,3 +401,10 @@ Volumes: монтирование `./data` в `mcp_server` (и при stdio — 
 | ADR-0006 | Один `POST /api/v1/chat`, JSON vs SSE через `Accept` | Принято |
 | ADR-0007 | Форматирование ответа в Core по `channel` | Принято |
 | ADR-0008 | HTTP 200 на `/chat` (in-memory, не 201) | Принято |
+
+### ADR по хранилищам
+
+| № | Тема | Статус |
+|---|------|--------|
+| ADR-0009 | Qdrant v1.18.2 как vector DB | Принято |
+| ADR-0010 | Neo4j 2026.04 как graph DB для GraphRAG | Принято |

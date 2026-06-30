@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help dev dev-backend dev-frontend dev-bot up down lint format typecheck test test-backend test-mcp test-bot test-frontend ci index reindex upload-langfuse-dataset reload-langfuse-dataset eval-validate eval-sync eval-experiment eval-analyze eval-compare eval-backfill-runs bench bench-one
+.PHONY: help dev dev-backend dev-frontend dev-bot up down lint format typecheck test test-backend test-mcp test-bot test-frontend ci index reindex upload-langfuse-dataset reload-langfuse-dataset eval-validate eval-sync eval-experiment eval-graph-hybrid eval-graph-global eval-graph-routing eval-graph-regression eval-analyze eval-compare eval-backfill-runs bench bench-one graph-up graph-down graph-status graph-shell graph-init-ro graph-seed graph-inspect graph-qa graph-extract graph-compare graph-index
 
 COMPOSE_FILE := devops/docker-compose.yml
 BACKEND_PORT ?= 8003
@@ -23,6 +23,17 @@ help:
 	@echo Infrastructure
 	@echo   up                  Start Docker stack (Langfuse v3, Postgres, etc.)
 	@echo   down                Stop Docker stack
+	@echo   graph-up            Start Neo4j only
+	@echo   graph-down          Stop Neo4j (data preserved in volume)
+	@echo   graph-status        Neo4j container status + connectivity smoke check
+	@echo   graph-shell         Interactive cypher-shell (admin user)
+	@echo   graph-init-ro       Create read-only text2cypher_ro user (once after graph-up)
+	@echo   graph-seed          Load seed.cypher into Neo4j (idempotent)
+	@echo   graph-inspect       Node/edge stats, orphans, COVERS coverage
+	@echo   graph-qa            Run QA Cypher checks (graph-qa.cypher)
+	@echo   graph-extract       Auto-extract themes via SimpleKGPipeline
+	@echo   graph-compare       Diff seed vs auto + keyword-recall report
+	@echo   graph-index         Full pipeline: graph-seed + graph-extract
 	@echo.
 	@echo Quality
 	@echo   lint                Run all linters (backend, mcp, bot, frontend)
@@ -57,7 +68,11 @@ help:
 	@echo Eval
 	@echo   eval-validate         Pydantic + integrity tests for eval contour
 	@echo   eval-sync             Sync datasets to Langfuse (stub until task 04)
-	@echo   eval-experiment       Run experiment (stub until task 05)
+	@echo   eval-experiment       Run experiment (CONFIG=..., DATASET=...)
+	@echo   eval-graph-hybrid     GraphRAG Task 06 eval hybrid branch (CONFIG=graphrag-graph.yaml)
+	@echo   eval-graph-global     GraphRAG Task 06 smoke global branch (CONFIG=graphrag-global-branch.yaml)
+	@echo   eval-graph-routing    GraphRAG Task 08 agent routing eval (CONFIG=graphrag-routing.yaml)
+	@echo   eval-graph-regression GraphRAG Task 08 fix-loop regression set (CONFIG=graphrag-routing-v5.yaml)
 	@echo   eval-analyze          Analyze run report (JSON to markdown)
 	@echo   eval-compare          Compare two runs (stub until v0.2)
 	@echo   eval-backfill-runs    Backfill Langfuse dataset_run_items from JSON (RUN=optional)
@@ -94,6 +109,41 @@ up:
 
 down:
 	docker compose --env-file .env -f $(COMPOSE_FILE) down
+
+graph-up:
+	docker compose --env-file .env -f $(COMPOSE_FILE) up -d neo4j
+
+graph-down:
+	docker compose --env-file .env -f $(COMPOSE_FILE) stop neo4j
+
+graph-status:
+	@echo === docker compose ps neo4j ===
+	docker compose --env-file .env -f $(COMPOSE_FILE) ps neo4j
+	@echo === connectivity ===
+	cd mcp_server && uv run python -m scripts.neo4j_smoke
+
+graph-shell:
+	cd mcp_server && uv run python -m scripts.neo4j_shell
+
+graph-init-ro:
+	cd mcp_server && uv run python -m scripts.neo4j_init_ro
+
+graph-seed:
+	cd mcp_server && uv run python -m scripts.neo4j_seed
+
+graph-inspect:
+	cd mcp_server && uv run python -m scripts.neo4j_qa --inspect
+
+graph-qa:
+	cd mcp_server && uv run python -m scripts.neo4j_qa
+
+graph-extract:
+	cd mcp_server && uv run python ../scripts/graph_indexer.py
+
+graph-compare:
+	cd mcp_server && uv run python ../scripts/graph_compare.py --output ../data/graph/extraction-report.md
+
+graph-index: graph-seed graph-extract
 
 lint: lint-backend lint-mcp lint-bot lint-frontend
 
@@ -187,6 +237,23 @@ eval-sync:
 
 eval-experiment:
 	$(MAKE) -C evals experiment
+
+eval-graph-hybrid:
+	@echo Before run: set RETRIEVER_BRANCH=hybrid and RAG_TOP_K=5 in .env, restart backend.
+	$(MAKE) -C evals experiment CONFIG=configs/graphrag-graph.yaml DATASET=$(if $(DATASET),$(DATASET),all)
+
+eval-graph-global:
+	@echo Before run: set RETRIEVER_BRANCH=global and RAG_TOP_K=5 in .env, restart backend.
+	$(MAKE) -C evals experiment CONFIG=configs/graphrag-global-branch.yaml DATASET=$(if $(DATASET),$(DATASET),global)
+
+eval-graph-routing:
+	@echo Before run: restart backend with Task 08 tools + prompt v4 (RETRIEVER_BRANCH=vector default).
+	$(MAKE) -C evals experiment CONFIG=configs/graphrag-routing.yaml DATASET=$(if $(DATASET),$(DATASET),all)
+
+eval-graph-regression:
+	@echo Fix-loop regression set. Default CONFIG=graphrag-routing-v5 (prompt v5); pass CONFIG=configs/graphrag-routing.yaml for v4 baseline.
+	@echo Restart backend so config_id is loaded before running.
+	$(MAKE) -C evals experiment CONFIG=$(if $(CONFIG),$(CONFIG),configs/graphrag-routing-v5.yaml) DATASET=$(if $(DATASET),$(DATASET),e2e/e2e-regression)
 
 eval-analyze:
 	$(MAKE) -C evals analyze

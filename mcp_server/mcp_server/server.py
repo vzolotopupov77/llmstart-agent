@@ -9,7 +9,13 @@ from mcp_server.retriever.base import KnowledgeChunk
 from mcp_server.tools.list_b2c_products import handle_list_b2c_products
 from mcp_server.tools.payment import handle_confirm_payment, handle_create_payment_link
 from mcp_server.tools.save_lead import handle_save_lead
-from mcp_server.tools.search_knowledge_base import handle_search_knowledge_base
+from mcp_server.tools.search_knowledge_base import (
+    GLOBAL_CATALOG_TOOL_DESCRIPTION,
+    GRAPH_SEARCH_TOOL_DESCRIPTION,
+    VECTOR_SEARCH_TOOL_DESCRIPTION,
+    handle_branch_search,
+)
+from mcp_server.tools.text2cypher import TEXT2CYPHER_TOOL_DESCRIPTION, handle_text2cypher
 
 logger = logging.getLogger(__name__)
 
@@ -17,9 +23,35 @@ mcp = FastMCP("llmstart-tools", json_response=True)
 
 
 @mcp.tool()
-def search_knowledge_base(query: str, segment: Literal["b2b", "b2c"]) -> list[KnowledgeChunk]:
-    """Search B2B or B2C knowledge base and return relevant text chunks."""
-    return handle_search_knowledge_base(query, segment)
+def vector_search(query: str, segment: Literal["b2b", "b2c"]) -> list[KnowledgeChunk]:
+    """Semantic search for single-hop questions about courses, FAQ, and policies."""
+    return handle_branch_search(query, segment, "vector")
+
+
+@mcp.tool()
+def graph_search(query: str, segment: Literal["b2b", "b2c"]) -> list[KnowledgeChunk]:
+    """Graph traversal for multi-hop prerequisites, dependencies, and theme intersections."""
+    return handle_branch_search(query, segment, "graph")
+
+
+@mcp.tool()
+def global_catalog(query: str, segment: Literal["b2b", "b2c"]) -> list[KnowledgeChunk]:
+    """Catalog-wide structural aggregates: formats, audiences, hours, theme coverage."""
+    return handle_branch_search(query, segment, "global")
+
+
+vector_search.__doc__ = VECTOR_SEARCH_TOOL_DESCRIPTION
+graph_search.__doc__ = GRAPH_SEARCH_TOOL_DESCRIPTION
+global_catalog.__doc__ = GLOBAL_CATALOG_TOOL_DESCRIPTION
+
+
+@mcp.tool()
+def text2cypher_tool(query: str, segment: Literal["b2b", "b2c"]) -> list[KnowledgeChunk]:
+    """Run read-only structural Neo4j queries (counts/lists), not semantic descriptions."""
+    return handle_text2cypher(query, segment)
+
+
+text2cypher_tool.__doc__ = TEXT2CYPHER_TOOL_DESCRIPTION
 
 
 @mcp.tool()

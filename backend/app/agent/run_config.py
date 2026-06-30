@@ -22,6 +22,9 @@ class RetrievalConfigBlock(BaseModel):
     embedding_model: str | None = None
     chunk_size: int | None = None
     top_k: int | None = None
+    branch: str | None = None
+    rrf_k: int | None = None
+    reranker_model: str | None = None
 
 
 class ModelConfigBlock(BaseModel):

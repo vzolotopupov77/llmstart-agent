@@ -41,6 +41,25 @@ class Settings(BaseSettings):
     qdrant_api_key: str | None = Field(default=None, alias="QDRANT_API_KEY")
     embedding_dim: int = Field(default=1536, alias="EMBEDDING_DIM")
     retriever_backend: str = Field(default="qdrant", alias="RETRIEVER_BACKEND")
+    retriever_branch: str = Field(default="vector", alias="RETRIEVER_BRANCH")
+    neo4j_uri: str = Field(default="bolt://localhost:7687", alias="NEO4J_URI")
+    neo4j_user: str = Field(default="neo4j", alias="NEO4J_USER")
+    neo4j_password: str = Field(default="", alias="NEO4J_PASSWORD")
+    neo4j_ro_user: str = Field(default="text2cypher_ro", alias="NEO4J_RO_USER")
+    neo4j_ro_password: str = Field(default="", alias="NEO4J_RO_PASSWORD")
+    text2cypher_model: str = Field(default="openai/gpt-4o-mini", alias="TEXT2CYPHER_MODEL")
+    text2cypher_result_limit: int = Field(default=25, alias="TEXT2CYPHER_RESULT_LIMIT")
+    text2cypher_query_timeout_seconds: float = Field(
+        default=5.0,
+        alias="TEXT2CYPHER_QUERY_TIMEOUT_SECONDS",
+    )
+    reranker_model: str = Field(
+        default="BAAI/bge-reranker-v2-m3",
+        alias="RERANKER_MODEL",
+    )
+    reranker_enabled: bool = Field(default=True, alias="RERANKER_ENABLED")
+    rrf_k: int = Field(default=60, alias="RRF_K")
+    graph_expand_hops: int = Field(default=2, alias="GRAPH_EXPAND_HOPS")
     pgvector_host: str = Field(default="localhost", alias="PGVECTOR_HOST")
     pgvector_port: int = Field(default=5434, alias="PGVECTOR_PORT")
     pgvector_db: str = Field(default="knowledge_base", alias="PGVECTOR_DB")

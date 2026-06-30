@@ -41,6 +41,8 @@ def _langfuse_metadata(item: DatasetItem, *, langfuse_id: str) -> dict[str, str]
         compact["gq"] = meta.gt_quality[:1]
     if meta.source == "synthetic":
         compact["src"] = "syn"
+    if meta.graphrag_type is not None:
+        compact["gr_type"] = meta.graphrag_type
     if _metadata_json_len(compact) > OTEL_METADATA_MAX_CHARS:
         compact = {k: compact[k] for k in ("id", "seg", "int")}
     if _metadata_json_len(compact) > OTEL_METADATA_MAX_CHARS:
@@ -58,8 +60,15 @@ def _discover_manifests(dataset: str) -> list[Path]:
     if "/" in dataset:
         group, name = dataset.split("/", maxsplit=1)
         folder = DATASETS_ROOT / group / name
-    else:
-        folder = DATASETS_ROOT / dataset
+        return sorted(folder.glob("v*_*.yaml"))
+    manifests: list[Path] = []
+    for group in ("graphrag", "e2e", "rag", "behavior", "edge"):
+        folder = DATASETS_ROOT / group / dataset
+        if folder.is_dir():
+            manifests.extend(sorted(folder.glob("v*_*.yaml")))
+    if manifests:
+        return manifests
+    folder = DATASETS_ROOT / dataset
     return sorted(folder.glob("v*_*.yaml"))
 
 

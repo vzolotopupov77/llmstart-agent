@@ -4,12 +4,13 @@ from __future__ import annotations
 
 import argparse
 import sys
+import time
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 from scripts.agent_task import AgentTaskRunner, check_backend_health
-from scripts.evaluators import get_e2e_evaluators
+from scripts.evaluators import get_e2e_evaluators, get_graphrag_evaluators
 from scripts.judge_client import require_openrouter_key
 from scripts.langfuse_helpers import (
     auth_check,
@@ -100,7 +101,11 @@ def run_experiment(
         "retrieval": config.retrieval.model_dump(),
     }
 
-    evaluators = get_e2e_evaluators(config.judge)
+    group = dataset_ctx.get("group", "e2e")
+    if group == "graphrag":
+        evaluators = get_graphrag_evaluators(config.judge)
+    else:
+        evaluators = get_e2e_evaluators(config.judge)
     task = AgentTaskRunner(config, langfuse_client=langfuse)
     started_at = datetime.now(UTC)
 
@@ -123,13 +128,18 @@ def run_experiment(
     langfuse.flush()
     dataset_id = dataset.id if dataset.items else None
     linked_count = 0
+    expected = len(dataset.items)
     if dataset_id and result.dataset_run_id:
-        linked_count = count_dataset_run_items(
-            langfuse,
-            dataset_id=dataset_id,
-            run_name=run_name,
-        )
-    langfuse_linked = linked_count >= len(dataset.items)
+        for _attempt in range(4):
+            linked_count = count_dataset_run_items(
+                langfuse,
+                dataset_id=dataset_id,
+                run_name=run_name,
+            )
+            if linked_count >= expected:
+                break
+            time.sleep(2)
+    langfuse_linked = linked_count >= expected
 
     finished_at = datetime.now(UTC)
     report_path = write_run_report(

@@ -1,0 +1,706 @@
+{
+  "schema_version": 2,
+  "run_name": "graphrag-routing--multi-hop--f6c0db35--20260629T185053Z",
+  "config_id": "graphrag-routing",
+  "dataset_slug": "multi-hop",
+  "langfuse_dataset": "graphrag/multi-hop/v002",
+  "git_sha": "f6c0db35fa0b41d7db8a5ab710f6308ac7fd3569",
+  "started_at": "2026-06-29T18:50:53.121727+00:00",
+  "finished_at": "2026-06-29T18:55:05.382724+00:00",
+  "timing": {
+    "total_duration_ms": 252260,
+    "items_total": 12,
+    "items_with_timing": 12
+  },
+  "judge": {
+    "provider": "openrouter",
+    "name": "google/gemini-2.5-flash-lite",
+    "temperature": 0.0
+  },
+  "run_metadata": {
+    "config_id": "graphrag-routing",
+    "git_sha": "f6c0db35fa0b41d7db8a5ab710f6308ac7fd3569",
+    "dataset_slug": "multi-hop",
+    "dataset_version": "v002",
+    "langfuse_dataset": "graphrag/multi-hop/v002",
+    "manifest_path": "evals\\datasets\\graphrag\\multi-hop\\v002_2026-06-26.yaml",
+    "judge": {
+      "provider": "openrouter",
+      "name": "google/gemini-2.5-flash-lite",
+      "temperature": 0.0
+    },
+    "agent_model": {
+      "provider": "openrouter",
+      "name": "openai/gpt-4o-mini",
+      "temperature": 0.0
+    },
+    "prompt": {
+      "source": "code",
+      "name": "agent-system-prompt-v4",
+      "label": null,
+      "version": null
+    },
+    "retrieval": {
+      "backend": "qdrant",
+      "db_version": "v1.18.2",
+      "embedding_model": "openai/text-embedding-3-small",
+      "chunk_size": 800,
+      "top_k": 5,
+      "branch": "agent-routing",
+      "rrf_k": 60,
+      "reranker_model": "BAAI/bge-reranker-v2-m3"
+    }
+  },
+  "full_config_snapshot": {
+    "config_id": "graphrag-routing",
+    "comment": "GraphRAG Task 08 — agent tool routing (prompt v4). Branch selected by tool, not RETRIEVER_BRANCH env.",
+    "benchmark_only": false,
+    "agent": {
+      "impl": "langchain-react",
+      "api_url": "http://127.0.0.1:8003/api/v1/chat"
+    },
+    "retrieval": {
+      "backend": "qdrant",
+      "db_version": "v1.18.2",
+      "embedding_model": "openai/text-embedding-3-small",
+      "chunk_size": 800,
+      "top_k": 5,
+      "branch": "agent-routing",
+      "rrf_k": 60,
+      "reranker_model": "BAAI/bge-reranker-v2-m3"
+    },
+    "model": {
+      "provider": "openrouter",
+      "name": "openai/gpt-4o-mini",
+      "temperature": 0.0
+    },
+    "judge": {
+      "provider": "openrouter",
+      "name": "google/gemini-2.5-flash-lite",
+      "temperature": 0.0
+    },
+    "prompt": {
+      "source": "code",
+      "name": "agent-system-prompt-v4",
+      "label": null,
+      "version": null
+    },
+    "datasets": {
+      "multi-hop": "v002",
+      "global": "v001",
+      "e2e-qa": "v002"
+    }
+  },
+  "items": [
+    {
+      "input": "Какова суммарная стоимость всех курсов комбо, если покупать их по отдельности?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/5 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "41279b12387756dcba807ca97f441494"
+    },
+    {
+      "input": "Тема Observability (мониторинг LLM/агентов) встречается в нескольких курсах комбо. В каких именно и как нарастает глубина от ступени к ступени?",
+      "output": {
+        "message": "Тема **Observability** (мониторинг LLM/агентов) встречается в следующих курсах:\n\n1. **AI-driven разработка ИИ-агентов** (курс: agents)\n2. **AI-driven Fullstack разработка** (курс: fullstack-aidd)\n\nК сожалению, в данных нет информации о том, как нарастает глубина от ступени к ступени по этой теме. Если вам нужно больше информации о каждом курсе или их содержании, дайте знать!",
+        "message_html": "Тема **Observability** (мониторинг LLM/агентов) встречается в следующих курсах:\n\n1. **AI-driven разработка ИИ-агентов** (курс: agents)\n2. **AI-driven Fullstack разработка** (курс: fullstack-aidd)\n\nК сожалению, в данных нет информации о том, как нарастает глубина от ступени к ступени по этой теме. Если вам нужно больше информации о каждом курсе или их содержании, дайте знать!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Графовый поиск\nВызов инструмента: Графовый поиск\nФормирование рекомендации.",
+        "session_id": "694d7eda-ffbf-4488-b2ab-1158604825bd",
+        "tools": [
+          {
+            "name": "graph_search",
+            "status": "done",
+            "title": "Графовый поиск"
+          },
+          {
+            "name": "graph_search",
+            "status": "done",
+            "title": "Графовый поиск"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[graph] theme=observability | course=agents | title=AI-driven разработка ИИ-агентов | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"observability:agents\"}, {\"text\": \"[graph] theme=observability | course=fullstack-aidd | title=AI-driven Fullstack разработка | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"observability:fullstack-aidd\"}]",
+          "[{\"text\": \"[graph] theme=observability | course=agents | title=AI-driven разработка ИИ-агентов | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"observability:agents\"}, {\"text\": \"[graph] theme=observability | course=fullstack-aidd | title=AI-driven Fullstack разработка | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"observability:fullstack-aidd\"}]"
+        ],
+        "input_text": "Тема Observability (мониторинг LLM/агентов) встречается в нескольких курсах комбо. В каких именно и как нарастает глубина от ступени к ступени?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.4,
+          "comment": "The response correctly identifies that the topic of Observability appears in the 'agents' and 'fullstack-aidd' courses. However, it fails to elaborate on the depth of coverage for each stage as requested by the user. Specifically, it does not detail the infrastructure monitoring aspects (Loki, Prometheus, Grafana, Docker) for fullstack-aidd (step 2), nor the LLM/RAG tracing (LangSmith/LangFuse, Context Precision/Recall) for agents (step 3), nor the evaluation/red teaming aspects (step 4). The response acknowledges a lack of information regarding the progression of depth, which is a significant shortfall given the prompt's explicit request.",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.6,
+          "comment": "3/5 entities found; missing: deep-agents, LangFuse",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        }
+      ],
+      "trace_id": "1b6112e29f968ce25cc9cae41a12a800"
+    },
+    {
+      "input": "Какие курсы покрывают тему Advanced RAG и что нужно знать перед её изучением?",
+      "output": {
+        "message": "Темы Advanced RAG покрывают следующие курсы:\n\n1. **AI-driven разработка ИИ-агентов** (код: agents)\n2. **Deep Agents: продвинутая разработка ИИ-агентов** (код: deep-agents)\n3. **AI-driven Fullstack разработка** (код: fullstack-aidd)\n\nПеред изучением темы Advanced RAG рекомендуется ознакомиться с материалами из этих курсов, так как они не имеют строгих предварительных требований. \n\nЕсли вас интересует один из этих курсов, дайте знать, и я помогу с оплатой!",
+        "message_html": "Темы Advanced RAG покрывают следующие курсы:\n\n1. **AI-driven разработка ИИ-агентов** (код: agents)\n2. **Deep Agents: продвинутая разработка ИИ-агентов** (код: deep-agents)\n3. **AI-driven Fullstack разработка** (код: fullstack-aidd)\n\nПеред изучением темы Advanced RAG рекомендуется ознакомиться с материалами из этих курсов, так как они не имеют строгих предварительных требований. \n\nЕсли вас интересует один из этих курсов, дайте знать, и я помогу с оплатой!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Графовый поиск\nВызов инструмента: Графовый поиск\nФормирование рекомендации.",
+        "session_id": "a6f8aaad-ffa6-4db6-a401-5d0a6c1ff143",
+        "tools": [
+          {
+            "name": "graph_search",
+            "status": "done",
+            "title": "Графовый поиск"
+          },
+          {
+            "name": "graph_search",
+            "status": "done",
+            "title": "Графовый поиск"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[graph] theme=rag-basic | course=agents | title=AI-driven разработка ИИ-агентов | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"rag-basic:agents\"}, {\"text\": \"[graph] theme=rag-basic | course=deep-agents | title=Deep Agents: продвинутая разработка ИИ-агентов | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"rag-basic:deep-agents\"}, {\"text\": \"[graph] theme=rag-basic | course=fullstack-aidd | title=AI-driven Fullstack разработка | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"rag-basic:fullstack-aidd\"}]",
+          "[{\"text\": \"[graph] theme=rag-basic | course=agents | title=AI-driven разработка ИИ-агентов | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"rag-basic:agents\"}, {\"text\": \"[graph] theme=rag-basic | course=deep-agents | title=Deep Agents: продвинутая разработка ИИ-агентов | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"rag-basic:deep-agents\"}, {\"text\": \"[graph] theme=rag-basic | course=fullstack-aidd | title=AI-driven Fullstack разработка | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"rag-basic:fullstack-aidd\"}]"
+        ],
+        "input_text": "Какие курсы покрывают тему Advanced RAG и что нужно знать перед её изучением?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.4,
+          "comment": "The response correctly identifies that the 'agents' course covers Advanced RAG (step 3). However, it fails to mention that basic RAG is a prerequisite (step 4) and that basic RAG requires understanding vector databases and LLM APIs (step 5). The response also incorrectly states that the Advanced RAG courses have no strict prerequisites.",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 1.0,
+          "comment": "2/2 entities found",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        }
+      ],
+      "trace_id": "41399f2c5bca9be9334478a3bfa28c8f"
+    },
+    {
+      "input": "Какой минимальный путь по курсам нужен, чтобы освоить HITL (Human-in-the-loop)?",
+      "output": {
+        "message": "Чтобы освоить HITL (Human-in-the-loop), вам потребуется пройти следующие курсы:\n\n1. **Интенсив AI-кодинг ИИ-агентов в Cursor** (код: vibe-coding) - стоимость 14,990 руб.\n   - Формат: самостоятеленное обучение\n   - Темы: react-agent, ai-driven-methodology, multimodality, llm-api\n\n2. **AI-driven разработка ИИ-агентов** (код: agents) - стоимость 39,990 руб.\n   - Формат: гибридное обучение\n   - Темы: hitl, ai-driven-methodology и другие\n\n3. **AI-driven Fullstack разработка** (код: fullstack-aidd) - стоимость 39,990 руб.\n   - Формат: самостоятеленное обучение\n   - Темы: ai-driven-methodology, llm-api и другие\n\nРекомендуем начать с курса **Интенсив AI-кодинг ИИ-агентов в Cursor**. Если вас устраивает, я могу создать ссылку для оплаты.",
+        "message_html": "Чтобы освоить HITL (Human-in-the-loop), вам потребуется пройти следующие курсы:\n\n1. **Интенсив AI-кодинг ИИ-агентов в Cursor** (код: vibe-coding) - стоимость 14,990 руб.\n   - Формат: самостоятеленное обучение\n   - Темы: react-agent, ai-driven-methodology, multimodality, llm-api\n\n2. **AI-driven разработка ИИ-агентов** (код: agents) - стоимость 39,990 руб.\n   - Формат: гибридное обучение\n   - Темы: hitl, ai-driven-methodology и другие\n\n3. **AI-driven Fullstack разработка** (код: fullstack-aidd) - стоимость 39,990 руб.\n   - Формат: самостоятеленное обучение\n   - Темы: ai-driven-methodology, llm-api и другие\n\nРекомендуем начать с курса **Интенсив AI-кодинг ИИ-агентов в Cursor**. Если вас устраивает, я могу создать ссылку для оплаты.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Графовый поиск\nФормирование рекомендации.",
+        "session_id": "bdaa5608-583c-4686-97fd-5a47e8e2e6db",
+        "tools": [
+          {
+            "name": "graph_search",
+            "status": "done",
+            "title": "Графовый поиск"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[graph] course=vibe-coding | title=Интенсив AI-кодинг ИИ-агентов в Cursor | price=14990 | level=intensive | format=self-paced | prerequisites=[] | themes=['react-agent', 'ai-driven-methodology', 'multimodality', 'llm-api'] | combos=['ai-agents-combo']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"vibe-coding\"}, {\"text\": \"[graph] course=agents | title=AI-driven разработка ИИ-агентов | price=39990 | level=intermediate | format=hybrid | prerequisites=['vibe-coding', 'fullstack-aidd', 'agents'] | themes=['react-agent', 'langchain-langgraph', 'tool-calling', 'rag-advanced', 'observability', 'hitl', 'ai-driven-methodology', 'rag-basic', 'evaluation', 'llm-api', 'multi-agent', 'security-guardrails', 'mcp', 'agent-memory', 'vector-db', 'multimodality'] | combos=['ai-agents-combo']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"agents\"}, {\"text\": \"[graph] course=fullstack-aidd | title=AI-driven Fullstack разработка | price=39990 | level=intermediate | format=self-paced | prerequisites=['vibe-coding', 'fullstack-aidd'] | themes=['rag-basic', 'observability', 'docker-devops', 'frontend-dev', 'mcp', 'ai-driven-methodology', 'postgresql', 'llm-api', 'context-engineering', 'fastapi-backend', 'cicd'] | combos=['ai-agents-combo']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"fullstack-aidd\"}]"
+        ],
+        "input_text": "Какой минимальный путь по курсам нужен, чтобы освоить HITL (Human-in-the-loop)?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.4,
+          "comment": "The response correctly identifies that HITL is studied in the 'agents' course (step 3). However, it fails to accurately represent the minimal path as vibe-coding → fullstack-aidd → agents (step 4), instead suggesting vibe-coding → agents → fullstack-aidd. Additionally, it does not mention that an in-depth study of HITL is available in 'deep-agents' (step 5).",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 1.0,
+          "comment": "2/2 entities found",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        }
+      ],
+      "trace_id": "2f39a2ec0a74e76488bef2f943f405c0"
+    },
+    {
+      "input": "Какой курс нужно закончить, чтобы потом делать мультиагентные системы с A2A-протоколом?",
+      "output": {
+        "message": "Чтобы заниматься разработкой мультиагентных систем с A2A-протоколом, вам нужно пройти следующие курсы:\n\n1. **AI-driven разработка ИИ-агентов** (код: agents) - курс среднего уровня, стоимость 39,990 руб. \n2. **Deep Agents: продвинутая разработка ИИ-агентов** (код: deep-agents) - курс продвинутого уровня, стоимость 44,990 руб.\n\nРекомендую начать с курса **AI-driven разработка ИИ-агентов**, а затем перейти к **Deep Agents**. Если вас интересует оплата, дайте знать, и я помогу с этим!",
+        "message_html": "Чтобы заниматься разработкой мультиагентных систем с A2A-протоколом, вам нужно пройти следующие курсы:\n\n1. **AI-driven разработка ИИ-агентов** (код: agents) - курс среднего уровня, стоимость 39,990 руб. \n2. **Deep Agents: продвинутая разработка ИИ-агентов** (код: deep-agents) - курс продвинутого уровня, стоимость 44,990 руб.\n\nРекомендую начать с курса **AI-driven разработка ИИ-агентов**, а затем перейти к **Deep Agents**. Если вас интересует оплата, дайте знать, и я помогу с этим!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Графовый поиск\nФормирование рекомендации.",
+        "session_id": "ac1c142f-0b73-4877-b4af-5b6f41684853",
+        "tools": [
+          {
+            "name": "graph_search",
+            "status": "done",
+            "title": "Графовый поиск"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[graph] course=deep-agents | title=Deep Agents: продвинутая разработка ИИ-агентов | price=44990 | level=advanced | format=live | prerequisites=['vibe-coding', 'fullstack-aidd', 'agents', 'deep-agents'] | themes=['graphrag', 'multimodal-rag', 'evaluation', 'a2a-a2ui', 'dataset-management', 'deep-agents-skills', 'context-engineering', 'mcp', 'ai-driven-methodology', 'rag-basic', 'prompt-management', 'vector-db', 'hitl', 'graph-db', 'security-guardrails', 'multi-agent', 'langchain-langgraph'] | combos=['ai-agents-combo']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"deep-agents\"}, {\"text\": \"[graph] course=agents | title=AI-driven разработка ИИ-агентов | price=39990 | level=intermediate | format=hybrid | prerequisites=['vibe-coding', 'fullstack-aidd', 'agents'] | themes=['react-agent', 'langchain-langgraph', 'tool-calling', 'rag-advanced', 'observability', 'hitl', 'ai-driven-methodology', 'rag-basic', 'evaluation', 'llm-api', 'multi-agent', 'security-guardrails', 'mcp', 'agent-memory', 'vector-db', 'multimodality'] | combos=['ai-agents-combo']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"agents\"}]"
+        ],
+        "input_text": "Какой курс нужно закончить, чтобы потом делать мультиагентные системы с A2A-протоколом?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.8,
+          "comment": "The response correctly identifies that both 'agents' and 'deep-agents' are required for A2A, and that 'agents' is a prerequisite for 'deep-agents'. It also correctly states that A2A and A2UI are studied in 'deep-agents' (topic 12). However, it does not explicitly mention that 'agents' is the direct predecessor of 'deep-agents' as stated in step 4.",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 1.0,
+          "comment": "3/3 entities found",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        }
+      ],
+      "trace_id": "d99ec6050f53d6c976bc33bfe557bf77"
+    },
+    {
+      "input": "Что общего в темах курсов fullstack-aidd и agents?",
+      "output": {
+        "message": "Курсы **fullstack-aidd** и **agents** имеют несколько общих тем:\n\n1. **AI-driven методология** (ai-driven-methodology)\n2. **LLM API и промпт-инжиниринг** (llm-api)\n3. **Model Context Protocol** (mcp)\n4. **Observability** (observability)\n5. **RAG (базовый pipeline)** (rag-basic)\n\nЭти темы подчеркивают пересечение в области разработки, связанной с искусственным интеллектом и методами работы с данными.",
+        "message_html": "Курсы **fullstack-aidd** и **agents** имеют несколько общих тем:\n\n1. **AI-driven методология** (ai-driven-methodology)\n2. **LLM API и промпт-инжиниринг** (llm-api)\n3. **Model Context Protocol** (mcp)\n4. **Observability** (observability)\n5. **RAG (базовый pipeline)** (rag-basic)\n\nЭти темы подчеркивают пересечение в области разработки, связанной с искусственным интеллектом и методами работы с данными.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Графовый поиск\nФормирование рекомендации.",
+        "session_id": "120407a9-8757-4d0f-aab4-33617fe26ab6",
+        "tools": [
+          {
+            "name": "graph_search",
+            "status": "done",
+            "title": "Графовый поиск"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[graph] intersection | courseA=fullstack-aidd | courseB=agents | sharedThemes=['ai-driven-methodology', 'llm-api', 'mcp', 'observability', 'rag-basic'] | names=['AI-driven методология', 'LLM API и промпт-инжиниринг', 'Model Context Protocol', 'Observability', 'RAG (базовый pipeline)']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"intersection:fullstack-aidd:agents\"}, {\"text\": \"[graph] course=fullstack-aidd | title=AI-driven Fullstack разработка | price=39990 | level=intermediate | format=self-paced | prerequisites=['vibe-coding', 'fullstack-aidd'] | themes=['rag-basic', 'observability', 'docker-devops', 'frontend-dev', 'mcp', 'ai-driven-methodology', 'postgresql', 'llm-api', 'context-engineering', 'fastapi-backend', 'cicd'] | combos=['ai-agents-combo']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"fullstack-aidd\"}, {\"text\": \"[graph] course=agents | title=AI-driven разработка ИИ-агентов | price=39990 | level=intermediate | format=hybrid | prerequisites=['vibe-coding', 'fullstack-aidd', 'agents'] | themes=['react-agent', 'langchain-langgraph', 'tool-calling', 'rag-advanced', 'observability', 'hitl', 'ai-driven-methodology', 'rag-basic', 'evaluation', 'llm-api', 'multi-agent', 'security-guardrails', 'mcp', 'agent-memory', 'vector-db', 'multimodality'] | combos=['ai-agents-combo']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"agents\"}]"
+        ],
+        "input_text": "Что общего в темах курсов fullstack-aidd и agents?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 1.0,
+          "comment": "The response directly addresses the user's last query about common topics between the 'fullstack-aidd' and 'agents' courses. It accurately reflects that both courses cover AI-driven methodology (AIDD), Model Context Protocol (MCP), and Observability (LangSmith/LangFuse monitoring) by listing them as common themes.",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 1.0,
+          "comment": "4/4 entities found",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        }
+      ],
+      "trace_id": "f8a28916a222cc96adae3ba1606cb44b"
+    },
+    {
+      "input": "Какие темы из курса agents являются обязательной базой для GraphRAG, который изучается в deep-agents?",
+      "output": {
+        "message": "Для изучения темы GraphRAG в курсе deep-agents обязательными являются следующие темы из курса agents:\n\n1. **AI-driven методология**\n2. **Evaluation / Evals**\n3. **Human-in-the-loop**\n4. **LangChain / LangGraph**\n5. **Model Context Protocol (MCP)**\n6. **Мультиагентные системы**\n7. **RAG (базовый pipeline)**\n8. **Безопасность / guardrails**\n9. **Векторные базы данных**\n\nЭти темы являются основой для успешного освоения GraphRAG в рамках курса deep-agents.",
+        "message_html": "Для изучения темы GraphRAG в курсе deep-agents обязательными являются следующие темы из курса agents:\n\n1. **AI-driven методология**\n2. **Evaluation / Evals**\n3. **Human-in-the-loop**\n4. **LangChain / LangGraph**\n5. **Model Context Protocol (MCP)**\n6. **Мультиагентные системы**\n7. **RAG (базовый pipeline)**\n8. **Безопасность / guardrails**\n9. **Векторные базы данных**\n\nЭти темы являются основой для успешного освоения GraphRAG в рамках курса deep-agents.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Графовый поиск\nФормирование рекомендации.",
+        "session_id": "c979d3bd-1c59-418b-a1d6-0bae32d6a942",
+        "tools": [
+          {
+            "name": "graph_search",
+            "status": "done",
+            "title": "Графовый поиск"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[graph] intersection | courseA=agents | courseB=deep-agents | sharedThemes=['ai-driven-methodology', 'evaluation', 'hitl', 'langchain-langgraph', 'mcp', 'multi-agent', 'rag-basic', 'security-guardrails', 'vector-db'] | names=['AI-driven методология', 'Evaluation / Evals', 'Human-in-the-loop', 'LangChain / LangGraph', 'Model Context Protocol', 'Мультиагентные системы', 'RAG (базовый pipeline)', 'Безопасность / guardrails', 'Векторные базы данных']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"intersection:agents:deep-agents\"}, {\"text\": \"[graph] course=agents | title=AI-driven разработка ИИ-агентов | price=39990 | level=intermediate | format=hybrid | prerequisites=['vibe-coding', 'fullstack-aidd', 'agents'] | themes=['react-agent', 'langchain-langgraph', 'tool-calling', 'rag-advanced', 'observability', 'hitl', 'ai-driven-methodology', 'rag-basic', 'evaluation', 'llm-api', 'multi-agent', 'security-guardrails', 'mcp', 'agent-memory', 'vector-db', 'multimodality'] | combos=['ai-agents-combo']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"agents\"}, {\"text\": \"[graph] course=deep-agents | title=Deep Agents: продвинутая разработка ИИ-агентов | price=44990 | level=advanced | format=live | prerequisites=['vibe-coding', 'fullstack-aidd', 'agents', 'deep-agents'] | themes=['graphrag', 'multimodal-rag', 'evaluation', 'a2a-a2ui', 'dataset-management', 'deep-agents-skills', 'context-engineering', 'mcp', 'ai-driven-methodology', 'rag-basic', 'prompt-management', 'vector-db', 'hitl', 'graph-db', 'security-guardrails', 'multi-agent', 'langchain-langgraph'] | combos=['ai-agents-combo']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"deep-agents\"}, {\"text\": \"[graph] theme=graphrag | course=deep-agents | title=Deep Agents: продвинутая разработка ИИ-агентов | themePrereqs=['graph-db', 'vector-db', 'rag-basic']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"graphrag:deep-agents\"}, {\"text\": \"[graph] theme=rag-basic | course=agents | title=AI-driven разработка ИИ-агентов | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"rag-basic:agents\"}]"
+        ],
+        "input_text": "Какие темы из курса agents являются обязательной базой для GraphRAG, который изучается в deep-agents?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.6,
+          "comment": "The response correctly identifies RAG (базовый pipeline) and Векторные базы данных as prerequisites from the 'agents' course for GraphRAG, aligning with steps 3 and 4. However, it incorrectly lists 'AI-driven методология', 'Evaluation / Evals', 'Human-in-the-loop', 'LangChain / LangGraph', 'Model Context Protocol (MCP)', 'Мультиагентные системы', and 'Безопасность / guardrails' as mandatory prerequisites from the 'agents' course for GraphRAG. Step 5 states that Графовые БД are only studied in deep-agents, not agents, and this is not addressed. The response also fails to explicitly mention that GraphRAG requires Graph Databases as a prerequisite, as stated in step 3.",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.6,
+          "comment": "3/5 entities found; missing: rag-basic, Векторные БД",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.5,
+          "comment": "The score is 0.50 because the actual output incorrectly claims that the listed topics are mandatory for studying GraphRAG in the deep-agents course. The retrieval context only indicates that 'graphrag' is associated with the 'deep-agents' course and has specific prerequisites ('graph-db', 'vector-db', 'rag-basic'), but it does not state that the topics from the 'agents' course are mandatory for 'graphrag'.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "8e2f88f6c662a6e40d76ebcf9307df2a"
+    },
+    {
+      "input": "Входит ли курс с Векторными БД в комбо «ИИ-агенты»?",
+      "output": {
+        "message": "Да, курс с Векторными БД входит в комбо «ИИ-агенты». В этом комбо представлены следующие курсы:\n\n1. **AI-driven разработка ИИ-агентов** (код: agents)\n2. **Deep Agents: продвинутая разработка ИИ-агентов** (код: deep-agents)\n3. **AI-driven Fullstack разработка** (код: fullstack-aidd)\n4. **Интенсив AI-кодинг ИИ-агентов в Cursor** (код: vibe-coding)\n\nЕсли вас интересует подробная информация о каком-либо из этих курсов, дайте знать!",
+        "message_html": "Да, курс с Векторными БД входит в комбо «ИИ-агенты». В этом комбо представлены следующие курсы:\n\n1. **AI-driven разработка ИИ-агентов** (код: agents)\n2. **Deep Agents: продвинутая разработка ИИ-агентов** (код: deep-agents)\n3. **AI-driven Fullstack разработка** (код: fullstack-aidd)\n4. **Интенсив AI-кодинг ИИ-агентов в Cursor** (код: vibe-coding)\n\nЕсли вас интересует подробная информация о каком-либо из этих курсов, дайте знать!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Графовый поиск\nФормирование рекомендации.",
+        "session_id": "b0ad4567-90b9-4c5e-b976-e14f8e412a08",
+        "tools": [
+          {
+            "name": "graph_search",
+            "status": "done",
+            "title": "Графовый поиск"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[graph] combo=ai-agents-combo | course=agents | title=AI-driven разработка ИИ-агентов | themes=['react-agent', 'langchain-langgraph', 'tool-calling', 'rag-advanced', 'observability', 'hitl', 'ai-driven-methodology', 'rag-basic', 'evaluation', 'llm-api', 'multi-agent', 'security-guardrails', 'mcp', 'agent-memory', 'vector-db', 'multimodality']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"ai-agents-combo:agents\"}, {\"text\": \"[graph] combo=ai-agents-combo | course=deep-agents | title=Deep Agents: продвинутая разработка ИИ-агентов | themes=['graphrag', 'multimodal-rag', 'evaluation', 'a2a-a2ui', 'dataset-management', 'deep-agents-skills', 'context-engineering', 'mcp', 'ai-driven-methodology', 'rag-basic', 'prompt-management', 'vector-db', 'hitl', 'graph-db', 'security-guardrails', 'multi-agent', 'langchain-langgraph']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"ai-agents-combo:deep-agents\"}, {\"text\": \"[graph] combo=ai-agents-combo | course=fullstack-aidd | title=AI-driven Fullstack разработка | themes=['rag-basic', 'observability', 'docker-devops', 'frontend-dev', 'mcp', 'ai-driven-methodology', 'postgresql', 'llm-api', 'context-engineering', 'fastapi-backend', 'cicd']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"ai-agents-combo:fullstack-aidd\"}, {\"text\": \"[graph] combo=ai-agents-combo | course=vibe-coding | title=Интенсив AI-кодинг ИИ-агентов в Cursor | themes=['react-agent', 'ai-driven-methodology', 'multimodality', 'llm-api']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"ai-agents-combo:vibe-coding\"}, {\"text\": \"[graph] theme=vector-db | course=agents | title=AI-driven разработка ИИ-агентов | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"vector-db:agents\"}]"
+        ],
+        "input_text": "Входит ли курс с Векторными БД в комбо «ИИ-агенты»?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 1.0,
+          "comment": "The response directly answers the user's question, confirming that the course with Vector Databases is included in the 'AI Agents' combo. It accurately reflects that the 'agents' course is step 3 within the 'AI Agents' combo and that vector databases are covered within this course. The response also lists the relevant courses within the combo, fulfilling all evaluation criteria.",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.5,
+          "comment": "1/2 entities found; missing: ai-agents-combo",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        }
+      ],
+      "trace_id": "f80fcd74f3df4feb7e7cf0b5c1c13d12"
+    },
+    {
+      "input": "Покрывает ли курс agents темы, на которые опирается GraphRAG?",
+      "output": {
+        "message": "Курс \"AI-driven разработка ИИ-агентов\" (agents) действительно покрывает темы, на которые опирается GraphRAG. В частности, он включает следующие общие темы с курсом \"AI-driven Fullstack разработка\" (fullstack-aidd):\n\n- AI-driven методология\n- LLM API и промпт-инжиниринг\n- Model Context Protocol (MCP)\n- Observability\n- RAG (базовый pipeline)\n\nЕсли вас интересует более подробная информация о курсе agents или вы хотите записаться на него, дайте знать!",
+        "message_html": "Курс \"AI-driven разработка ИИ-агентов\" (agents) действительно покрывает темы, на которые опирается GraphRAG. В частности, он включает следующие общие темы с курсом \"AI-driven Fullstack разработка\" (fullstack-aidd):\n\n- AI-driven методология\n- LLM API и промпт-инжиниринг\n- Model Context Protocol (MCP)\n- Observability\n- RAG (базовый pipeline)\n\nЕсли вас интересует более подробная информация о курсе agents или вы хотите записаться на него, дайте знать!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Графовый поиск\nФормирование рекомендации.",
+        "session_id": "942780a9-0a38-4ee3-9031-bb3fa928d275",
+        "tools": [
+          {
+            "name": "graph_search",
+            "status": "done",
+            "title": "Графовый поиск"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[graph] intersection | courseA=fullstack-aidd | courseB=agents | sharedThemes=['ai-driven-methodology', 'llm-api', 'mcp', 'observability', 'rag-basic'] | names=['AI-driven методология', 'LLM API и промпт-инжиниринг', 'Model Context Protocol', 'Observability', 'RAG (базовый pipeline)']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"intersection:fullstack-aidd:agents\"}, {\"text\": \"[graph] course=fullstack-aidd | title=AI-driven Fullstack разработка | price=39990 | level=intermediate | format=self-paced | prerequisites=['vibe-coding', 'fullstack-aidd'] | themes=['rag-basic', 'observability', 'docker-devops', 'frontend-dev', 'mcp', 'ai-driven-methodology', 'postgresql', 'llm-api', 'context-engineering', 'fastapi-backend', 'cicd'] | combos=['ai-agents-combo']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"fullstack-aidd\"}, {\"text\": \"[graph] course=agents | title=AI-driven разработка ИИ-агентов | price=39990 | level=intermediate | format=hybrid | prerequisites=['vibe-coding', 'fullstack-aidd', 'agents'] | themes=['react-agent', 'langchain-langgraph', 'tool-calling', 'rag-advanced', 'observability', 'hitl', 'ai-driven-methodology', 'rag-basic', 'evaluation', 'llm-api', 'multi-agent', 'security-guardrails', 'mcp', 'agent-memory', 'vector-db', 'multimodality'] | combos=['ai-agents-combo']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"agents\"}]"
+        ],
+        "input_text": "Покрывает ли курс agents темы, на которые опирается GraphRAG?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.6,
+          "comment": "The response correctly identifies that the 'agents' course covers RAG basics and LLM API/prompt engineering, which are partial prerequisites for GraphRAG (Step 3 and 5). However, it fails to mention that graph databases, the second component of GraphRAG, are studied in 'deep-agents' and not 'agents' (Step 4). The response also correctly focuses only on the last user query (Step 1) and does not refer to previous turns (Step 2).",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.6666666666666666,
+          "comment": "2/3 entities found; missing: deep-agents",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        }
+      ],
+      "trace_id": "f72bfb4d98777fdc8afbf51ac21d4547"
+    },
+    {
+      "input": "Через какой курс можно добраться до изучения GraphRAG?",
+      "output": {
+        "message": "Чтобы изучить курс GraphRAG, вам нужно пройти курс **Deep Agents: продвинутая разработка ИИ-агентов**. Этот курс требует предварительного изучения тем, связанных с графовыми и векторными базами данных, а также основами RAG.\n\nТакже вы можете начать с курса **AI-driven разработка ИИ-агентов**, который не имеет предварительных требований.\n\nЕсли вас интересует один из этих курсов, дайте знать, и я помогу с оплатой!",
+        "message_html": "Чтобы изучить курс GraphRAG, вам нужно пройти курс **Deep Agents: продвинутая разработка ИИ-агентов**. Этот курс требует предварительного изучения тем, связанных с графовыми и векторными базами данных, а также основами RAG.\n\nТакже вы можете начать с курса **AI-driven разработка ИИ-агентов**, который не имеет предварительных требований.\n\nЕсли вас интересует один из этих курсов, дайте знать, и я помогу с оплатой!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Графовый поиск\nФормирование рекомендации.",
+        "session_id": "e70a3f50-f34c-4b1a-b96e-c298079fd8e9",
+        "tools": [
+          {
+            "name": "graph_search",
+            "status": "done",
+            "title": "Графовый поиск"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[graph] theme=graphrag | course=deep-agents | title=Deep Agents: продвинутая разработка ИИ-агентов | themePrereqs=['graph-db', 'vector-db', 'rag-basic']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"graphrag:deep-agents\"}, {\"text\": \"[graph] theme=rag-basic | course=agents | title=AI-driven разработка ИИ-агентов | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"rag-basic:agents\"}, {\"text\": \"[graph] theme=rag-basic | course=deep-agents | title=Deep Agents: продвинутая разработка ИИ-агентов | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"rag-basic:deep-agents\"}, {\"text\": \"[graph] theme=rag-basic | course=fullstack-aidd | title=AI-driven Fullstack разработка | themePrereqs=[]\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"rag-basic:fullstack-aidd\"}]"
+        ],
+        "input_text": "Через какой курс можно добраться до изучения GraphRAG?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.4,
+          "comment": "The response correctly identifies that GraphRAG is studied within the Deep Agents course (step 3). However, it fails to mention that the 'agents' course is a prerequisite for 'Deep Agents' (step 4) and does not explicitly outline the learning path as agents → deep-agents → GraphRAG (step 5). The response also includes extraneous information about database prerequisites and payment assistance, which are not relevant to the evaluation steps.",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.6666666666666666,
+          "comment": "2/3 entities found; missing: deep-agents",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        }
+      ],
+      "trace_id": "7f4b9ebca785e1d262745e6d59744809"
+    },
+    {
+      "input": "Какие темы охватывает комбо «ИИ-агенты» целиком по всем четырём курсам?",
+      "output": {
+        "message": "Комбо «ИИ-агенты» охватывает следующие темы по всем четырём курсам:\n\n1. **AI-driven разработка ИИ-агентов**:\n   - react-agent\n   - langchain-langgraph\n   - tool-calling\n   - rag-advanced\n   - observability\n   - hitl\n   - ai-driven-methodology\n   - rag-basic\n   - evaluation\n   - llm-api\n   - multi-agent\n   - security-guardrails\n   - mcp\n   - agent-memory\n   - vector-db\n   - multimodality\n\n2. **Deep Agents: продвинутая разработка ИИ-агентов**:\n   - graphrag\n   - multimodal-rag\n   - evaluation\n   - a2a-a2ui\n   - dataset-management\n   - deep-agents-skills\n   - context-engineering\n   - mcp\n   - ai-driven-methodology\n   - rag-basic\n   - prompt-management\n   - vector-db\n   - hitl\n   - graph-db\n   - security-guardrails\n   - multi-agent\n   - langchain-langgraph\n\n3. **AI-driven Fullstack разработка**:\n   - rag-basic\n   - observability\n   - docker-devops\n   - frontend-dev\n   - mcp\n   - ai-driven-methodology\n   - postgresql\n   - llm-api\n   - context-engineering\n   - fastapi-backend\n   - cicd\n\n4. **Интенсив AI-кодинг ИИ-агентов в Cursor**:\n   - react-agent\n   - ai-driven-methodology\n   - multimodality\n   - llm-api\n\nТаким образом, комбо охватывает широкий спектр тем, связанных с разработкой и применением ИИ-агентов.",
+        "message_html": "Комбо «ИИ-агенты» охватывает следующие темы по всем четырём курсам:\n\n1. **AI-driven разработка ИИ-агентов**:\n   - react-agent\n   - langchain-langgraph\n   - tool-calling\n   - rag-advanced\n   - observability\n   - hitl\n   - ai-driven-methodology\n   - rag-basic\n   - evaluation\n   - llm-api\n   - multi-agent\n   - security-guardrails\n   - mcp\n   - agent-memory\n   - vector-db\n   - multimodality\n\n2. **Deep Agents: продвинутая разработка ИИ-агентов**:\n   - graphrag\n   - multimodal-rag\n   - evaluation\n   - a2a-a2ui\n   - dataset-management\n   - deep-agents-skills\n   - context-engineering\n   - mcp\n   - ai-driven-methodology\n   - rag-basic\n   - prompt-management\n   - vector-db\n   - hitl\n   - graph-db\n   - security-guardrails\n   - multi-agent\n   - langchain-langgraph\n\n3. **AI-driven Fullstack разработка**:\n   - rag-basic\n   - observability\n   - docker-devops\n   - frontend-dev\n   - mcp\n   - ai-driven-methodology\n   - postgresql\n   - llm-api\n   - context-engineering\n   - fastapi-backend\n   - cicd\n\n4. **Интенсив AI-кодинг ИИ-агентов в Cursor**:\n   - react-agent\n   - ai-driven-methodology\n   - multimodality\n   - llm-api\n\nТаким образом, комбо охватывает широкий спектр тем, связанных с разработкой и применением ИИ-агентов.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Графовый поиск\nФормирование рекомендации.",
+        "session_id": "13cb62a8-b3ae-41d2-92b2-98a3a4f27aaa",
+        "tools": [
+          {
+            "name": "graph_search",
+            "status": "done",
+            "title": "Графовый поиск"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[graph] combo=ai-agents-combo | course=agents | title=AI-driven разработка ИИ-агентов | themes=['react-agent', 'langchain-langgraph', 'tool-calling', 'rag-advanced', 'observability', 'hitl', 'ai-driven-methodology', 'rag-basic', 'evaluation', 'llm-api', 'multi-agent', 'security-guardrails', 'mcp', 'agent-memory', 'vector-db', 'multimodality']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"ai-agents-combo:agents\"}, {\"text\": \"[graph] combo=ai-agents-combo | course=deep-agents | title=Deep Agents: продвинутая разработка ИИ-агентов | themes=['graphrag', 'multimodal-rag', 'evaluation', 'a2a-a2ui', 'dataset-management', 'deep-agents-skills', 'context-engineering', 'mcp', 'ai-driven-methodology', 'rag-basic', 'prompt-management', 'vector-db', 'hitl', 'graph-db', 'security-guardrails', 'multi-agent', 'langchain-langgraph']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"ai-agents-combo:deep-agents\"}, {\"text\": \"[graph] combo=ai-agents-combo | course=fullstack-aidd | title=AI-driven Fullstack разработка | themes=['rag-basic', 'observability', 'docker-devops', 'frontend-dev', 'mcp', 'ai-driven-methodology', 'postgresql', 'llm-api', 'context-engineering', 'fastapi-backend', 'cicd']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"ai-agents-combo:fullstack-aidd\"}, {\"text\": \"[graph] combo=ai-agents-combo | course=vibe-coding | title=Интенсив AI-кодинг ИИ-агентов в Cursor | themes=['react-agent', 'ai-driven-methodology', 'multimodality', 'llm-api']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"ai-agents-combo:vibe-coding\"}]"
+        ],
+        "input_text": "Какие темы охватывает комбо «ИИ-агенты» целиком по всем четырём курсам?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.7,
+          "comment": "The response correctly identifies the four courses within the combo: 'AI-driven разработка ИИ-агентов' (agents), 'Deep Agents: продвинутая разработка ИИ-агентов' (deep-agents), 'AI-driven Fullstack разработка' (fullstack-aidd), and 'Интенсив AI-кодинг ИИ-агентов в Cursor' (vibe-coding). However, it fails to accurately list the specific topics for each course as requested in steps 4, 5, and 6. For example, 'agents' should include RAG, Advanced RAG, LangChain/LangGraph, MCP, vector databases, and multi-agent systems, but the output lists many other topics not specified. Similarly, 'deep-agents' misses GraphRAG, Context Engineering, Deep Agents, and A2A/A2UI, and 'fullstack-aidd' omits FastAPI, PostgreSQL, Docker, CI/CD, and Observability. The response also includes topics for 'vibe-coding' which were not explicitly requested in the evaluation steps.",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.4,
+          "comment": "2/5 entities found; missing: ai-agents-combo, vibe-coding, fullstack-aidd",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.3333333333333333,
+          "comment": "The score is 0.33 because the actual output lists many components for AI-driven разработка ИИ-агентов, Deep Agents: продвинутая разработка ИИ-агентов, AI-driven Fullstack разработка, and Интенсив AI-кодинг ИИ-агентов в Cursor, such as 'rag-advanced', 'hitl', 'ai-driven-methodology', 'rag-basic', 'evaluation', 'llm-api', 'multi-agent', 'security-guardrails', 'mcp', 'agent-memory', 'vector-db', 'multimodality', 'a2a-a2ui', 'dataset-management', 'deep-agents-skills', 'context-engineering', 'prompt-management', 'graph-db', 'frontend-dev', 'postgresql', 'fastapi-backend', 'cicd', which are not mentioned in the retrieval context. The retrieval context only mentions 'react-agent', 'langchain-langgraph', 'tool-calling', 'graphrag', 'multimodal-rag', 'react-agent', 'ai-driven-methodology', 'multimodality', 'rag-basic', 'observability', and 'docker-devops'.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "40fe3759b6a4ff847827c51a4e3fca3b"
+    },
+    {
+      "input": "Что нужно пройти перед курсом Deep Agents?",
+      "output": {
+        "message": "Курс \"Deep Agents: продвинутая разработка ИИ-агентов\" не имеет обязательных предварительных курсов. Вы можете записаться на него без каких-либо предварительных требований. \n\nЕсли у вас есть дополнительные вопросы или вы хотите записаться на курс, дайте знать!",
+        "message_html": "Курс \"Deep Agents: продвинутая разработка ИИ-агентов\" не имеет обязательных предварительных курсов. Вы можете записаться на него без каких-либо предварительных требований. \n\nЕсли у вас есть дополнительные вопросы или вы хотите записаться на курс, дайте знать!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Графовый поиск\nФормирование рекомендации.",
+        "session_id": "fcd6077e-8b5f-474d-889e-adbba3fe678a",
+        "tools": [
+          {
+            "name": "graph_search",
+            "status": "done",
+            "title": "Графовый поиск"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[graph] course=deep-agents | title=Deep Agents: продвинутая разработка ИИ-агентов | price=44990 | prerequisites=[] | themes=['graphrag', 'multimodal-rag', 'evaluation', 'a2a-a2ui', 'dataset-management', 'deep-agents-skills', 'context-engineering', 'mcp', 'ai-driven-methodology', 'rag-basic', 'prompt-management', 'vector-db', 'hitl', 'graph-db', 'security-guardrails', 'multi-agent', 'langchain-langgraph']\", \"source\": \"neo4j/graph\", \"segment\": \"b2c\", \"branch\": \"graph\", \"entity_id\": \"deep-agents\"}]"
+        ],
+        "input_text": "Что нужно пройти перед курсом Deep Agents?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "The agent's response does not reflect any of the required information from the evaluation steps. Specifically, it fails to mention the prerequisite course 'agents (ступень 3 комбо)' and the recommended full progression of courses: vibe-coding → fullstack-aidd → agents → deep-agents.",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.25,
+          "comment": "1/4 entities found; missing: vibe-coding, fullstack-aidd, deep-agents",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        }
+      ],
+      "trace_id": "3331d6e3105e1b2e7da2e8c3b17a315e"
+    }
+  ],
+  "run_scores": [
+    {
+      "name": "error_rate",
+      "value": 0.08333333333333333,
+      "comment": "1/12 items failed",
+      "data_type": null
+    },
+    {
+      "name": "avg_answer_correctness",
+      "value": 0.525,
+      "comment": "Average of 12 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_required_entity_recall",
+      "value": 0.6402777777777778,
+      "comment": "Average of 12 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_faithfulness",
+      "value": 0.8194444444444445,
+      "comment": "Average of 12 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_answer_correctness_multi_hop",
+      "value": 0.525,
+      "comment": "Segment=multi-hop, n=12",
+      "data_type": null
+    }
+  ],
+  "langfuse": {
+    "dataset_run_id": "fda0c1e2-7264-44f0-a231-eb89572f5251",
+    "dataset_run_url": "http://localhost:3001/project/cmq0y543r0006ujmnyb937ki7/datasets/cmqv7cibt000prz0738yladps/runs/fda0c1e2-7264-44f0-a231-eb89572f5251",
+    "linked": true,
+    "dataset_id": "cmqv7cibt000prz0738yladps"
+  },
+  "source": "experiment"
+}

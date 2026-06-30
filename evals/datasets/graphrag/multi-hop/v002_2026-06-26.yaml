@@ -1,0 +1,317 @@
+dataset: multi-hop
+group: graphrag
+version: v002
+created: '2026-06-26'
+description: 'GraphRAG multi-hop eval v002: MH-06 и MH-11 усилены — требуют обхода 3+ узлов (sprint-09, Task 02)'
+items:
+- id: gr-mh-0001
+  input: Что нужно пройти перед курсом Deep Agents?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - vibe-coding
+    - fullstack-aidd
+    - agents
+    - deep-agents
+    answer_key_points:
+    - перед Deep Agents нужно пройти курс agents (ступень 3 комбо)
+    - полная цепочка ступеней комбо vibe-coding → fullstack-aidd → agents → deep-agents
+    - рекомендуется последовательное прохождение всех 4 ступеней
+    required_entities:
+    - vibe-coding
+    - fullstack-aidd
+    - agents
+    - deep-agents
+  metadata:
+    segment: b2c
+    intent: graphrag.multi-hop
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: hard
+    graphrag_type: multi-hop
+
+- id: gr-mh-0002
+  input: Какие темы охватывает комбо «ИИ-агенты» целиком по всем четырём курсам?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - ai-agents-combo
+    answer_key_points:
+    - комбо включает 4 курса — vibe-coding, fullstack-aidd, agents, deep-agents
+    - из agents — RAG, Advanced RAG, LangChain/LangGraph, MCP, векторные БД, мультиагентные системы
+    - из deep-agents — GraphRAG, Context Engineering, Deep Agents, A2A/A2UI
+    - из fullstack-aidd — FastAPI, PostgreSQL, Docker, CI/CD, Observability
+    required_entities:
+    - ai-agents-combo
+    - vibe-coding
+    - fullstack-aidd
+    - agents
+    - deep-agents
+  metadata:
+    segment: b2c
+    intent: graphrag.multi-hop
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: hard
+    graphrag_type: multi-hop
+
+- id: gr-mh-0003
+  input: Через какой курс можно добраться до изучения GraphRAG?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - deep-agents
+    - agents
+    answer_key_points:
+    - GraphRAG изучается в курсе Deep Agents (ступень 4, тема 5)
+    - перед Deep Agents нужно пройти курс agents как непосредственный предшественник
+    - маршрут agents → deep-agents → тема GraphRAG
+    required_entities:
+    - deep-agents
+    - agents
+    - GraphRAG
+  metadata:
+    segment: b2c
+    intent: graphrag.multi-hop
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: hard
+    graphrag_type: multi-hop
+
+- id: gr-mh-0004
+  input: Покрывает ли курс agents темы, на которые опирается GraphRAG?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - agents
+    - deep-agents
+    answer_key_points:
+    - agents покрывает RAG базовый и векторные БД — частичные предпосылки GraphRAG
+    - графовые БД (вторая нога GraphRAG) изучаются только в deep-agents, не в agents
+    - agents частично закрывает prerequisites для GraphRAG
+    required_entities:
+    - agents
+    - deep-agents
+    - GraphRAG
+  metadata:
+    segment: b2c
+    intent: graphrag.multi-hop
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: hard
+    graphrag_type: multi-hop
+
+- id: gr-mh-0005
+  input: Входит ли курс с Векторными БД в комбо «ИИ-агенты»?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - agents
+    - ai-agents-combo
+    answer_key_points:
+    - тема векторные БД покрывается в курсе agents (ступень 3)
+    - курс agents входит в комбо «ИИ-агенты» как ступень 3
+    - да, векторные БД представлены в комбо через курс agents
+    required_entities:
+    - agents
+    - ai-agents-combo
+  metadata:
+    segment: b2c
+    intent: graphrag.multi-hop
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: medium
+    graphrag_type: multi-hop
+
+- id: gr-mh-0006
+  input: Какие темы из курса agents являются обязательной базой для GraphRAG, который изучается в deep-agents?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - agents
+    - deep-agents
+    answer_key_points:
+    - GraphRAG (deep-agents, тема 5) требует предпосылки — RAG базовый, Векторные БД, Графовые БД
+    - agents покрывает RAG базовый (тема 4) и Векторные БД — это 2 из 3 предпосылок
+    - Графовые БД изучаются только в deep-agents (тема 4), не в agents
+    required_entities:
+    - agents
+    - deep-agents
+    - GraphRAG
+    - rag-basic
+    - Векторные БД
+  metadata:
+    segment: b2c
+    intent: graphrag.multi-hop
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02-v002
+    difficulty: hard
+    graphrag_type: multi-hop
+
+- id: gr-mh-0007
+  input: Что общего в темах курсов fullstack-aidd и agents?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - fullstack-aidd
+    - agents
+    answer_key_points:
+    - оба курса покрывают MCP (Model Context Protocol)
+    - оба курса покрывают Observability — LangSmith/LangFuse мониторинг
+    - оба курса включают AI-driven методологию (AIDD)
+    required_entities:
+    - fullstack-aidd
+    - agents
+    - MCP
+    - Observability
+  metadata:
+    segment: b2c
+    intent: graphrag.multi-hop
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: hard
+    graphrag_type: multi-hop
+
+- id: gr-mh-0008
+  input: Какой курс нужно закончить, чтобы потом делать мультиагентные системы с A2A-протоколом?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - deep-agents
+    - agents
+    answer_key_points:
+    - A2A и A2UI протоколы изучаются в deep-agents (тема 12)
+    - непосредственным предшественником deep-agents является курс agents (ступень 3)
+    - для A2A нужно завершить agents, потом deep-agents
+    required_entities:
+    - deep-agents
+    - agents
+    - A2A
+  metadata:
+    segment: b2c
+    intent: graphrag.multi-hop
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: hard
+    graphrag_type: multi-hop
+
+- id: gr-mh-0009
+  input: Какой минимальный путь по курсам нужен, чтобы освоить HITL (Human-in-the-loop)?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - agents
+    - deep-agents
+    answer_key_points:
+    - HITL изучается в курсе agents (тема 9, безопасность агентных систем)
+    - минимальный путь vibe-coding → fullstack-aidd → agents
+    - углублённая проработка HITL есть в deep-agents (тема 1)
+    required_entities:
+    - agents
+    - HITL
+  metadata:
+    segment: b2c
+    intent: graphrag.multi-hop
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: medium
+    graphrag_type: multi-hop
+
+- id: gr-mh-0010
+  input: Какие курсы покрывают тему Advanced RAG и что нужно знать перед её изучением?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - agents
+    answer_key_points:
+    - Advanced RAG изучается в курсе agents (тема 6 — Query Transformation, Hybrid Search, Self-RAG, Agentic RAG)
+    - перед Advanced RAG нужен базовый RAG (тема 4 того же курса agents)
+    - базовый RAG требует понимания векторных БД и LLM API
+    required_entities:
+    - agents
+    - Advanced RAG
+  metadata:
+    segment: b2c
+    intent: graphrag.multi-hop
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: medium
+    graphrag_type: multi-hop
+
+- id: gr-mh-0011
+  input: Тема Observability (мониторинг LLM/агентов) встречается в нескольких курсах комбо. В каких именно и как нарастает глубина от ступени к ступени?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - fullstack-aidd
+    - agents
+    - deep-agents
+    answer_key_points:
+    - fullstack-aidd (ступень 2) — инфраструктурный мониторинг (Loki, Prometheus, Grafana, Docker)
+    - agents (ступень 3) — трейсинг LLM и RAG через LangSmith/LangFuse, метрики Context Precision/Recall
+    - deep-agents (ступень 4) — Evaluation и red teaming как надстройка над трейсами
+    required_entities:
+    - fullstack-aidd
+    - agents
+    - deep-agents
+    - Observability
+    - LangFuse
+  metadata:
+    segment: b2c
+    intent: graphrag.multi-hop
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02-v002
+    difficulty: hard
+    graphrag_type: multi-hop
+
+- id: gr-mh-0012
+  input: Какова суммарная стоимость всех курсов комбо, если покупать их по отдельности?
+  expected_output:
+    segment: b2c
+    product_codes:
+    - vibe-coding
+    - fullstack-aidd
+    - agents
+    - deep-agents
+    - ai-agents-combo
+    answer_key_points:
+    - vibe-coding стоит 14 990 ₽, fullstack-aidd — 39 990 ₽, agents — 39 990 ₽, deep-agents — 44 990 ₽
+    - суммарная стоимость по отдельности — 139 960 ₽
+    - комбо стоит 59 990 ₽, экономия около 57%
+    required_entities:
+    - ai-agents-combo
+    - vibe-coding
+    - fullstack-aidd
+    - agents
+    - deep-agents
+  metadata:
+    segment: b2c
+    intent: graphrag.multi-hop
+    source: synthetic
+    turn_mode: single
+    gt_quality: verified
+    reviewed_by: sprint-09-task-02
+    difficulty: medium
+    graphrag_type: multi-hop

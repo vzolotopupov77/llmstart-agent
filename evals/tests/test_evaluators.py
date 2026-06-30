@@ -208,6 +208,65 @@ def test_answer_correctness_creates_fresh_geval_per_call(
     assert first_expected["answer_key_points"] != second_expected["answer_key_points"]
 
 
+@patch("scripts.evaluators.create_answer_correctness_metric")
+def test_answer_correctness_retries_then_succeeds(
+    mock_create_metric: MagicMock,
+) -> None:
+    """Transient judge failure (invalid JSON) is retried, not scored 0.0."""
+    mock_metric = MagicMock()
+    mock_metric.measure.side_effect = [ValueError("invalid JSON"), None]
+    mock_metric.score = 0.9
+    mock_metric.reason = "covers key points"
+    mock_create_metric.return_value = mock_metric
+
+    bundle = get_e2e_evaluators(JUDGE)
+    answer_correctness = bundle.item_evaluators[2]
+    result = answer_correctness(
+        input="Есть ли рассрочка?",
+        output={"message": "Рассрочки пока нет."},
+        expected_output={"answer_key_points": ["не обещать рассрочку"]},
+    )
+
+    assert result.value == 0.9
+    assert mock_metric.measure.call_count == 2
+
+
+@patch("scripts.evaluators.create_answer_correctness_metric")
+def test_answer_correctness_skips_on_persistent_judge_failure(
+    mock_create_metric: MagicMock,
+) -> None:
+    """Persistent judge failure -> value=None (skip), never a false 0.0."""
+    mock_metric = MagicMock()
+    mock_metric.measure.side_effect = ValueError("invalid JSON")
+    mock_create_metric.return_value = mock_metric
+
+    bundle = get_e2e_evaluators(JUDGE)
+    answer_correctness = bundle.item_evaluators[2]
+    result = answer_correctness(
+        input="Чем комбо отличается?",
+        output={"message": "Комбо дешевле."},
+        expected_output={"answer_key_points": ["все четыре программы"]},
+    )
+
+    assert result.value is None
+    assert "judge_skipped" in (result.comment or "")
+    assert mock_metric.measure.call_count == 3
+
+
+def test_avg_answer_correctness_excludes_skipped() -> None:
+    """Run-level average must ignore judge_skipped (value=None) items."""
+    bundle = get_e2e_evaluators(JUDGE)
+    avg_ac = next(e for e in bundle.run_evaluators if e.__name__ == "avg_answer_correctness")
+    item_results = [
+        SimpleNamespace(evaluations=[Evaluation(name="answer_correctness", value=1.0)]),
+        SimpleNamespace(evaluations=[Evaluation(name="answer_correctness", value=0.0)]),
+        SimpleNamespace(evaluations=[Evaluation(name="answer_correctness", value=None)]),
+    ]
+    result = avg_ac(item_results=item_results)
+    assert result.value == 0.5
+    assert "2 items" in (result.comment or "")
+
+
 @patch("scripts.evaluators.create_task_completion_metric")
 def test_task_completion_passes_expected_output(
     mock_create_metric: MagicMock,

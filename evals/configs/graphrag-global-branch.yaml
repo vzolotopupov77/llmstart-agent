@@ -1,0 +1,31 @@
+config_id: graphrag-global-branch
+comment: "GraphRAG Task 06 — global branch smoke (Neo4j rule-based aggregates). Set RETRIEVER_BRANCH=global before run."
+
+agent:
+  impl: langchain-react
+  api_url: http://127.0.0.1:8003/api/v1/chat
+
+retrieval:
+  backend: qdrant
+  branch: global
+  db_version: "v1.18.2"
+  embedding_model: openai/text-embedding-3-small
+  chunk_size: 800
+  top_k: 5
+
+model:
+  provider: openrouter
+  name: openai/gpt-4o-mini
+  temperature: 0.0
+
+judge:
+  provider: openrouter
+  name: google/gemini-2.5-flash-lite
+  temperature: 0.0
+
+prompt:
+  source: code
+  name: agent-system-prompt-v2
+
+datasets:
+  global: v001

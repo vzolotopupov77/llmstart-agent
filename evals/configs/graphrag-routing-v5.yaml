@@ -1,0 +1,36 @@
+config_id: graphrag-routing-v5
+comment: "GraphRAG Task 08 fix-loop — prompt v5 (post-tool generation fixes). Same routing as graphrag-routing; only prompt differs (v4 -> v5)."
+
+agent:
+  impl: langchain-react
+  api_url: http://127.0.0.1:8003/api/v1/chat
+
+retrieval:
+  backend: qdrant
+  branch: agent-routing
+  db_version: "v1.18.2"
+  embedding_model: openai/text-embedding-3-small
+  chunk_size: 800
+  top_k: 5
+  rrf_k: 60
+  reranker_model: BAAI/bge-reranker-v2-m3
+
+model:
+  provider: openrouter
+  name: openai/gpt-4o-mini
+  temperature: 0.0
+
+judge:
+  provider: openrouter
+  name: google/gemini-2.5-flash-lite
+  temperature: 0.0
+
+prompt:
+  source: code
+  name: agent-system-prompt-v5
+
+datasets:
+  multi-hop: v002
+  global: v001
+  e2e-qa: v002
+  e2e-regression: v001

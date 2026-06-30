@@ -39,24 +39,50 @@ llmstart-agent/
 ├── mcp_server/        # MCP-сервер инструментов (RAG, каталог, лиды)
 ├── data/              # База знаний, каталог, leads.txt
 ├── datasets/          # Валидационные датасеты, скрипты загрузки в Langfuse
-├── devops/            # docker-compose, Langfuse
-└── docs/              # Концепт, roadmap, спринты
+├── evals/             # Eval-контур: конфиги, датасеты, отчёты, скрипты
+├── devops/            # docker-compose, Langfuse v3
+└── docs/              # Концепт, roadmap, ADR, спринты
 ```
 
 ## Команды (make)
 
 Полный список: **`make help`** (или просто `make`).
 
+**Dev**
+
 | Команда | Описание |
 |---------|----------|
-| `make dev` | Langfuse + backend :8003 + frontend :3002 + Telegram-бот |
+| `make dev` | Весь стек: Langfuse + backend :8003 + frontend :3002 + Telegram-бот |
 | `make dev-backend` / `dev-frontend` / `dev-bot` | Отдельные сервисы |
-| `make up` / `make down` | Docker Compose (Langfuse v3) |
-| `make lint` / `make format` / `make typecheck` | Качество кода |
-| `make test` / `make ci` | Тесты и полный CI-цикл |
-| `make reindex` | Переиндексация RAG (Chroma в `data/.chroma/`) |
+| `make up` / `make down` | Docker Compose (Langfuse v3, Qdrant, …) |
+
+**Качество и тесты**
+
+| Команда | Описание |
+|---------|----------|
+| `make lint` / `make format` / `make typecheck` | Linters, форматтеры, type checkers |
+| `make test` / `make test-backend` / `make test-mcp` | Тесты (pytest / vitest) |
+| `make ci` | Полный CI-цикл: lint + typecheck + test |
+
+**Данные и индексация**
+
+| Команда | Описание |
+|---------|----------|
+| `make index` | Индексация базы знаний в Qdrant (md, txt, pdf) — production |
+| `make index BACKEND=pgvector` | Индексация в pgvector |
+| `make bench` | Benchmark всех retriever-бэкендов (Qdrant, ChromaDB, pgvector) |
+| `make bench RETRIEVER_BACKEND=qdrant` | Benchmark одного бэкенда |
 | `make upload-langfuse-dataset` | Загрузка JSONL-датасета в Langfuse (upsert) |
 | `make reload-langfuse-dataset` | Полная перезагрузка датасета в Langfuse |
+
+**Eval**
+
+| Команда | Описание |
+|---------|----------|
+| `make eval-experiment` | Прогон эксперимента по конфигу |
+| `make eval-analyze` | Анализ JSON-отчёта → markdown |
+| `make eval-compare` | Сравнение двух прогонов |
+| `make eval-validate` / `eval-sync` | Проверка контура и синхронизация датасетов |
 
 ## MCP-сервер (stdio)
 
@@ -104,6 +130,19 @@ make dev-bot
 
 ## Roadmap
 
-**v0.1 MVP** завершён (sprint-01…06). Текущий этап — **v0.2 hardening**; закрыт [sprint-07 langfuse-v3](docs/sprints/sprint-07-langfuse-v3/README.md) (трейсы в UI).
+| Этап | Статус | Описание |
+|------|--------|----------|
+| **v0.1 MVP** | ✅ Done | sprint-01…06: агент, RAG, web-виджет, Telegram, воронка |
+| **v0.2 Развитие RAG-ассистента** | 🚧 In Progress | GraphRAG, мультимодал, context-engineering |
+| **v0.3 Hardening** | 📋 Planned | Guardrails, rate limits, security |
+| **v1.0 Production** | 📋 Planned | Реальные платежи, CRM, Postgres |
+
+Закрытые спринты v0.1–v0.2:
+
+| Sprint | Статус |
+|--------|--------|
+| [07 langfuse-v3](docs/sprints/sprint-07-langfuse-v3/README.md) | ✅ self-hosted Langfuse v3, трейсы в UI |
+| [08 vector-db](docs/sprints/sprint-08-vector-db/README.md) | ✅ Qdrant production, pgvector bench, retriever-абстракция |
+| [09 graphrag](docs/sprints/sprint-09-graphrag/README.md) | 📋 Neo4j KG, graph/global/text2cypher retrieval |
 
 Сводка: [`docs/roadmap.md`](docs/roadmap.md).

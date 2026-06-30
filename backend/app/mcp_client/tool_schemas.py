@@ -5,8 +5,8 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 
-class SearchKnowledgeBaseArgs(BaseModel):
-    """Arguments for RAG search."""
+class BranchSearchArgs(BaseModel):
+    """Arguments for branch-specific RAG search tools."""
 
     query: str = Field(description="Поисковый запрос пользователя")
     segment: Literal["b2b", "b2c"] = Field(
@@ -45,7 +45,10 @@ class SaveLeadArgs(BaseModel):
 
 
 TOOL_ARGS_SCHEMAS: dict[str, type[BaseModel]] = {
-    "search_knowledge_base": SearchKnowledgeBaseArgs,
+    "vector_search": BranchSearchArgs,
+    "graph_search": BranchSearchArgs,
+    "global_catalog": BranchSearchArgs,
+    "text2cypher_tool": BranchSearchArgs,
     "list_b2c_products": ListB2cProductsArgs,
     "create_payment_link": CreatePaymentLinkArgs,
     "confirm_payment": ConfirmPaymentArgs,

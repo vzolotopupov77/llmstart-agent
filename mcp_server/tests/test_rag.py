@@ -79,6 +79,19 @@ def test_search_knowledge_base_tool(mock_retriever: MockRetriever) -> None:
     assert chunks[0]["segment"] == "b2c"
 
 
+def test_handle_branch_search_global(mock_retriever: MockRetriever) -> None:
+    from mcp_server.tools.search_knowledge_base import handle_branch_search
+
+    chunks = handle_branch_search(
+        "formats catalog",
+        "b2c",
+        "global",
+        retriever=mock_retriever,
+    )
+    assert chunks
+    assert chunks[0]["segment"] == "b2c"
+
+
 def test_reindex_after_source_change(
     settings_env: object,
     mock_embeddings: MockEmbeddings,

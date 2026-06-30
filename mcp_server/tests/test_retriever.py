@@ -13,23 +13,49 @@ from mcp_server.retriever.qdrant import QdrantRetriever
 
 
 def test_get_retriever_qdrant(settings_env: object) -> None:
-    retriever = get_retriever(backend="qdrant")
+    retriever = get_retriever(backend="qdrant", branch="vector")
     assert isinstance(retriever, QdrantRetriever)
 
 
 def test_get_retriever_chroma(settings_env: object) -> None:
-    retriever = get_retriever(backend="chroma")
+    retriever = get_retriever(backend="chroma", branch="vector")
     assert isinstance(retriever, ChromaRetriever)
 
 
 def test_get_retriever_pgvector(settings_env: object) -> None:
-    retriever = get_retriever(backend="pgvector")
+    retriever = get_retriever(backend="pgvector", branch="vector")
     assert isinstance(retriever, PgvectorRetriever)
 
 
 def test_get_retriever_unknown_backend_raises(settings_env: object) -> None:
     with pytest.raises(ValueError, match="unknown RETRIEVER_BACKEND"):
         get_retriever(backend="unknown")
+
+
+def test_get_retriever_graph_branch(settings_env: object) -> None:
+    from mcp_server.retriever.graph import GraphRetriever
+
+    retriever = get_retriever(backend="qdrant", branch="graph")
+    assert isinstance(retriever, GraphRetriever)
+
+
+def test_get_retriever_global_branch(settings_env: object) -> None:
+    from mcp_server.retriever.global_agg import GlobalRetriever
+
+    retriever = get_retriever(backend="qdrant", branch="global")
+    assert isinstance(retriever, GlobalRetriever)
+
+
+def test_get_retriever_hybrid_branch(settings_env: object) -> None:
+    from mcp_server.retriever.hybrid import HybridRetriever
+
+    retriever = get_retriever(backend="qdrant", branch="hybrid")
+    assert isinstance(retriever, HybridRetriever)
+
+
+def test_get_retriever_unknown_branch_raises(settings_env: object) -> None:
+    with pytest.raises(ValueError, match="unknown RETRIEVER_BRANCH"):
+        get_retriever(backend="qdrant", branch="unknown")
 
 
 def _qdrant_point(*, text: str = "hello", source: str = "a.md", segment: str = "b2b") -> MagicMock:

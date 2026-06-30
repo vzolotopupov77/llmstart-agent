@@ -249,7 +249,7 @@ llmstart-agent/
 
 ## 11. Архитектурные и прочие принятые решения
 
-> Полные ADR — в `docs/decisions/` (создаются по мере детализации).
+> Полные ADR — в [`docs/adrs/`](../adrs/) (файлы ADR-0001…ADR-0010).
 
 
 | №        | Решение                                                          | Статус  |
@@ -259,5 +259,7 @@ llmstart-agent/
 | ADR-0003 | LLM-провайдер — OpenRouter                                       | Принято |
 | ADR-0004 | Платежи и CRM — моки на MVP                                      | Принято |
 | ADR-0005 | Память диалога in-memory, без БД на MVP                          | Принято |
+| ADR-0009 | Qdrant v1.18.2 как vector DB для RAG                             | Принято |
+| ADR-0010 | Neo4j 2026.04 как graph DB для GraphRAG                          | Принято |
 
 

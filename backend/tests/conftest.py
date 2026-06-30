@@ -31,8 +31,12 @@ class FakeMcpClient:
         self.is_connected = False
 
     async def list_tools(self) -> list[Tool]:
+        branch_schema = {"type": "object"}
         return [
-            Tool(name="search_knowledge_base", description="RAG", inputSchema={"type": "object"}),
+            Tool(name="vector_search", description="Vector", inputSchema=branch_schema),
+            Tool(name="graph_search", description="Graph", inputSchema=branch_schema),
+            Tool(name="global_catalog", description="Global", inputSchema=branch_schema),
+            Tool(name="text2cypher_tool", description="T2C", inputSchema=branch_schema),
             Tool(name="list_b2c_products", description="Catalog", inputSchema={"type": "object"}),
             Tool(
                 name="create_payment_link",
@@ -57,7 +61,7 @@ class FakeMcpClient:
             }
         if name == "create_payment_link":
             return {"url": "https://pay.mock.llmstart.ru/checkout?product_id=agents"}
-        if name == "search_knowledge_base":
+        if name in {"vector_search", "graph_search", "global_catalog", "text2cypher_tool"}:
             return [{"text": "chunk", "source": "faq.md", "segment": arguments.get("segment")}]
         if name == "confirm_payment":
             return {"status": "confirmed"}
@@ -66,7 +70,7 @@ class FakeMcpClient:
         return {"ok": True}
 
     async def health_check(self) -> int:
-        return 5
+        return 8
 
 
 class FakeReactRunner:
@@ -83,9 +87,9 @@ class FakeReactRunner:
         if "корпоратив" in user_message.lower():
             tools = [
                 ToolCallRecord(
-                    name="search_knowledge_base",
+                    name="vector_search",
                     status="done",
-                    title="Поиск в базе знаний",
+                    title="Семантический поиск",
                 ),
             ]
             reasoning = "Запрос B2B — поиск в корпоративной базе знаний."

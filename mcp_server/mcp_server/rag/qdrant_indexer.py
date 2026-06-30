@@ -15,6 +15,7 @@ from mcp_server.config import Settings, get_settings
 from mcp_server.paths import data_dir
 from mcp_server.rag.chunking import TextChunk, chunk_markdown
 from mcp_server.rag.embeddings import EmbeddingClient, MockEmbeddings, get_embedding_client
+from mcp_server.retriever.graph_entities import resolve_course_id_from_payload
 
 logger = logging.getLogger(__name__)
 
@@ -188,6 +189,10 @@ def _upsert_in_batches(
                     "segment": item.chunk.segment,
                     "relative_path": item.relative_path,
                     "chunk_index": item.chunk_index,
+                    "course_id": resolve_course_id_from_payload(
+                        source=item.chunk.source,
+                        relative_path=item.relative_path,
+                    ),
                 },
             )
             for item, vector in zip(batch_chunks, batch_embeddings, strict=True)

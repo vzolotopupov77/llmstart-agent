@@ -1,0 +1,308 @@
+{
+  "schema_version": 2,
+  "run_name": "graphrag-baseline--global--f6c0db35--20260626T153957Z",
+  "config_id": "graphrag-baseline",
+  "dataset_slug": "global",
+  "langfuse_dataset": "graphrag/global/v001",
+  "git_sha": "f6c0db35fa0b41d7db8a5ab710f6308ac7fd3569",
+  "started_at": "2026-06-26T15:39:57.890880+00:00",
+  "finished_at": "2026-06-26T15:40:13.097285+00:00",
+  "timing": {
+    "total_duration_ms": 15206,
+    "items_total": 6,
+    "items_with_timing": 6
+  },
+  "judge": {
+    "provider": "openrouter",
+    "name": "google/gemini-2.5-flash-lite",
+    "temperature": 0.0
+  },
+  "run_metadata": {
+    "config_id": "graphrag-baseline",
+    "git_sha": "f6c0db35fa0b41d7db8a5ab710f6308ac7fd3569",
+    "dataset_slug": "global",
+    "dataset_version": "v001",
+    "langfuse_dataset": "graphrag/global/v001",
+    "manifest_path": "evals\\datasets\\graphrag\\global\\v001_2026-06-26.yaml",
+    "judge": {
+      "provider": "openrouter",
+      "name": "google/gemini-2.5-flash-lite",
+      "temperature": 0.0
+    },
+    "agent_model": {
+      "provider": "openrouter",
+      "name": "openai/gpt-4o-mini",
+      "temperature": 0.0
+    },
+    "prompt": {
+      "source": "code",
+      "name": "agent-system-prompt-v2",
+      "label": null,
+      "version": null
+    },
+    "retrieval": {
+      "backend": "qdrant",
+      "db_version": "v1.18.2",
+      "embedding_model": "openai/text-embedding-3-small",
+      "chunk_size": 800,
+      "top_k": 5
+    }
+  },
+  "full_config_snapshot": {
+    "config_id": "graphrag-baseline",
+    "comment": "GraphRAG Sprint-09 baseline — Qdrant-hybrid без графа. Замер просадок на multi-hop и global.",
+    "benchmark_only": false,
+    "agent": {
+      "impl": "langchain-react",
+      "api_url": "http://127.0.0.1:8003/api/v1/chat"
+    },
+    "retrieval": {
+      "backend": "qdrant",
+      "db_version": "v1.18.2",
+      "embedding_model": "openai/text-embedding-3-small",
+      "chunk_size": 800,
+      "top_k": 5
+    },
+    "model": {
+      "provider": "openrouter",
+      "name": "openai/gpt-4o-mini",
+      "temperature": 0.0
+    },
+    "judge": {
+      "provider": "openrouter",
+      "name": "google/gemini-2.5-flash-lite",
+      "temperature": 0.0
+    },
+    "prompt": {
+      "source": "code",
+      "name": "agent-system-prompt-v2",
+      "label": null,
+      "version": null
+    },
+    "datasets": {
+      "multi-hop": "v001",
+      "global": "v001"
+    }
+  },
+  "items": [
+    {
+      "input": "Кто ведёт курсы в каталоге LLMStart?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/2 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "804541b9a65f73bd195345133e10ad3d"
+    },
+    {
+      "input": "Какова суммарная учебная нагрузка в академических часах по курсам комбо?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/3 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "aa156fd1f0c71a08b8528ddf4103a056"
+    },
+    {
+      "input": "Какие курсы подходят для менеджеров и продактов без опыта программирования?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/1 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "d11b7413bcaf3ef9fafb4169624a94ed"
+    },
+    {
+      "input": "В каких курсах каталога встречается тема MCP (Model Context Protocol)?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/4 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "0b9d29f1fbdf85a2f950486cc1be63df"
+    },
+    {
+      "input": "Какие форматы обучения предлагает LLMStart?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/4 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "a9cb857caa749719d0b1d3a71309e72b"
+    },
+    {
+      "input": "Сколько B2C курсов в каталоге и как они называются?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/4 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "4feadf76f2ccd78f038a9d7ef8d489e5"
+    }
+  ],
+  "run_scores": [
+    {
+      "name": "error_rate",
+      "value": 1.0,
+      "comment": "6/6 items failed",
+      "data_type": null
+    },
+    {
+      "name": "avg_answer_correctness",
+      "value": 0.0,
+      "comment": "Average of 6 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_required_entity_recall",
+      "value": 0.0,
+      "comment": "Average of 6 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_faithfulness",
+      "value": 0.0,
+      "comment": "Average of 6 items",
+      "data_type": null
+    }
+  ],
+  "langfuse": {
+    "dataset_run_id": "e573417e-5760-4a3f-9df9-cb9c73cf2dd1",
+    "dataset_run_url": "http://localhost:3001/project/cmq0y543r0006ujmnyb937ki7/datasets/cmqv3kcbg000grz07ld450efs/runs/e573417e-5760-4a3f-9df9-cb9c73cf2dd1",
+    "linked": false,
+    "dataset_id": "cmqv3kcbg000grz07ld450efs"
+  },
+  "source": "experiment"
+}

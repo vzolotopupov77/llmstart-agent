@@ -71,6 +71,7 @@ class QdrantRetriever:
                     "text": str(text),
                     "source": str(payload.get("source", "")),
                     "segment": str(payload.get("segment", segment)),
+                    "branch": "vector",
                 },
             )
         return chunks

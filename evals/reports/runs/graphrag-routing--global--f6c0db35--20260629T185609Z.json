@@ -1,0 +1,412 @@
+{
+  "schema_version": 2,
+  "run_name": "graphrag-routing--global--f6c0db35--20260629T185609Z",
+  "config_id": "graphrag-routing",
+  "dataset_slug": "global",
+  "langfuse_dataset": "graphrag/global/v001",
+  "git_sha": "f6c0db35fa0b41d7db8a5ab710f6308ac7fd3569",
+  "started_at": "2026-06-29T18:56:09.965248+00:00",
+  "finished_at": "2026-06-29T18:57:49.078523+00:00",
+  "timing": {
+    "total_duration_ms": 99113,
+    "items_total": 6,
+    "items_with_timing": 6
+  },
+  "judge": {
+    "provider": "openrouter",
+    "name": "google/gemini-2.5-flash-lite",
+    "temperature": 0.0
+  },
+  "run_metadata": {
+    "config_id": "graphrag-routing",
+    "git_sha": "f6c0db35fa0b41d7db8a5ab710f6308ac7fd3569",
+    "dataset_slug": "global",
+    "dataset_version": "v001",
+    "langfuse_dataset": "graphrag/global/v001",
+    "manifest_path": "evals\\datasets\\graphrag\\global\\v001_2026-06-26.yaml",
+    "judge": {
+      "provider": "openrouter",
+      "name": "google/gemini-2.5-flash-lite",
+      "temperature": 0.0
+    },
+    "agent_model": {
+      "provider": "openrouter",
+      "name": "openai/gpt-4o-mini",
+      "temperature": 0.0
+    },
+    "prompt": {
+      "source": "code",
+      "name": "agent-system-prompt-v4",
+      "label": null,
+      "version": null
+    },
+    "retrieval": {
+      "backend": "qdrant",
+      "db_version": "v1.18.2",
+      "embedding_model": "openai/text-embedding-3-small",
+      "chunk_size": 800,
+      "top_k": 5,
+      "branch": "agent-routing",
+      "rrf_k": 60,
+      "reranker_model": "BAAI/bge-reranker-v2-m3"
+    }
+  },
+  "full_config_snapshot": {
+    "config_id": "graphrag-routing",
+    "comment": "GraphRAG Task 08 — agent tool routing (prompt v4). Branch selected by tool, not RETRIEVER_BRANCH env.",
+    "benchmark_only": false,
+    "agent": {
+      "impl": "langchain-react",
+      "api_url": "http://127.0.0.1:8003/api/v1/chat"
+    },
+    "retrieval": {
+      "backend": "qdrant",
+      "db_version": "v1.18.2",
+      "embedding_model": "openai/text-embedding-3-small",
+      "chunk_size": 800,
+      "top_k": 5,
+      "branch": "agent-routing",
+      "rrf_k": 60,
+      "reranker_model": "BAAI/bge-reranker-v2-m3"
+    },
+    "model": {
+      "provider": "openrouter",
+      "name": "openai/gpt-4o-mini",
+      "temperature": 0.0
+    },
+    "judge": {
+      "provider": "openrouter",
+      "name": "google/gemini-2.5-flash-lite",
+      "temperature": 0.0
+    },
+    "prompt": {
+      "source": "code",
+      "name": "agent-system-prompt-v4",
+      "label": null,
+      "version": null
+    },
+    "datasets": {
+      "multi-hop": "v002",
+      "global": "v001",
+      "e2e-qa": "v002"
+    }
+  },
+  "items": [
+    {
+      "input": "Кто ведёт курсы в каталоге LLMStart?",
+      "output": {
+        "message": "К сожалению, информация об авторах курсов в каталоге LLMStart в данный момент недоступна. Рекомендуем обратиться к страницам конкретных программ для получения более детальной информации.",
+        "message_html": "К сожалению, информация об авторах курсов в каталоге LLMStart в данный момент недоступна. Рекомендуем обратиться к страницам конкретных программ для получения более детальной информации.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Обзор каталога\nФормирование рекомендации.",
+        "session_id": "c3b33684-da16-4699-ad5b-fe6b69c7399a",
+        "tools": [
+          {
+            "name": "global_catalog",
+            "status": "done",
+            "title": "Обзор каталога"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[global] authors | note=данные об авторах не в графе (Instructor node deferred); consult program pages\", \"source\": \"neo4j/global\", \"segment\": \"b2c\", \"branch\": \"global\", \"entity_id\": \"authors-gap\"}]"
+        ],
+        "input_text": "Кто ведёт курсы в каталоге LLMStart?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "The agent's response does not reflect any of the required information from the evaluation steps. It fails to mention that Sergey Smirnov leads all programs, Alexander Kozhin leads agents and deep-agents, or the provided Telegram contact information. The response also incorrectly states that information about course authors is unavailable, directly contradicting the provided details.",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "0/2 entities found; missing: Смирнов Сергей, Кожин Александр",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        }
+      ],
+      "trace_id": "b5fac403f98d47e5692625ca64840514"
+    },
+    {
+      "input": "Какова суммарная учебная нагрузка в академических часах по курсам комбо?",
+      "output": null,
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 1.0,
+          "comment": "Task failed",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "No output; 0/3 entities",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "No output",
+          "data_type": null
+        }
+      ],
+      "trace_id": "3603cf0178eaffdabbff9bfbd8d54e7b"
+    },
+    {
+      "input": "Какие курсы подходят для менеджеров и продактов без опыта программирования?",
+      "output": {
+        "message": "Для менеджеров и продактов без опыта программирования я рекомендую следующие курсы:\n\n1. **Интенсив по Cursor** (код: vibe-coding-intensive) - Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов. Цена: 29 000 ₽.\n\n2. **Комбо из 4 программ** (код: ai-agents-combo) - Пакет из четырёх программ LLMStart: agents, deep-agents, fullstack-aidd и vibe-coding-intensive со скидкой. Цена: 99 000 ₽.\n\nЕсли вас интересует один из этих курсов, дайте знать, и я помогу с оплатой!",
+        "message_html": "Для менеджеров и продактов без опыта программирования я рекомендую следующие курсы:\n\n1. **Интенсив по Cursor** (код: vibe-coding-intensive) - Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов. Цена: 29 000 ₽.\n\n2. **Комбо из 4 программ** (код: ai-agents-combo) - Пакет из четырёх программ LLMStart: agents, deep-agents, fullstack-aidd и vibe-coding-intensive со скидкой. Цена: 99 000 ₽.\n\nЕсли вас интересует один из этих курсов, дайте знать, и я помогу с оплатой!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Обзор каталога\nВызов инструмента: Каталог курсов\nФормирование рекомендации.",
+        "session_id": "d042198b-ca96-4868-90ad-886e224dd37e",
+        "tools": [
+          {
+            "name": "global_catalog",
+            "status": "done",
+            "title": "Обзор каталога"
+          },
+          {
+            "name": "list_b2c_products",
+            "status": "done",
+            "title": "Каталог курсов"
+          }
+        ],
+        "segment": "b2c",
+        "retrieval_context": [
+          "{\"items\": [{\"code\": \"ai-agents-combo\", \"title\": \"Комбо из 4 программ\", \"price\": 9900000, \"currency\": \"RUB\", \"description\": \"Пакет из четырёх программ LLMStart: agents, deep-agents, fullstack-aidd и vibe-coding-intensive со скидкой.\", \"price_display\": \"99 000 ₽\"}, {\"code\": \"vibe-coding-intensive\", \"title\": \"Интенсив по Cursor\", \"price\": 2900000, \"currency\": \"RUB\", \"description\": \"Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов.\", \"price_display\": \"29 000 ₽\"}, {\"code\": \"fullstack-aidd\", \"title\": \"AI-driven Fullstack\", \"price\": 4900000, \"currency\": \"RUB\", \"description\": \"Fullstack-разработка с AI: backend, frontend, DevOps и агентные паттерны в одном курсе.\", \"price_display\": \"49 000 ₽\"}, {\"code\": \"agents\", \"title\": \"Базовый курс по ИИ-агентам\", \"price\": 3900000, \"currency\": \"RUB\", \"description\": \"Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде.\", \"price_display\": \"39 000 ₽\"}, {\"code\": \"deep-agents\", \"title\": \"Продвинутый курс Deep Agents\", \"price\": 5900000, \"currency\": \"RUB\", \"description\": \"Продвинутые агентные архитектуры: планирование, human-in-the-loop, мультиагентные сценарии.\", \"price_display\": \"59 000 ₽\"}, {\"code\": \"consultation\", \"title\": \"Консультация с экспертом\", \"price\": 1500000, \"currency\": \"RUB\", \"description\": \"Индивидуальная консультация по выбору программы, внедрению AI в продукт или обучению команды.\", \"price_display\": \"15 000 ₽\"}]}",
+          "[{\"text\": \"[global] audience=non-dev | courses=[{'courseId': 'vibe-coding', 'title': 'Интенсив AI-кодинг ИИ-агентов в Cursor', 'priceRub': 14990, 'level': 'intensive'}]\", \"source\": \"neo4j/global\", \"segment\": \"b2c\", \"branch\": \"global\", \"entity_id\": \"global:audience:non-dev\"}]"
+        ],
+        "input_text": "Какие курсы подходят для менеджеров и продактов без опыта программирования?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.8,
+          "comment": "The response correctly identifies 'vibe-coding' as suitable for managers and product managers without coding experience, aligning with evaluation steps 3 and 4. It also correctly identifies that other courses are for developers. However, it incorrectly includes the 'ai-agents-combo' as a primary recommendation for this user group, which is a bundle that includes courses for developers, not solely for non-coders.",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 1.0,
+          "comment": "1/1 entities found",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.3333333333333333,
+          "comment": "The score is 0.33 because the actual output incorrectly states the price of the 'vibe-coding-intensive' course as 29,000 ₽ when it is actually 14990 Rubles and intended for a 'non-dev' audience. Additionally, while the 'ai-agents-combo' package is discounted, the specific price of 99,000 ₽ is not supported by the retrieval context.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "432b1d478cf0557befd95ea42cd1b950"
+    },
+    {
+      "input": "В каких курсах каталога встречается тема MCP (Model Context Protocol)?",
+      "output": {
+        "message": "Тема MCP (Model Context Protocol) встречается в следующих курсах:\n\n1. **AI-driven разработка ИИ-агентов** (код: agents)\n2. **Deep Agents: продвинутая разработка ИИ-агентов** (код: deep-agents)\n3. **AI-driven Fullstack разработка** (код: fullstack-aidd)\n\nЕсли вас интересует подробная информация о каком-либо из этих курсов, дайте знать!",
+        "message_html": "Тема MCP (Model Context Protocol) встречается в следующих курсах:\n\n1. **AI-driven разработка ИИ-агентов** (код: agents)\n2. **Deep Agents: продвинутая разработка ИИ-агентов** (код: deep-agents)\n3. **AI-driven Fullstack разработка** (код: fullstack-aidd)\n\nЕсли вас интересует подробная информация о каком-либо из этих курсов, дайте знать!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Обзор каталога\nФормирование рекомендации.",
+        "session_id": "fb9875c1-b5e5-4d0f-8c1e-46c02118fce8",
+        "tools": [
+          {
+            "name": "global_catalog",
+            "status": "done",
+            "title": "Обзор каталога"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[global] theme_courses | theme=mcp | courses=[{'id': 'agents', 'title': 'AI-driven разработка ИИ-агентов'}, {'id': 'deep-agents', 'title': 'Deep Agents: продвинутая разработка ИИ-агентов'}, {'id': 'fullstack-aidd', 'title': 'AI-driven Fullstack разработка'}]\", \"source\": \"neo4j/global\", \"segment\": \"b2c\", \"branch\": \"global\", \"entity_id\": \"global:theme:mcp\"}]"
+        ],
+        "input_text": "В каких курсах каталога встречается тема MCP (Model Context Protocol)?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.7,
+          "comment": "The response correctly identifies that MCP is present in 'agents', 'deep-agents', and 'fullstack-aidd' courses, aligning with step 3. However, it does not provide the specific details about MCP's presence within each course as requested by steps 4, 5, and 6 (e.g., topic number, duration, or explicit mention of its absence in 'vibe-coding').",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 1.0,
+          "comment": "4/4 entities found",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, indicating the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        }
+      ],
+      "trace_id": "01b83708f61c61b42f67ba6ecd6de979"
+    },
+    {
+      "input": "Какие форматы обучения предлагает LLMStart?",
+      "output": {
+        "message": "LLMStart предлагает следующие форматы обучения:\n\n1. **Корпоративная программа** - для организаций.\n2. **Гибрид (live + запись)** - сочетание живых занятий и записей.\n3. **Online live** - онлайн занятия в реальном времени.\n4. **Менторинг** - индивидуальное сопровождение.\n5. **Видеокурс (запись)** - самостоятельное обучение по видео.\n6. **Воркшоп / интенсив** - практические занятия и интенсивные курсы.\n\nЕсли вас интересует конкретный курс в одном из этих форматов, дайте знать!",
+        "message_html": "LLMStart предлагает следующие форматы обучения:\n\n1. **Корпоративная программа** - для организаций.\n2. **Гибрид (live + запись)** - сочетание живых занятий и записей.\n3. **Online live** - онлайн занятия в реальном времени.\n4. **Менторинг** - индивидуальное сопровождение.\n5. **Видеокурс (запись)** - самостоятельное обучение по видео.\n6. **Воркшоп / интенсив** - практические занятия и интенсивные курсы.\n\nЕсли вас интересует конкретный курс в одном из этих форматов, дайте знать!",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Обзор каталога\nФормирование рекомендации.",
+        "session_id": "53d691b7-1719-4218-b18a-5c2c4f448ae5",
+        "tools": [
+          {
+            "name": "global_catalog",
+            "status": "done",
+            "title": "Обзор каталога"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[global] formats | items=[{'id': 'corporate', 'name': 'Корпоративная программа', 'courses': ['agents']}, {'id': 'hybrid', 'name': 'Гибрид (live + запись)', 'courses': ['agents']}, {'id': 'live', 'name': 'Online live', 'courses': ['deep-agents']}, {'id': 'mentoring', 'name': 'Менторинг', 'courses': ['agents']}, {'id': 'self-paced', 'name': 'Видеокурс (запись)', 'courses': ['vibe-coding', 'fullstack-aidd']}, {'id': 'workshop', 'name': 'Воркшоп / интенсив', 'courses': ['agents']}]\", \"source\": \"neo4j/global\", \"segment\": \"b2c\", \"branch\": \"global\", \"entity_id\": \"global:formats\"}]"
+        ],
+        "input_text": "Какие форматы обучения предлагает LLMStart?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.8,
+          "comment": "The response accurately lists the training formats offered by LLMStart, aligning with steps 3, 4, 5, and 6 by mentioning 'видеокурс (запись)' which corresponds to 'self-paced' with 'vibe-coding' and 'fullstack-aidd', 'Гибрид (live + запись)' with 'agents, ~1,5 месяца', 'Online live' with 'deep-agents, 2 месяца', and 'воркшопы, корпоративные программы, менторинг'. The response does not include any extraneous information or requests for action from previous turns, adhering to steps 1 and 2.",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.0,
+          "comment": "0/4 entities found; missing: vibe-coding, fullstack-aidd, agents",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 1.0,
+          "comment": "The score is 1.00 because there are no contradictions found, which means the actual output is perfectly aligned with the retrieval context. Great job!",
+          "data_type": null
+        }
+      ],
+      "trace_id": "4ee1646b95074f9a207a0c79efcd1326"
+    },
+    {
+      "input": "Сколько B2C курсов в каталоге и как они называются?",
+      "output": {
+        "message": "В каталоге B2C представлено 4 курса:\n\n1. **Интенсив AI-кодинг ИИ-агентов в Cursor** - 14,990 руб.\n2. **AI-driven Fullstack разработка** - 39,990 руб.\n3. **Deep Agents: продвинутая разработка ИИ-агентов** - 44,990 руб.\n4. **AI-driven разработка ИИ-агентов** - 39,990 руб.",
+        "message_html": "В каталоге B2C представлено 4 курса:\n\n1. **Интенсив AI-кодинг ИИ-агентов в Cursor** - 14,990 руб.\n2. **AI-driven Fullstack разработка** - 39,990 руб.\n3. **Deep Agents: продвинутая разработка ИИ-агентов** - 44,990 руб.\n4. **AI-driven разработка ИИ-агентов** - 39,990 руб.",
+        "reasoning": "Анализ запроса пользователя.\nВызов инструмента: Обзор каталога\nФормирование рекомендации.",
+        "session_id": "7500d33e-21a9-4007-8300-0f7f9799691f",
+        "tools": [
+          {
+            "name": "global_catalog",
+            "status": "done",
+            "title": "Обзор каталога"
+          }
+        ],
+        "segment": null,
+        "retrieval_context": [
+          "[{\"text\": \"[global] course_count | total=4 | courses=[{'id': 'vibe-coding', 'title': 'Интенсив AI-кодинг ИИ-агентов в Cursor', 'priceRub': 14990}, {'id': 'fullstack-aidd', 'title': 'AI-driven Fullstack разработка', 'priceRub': 39990}, {'id': 'deep-agents', 'title': 'Deep Agents: продвинутая разработка ИИ-агентов', 'priceRub': 44990}, {'id': 'agents', 'title': 'AI-driven разработка ИИ-агентов', 'priceRub': 39990}]\", \"source\": \"neo4j/global\", \"segment\": \"b2c\", \"branch\": \"global\", \"entity_id\": \"global:course-count\"}]"
+        ],
+        "input_text": "Сколько B2C курсов в каталоге и как они называются?"
+      },
+      "scores": [
+        {
+          "name": "task_error",
+          "value": 0.0,
+          "comment": "OK",
+          "data_type": "BOOLEAN"
+        },
+        {
+          "name": "answer_correctness",
+          "value": 0.8,
+          "comment": "The response correctly identifies that there are 4 B2C courses and lists them. However, it fails to mention the combo-package 'ai-agents-combo' as specified in step 5. Additionally, the names of the courses are slightly different from the exact names provided in step 4 (e.g., 'Интенсив AI-кодинг ИИ-агентов в Cursor' instead of 'Интенсив AI-кодинг в Cursor (vibe-coding)').",
+          "data_type": null
+        },
+        {
+          "name": "required_entity_recall",
+          "value": 0.25,
+          "comment": "1/4 entities found; missing: vibe-coding, fullstack-aidd, deep-agents",
+          "data_type": null
+        },
+        {
+          "name": "faithfulness",
+          "value": 0.0,
+          "comment": "Judge error: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.",
+          "data_type": null
+        }
+      ],
+      "trace_id": "06cb490373a70cfb830dcd5884288440"
+    }
+  ],
+  "run_scores": [
+    {
+      "name": "error_rate",
+      "value": 0.16666666666666666,
+      "comment": "1/6 items failed",
+      "data_type": null
+    },
+    {
+      "name": "avg_answer_correctness",
+      "value": 0.5166666666666667,
+      "comment": "Average of 6 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_required_entity_recall",
+      "value": 0.375,
+      "comment": "Average of 6 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_faithfulness",
+      "value": 0.5555555555555556,
+      "comment": "Average of 6 items",
+      "data_type": null
+    },
+    {
+      "name": "avg_answer_correctness_global",
+      "value": 0.5166666666666667,
+      "comment": "Segment=global, n=6",
+      "data_type": null
+    }
+  ],
+  "langfuse": {
+    "dataset_run_id": "6971fc82-0bcd-48cc-9f6b-422e0306080b",
+    "dataset_run_url": "http://localhost:3001/project/cmq0y543r0006ujmnyb937ki7/datasets/cmqv3kcbg000grz07ld450efs/runs/6971fc82-0bcd-48cc-9f6b-422e0306080b",
+    "linked": true,
+    "dataset_id": "cmqv3kcbg000grz07ld450efs"
+  },
+  "source": "experiment"
+}

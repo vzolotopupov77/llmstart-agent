@@ -1,0 +1,22 @@
+[
+  {
+    "question": "Сколько курсов в каталоге?",
+    "cypher": "MATCH (c:Course) RETURN count(c) AS total"
+  },
+  {
+    "question": "В каких курсах встречается тема MCP?",
+    "cypher": "MATCH (c:Course)-[:COVERS]->(t:Theme) WHERE t.id = 'mcp' OR 'mcp' IN t.aliases RETURN c.id, c.title ORDER BY c.id"
+  },
+  {
+    "question": "Какие курсы входят в комбо ai-agents-combo?",
+    "cypher": "MATCH (cb:Combo {id: 'ai-agents-combo'})-[:INCLUDES]->(c:Course) RETURN c.id, c.title, c.priceRub ORDER BY c.id"
+  },
+  {
+    "question": "Какие темы покрывает комбо ai-agents-combo?",
+    "cypher": "MATCH (cb:Combo {id: 'ai-agents-combo'})-[:INCLUDES]->(c:Course)-[:COVERS]->(t:Theme) RETURN DISTINCT t.id, t.name ORDER BY t.name"
+  },
+  {
+    "question": "Какие курсы для аудитории non-dev?",
+    "cypher": "MATCH (c:Course)-[:TARGETS]->(a:Audience {role: 'non-dev'}) RETURN c.id, c.title, c.priceRub ORDER BY c.priceRub"
+  }
+]

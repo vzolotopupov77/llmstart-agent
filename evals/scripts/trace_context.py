@@ -22,21 +22,28 @@ def _text_from_observation(obs: Any) -> str | None:
     return str(output)
 
 
-def _audience_from_observation(obs: Any) -> str | None:
+def _segment_from_observation(obs: Any) -> str | None:
     input_data = getattr(obs, "input", None)
     if isinstance(input_data, dict):
-        audience = input_data.get("audience") or input_data.get("args", {}).get("audience")
-        if isinstance(audience, str):
-            return audience
+        args = input_data.get("args", {})
+        segment = input_data.get("segment")
+        if not isinstance(segment, str) and isinstance(args, dict):
+            segment = args.get("segment")
+        if not isinstance(segment, str):
+            segment = input_data.get("audience")
+        if not isinstance(segment, str) and isinstance(args, dict):
+            segment = args.get("audience")
+        if isinstance(segment, str):
+            return segment
     if isinstance(input_data, str):
         try:
             parsed = json.loads(input_data)
         except json.JSONDecodeError:
             return None
         if isinstance(parsed, dict):
-            audience = parsed.get("audience")
-            if isinstance(audience, str):
-                return audience
+            segment = parsed.get("segment") or parsed.get("audience")
+            if isinstance(segment, str):
+                return segment
     return None
 
 
@@ -71,9 +78,9 @@ def fetch_agent_context(
                     text = _text_from_observation(obs)
                     if text:
                         contexts.append(text)
-                    audience = _audience_from_observation(obs)
-                    if audience in ("b2c", "b2b"):
-                        segment = audience
+                    observed_segment = _segment_from_observation(obs)
+                    if observed_segment in ("b2c", "b2b"):
+                        segment = observed_segment
             if contexts or segment:
                 return contexts, segment
         except Exception as exc:  # noqa: BLE001

@@ -194,6 +194,34 @@ services:
       retries: 10
       start_period: 15s
 
+  neo4j:
+    image: neo4j:2026.04.0-community
+    restart: unless-stopped
+    networks:
+      - langfuse_net
+    ports:
+      - "127.0.0.1:7474:7474"
+      - "127.0.0.1:7687:7687"
+    environment:
+      NEO4J_AUTH: ${NEO4J_USER:-neo4j}/${NEO4J_PASSWORD:?NEO4J_PASSWORD is required in .env}
+      NEO4J_PLUGINS: '["apoc"]'
+      NEO4J_dbms_security_procedures_unrestricted: apoc.*
+      NEO4J_dbms_security_procedures_allowlist: apoc.*
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    healthcheck:
+      # /db/neo4j/available returns 404 on 2026.04; Bolt + cypher verifies DB readiness.
+      test:
+        [
+          "CMD-SHELL",
+          "cypher-shell -u \"${NEO4J_USER:-neo4j}\" -p \"${NEO4J_PASSWORD}\" -a bolt://localhost:7687 \"RETURN 1 AS ok\" || exit 1",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+
 networks:
   langfuse_net:
     driver: bridge
@@ -212,4 +240,8 @@ volumes:
   qdrant_data:
     driver: local
   pgvector_data:
+    driver: local
+  neo4j_data:
+    driver: local
+  neo4j_logs:
     driver: local

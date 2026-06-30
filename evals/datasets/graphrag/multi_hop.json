@@ -1,0 +1,86 @@
+[
+  {
+    "id": "MH-01",
+    "segment": "multi-hop",
+    "question": "Что нужно пройти перед курсом Deep Agents?",
+    "reference_answer": "Перед Deep Agents рекомендуется пройти три предыдущие ступени комбо: 1) Интенсив AI-кодинг ИИ-агентов в Cursor (vibe-coding), 2) AI-driven Fullstack разработка (fullstack-aidd), 3) AI-driven разработка ИИ-агентов (agents). Это полная цепочка prerequisite: vibe-coding → fullstack-aidd → agents → deep-agents.",
+    "required_entities": ["vibe-coding", "fullstack-aidd", "agents", "deep-agents", "RECOMMENDED_BEFORE"]
+  },
+  {
+    "id": "MH-02",
+    "segment": "multi-hop",
+    "question": "Какие темы охватывает комбо «ИИ-агенты» целиком (по всем 4 курсам)?",
+    "reference_answer": "Комбо включает 4 курса и покрывает следующие темы: из vibe-coding — AI-driven методология, ReAct, мультимодальность; из fullstack-aidd — FastAPI, PostgreSQL, Frontend (React/Next.js), Docker/DevOps, CI/CD, Observability, MCP; из agents — LangChain/LangGraph, RAG базовый, Advanced RAG, векторные БД, tool calling, память агента, HITL, мультиагентные системы, Evaluation/Evals, безопасность/guardrails, MCP; из deep-agents — GraphRAG, графовые БД, мультимодальный RAG, Context Engineering, Deep Agents (planning/skills/subagents), датасет-менеджмент, Prompt Management, A2A/A2UI, Red teaming.",
+    "required_entities": ["ai-agents-combo", "vibe-coding", "fullstack-aidd", "agents", "deep-agents", "INCLUDES", "COVERS"]
+  },
+  {
+    "id": "MH-03",
+    "segment": "multi-hop",
+    "question": "Через какой курс можно добраться до изучения GraphRAG?",
+    "reference_answer": "Тема GraphRAG покрывается только в курсе Deep Agents (ступень 4). Чтобы попасть на Deep Agents, нужно пройти: vibe-coding → fullstack-aidd → agents → deep-agents. Таким образом, прямой путь к GraphRAG: agents → deep-agents → тема 5 «Графовые базы данных и GraphRAG».",
+    "required_entities": ["deep-agents", "agents", "GraphRAG", "COVERS", "RECOMMENDED_BEFORE"]
+  },
+  {
+    "id": "MH-04",
+    "segment": "multi-hop",
+    "question": "Покрывает ли курс agents темы, на которые опирается GraphRAG?",
+    "reference_answer": "Да. GraphRAG требует: RAG базовый, Векторные БД и Графовые БД. Курс agents покрывает RAG базовый (тема 4) и Векторные БД (как часть тем 4–6), но не покрывает Графовые БД — они изучаются только в deep-agents (тема 5). Таким образом, agents частично закрывает предпосылки GraphRAG.",
+    "required_entities": ["agents", "deep-agents", "GraphRAG", "rag-basic", "Векторные БД", "COVERS", "REQUIRES"]
+  },
+  {
+    "id": "MH-05",
+    "segment": "multi-hop",
+    "question": "Входит ли курс с Векторными БД в комбо «ИИ-агенты»?",
+    "reference_answer": "Да. Тема «Векторные БД» покрывается в курсе agents (AI-driven разработка ИИ-агентов), а курс agents входит в комбо «ИИ-агенты» как ступень 3. Таким образом, Векторные БД → agents → ai-agents-combo.",
+    "required_entities": ["Векторные БД", "agents", "ai-agents-combo", "COVERS", "INCLUDES"]
+  },
+  {
+    "id": "MH-06",
+    "segment": "multi-hop",
+    "question": "Какие темы из курса agents являются обязательной базой для GraphRAG, который изучается в deep-agents?",
+    "reference_answer": "GraphRAG (deep-agents, тема 5) требует трёх предпосылок: RAG базовый, Векторные БД и Графовые БД. Из курса agents закрываются две: RAG базовый (тема 4) и Векторные БД (входят в темы 4–6 как инструмент). Графовые БД — только в самом deep-agents (тема 4), то есть agents даёт 2 из 3 предпосылок GraphRAG.",
+    "required_entities": ["agents", "deep-agents", "GraphRAG", "rag-basic", "Векторные БД", "REQUIRES", "COVERS"]
+  },
+  {
+    "id": "MH-07",
+    "segment": "multi-hop",
+    "question": "Что общего в темах курсов fullstack-aidd и agents?",
+    "reference_answer": "Оба курса покрывают следующие общие темы: AI-driven методология (AIDD), MCP (Model Context Protocol), Observability (LangSmith/LangFuse). В fullstack-aidd MCP разбирается в контексте fullstack-разработки, в agents — как слой интеграций для агентов.",
+    "required_entities": ["fullstack-aidd", "agents", "MCP", "Observability", "ai-driven-methodology", "COVERS"]
+  },
+  {
+    "id": "MH-08",
+    "segment": "multi-hop",
+    "question": "Какой курс нужно закончить, чтобы потом делать мультиагентные системы с A2A-протоколом?",
+    "reference_answer": "Тема A2A/A2UI протоколов изучается в курсе Deep Agents (тема 12). Чтобы попасть на deep-agents, рекомендуется пройти: vibe-coding → fullstack-aidd → agents → deep-agents. Непосредственным предшественником является курс agents, который даёт основу мультиагентных систем (тема 11).",
+    "required_entities": ["deep-agents", "agents", "A2A", "Мультиагентные системы", "RECOMMENDED_BEFORE", "COVERS"]
+  },
+  {
+    "id": "MH-09",
+    "segment": "multi-hop",
+    "question": "Какой минимальный путь по курсам нужен, чтобы освоить HITL (Human-in-the-loop)?",
+    "reference_answer": "HITL изучается в двух курсах: в agents (тема 9, безопасность агентных систем) и в deep-agents (тема 1, обзор компонентов агента). Минимальный путь: vibe-coding → fullstack-aidd → agents, где HITL уже упоминается как паттерн прерывания ReAct-цикла. Если нужна углублённая проработка — далее deep-agents.",
+    "required_entities": ["agents", "deep-agents", "HITL", "ReAct", "COVERS", "RECOMMENDED_BEFORE"]
+  },
+  {
+    "id": "MH-10",
+    "segment": "multi-hop",
+    "question": "Какие курсы покрывают тему Advanced RAG и что нужно знать перед её изучением?",
+    "reference_answer": "Advanced RAG покрывается в курсе agents (тема 6: Query Transformation, Hybrid Search, Self-RAG, Agentic RAG). Для изучения Advanced RAG требуется базовый RAG (тема 4 того же курса agents). Базовый RAG, в свою очередь, требует понимания LLM API (тема 1) и векторных БД. Таким образом: LLM API → RAG базовый → Advanced RAG — всё в рамках курса agents.",
+    "required_entities": ["agents", "rag-advanced", "rag-basic", "Векторные БД", "COVERS", "REQUIRES"]
+  },
+  {
+    "id": "MH-11",
+    "segment": "multi-hop",
+    "question": "Тема Observability (мониторинг LLM/агентов) встречается в нескольких курсах комбо. В каких именно и как нарастает глубина от ступени к ступени?",
+    "reference_answer": "Observability покрывается в трёх курсах комбо: fullstack-aidd (ступень 2) — инфраструктурный мониторинг (Loki, Prometheus, Grafana, Docker, CI/CD); agents (ступень 3) — трейсинг LLM и RAG-систем через LangSmith/LangFuse, метрики Context Precision/Recall; deep-agents (ступень 4) — Evaluation и red teaming как надстройка над трейсами. Прогрессия: инфра → RAG-трейсинг → оценка качества агентов.",
+    "required_entities": ["fullstack-aidd", "agents", "deep-agents", "Observability", "LangFuse", "COVERS"]
+  },
+  {
+    "id": "MH-12",
+    "segment": "multi-hop",
+    "question": "Какова суммарная стоимость всех курсов, входящих в комбо, если покупать их по отдельности?",
+    "reference_answer": "Если покупать курсы по отдельности: vibe-coding (14 990 ₽) + fullstack-aidd (39 990 ₽) + agents (39 990 ₽) + deep-agents (44 990 ₽) = 139 960 ₽. Комбо стоит 59 990 ₽, что даёт скидку около 57% от суммы отдельных покупок.",
+    "required_entities": ["ai-agents-combo", "vibe-coding", "fullstack-aidd", "agents", "deep-agents", "INCLUDES", "price_rub"]
+  }
+]

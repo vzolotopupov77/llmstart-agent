@@ -1,9 +1,9 @@
 # Карта метрик — LLMStart Agent (llmstart.ru)
 
 > **Создаётся:** задача 03 sprint-eval-01 · **Методология:** [.methodology/eval/eval-methodology.md](../../.methodology/eval/eval-methodology.md)
-> **Входы:** [dataset-map.md](dataset-map.md) (✅ 2026-06-14), [metrics-guide.md](../../.methodology/eval/metrics-guide.md)
-> **Статус:** ✅ утверждена пользователем / 2026-06-14
-> **Последнее обновление:** 2026-06-14
+> **Входы:** [dataset-map.md](dataset-map.md) (✅ 2026-06-14; дополнена sprint-09), [metrics-guide.md](../../.methodology/eval/metrics-guide.md)
+> **Статус:** ✅ утверждена 2026-06-14; дополнена sprint-09 / 2026-06-26
+> **Последнее обновление:** 2026-06-26
 
 **Judge-модель:** из run-config (`judge.name`, отдельно от модели агента, E-17). Пороги ниже — **до первого прогона** (E-20); изменение только решением с записью в секции «Пороги».
 
@@ -126,11 +126,44 @@
 
 ---
 
+### graphrag/multi-hop · graphrag/global
+
+> **Реализовано:** sprint-09, задача 02 · **Baseline зафиксирован:** 2026-06-26  
+> **Конфиг:** `evals/configs/graphrag-baseline.yaml` · **Evaluators:** `get_graphrag_evaluators()` в `evals/scripts/evaluators.py`
+
+| Метрика | Ступень E-17 | Фреймворк / точное имя | Уровень | Тип score | Порог 🟢 / 🔴 | Обоснование |
+|---|---|---|---|---|---|---|
+| `answer_correctness` | в (G-Eval) | DeepEval `GEval` по `expected_output.reference_answer` | item: trace | NUMERIC 0–1 | ≥ **0.65** / < **0.50** | Главная метрика сегмента; эталон — полный reference_answer из KB |
+| `required_entity_recall` | а | Детерминированный: доля `required_entities` из `expected_output`, найденных в тексте ответа (substring match) | item: trace | NUMERIC 0–1 | ≥ **0.70** / < **0.50** | Retrieval-guard: граф должен находить нужные сущности (коды курсов, имена); независим от judge |
+| `faithfulness` | б | RAGAS `Faithfulness` | item: trace | NUMERIC 0–1 | ≥ **0.75** / < **0.60** | Guard: ответ не противоречит retrieved-контексту; порог ниже e2e (multi-hop может частично опираться на параметризованные данные) |
+| `task_error` | а | Детерминированный флаг исключения | item: trace | BOOLEAN | **0%** / > **5%** | E-19 |
+
+**Run-level агрегаты:**
+
+| Метрика | Описание | Реализация |
+|---|---|---|
+| `error_rate` | Доля task_error items | `evals/scripts/evaluators.py` |
+| `avg_answer_correctness` | Средняя по всем items прогона | — |
+| `avg_required_entity_recall` | Средняя recall по entities | — |
+| `avg_faithfulness` | Средняя faithfulness | — |
+| `avg_answer_correctness_{segment}` | Средняя answer_correctness, сгруппированная по `graphrag_type` из Langfuse-метаданных (`gr_type`) | `avg_answer_correctness_by_graphrag_type()` — возвращает список Evaluation |
+
+**Baseline (2026-06-26, Qdrant-hybrid без графа):**
+
+| Сегмент | answer_correctness | required_entity_recall | faithfulness |
+|---|---|---|---|
+| multi-hop (n=12) | **0.500** | **0.701** | **0.810** |
+| global (n=6) | **0.200** | **0.292** | **0.767** |
+
+**Особые режимы:** `required_entity_recall` возвращает `1.0` (N/A) если `required_entities` пуст — не влияет на avg при items без требований.
+
+---
+
 ## Кастомные метрики (E-17г)
 
 | Метрика | ADR | Статус |
 |---|---|---|
-| — | — | **Нет.** Все метрики — категории A–E через RAGAS / DeepEval / GEval |
+| `required_entity_recall` | sprint-09 Task 02 | ✅ Реализована (`evals/scripts/evaluators.py`). Категория **А** (детерминированная substring-проверка). Применяется только в группе `graphrag`. |
 
 ---
 
@@ -148,11 +181,22 @@
 
 Item-level пороги — в таблицах датасетов выше.
 
+**Пороги для graphrag-сегментов (зафиксированы до первого прогона sprint-09):**
+
+| Run-level ключ | 🟢 baseline принят | 🔴 регрессия |
+|---|---|---|
+| `avg_answer_correctness` (multi-hop) | ≥ 0.65 | < 0.50 |
+| `avg_answer_correctness` (global) | ≥ 0.65 | < 0.50 |
+| `avg_required_entity_recall` | ≥ 0.70 | < 0.50 |
+| `avg_faithfulness` | ≥ 0.75 | < 0.60 |
+| `error_rate` | < 0.05 | ≥ 0.10 |
+
 ### История изменений порогов
 
 | Дата | Метрика | Было → стало | Основание |
 |---|---|---|---|
-| 2026-06-14 | все | — | Первичная фиксация при создании карты (E-20) |
+| 2026-06-14 | все (e2e) | — | Первичная фиксация при создании карты (E-20) |
+| 2026-06-26 | graphrag/* | — | Зафиксированы пороги sprint-09 baseline; metricс `required_entity_recall` добавлена |
 
 ---
 
@@ -171,3 +215,4 @@ Item-level пороги — в таблицах датасетов выше.
 
 - [x] dataset-map утверждён: 2026-06-14
 - [x] Карта метрик показана и утверждена: пользователь / 2026-06-14 (⛔ гейт задачи 03)
+- [x] Секция `graphrag/*` добавлена: 2026-06-26 (sprint-09 задача 02 baseline)

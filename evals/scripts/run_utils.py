@@ -63,16 +63,33 @@ def find_manifest_path(group: str, slug: str, version: str, config: RunConfig) -
     return matches[0]
 
 
+def _group_for_arg(dataset_arg: str, config: RunConfig) -> str:
+    """Derive dataset group from CLI arg and run config."""
+    if "/" in dataset_arg:
+        return dataset_arg.split("/")[0]
+    if dataset_arg in ("all", "e2e-qa"):
+        return "e2e"
+    slug = dataset_arg
+    if slug in config.datasets:
+        pinned_version = config.datasets[slug]
+        for group in ("graphrag", "e2e", "rag", "behavior", "edge"):
+            folder = DATASETS_ROOT / group / slug
+            if list(folder.glob(f"{pinned_version}_*.yaml")):
+                return group
+    if config.config_id.startswith("graphrag-"):
+        return "graphrag"
+    return "e2e"
+
+
 def load_dataset_context(config: RunConfig, dataset_arg: str) -> dict[str, str]:
+    group = _group_for_arg(dataset_arg, config)
     slug, version, _lf_name = resolve_dataset_slug(dataset_arg)
-    if slug != "e2e-qa":
-        msg = f"Task 05 supports only e2e-qa, got {dataset_arg}"
-        raise ValueError(msg)
-    manifest_path = find_manifest_path("e2e", slug, version, config)
+    manifest_path = find_manifest_path(group, slug, version, config)
     manifest = load_manifest(manifest_path)
     version = manifest.version
-    lf_name = langfuse_dataset_name("e2e", slug, version)
+    lf_name = langfuse_dataset_name(group, slug, version)
     return {
+        "group": group,
         "dataset_slug": slug,
         "dataset_version": version,
         "langfuse_dataset": lf_name,
