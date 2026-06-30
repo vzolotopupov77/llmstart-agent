@@ -50,9 +50,7 @@ def _parse_statements(cypher: str) -> list[str]:
     comment text (e.g. ``// a; b``) don't produce spurious empty statements.
     """
     # Remove comment lines from the whole file first
-    clean_lines = [
-        line for line in cypher.splitlines() if not _COMMENT_LINE.match(line)
-    ]
+    clean_lines = [line for line in cypher.splitlines() if not _COMMENT_LINE.match(line)]
     cleaned = "\n".join(clean_lines)
     return [stmt.strip() for stmt in cleaned.split(";") if stmt.strip()]
 

@@ -18,15 +18,24 @@ def test_rrf_score_decreases_with_rank() -> None:
 
 
 def test_merge_rrf_combines_lists() -> None:
-    vector = [cast("KnowledgeChunk", {"text": "a", "source": "q", "segment": "b2c", "entity_id": "x"})]
-    graph = [cast("KnowledgeChunk", {"text": "b", "source": "n", "segment": "b2c", "entity_id": "y"})]
+    vector = [
+        cast("KnowledgeChunk", {"text": "a", "source": "q", "segment": "b2c", "entity_id": "x"})
+    ]
+    graph = [
+        cast("KnowledgeChunk", {"text": "b", "source": "n", "segment": "b2c", "entity_id": "y"})
+    ]
     merged = merge_rrf(vector, graph, k=60)
     assert len(merged) == 2
     assert merged[0].get("rank", 0) >= merged[1].get("rank", 0)
 
 
 def test_merge_rrf_boosts_shared_entity() -> None:
-    shared = [cast("KnowledgeChunk", {"text": "shared", "source": "s", "segment": "b2c", "entity_id": "agents"})]
+    shared = [
+        cast(
+            "KnowledgeChunk",
+            {"text": "shared", "source": "s", "segment": "b2c", "entity_id": "agents"},
+        )
+    ]
     merged = merge_rrf(shared, shared, k=60)
     assert len(merged) == 1
     assert merged[0]["rank"] > rrf_score(1, k=60)

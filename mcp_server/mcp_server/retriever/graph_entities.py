@@ -73,7 +73,9 @@ def _ordered_course_hits(lowered: str) -> list[str]:
     hits: list[tuple[int, str]] = []
     seen: set[str] = set()
 
-    for alias, canonical in sorted(COURSE_ALIASES.items(), key=lambda item: len(item[0]), reverse=True):
+    for alias, canonical in sorted(
+        COURSE_ALIASES.items(), key=lambda item: len(item[0]), reverse=True
+    ):
         index = lowered.find(alias)
         if index >= 0 and canonical not in seen:
             hits.append((index, canonical))
@@ -121,7 +123,9 @@ def extract_entities(query: str) -> ResolvedEntities:
             theme_ids.append(theme_id)
 
     intersection_pair: tuple[str, str] | None = None
-    if (len(course_ids) >= 2 and not is_prereq) or ("общ" in lowered and "тем" in lowered and len(course_ids) >= 2):
+    if (len(course_ids) >= 2 and not is_prereq) or (
+        "общ" in lowered and "тем" in lowered and len(course_ids) >= 2
+    ):
         intersection_pair = (course_ids[0], course_ids[1])
 
     return ResolvedEntities(
