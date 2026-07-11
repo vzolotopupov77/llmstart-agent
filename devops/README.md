@@ -171,6 +171,34 @@ docker compose --env-file .env -f devops/docker-compose.yml down --remove-orphan
 make up
 ```
 
+#### `make up` зависает на Starting / контейнеры в Created
+
+Docker Desktop (WSL2) иногда «залипает» — контейнеры создаются, но не стартуют, даже `docker run hello-world` висит.
+
+```bash
+wsl --shutdown
+docker desktop start
+make up
+```
+
+Если не помогло — Docker Desktop → Troubleshoot → Restart.
+
+#### `make up` падает на pull (TLS handshake timeout)
+
+Образы Langfuse уже есть локально — `make up` больше не тянет их принудительно. Для явного обновления:
+
+```bash
+make up PULL=1
+```
+
+#### Qdrant unhealthy
+
+В образе `qdrant/qdrant` нет `curl`/`wget`. После обновления compose:
+
+```bash
+docker compose --env-file .env -f devops/docker-compose.yml up -d --force-recreate qdrant
+```
+
 #### `make up` падает на ClickHouse unhealthy
 
 - Подождите 30–60 с после первого старта.

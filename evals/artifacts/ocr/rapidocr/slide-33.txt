@@ -1,0 +1,20 @@
+# slide-33
+# source: OCR rapidocr (slide-33.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+Kec: Al-cTpaTerNA koMmepyeckoro 6aHka Ha 3 rona
+KoMMepyecKn 6aHK
+HIGH
+KnNeHTCKnN cepBNC
+HIGH
+MEDIUM
+Onepaynn
+AHaJNTNKa AaHHbIX
+bAHK
+Roadmap: 3rona ·3nwnota An9 anpo6ayU
+HIGH
+Be30naCHocTb
+Roadmap:3rona·3nnnotanganpo6aunn
+oKanbHble MonenN = 6e3OnacHocTb + ynpaBnAeMaA 3KOHoMNKa
+LLMSTART.RU
+KoMMep4ecKni6aHK
+33

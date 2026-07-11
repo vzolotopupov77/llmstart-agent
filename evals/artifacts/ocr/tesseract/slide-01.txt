@@ -1,0 +1,9 @@
+# slide-01
+# source: OCR tesseract (slide-01.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+225%
+в: =— = ea В ь
+Дорожная карта Al-first
+трансформации бизнеса
+От первого знакомства с ИИ до production-ready систем
+Конференция IC . 8 апреля 2026

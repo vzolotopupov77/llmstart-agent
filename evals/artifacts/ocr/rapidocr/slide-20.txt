@@ -1,0 +1,20 @@
+# slide-20
+# source: OCR rapidocr (slide-20.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+Bn3Hec KaK MeANa
+OnNH Be6uHap — TpИ ponyKTa 3a MNHyTbl
+TpaHcKpunuNA
+3 nocta
++ TaNMKObI
+B COLCeTИ
+Be6nHap
+ToBapHOe 中oTO
+CTpyKTypa
+6e3 ΦoToceccnN
+npe3eHTaLNN
+木
+AI
+MidjourneyNotebookLM
+Claude
+LLMSTART.RU
+20

@@ -1,0 +1,12 @@
+# slide-30
+# source: OCR tesseract (slide-30.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+Кейс: Хакатон
+
+СТАРТ м > ПОСЛЕ: лидеры видны
+a \ у. , cra aoe и к © о
+В АЗ. о
+и в”
+ea
+ПИЩА 2.
+_ Приверженцы видны сразу |

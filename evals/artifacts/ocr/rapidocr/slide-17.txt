@@ -1,0 +1,15 @@
+# slide-17
+# source: OCR rapidocr (slide-17.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+YuNMCA BOKAEHNIO,
+a He c6opKe aBToMo6nnA
+LnpNHa BaKHeerny6uHbI
+BoxdeHue
+CSopka
+(bom umo HyXHO)
+(He Hy*HO)
+Coopka (He Hy*Ho)
+BoxdeHue (bom ymo HyxHo)
+Ka>xAyro 3ana4y - cHayana yepe3 ИИ
+LLMSTART.RU
+17

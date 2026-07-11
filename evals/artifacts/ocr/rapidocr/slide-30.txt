@@ -1,0 +1,10 @@
+# slide-30
+# source: OCR rapidocr (slide-30.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+Kevc: XaKaToH
+CTAPT:XaoC
+nOCnE:nNAepbI BNAHbI
+50 yenOBeK· npON3BOACTBeHHaA KOMnaHNA
+pNBepKeHubl BИAHbI Cpa3y
+LLMSTART.RU · pOH3BOACTBeHHaA KOMnaHNA
+30

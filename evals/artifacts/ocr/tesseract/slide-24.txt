@@ -1,0 +1,14 @@
+# slide-24
+# source: OCR tesseract (slide-24.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+Мо-соае автоматизация
+Пайплайны без участия человека
+_
+a e—e <=
+| : US
+Таблица идей ИИ обрабатывает
+(B}— Se)
+Бриф-форма А
+оо пвп | { ii make ) { —zapier |
+
+LLMSTART.RU 24 )

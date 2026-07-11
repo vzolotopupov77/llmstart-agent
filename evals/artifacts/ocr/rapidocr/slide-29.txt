@@ -1,0 +1,17 @@
+# slide-29
+# source: OCR rapidocr (slide-29.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+KoTTep: warИ 1+2
+CpOyHOCTb
+KoanNuNA npNBepXeHueB
+PUCKИ:
+He MeHAeMCA
+Al Champions
+BO3MOKHOCTV:
+MeHAeMCA
+> Cpo4HocTb
+BaKHa
+PaHHNe nOCneAOBaTenN C BnNAHNeM
+Be3 Cpo4HoCTИ - H3MeHeHNA BOCnpИHNMaIOTCA KaK pNxOTb Ha4anbCTBa
+LLMSTART.RU
+29

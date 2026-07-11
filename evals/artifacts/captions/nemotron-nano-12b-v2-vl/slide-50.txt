@@ -1,0 +1,33 @@
+# slide-50
+# source: VLM caption (slide-50.png)
+# model: qwen/qwen3-vl-8b-instruct
+# fallback_from: nvidia/nemotron-nano-12b-v2-vl:free
+# fallback_reason: rate_limit_429_free_tier
+# prompt_tokens: 1244
+# completion_tokens: 453
+# latency_s: 9.63
+# est_cost_usd: 0.00035166
+**1. Весь видимый текст:**
+
+- ЗА ДИАЛОГОМ — PRODUCTION-СИСТЕМА
+- Агент снаружи — чат. Внутри — система.
+- ЧАТБОТ / АГЕНТ
+- УРОВЕНЬ 1
+- УРОВЕНЬ 2
+- УРОВЕНЬ 3
+- LLM → Agent Loop → Tools → RAG → Vector DB
+- Ядро агента
+- MCP · CRM · ERP · СЭД
+- Интеграции
+- Evaluation · Observability · Guards · Memory · Skills Library
+- Качество · Мониторинг · Безопасность · Память
+- LLMSTART.RU
+- 50
+
+**2. Все числа и проценты (точно как на слайде):**
+
+- Нет чисел и процентов.
+
+**3. Визуальная структура:**
+
+На слайде представлена схема многоуровневой архитектуры чатбота/агента в виде пирамиды, погруженной в воду. Верхушка пирамиды — это интерфейс чатбота/агента. Ниже, на уровне 1, показана цепочка компонентов: LLM → Agent Loop → Tools → RAG → Vector DB. Уровень 2 содержит блоки интеграций: MCP, CRM, ERP, СЭД. Уровень 3 — это зелёная рамка с перечислением компонентов: Evaluation, Observability, Guards, Memory, Skills Library. Справа от каждого уровня указаны соответствующие категории: «Ядро агента», «Интеграции», «Качество · Мониторинг · Безопасность · Память». Внизу слева — логотип LLMSTART.RU, справа — номер слайда 50.

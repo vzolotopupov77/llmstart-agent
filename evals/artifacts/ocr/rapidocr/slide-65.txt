@@ -1,0 +1,12 @@
+# slide-65
+# source: OCR rapidocr (slide-65.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+Al First Club:
+CTpoNM KOMnaHNIo
+B npAmOm 3Φnpe
+·KOMMbIOHNTИ, APaNB, BAOXHOBeHNe
+EAMHaAAI-3KOCMCTeMa
+·Ba3a 3HaHNNWHaBbIKOB
+llmstart.ru/club
+LLMSTART.RU·AIFirstClub
+65

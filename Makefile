@@ -1,8 +1,10 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help dev dev-backend dev-frontend dev-bot up down lint format typecheck test test-backend test-mcp test-bot test-frontend ci index reindex upload-langfuse-dataset reload-langfuse-dataset eval-validate eval-sync eval-experiment eval-graph-hybrid eval-graph-global eval-graph-routing eval-graph-regression eval-analyze eval-compare eval-backfill-runs bench bench-one graph-up graph-down graph-status graph-shell graph-init-ro graph-seed graph-inspect graph-qa graph-extract graph-compare graph-index
+.PHONY: help dev dev-backend dev-frontend dev-bot up down lint format typecheck test test-backend test-mcp test-bot test-frontend ci index reindex upload-langfuse-dataset reload-langfuse-dataset eval-validate eval-sync eval-experiment eval-multimodal-baseline eval-multimodal eval-multimodal-a-ocr eval-multimodal-b-caption eval-multimodal-c-unified eval-multimodal-d-multivector ocr-build ocr-run-tesseract ocr-run-easyocr eval-graph-hybrid eval-graph-global eval-graph-routing eval-graph-regression eval-analyze eval-compare eval-backfill-runs bench bench-one graph-up graph-down graph-status graph-shell graph-init-ro graph-seed graph-inspect graph-qa graph-extract graph-compare graph-index
 
 COMPOSE_FILE := devops/docker-compose.yml
+OCR_COMPOSE_FILE := devops/docker-compose.ocr.yml
+REPO_ROOT := $(CURDIR)
 BACKEND_PORT ?= 8003
 FRONTEND_PORT ?= 3002
 DATASET_NAME ?= llmstart-agent-v1
@@ -22,6 +24,7 @@ help:
 	@echo.
 	@echo Infrastructure
 	@echo   up                  Start Docker stack (Langfuse v3, Postgres, etc.)
+	@echo                       PULL=1 to force langfuse image pull before start
 	@echo   down                Stop Docker stack
 	@echo   graph-up            Start Neo4j only
 	@echo   graph-down          Stop Neo4j (data preserved in volume)
@@ -69,6 +72,16 @@ help:
 	@echo   eval-validate         Pydantic + integrity tests for eval contour
 	@echo   eval-sync             Sync datasets to Langfuse (stub until task 04)
 	@echo   eval-experiment       Run experiment (CONFIG=..., DATASET=...)
+	@echo   eval-multimodal-baseline  Sprint-10 naive text baseline (PDF layer -> e5 -> Qdrant)
+	@echo   eval-multimodal           Sprint-10 multimodal eval (CONFIG=evals/configs/multimodal-baseline.yaml)
+	@echo   eval-multimodal-a-ocr     Sprint-10 method A: Tesseract (docker) + RapidOCR (local) + CER
+	@echo   eval-multimodal-b-caption Sprint-10 method B: Nemotron + Gemini VLM caption + hallucination check
+	@echo   eval-multimodal-c-unified Sprint-10 method C: VL image embed + C vs B report
+	@echo   eval-multimodal-d-multivector Sprint-10 method D: Jina multivector + TEDS + D vs C/B
+	@echo   ocr-build                 Build OCR docker images (Tesseract; EasyOCR/RapidOCR optional)
+	@echo   ocr-run-tesseract         OCR batch via docker -> evals/artifacts/ocr/tesseract
+	@echo   ocr-run-easyocr           OCR batch via docker -> evals/artifacts/ocr/easyocr
+	@echo   ocr-run-rapidocr          OCR batch via docker -> evals/artifacts/ocr/rapidocr
 	@echo   eval-graph-hybrid     GraphRAG Task 06 eval hybrid branch (CONFIG=graphrag-graph.yaml)
 	@echo   eval-graph-global     GraphRAG Task 06 smoke global branch (CONFIG=graphrag-global-branch.yaml)
 	@echo   eval-graph-routing    GraphRAG Task 08 agent routing eval (CONFIG=graphrag-routing.yaml)
@@ -103,9 +116,13 @@ dev-frontend:
 dev-bot:
 	cd bot && uv run python -m bot.main
 
+PULL ?= 0
+
 up:
+ifeq ($(PULL),1)
 	docker compose --env-file .env -f $(COMPOSE_FILE) pull langfuse-web langfuse-worker
-	docker compose --env-file .env -f $(COMPOSE_FILE) up -d
+endif
+	docker compose --env-file .env -f $(COMPOSE_FILE) up -d --pull missing --wait
 
 down:
 	docker compose --env-file .env -f $(COMPOSE_FILE) down
@@ -237,6 +254,36 @@ eval-sync:
 
 eval-experiment:
 	$(MAKE) -C evals experiment
+
+eval-multimodal-baseline:
+	cd evals && uv sync && uv run python -m scripts.run_multimodal_eval --config configs/multimodal-baseline.yaml
+
+eval-multimodal:
+	cd evals && uv sync && uv run python -m scripts.run_multimodal_eval --config $(if $(CONFIG),$(CONFIG),configs/multimodal-baseline.yaml)
+
+ocr-build:
+	docker compose -f $(OCR_COMPOSE_FILE) build
+
+ocr-run-tesseract:
+	docker compose -f $(OCR_COMPOSE_FILE) run --rm ocr-tesseract
+
+ocr-run-easyocr:
+	docker compose -f $(OCR_COMPOSE_FILE) run --rm ocr-easyocr
+
+ocr-run-rapidocr:
+	docker compose -f $(OCR_COMPOSE_FILE) run --rm ocr-rapidocr
+
+eval-multimodal-a-ocr:
+	cd evals && uv sync --group ocr-modern && uv run python -m scripts.run_multimodal_a_ocr
+
+eval-multimodal-b-caption:
+	cd evals && uv sync && uv run python -m scripts.run_multimodal_b_caption
+
+eval-multimodal-c-unified:
+	cd evals && uv sync && uv run python -m scripts.run_multimodal_c_unified
+
+eval-multimodal-d-multivector:
+	cd evals && uv sync && uv run python -m scripts.run_multimodal_d_multivector
 
 eval-graph-hybrid:
 	@echo Before run: set RETRIEVER_BRANCH=hybrid and RAG_TOP_K=5 in .env, restart backend.

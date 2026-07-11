@@ -1,0 +1,21 @@
+# slide-32
+# source: OCR rapidocr (slide-32.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+KoTTep: War 3 - BnAeHNe W cTpaTerHA
+STAGE 1-AyANT npoueccoB
+STAGE2-MaTpnua2x2
+STAGE3-Ton-3nNnoTa
+HOIH
+LeHHOCTb
+2
+3
+Low
+LOW
+CnOXHOCTb
+HIGH
+AyAuT: Bce npoueccbl
+Ton-3nnota
+KOMnaHNN
+pocTaA KapTHHa 《KyAa WAéM》: OT xaoca npoμeccOB - K Ton-3 nNnoTaM
+LLMSTART.RU
+32

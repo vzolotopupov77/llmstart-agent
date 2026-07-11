@@ -1,0 +1,9 @@
+# slide-59
+# source: OCR rapidocr (slide-59.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+《MM-areHTbl>>
+yTb OT BOpKΦnOy K aBTOHoMHbIM areHTaM
+AcCNCTEHT:OTBeyaeT
+AreHT:AeMCTByeT
+LLMSTART.RU
+59

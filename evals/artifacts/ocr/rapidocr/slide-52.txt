@@ -1,0 +1,10 @@
+# slide-52
+# source: OCR rapidocr (slide-52.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+ИV-accNcTeHTbl c noNcKOM o 6a3e 3HaHN
+Korna ИИ 3HaeT BCé - COTpyAHИK OTBe4aeT MrHOBeHHO
+《PaHbWe: MNHyTbl noNCKa
+Cevyac: l cekyHna
+AccHcTeHT WnN 3aMeHa? - o6a BapNaHTa pa6oTaIOT
+LLMSTART.RU
+52

@@ -1,0 +1,22 @@
+# slide-66
+# source: VLM caption (slide-66.png)
+# model: google/gemini-2.5-flash-lite
+# prompt_tokens: 420
+# completion_tokens: 147
+# latency_s: 15.24
+# est_cost_usd: 0.00010080
+1.  **Текст:**
+    *   t.me/smirnoff_ai
+    *   vk.com/smirnoff_ai
+    *   @aidialogs
+    *   ТГ-канал
+    *   Спасибо! Теперь точно пора действовать 🚀
+    *   llmstart.ru
+    *   LLMSTART.RU
+    *   66
+
+2.  **Числа и проценты:**
+    *   66
+
+3.  **Визуальная структура:**
+    Слайд содержит изображение человека, QR-код, ссылки на социальные сети (Telegram, VK) и веб-сайт. Также присутствует номер страницы.

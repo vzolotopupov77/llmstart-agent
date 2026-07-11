@@ -1,0 +1,14 @@
+# slide-04
+# source: OCR rapidocr (slide-04.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+Pblhok mehAeTca.
+Tne Ha4aTb?
+yTb l: y4penntenb
+CTAPT
+yTb 2: cOTPynHNK
+BUANT PbIHOK
+npnHec pe3ynbTat
+CmOTpNTe 4TO
+jeLato B
+PacKaTblBaeM?
+LLMSTART.RU

@@ -1,0 +1,17 @@
+# slide-31
+# source: OCR rapidocr (slide-31.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+Kevc: AvTOH
+BpHΦ → BOpKwon: cTpoHm ИИ-accHcTeHTa
+O: 6pnΦnHr
+nOCnE:BOPKWOn
+<pph
+code,
+oroset()f
+return,nose()
+cpls (
+return()..;
+《>KN3Hb noAenNnacb Ha AO  nocne>
+—y4aCTHNK,ATOH
+LLMSTART.RU·ATOH
+31

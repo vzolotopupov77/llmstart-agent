@@ -1,7 +1,7 @@
 # Roadmap — LLMStart Agent
 
 > **Vision:** [concept/vision.md](concept/vision.md)  
-> **Последнее обновление:** 2026-06-30 (sprint-09 graphrag закрыт)
+> **Последнее обновление:** 2026-07-11 (sprint-10 multimodal-rag закрыт)
 
 ---
 
@@ -67,8 +67,8 @@
 
 **Ключевые результаты:**
 
-- [ ] GraphRAG: Knowledge Graph в Neo4j, GraphRAG-ретривер заменяет/дополняет Qdrant
-- [ ] Мультимодальный RAG: поддержка изображений и визуального контента в PDF
+- [x] GraphRAG: Knowledge Graph в Neo4j, GraphRAG-ретривер заменяет/дополняет Qdrant — sprint-09 ✅
+- [x] Мультимодальный RAG: 5 методов индексации на визуально-плотном корпусе; вердикт — метод C default — sprint-10 ✅ · [final report](../evals/reports/multimodal-final.md)
 - [ ] Управление контекстным окном, памятью и состоянием агента; планирование, декомпозиция задач, Skills, Subagents, Long-term memory
 - [ ] RAG: hybrid search (dense + BM25/sparse) для точных term-запросов
 - [ ] RAG: PDF chunking — структурный парсер (заголовки, таблицы); сейчас `pypdf` → plain text → blind window
@@ -80,7 +80,7 @@
 | # | Sprint | Цель | Статус | Документ |
 |---|--------|------|--------|----------|
 | 09 | [graphrag](sprints/sprint-09-graphrag/README.md) | **GraphRAG** — KG каталога (Neo4j), graph/global/text2cypher retrieval, маршрутизация по типу вопроса, реранкер | ✅ | [sprint-09](sprints/sprint-09-graphrag/README.md) |
-| 10 | TBD | **Мультимодальный RAG** — мультимодальные эмбеддинги, структурный разбор PDF (таблицы, изображения), vision-контекст в ответах | 📋 | — |
+| 10 | [multimodal-rag](sprints/sprint-10-multimodal-rag/README.md) | **Мультимодальный RAG** — 5 методов индексации (naive text / OCR / caption / unified image-embed / multivector) на визуально-плотном B2B-корпусе; сегментный анализ (текст/чарты/раскладка/multi-hop/unanswerable), цена (время, $, объём) на каждый метод | ✅ | [sprint-10](sprints/sprint-10-multimodal-rag/README.md) · [final report](../evals/reports/multimodal-final.md) |
 | 11 | TBD | **Context-engineering и агентное планирование** — sliding window / summarization, персистентная память (граф/БД), Plan-and-Execute, task decomposition, Skills, Subagents | 📋 | — |
 | 12 | TBD | **RAG-улучшения** — hybrid search (BM25 + dense), структурный PDF-чанкинг (заголовки, таблицы) | 📋 | — |
 
@@ -153,6 +153,8 @@ flowchart LR
 
 | Дата | Изменение |
 |------|-----------|
+| 2026-07-11 | Закрыт sprint-10 multimodal-rag: 7 конфигураций × 5 сегментов, вердикт — метод C default, D — S4-upgrade; [multimodal-final.md](../evals/reports/multimodal-final.md) |
+| 2026-07-05 | Создан план sprint-10 multimodal-rag: 8 задач (анализ корпуса → датасеты/метрики → контракт индексатора → методы A/OCR, B/caption, C/unified-embed, D/multivector → сводный отчёт и вердикт) |
 | 2026-06-23 | sprint-08: payload index для `segment` в Qdrant; отдельный путь чанкинга PDF |
 | 2026-06-25 | Добавлен v0.2 Развитие RAG-ассистента (GraphRAG, мультимодал, context-eng); hardening → v0.3 |
 | 2026-06-24 | Закрыт sprint-08 vector-db: Qdrant + pgvector + ChromaDB bench; production-бэкенд Qdrant |

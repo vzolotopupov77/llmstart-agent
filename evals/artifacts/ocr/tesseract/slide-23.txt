@@ -1,0 +1,14 @@
+# slide-23
+# source: OCR tesseract (slide-23.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+Безопасность корпоративного ИИ
+№ Cursor LM Studio в
+к a Satin aed ‘question. nticypped in this
+XN ‘
+Регламенты / omen Cte
+МР договоры > Данные He покидают ноутбук
+—— лини ; NDA оффлайн - 100% Privacy
+Регламенты > точный ответ CO ссылками Christe
+к =а
+
+LLMSTART.RU 23

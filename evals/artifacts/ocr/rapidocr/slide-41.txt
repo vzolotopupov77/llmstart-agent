@@ -1,0 +1,14 @@
+# slide-41
+# source: OCR rapidocr (slide-41.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+ИTOr cTyneHN 3: KoMnaHNA TpaHcΦopMИpoBaHa
+KoMaHna
+CTpaTerNA
+poueccbl
+natΦopma
+ba3a paKTИK
+Mac山Ta6 μ TeMn — y Ka*oro cBOИ, KaHBa — oμHa
+llmstart.ru/b2b
+porpaMmbl TpaHcΦopmauNN KoMaH
+LLMSTART.RU
+41

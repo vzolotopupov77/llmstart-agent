@@ -1,0 +1,10 @@
+# slide-07
+# source: OCR tesseract (slide-07.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+wa
+28 ge sa: saul"
+д. SPV Па
+хо ча
+А. eT
+Выглядит правдоподобно...
+LLMSTART.RU 7

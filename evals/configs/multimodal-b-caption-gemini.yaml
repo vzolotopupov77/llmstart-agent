@@ -1,0 +1,17 @@
+config_id: multimodal-b-caption-gemini
+comment: "Sprint-10 Task 05: VLM caption (gemini flash-lite) → e5 → Qdrant"
+
+dataset: evals/datasets/multimodal/multimodal-rag/v002_2026-07-05.json
+
+indexer:
+  method: b_caption
+  corpus_dir: data/multimodal-rag
+  artifact_dir: evals/artifacts/captions/gemini-2.5-flash-lite
+  caption_model: google/gemini-2.5-flash-lite
+
+retrieval:
+  collection: multimodal_caption_gemini_v002
+  embedding_model: intfloat/multilingual-e5-base
+  embedding_dim: 768
+  top_k: 5
+  qdrant_url: http://localhost:6333

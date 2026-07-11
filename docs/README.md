@@ -12,7 +12,7 @@
 | Понять продукт и MVP | [concept/idea.md](concept/idea.md) |
 | Техническое видение, компоненты, роли | [concept/vision.md](concept/vision.md) |
 | План реализации по спринтам | [roadmap.md](roadmap.md) |
-| Текущий этап | [roadmap.md](roadmap.md) — **v0.2 Развитие RAG-ассистента** (v0.1 MVP ✅) |
+| Текущий этап | [roadmap.md](roadmap.md) — **v0.2 Развитие RAG-ассистента** (GraphRAG ✅, Multimodal RAG ✅; v0.1 MVP ✅) |
 
 ---
 
@@ -50,9 +50,17 @@
 | 06 telegram-funnel | ✅ Done | [sprint-06-telegram-funnel](sprints/sprint-06-telegram-funnel/README.md) |
 | 07 langfuse-v3 | ✅ Done | [sprint-07-langfuse-v3](sprints/sprint-07-langfuse-v3/README.md) |
 | 08 vector-db | ✅ Done | [sprint-08-vector-db](sprints/sprint-08-vector-db/README.md) |
-| 09 graphrag | 📋 Planned | [sprint-09-graphrag](sprints/sprint-09-graphrag/README.md) |
+| 09 graphrag | ✅ Done | [sprint-09-graphrag](sprints/sprint-09-graphrag/README.md) |
+| 10 multimodal-rag | ✅ Done | [sprint-10-multimodal-rag](sprints/sprint-10-multimodal-rag/README.md) · [final report](../evals/reports/multimodal-final.md) |
 
 В каждом спринте: `README.md`, `tasks/<NN-task>/plan.md`, `summary.md`.
+
+### Eval (sprint-10 multimodal-rag)
+
+| Артефакт | Описание |
+|----------|----------|
+| [multimodal-final.md](../evals/reports/multimodal-final.md) | Финальный отчёт: матрица 7×5 + цена, decision log, вердикт |
+| [eval/README.md](eval/README.md) | Eval-контур, все multimodal-отчёты |
 
 ---
 
@@ -114,4 +122,4 @@ docs/
 
 ---
 
-*Последнее обновление навигатора: 2026-06-25*
+*Последнее обновление навигатора: 2026-07-11 (sprint-10 multimodal-rag закрыт)*

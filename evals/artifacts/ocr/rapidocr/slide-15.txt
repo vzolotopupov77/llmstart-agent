@@ -1,0 +1,15 @@
+# slide-15
+# source: OCR rapidocr (slide-15.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+opo>kHaa KapTa Al-first
+AI
+TpaHcoopmaLnn:
+5 cTyneHen
+poMbIWneHHbIN
+ypoBeHb — production
+3anycK npoAyKToB — vibe coding
+MacWTa6npoBaHNe — KOMaHAa
+CBON pON areHTOB — CИCTeMa
+epBble 山ar — kpyr030p
+LLMSTART.RU
+15

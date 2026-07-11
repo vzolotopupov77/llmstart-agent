@@ -1,0 +1,17 @@
+# slide-26
+# source: OCR rapidocr (slide-26.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+Иtor Ctynehe 1+2
+Yto ymeete tenepb
+ΦopMaTbl nporpaMMbl
+C-Level · Ton-meHenKmeHT
+TekCT W KOHTeht
+Pa6oTa C AaHHbIMИ
+KoMaHAbI И OTAenbl
+annaHbI
+KopnopaTNBHbIN KaCTOM
+Be3onacHocTb
+6e3 k0na
+llmstart.ru/b2b
+LLMSTART.RU
+26

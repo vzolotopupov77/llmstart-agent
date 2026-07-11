@@ -1,0 +1,19 @@
+# slide-03
+# source: OCR rapidocr (slide-03.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+TIPOrPAMMA CErOLHA
+4 CTaHLNN
+4
+2
+3
+KAK
+KEMCbI
+ABNrATbCA
+AOPOXKHAA
+nOYEMy
+AAJbWE
+KAPTA
+CEИYAC
+5 CTynEHEN
+LLMSTART.RU
+3

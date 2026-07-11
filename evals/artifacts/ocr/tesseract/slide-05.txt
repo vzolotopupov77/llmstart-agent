@@ -1,0 +1,7 @@
+# slide-05
+# source: OCR tesseract (slide-05.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+ИНТЕЛЛЕКТ СТАЛ МАСШТАБИРУЕМЫМ РЕСУРСОМ
+& oa | eer
+СЫ „о 28 | \\ АСЕМТ
+IntennekTt on demand

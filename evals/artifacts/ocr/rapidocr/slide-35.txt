@@ -1,0 +1,20 @@
+# slide-35
+# source: OCR rapidocr (slide-35.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+Kevc: Pa3pa6oTyNkn O
+Bapbep: CTa6nnbHbIN nOBTOpAeMblN pe3ynbTaT
+AO:pa3OBblenpoTOTNnbl
+nOCnE:cVCTeMa
+Fuzzy.
+Unstable
+Unstable
+npototy
+npotOr
+Unstable
+npOTOTNnbl
+npoTOTynBbI
+Disappear
+Fuzzy,
+fuzzy..
+LLMSTART.RU·KoMnaHWA-pa3pa6oTyNKO
+35

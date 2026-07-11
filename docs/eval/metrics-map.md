@@ -159,6 +159,28 @@
 
 ---
 
+### multimodal-rag (sprint-10) ✅
+
+> **Реализовано:** sprint-10 Task 02–08 · **Финальный отчёт:** [multimodal-final.md](../../evals/reports/multimodal-final.md)  
+> **Baseline:** [multimodal-baseline.md](../../evals/reports/multimodal-baseline.md)  
+> **Sprint metric map:** [metric_map.md](../sprints/sprint-10-multimodal-rag/metric_map.md)
+
+| Метрика | Сегменты | Слой | Тип | Примечание |
+|---|---|---|---|---|
+| `recall_at_k` | S1, S2, S3 | retrieval | NUMERIC 0–1 | Любой `required_slides` в top-k |
+| `ndcg_at_5` | S1, S2, S3 | retrieval | NUMERIC 0–1 | Не для S5 |
+| `mrr` | S1, S2, S3 | retrieval | NUMERIC 0–1 | |
+| `set_recall_at_k` | S4 | retrieval | NUMERIC 0–1 | Доля найденных required slides |
+| `trap_slide_in_topk` | S5 | retrieval (diag) | NUMERIC 0–1 | Не primary; ловушечный слайд в top-k |
+| **`correct_refusal_rate`** | **S5** | **generation/behavior** | NUMERIC 0–1 | **Primary S5** — отказ без выдумки |
+| `answer_correctness` | S1–S4 | generation (опц.) | NUMERIC 0–1 | GEval, Task 03+ |
+| **CER** | A/OCR | ingestion-quality | NUMERIC | Task 04, не в retrieval-скор |
+| **TEDS** | D/multivector | ingestion-quality | NUMERIC | Task 07, слайды 10/11 |
+
+**Агрегация:** только по сегменту (S1_text … S5_unanswerable), не macro-average по корпусу.
+
+---
+
 ## Кастомные метрики (E-17г)
 
 | Метрика | ADR | Статус |

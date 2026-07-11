@@ -1,0 +1,19 @@
+# slide-01
+# source: OCR rapidocr (slide-01.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+LLMSTART.RU
+1.epBblewarn
+CBOMpon
+areHTO8
+3.MacWTa6MpoBaHNe
+43anycKnpoAyKTOB
+npOMbIWneHHbI
+ypoBeHb
+v1.0
+BETA
+AopokHaAKapta
+Al-first
+6n3Heca
+TpaHcOopmaunn
+OT nepBOrO 3HaKoMcTBa c ИИ no production-ready cMcTem
+KoHΦepeHung1C·8anpenA2026

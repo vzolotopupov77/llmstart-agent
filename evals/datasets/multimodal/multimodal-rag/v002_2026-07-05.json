@@ -1,0 +1,366 @@
+{
+  "dataset": "multimodal-rag",
+  "group": "rag",
+  "version": "v002",
+  "created": "2026-07-05",
+  "description": "Multimodal RAG segment eval (v002): post dataset-reviewer. S1–S4 use required_slides (gold); S5 uses trap_slides. Counts: S1=7, S2=9, S3=10, S4=6, S5=6 (38 items). Changelog: v002-changelog.md",
+  "embedding_model": "intfloat/multilingual-e5-base",
+  "embedding_dim": 768,
+  "top_k": 5,
+  "items": [
+    {
+      "id": "S1-1",
+      "segment": "S1_text",
+      "question": "Какая учёная степень указана у Сергея Смирнова?",
+      "reference_answer": "к.т.н.",
+      "required_slides": [2],
+      "required_facts": ["к.т.н."],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S1-2",
+      "segment": "S1_text",
+      "question": "Мы оцениваем экспертизу спикера: сколько его AI-проектов уже в production?",
+      "reference_answer": "12+",
+      "required_slides": [2],
+      "required_facts": ["12+", "production"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-v002", "slide_verified": true, "persona": "hr-evaluator"}
+    },
+    {
+      "id": "S1-3",
+      "segment": "S1_text",
+      "question": "Какой процент начинающих специалистов, по цитате Amodei, исчезнет с рынка труда?",
+      "reference_answer": "50%",
+      "required_slides": [8],
+      "required_facts": ["50%", "начинающих"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S1-4",
+      "segment": "S1_text",
+      "question": "Какая формула превращает 1С-специалиста в отраслевого AI-эксперта?",
+      "reference_answer": "1С-специалист + ИИ = отраслевой AI-эксперт",
+      "required_slides": [13],
+      "required_facts": ["1С-специалист", "ИИ", "отраслевой AI-эксперт"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S1-5",
+      "segment": "S1_text",
+      "question": "Сколько побед в ИИ-хакатонах указано у автора?",
+      "reference_answer": "6",
+      "required_slides": [2],
+      "required_facts": ["6", "хакатон"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S1-6",
+      "segment": "S1_text",
+      "question": "Во сколько раз эффективнее «Кандидат с ИИ», чем «Кандидат без ИИ», по правилу на слайде 27?",
+      "reference_answer": "10x (в 10 раз)",
+      "required_slides": [27],
+      "required_facts": ["10", "10x"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-v002", "slide_verified": true}
+    },
+    {
+      "id": "S1-7",
+      "segment": "S1_text",
+      "question": "Сколько Skills указано в пайплайне «Данные → Ассистент → Результат» на слайде 21?",
+      "reference_answer": "3",
+      "required_slides": [21],
+      "required_facts": ["3", "Skills"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-v002", "slide_verified": true}
+    },
+    {
+      "id": "S2-1",
+      "segment": "S2_chart",
+      "question": "В какой области автоматизации в РФ самый высокий процент — и сколько?",
+      "reference_answer": "Документооборот — 70%",
+      "required_slides": [11],
+      "required_facts": ["Документооборот", "70%"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S2-2",
+      "segment": "S2_chart",
+      "question": "На сколько процентов снижается ФОТ на поддержке по данным СберАналитики?",
+      "reference_answer": "30–40%",
+      "required_slides": [11],
+      "required_facts": ["30–40%", "ФОТ", "поддерж"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S2-3",
+      "segment": "S2_chart",
+      "question": "Какой процент автономности ИИ в 2026 году на кривой Epoch AI?",
+      "reference_answer": "~45%",
+      "required_slides": [9],
+      "required_facts": ["45%", "2026"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S2-4",
+      "segment": "S2_chart",
+      "question": "Какова доля кода, написанного AI, по данным Google Q4 2025?",
+      "reference_answer": "~50%",
+      "required_slides": [9],
+      "required_facts": ["50%", "Google"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S2-5",
+      "segment": "S2_chart",
+      "question": "Какой процент трат на персонал указан в кейсе «Финансовые данные» (Э1)?",
+      "reference_answer": "45%",
+      "required_slides": [18],
+      "required_facts": ["персонал", "45%"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S2-6",
+      "segment": "S2_chart",
+      "question": "Какой процент компаний не выходит за рамки пилота (McKinsey)?",
+      "reference_answer": "88%",
+      "required_slides": [49],
+      "required_facts": ["88%"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S2-7",
+      "segment": "S2_chart",
+      "question": "На сколько секунд сократилось время поиска ответа в кейсе RUTUBE?",
+      "reference_answer": "7 сек",
+      "required_slides": [54],
+      "required_facts": ["7 сек"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S2-8",
+      "segment": "S2_chart",
+      "question": "Какова точность поиска по корпоративной базе в кейсе MediaWise?",
+      "reference_answer": "85%+",
+      "required_slides": [58],
+      "required_facts": ["85%+"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S2-9",
+      "segment": "S2_chart",
+      "question": "Какой процент компаний уже используют ИИ-агентов — крупная цифра на слайде 10?",
+      "reference_answer": "72%",
+      "required_slides": [10],
+      "required_facts": ["72%"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-v002", "slide_verified": true}
+    },
+    {
+      "id": "S3-1",
+      "segment": "S3_layout",
+      "question": "Какая четвёртая ступень на свитке титульного слайда?",
+      "reference_answer": "Запуск продуктов",
+      "required_slides": [1],
+      "required_facts": ["4", "Запуск продуктов"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S3-2",
+      "segment": "S3_layout",
+      "question": "Сколько «станций» в программе и какая вторая по порядку?",
+      "reference_answer": "4 станции; вторая — «Дорожная карта 5 ступеней»",
+      "required_slides": [3],
+      "required_facts": ["4", "Дорожная карта 5 ступеней"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S3-3",
+      "segment": "S3_layout",
+      "question": "Какие два пути ведут к «СТАРТ» на слайде 4?",
+      "reference_answer": "Путь 1: учредитель видит рынок; Путь 2: сотрудник принёс результат",
+      "required_slides": [4],
+      "required_facts": ["учредитель", "сотрудник"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S3-4",
+      "segment": "S3_layout",
+      "question": "Какая пятая ступень дорожной карты — верх лестницы на слайде 15?",
+      "reference_answer": "Промышленный уровень — production",
+      "required_slides": [15],
+      "required_facts": ["Промышленный уровень", "production"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S3-5",
+      "segment": "S3_layout",
+      "question": "Разработчик спрашивает: что на слайде 16 нарисовано «зонтиком» над темами первой ступени?",
+      "reference_answer": "Cursor",
+      "required_slides": [16],
+      "required_facts": ["Cursor"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-v002", "slide_verified": true, "persona": "developer"}
+    },
+    {
+      "id": "S3-6",
+      "segment": "S3_layout",
+      "question": "Какой квадрант матрицы 2×2 выделен для приоритизации пилотов?",
+      "reference_answer": "Высокая ценность + низкая сложность (верхний левый)",
+      "required_slides": [32],
+      "required_facts": ["ценность", "сложность"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S3-7",
+      "segment": "S3_layout",
+      "question": "Какой компонент идёт сразу после Agent Loop в ядре агента (айсберг)?",
+      "reference_answer": "Tools",
+      "required_slides": [50],
+      "required_facts": ["Agent Loop", "Tools"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S3-8",
+      "segment": "S3_layout",
+      "question": "Сколько уровней под водой в схеме production-системы?",
+      "reference_answer": "3 (Уровень 1–3)",
+      "required_slides": [50],
+      "required_facts": ["3", "Уровень"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S3-9",
+      "segment": "S3_layout",
+      "question": "На каком слое LiteLLM Proxy в корпоративной ИИ-платформе и что он маршрутизирует?",
+      "reference_answer": "Layer 2 — роутинг, fallback, контроль стоимости, снятие vendor lock-in",
+      "required_slides": [38],
+      "required_facts": ["LiteLLM Proxy", "Layer 2"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S3-10",
+      "segment": "S3_layout",
+      "question": "Сколько зелёных hub-нод «лидеров» на графе после хакатона?",
+      "reference_answer": "5",
+      "required_slides": [30],
+      "required_facts": ["5", "лидер"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S4-1",
+      "segment": "S4_multi",
+      "question": "Перечисли все 5 ступеней дорожной карты AI-first трансформации по порядку",
+      "reference_answer": "1) Первые шаги — кругозор; 2) Свой рой агентов — система; 3) Масштабирование — команда; 4) Запуск продуктов — vibe coding; 5) Промышленный уровень — production",
+      "required_slides": [15],
+      "required_facts": ["кругозор", "рой агентов", "Масштабирование", "vibe coding", "production"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-v002", "slide_verified": true, "multi_type": "cross_slide"}
+    },
+    {
+      "id": "S4-2",
+      "segment": "S4_multi",
+      "question": "Как в блоке ступени 3 раскрыта модель Коттера — от формирования коалиции до закрепления культуры?",
+      "reference_answer": "Коалиция: сеть AI Champions, весы рисков (шаг 2). Коммуникация: 4 концентрических слоя (шаг 4). Препятствия: 6 барьеров — доступ к данным, утечка, расходы, вендор, права, инъекции (шаг 5). Культура / AI Governance: схема «храм» (шаг 8). Обзор всех 8 шагов — айсберг-схема.",
+      "required_slides": [28, 29, 34, 37, 40],
+      "required_facts": ["Срочность", "Коалиция", "Коммуникация", "Препятствия", "Культура", "AI Champions", "4 слоя", "Governance"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-v002", "slide_verified": true, "multi_type": "cross_slide"}
+    },
+    {
+      "id": "S4-3",
+      "segment": "S4_multi",
+      "question": "Назови два кейса из блока поисковых ассистентов и время поиска до и после внедрения",
+      "reference_answer": "МФЦ Санкт-Петербурга: 1–5 мин → 1 сек; RUTUBE: 3–10 мин → 7 сек",
+      "required_slides": [53, 54],
+      "required_facts": ["МФЦ", "1–5 мин", "1 сек", "RUTUBE", "7 сек"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-v002", "slide_verified": true, "multi_type": "cross_slide", "persona": "case-analyst"}
+    },
+    {
+      "id": "S4-4",
+      "segment": "S4_multi",
+      "question": "Какие пять тем программы на слайде 43 и какие три формата обучения?",
+      "reference_answer": "Темы: AI-driven разработка, Промпт-инжиниринг, RAG, Агенты, Качество. Форматы: 1 день, 1 неделя, 1 месяц",
+      "required_slides": [43],
+      "required_facts": ["RAG", "Агенты", "1 день", "1 неделя", "1 месяц"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true, "multi_type": "single_slide_dense"}
+    },
+    {
+      "id": "S4-5",
+      "segment": "S4_multi",
+      "question": "Какие пять итоговых элементов компании после ступени 3?",
+      "reference_answer": "Команда; Стратегия; Процессы; Платформа; База практик",
+      "required_slides": [41],
+      "required_facts": ["Команда", "Стратегия", "Процессы", "Платформа", "База практик"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true, "multi_type": "single_slide_dense"}
+    },
+    {
+      "id": "S4-6",
+      "segment": "S4_multi",
+      "question": "Какие четыре этапа траектории LLMStart от пилота до production?",
+      "reference_answer": "1) Интенсив AI-кодинг; 2) AI-driven Fullstack; 3) Агенты; 4) Deep Agents",
+      "required_slides": [51],
+      "required_facts": ["Интенсив", "Fullstack", "Агенты", "Deep Agents"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true, "multi_type": "single_slide_dense"}
+    },
+    {
+      "id": "S5-1",
+      "segment": "S5_unanswerable",
+      "question": "Сколько компаний опрошено в исследовании Zapier (размер выборки)?",
+      "reference_answer": "Ответа в корпусе нет — указан только источник Zapier State of Agentic AI Survey 2025",
+      "trap_slides": [10],
+      "required_facts": ["отказ", "выборка не указана"],
+      "expected_behavior": "refusal",
+      "must_not_invent": ["число компаний", "размер выборки", "N="],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S5-2",
+      "segment": "S5_unanswerable",
+      "question": "Сколько стоит корпоративная подписка Cursor — нам нужна цифра для бюджета?",
+      "reference_answer": "Ответа в корпусе нет",
+      "trap_slides": [23],
+      "required_facts": ["отказ", "цена не указана"],
+      "expected_behavior": "refusal",
+      "must_not_invent": ["$", "руб", "стоимость подписки"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-v002", "slide_verified": true, "persona": "procurement"}
+    },
+    {
+      "id": "S5-3",
+      "segment": "S5_unanswerable",
+      "question": "Какие именно три пилотных проекта выбраны в AI-стратегии банка?",
+      "reference_answer": "Ответа в корпусе нет — указано только «3 пилота для апробации»",
+      "trap_slides": [33],
+      "required_facts": ["отказ", "названия пилотов не указаны"],
+      "expected_behavior": "refusal",
+      "must_not_invent": ["название пилота", "проект 1"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S5-4",
+      "segment": "S5_unanswerable",
+      "question": "Какой средний ROI в рублях у кейса МФЦ Санкт-Петербурга?",
+      "reference_answer": "Ответа в корпусе нет — есть только время поиска",
+      "trap_slides": [53],
+      "required_facts": ["отказ", "ROI не указан"],
+      "expected_behavior": "refusal",
+      "must_not_invent": ["ROI", "руб", "окуп"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S5-5",
+      "segment": "S5_unanswerable",
+      "question": "Сколько месяцев занимает переход от ступени 2 к ступени 3?",
+      "reference_answer": "Ответа в корпусе нет — сроки не заданы",
+      "trap_slides": [15, 27],
+      "required_facts": ["отказ", "сроки не указаны"],
+      "expected_behavior": "refusal",
+      "must_not_invent": ["месяц", "недел", "срок"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    },
+    {
+      "id": "S5-6",
+      "segment": "S5_unanswerable",
+      "question": "Какая LLM-модель используется в банковском ИИ-агенте?",
+      "reference_answer": "Ответа в корпусе нет — указаны только «локальные модели»",
+      "trap_slides": [61],
+      "required_facts": ["отказ", "модель не названа"],
+      "expected_behavior": "refusal",
+      "must_not_invent": ["GPT", "Llama", "модель"],
+      "metadata": {"source": "synthetic", "gt_quality": "verified", "reviewed_by": "sprint-10-task-02", "slide_verified": true}
+    }
+  ]
+}

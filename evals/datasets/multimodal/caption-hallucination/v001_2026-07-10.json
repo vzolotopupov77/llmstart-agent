@@ -1,0 +1,34 @@
+{
+  "version": "v001",
+  "created": "2026-07-10",
+  "comment": "S2 chart slides — key numbers for VLM caption hallucination check (PNG-verified)",
+  "slides": [
+    {
+      "slide_id": 10,
+      "segment": "S2_chart",
+      "key_numbers": [
+        {"value": "72%", "label": "компаний используют/тестируют ИИ-агентов"},
+        {"value": "49%", "label": "Поддержка клиентов"},
+        {"value": "47%", "label": "Операции"},
+        {"value": "35%", "label": "Разработка"},
+        {"value": "31%", "label": "Маркетинг"},
+        {"value": "30%", "label": "HR"},
+        {"value": "84%", "label": "планируют увеличить инвестиции в 2026"}
+      ]
+    },
+    {
+      "slide_id": 11,
+      "segment": "S2_chart",
+      "key_numbers": [
+        {"value": "39%", "label": "заголовок: ИИ в компаниях России"},
+        {"value": "70%", "label": "Документооборот"},
+        {"value": "55%", "label": "Бухгалтерия"},
+        {"value": "34%", "label": "HR"},
+        {"value": "30%", "label": "Поддержка"},
+        {"value": "45%", "label": "быстрее выполнение задач"},
+        {"value": "-37%", "label": "ручного труда"},
+        {"value": "-30-40%", "label": "ФОТ на поддержке", "alternatives": ["-30%", "-40%", "30-40%", "30–40%"]}
+      ]
+    }
+  ]
+}

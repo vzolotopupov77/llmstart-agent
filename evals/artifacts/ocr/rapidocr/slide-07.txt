@@ -1,0 +1,7 @@
+# slide-07
+# source: OCR rapidocr (slide-07.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+D
+Bbl2ngdum npae0onodo6ho...
+LLMSTART.RU
+7

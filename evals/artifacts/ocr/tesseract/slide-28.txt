@@ -1,0 +1,8 @@
+# slide-28
+# source: OCR tesseract (slide-28.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+Ступень 3: Трансформируем организацию
+Модель Коттера — 8 шагов
+МИ
+< — AYA ) NU )
+LLMSTART.RU 28

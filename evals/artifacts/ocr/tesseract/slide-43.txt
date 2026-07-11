@@ -1,0 +1,11 @@
+# slide-43
+# source: OCR tesseract (slide-43.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+5 ключевых тем - Выберите формат
+=) о
+OF га || GY и
+и > нь Q mas hE >
+abi! Промпт- RAG Агенты Качество
+SEES инжиниринг Поиск по Автономные Тестирование
+Методология Точность, цепочки знаниям агенты
+LLMSTART.RU LLMSTART.RU 43

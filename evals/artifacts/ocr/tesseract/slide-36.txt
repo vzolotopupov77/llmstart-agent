@@ -1,0 +1,12 @@
+# slide-36
+# source: OCR tesseract (slide-36.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+Маркетинг-команда: живая база знаний
+ПРОШЛИ И ЗАБЫЛИ Ne {> > ЖИВАЯБАЗА \
+В ai ББ = `` 4 {В NY g wt
+| | = } LOCAL AY обо
+Е `\ 777 — (регзопа! а VW (
+. м ) ‘ CaN > () TEAM repo
+> tar 1 :
+Не «прошли и забыли» — промпты : шаблоны : подходы пополняют базу
+LLMSTART.RU . Маркетинг-команда 36

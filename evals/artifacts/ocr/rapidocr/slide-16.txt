@@ -1,0 +1,16 @@
+# slide-16
+# source: OCR rapidocr (slide-16.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+CTyneHb 1: epBOe 3HaKOMCTBO
+ИИ — KaK o4eHb cnoco6HbIN HoBbIN coTpyAHnK
+Cursor
+A3blkOBble
+NoKanbHbiM
+3kocncTeMa
+ABTOMATN3ALNA
+Vibe-coding
+mOnenn
+NN
+aa  o i -    :
+LLMSTART.RU
+16

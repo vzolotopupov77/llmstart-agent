@@ -1,0 +1,11 @@
+# slide-02
+# source: OCR rapidocr (slide-02.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+KTO A
+Cepre CMNpHOB, K.T.H.
+OcHOBaTeb LLMStart.ru
+20+ neT pa3pa6oTKa · 10+ neT ИИ
+12+ Al-npoeKToB B production
+6 no6e B NИ-xaKaTOHax
+LLMSTART.RU
+2

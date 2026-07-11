@@ -1,0 +1,16 @@
+# slide-36
+# source: OCR rapidocr (slide-36.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+MapKeTNHr-KOMaHAa: KNBaA 6a3a 3HaHNN
+nPOWNN N 3A6bISM
+KИBAA 6A3A
+信
+LOCAL
+(personal
+prompts
+TEAMrepo
+folder)
+TpeHNHr npowen → 3HaHNA NCnapNnNcb
+KaKAbIN BKnan -oCTaeTCA HaBCerna
+LLMSTART.RU·MapKeTVHr-KOMaHna
+36

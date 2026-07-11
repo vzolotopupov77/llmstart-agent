@@ -1,0 +1,3 @@
+# slide-66
+# source: PDF text layer (slide-01.pdf, page 66)
+# status: empty (image-only slide)

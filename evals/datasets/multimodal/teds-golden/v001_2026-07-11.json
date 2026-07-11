@@ -1,0 +1,10 @@
+{
+  "version": "v001",
+  "created": "2026-07-11",
+  "comment": "PNG-verified chart slide layout for TEDS; manual HTML structure",
+  "formula": "TEDS = 1 - TED(tree_ref, tree_hyp) / max(|tree_ref|, |tree_hyp|)",
+  "slides": [
+    {"slide_id": 10, "segment": "S2_chart", "ref_file": "refs/slide-10.html"},
+    {"slide_id": 11, "segment": "S2_chart", "ref_file": "refs/slide-11.html"}
+  ]
+}

@@ -1,0 +1,25 @@
+# slide-56
+# source: OCR rapidocr (slide-56.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+ИИ-acCHcTeHT raBHOrO arpoHoMa 《pyHTHK》>
+「K porpeccArpo·5ooO+ coTpyAHMkoB
+100%
+ArpoHoMCT
+transcription/structuring→cleandatabase
+CpeKaHKNΦOTO,
+Hnanpounnnpo
+TenerpaM.
+KAyECTBOHaBanNnALNOHHOM
+Fonoc
+AaTacete
+ΦOTOll
+TeKCT
+3-7x
+okynaeMocTb 3a nepBblN ron
+Report
+>40%
+3KOHOMNABpeMEHN
+rnaBHOrOarpOHOMa
+before
+LLMSTART.RU·「K porpeccArpo
+56

@@ -1,0 +1,11 @@
+# slide-48
+# source: OCR tesseract (slide-48.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+СТУПЕНЬ 5: СТАБИЛЬНЫЕ РЕЛЬСЫ
+МУР — начало, не финал
+‘@s
++ 6 ъ SP map
+DESIGN CODE TEST DEPLOY MONITOR
+|
+1 СПЕЦИАЛИСТ = РЕЗУЛЬТАТ КОМАНДЫ
+LLMSTART.RU 48

@@ -1,0 +1,10 @@
+# slide-50
+# source: OCR tesseract (slide-50.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+ЗА ДИАЛОГОМ — PRODUCTION-CUCTEMA
+Агент снаружи — чат. Внутри — система.
+7“
+ЧАТБОТ / АГЕНТ
+ee ee
+YPOBEHb 2 ” о ° Интеграции
+LLMSTART.RU 50

@@ -2,7 +2,7 @@
 
 > **Создаётся:** задача 02 sprint-eval-01 · **Методология:** [.methodology/eval/eval-methodology.md](../../.methodology/eval/eval-methodology.md)
 > **Статус:** ✅ утверждена пользователем / 2026-06-14; дополнена sprint-09 / 2026-06-26
-> **Последнее обновление:** 2026-06-26
+> **Последнее обновление:** 2026-07-11 (sprint-10 multimodal-rag закрыт)
 
 ---
 
@@ -180,6 +180,25 @@
 
 ---
 
+### rag/multimodal-rag
+
+| Поле | Значение |
+|---|---|
+| **Группа (слой)** | rag *(sprint-10 R&D; не bot pre-purchase — см. «Не покрываем»)* |
+| **Что проверяет** | Slide-level retrieval по 5 сегментам визуально-плотного корпуса (66 PNG презентации): plain text, chart numbers, layout, multi-slide synthesis, unanswerable/refusal. Сравнение методов индексации A–D — **по сегментам**, не общий средний. |
+| **Обоснование** | Sprint-10: корпус с текстом в картинке; naive PDF baseline ослепнет на S2/S3 — нужен сегментный eval-датасет и north-star метрики до Task 03+. Не входит в матрицу vision С-1…С-11. |
+| **Источник items** | synthetic: `docs/sprints/sprint-10-multimodal-rag/analysis.md` (100%) · PNG-verified эталоны · dataset-reviewer → v002 |
+| **Схема item** | input: `question` · expected_output: `reference_answer`, `required_facts[]` · gold: `required_slides[]` (S1–S4) или `trap_slides[]` (S5) · metadata: `segment` (S1_text…S5_unanswerable), `multi_type`, `persona`, `gt_quality`, `reviewed_by`, `slide_verified` |
+| **Размер (MVP)** | **38** (v002, 2026-07-05): S1=7, S2=9, S3=10, S4=6, S5=6 |
+| **Ground truth** | verified — только видимое содержимое PNG; speaker notes не участвуют |
+| **Предполагаемый тип проверки** | детерминированная retrieval (Recall@k, set-Recall@k, MRR, nDCG@5 по сегменту) + generation опц. (`correct_refusal_rate` для S5) |
+| **Файл** | [`evals/datasets/multimodal/multimodal-rag/v002_2026-07-05.json`](../../evals/datasets/multimodal/multimodal-rag/v002_2026-07-05.json) · [README](../../evals/datasets/multimodal/multimodal-rag/README.md) · [changelog v002](../../evals/datasets/multimodal/multimodal-rag/v002-changelog.md) |
+| **Metric map** | [`docs/sprints/sprint-10-multimodal-rag/metric_map.md`](../sprints/sprint-10-multimodal-rag/metric_map.md) |
+| **Baseline-отчёт** | [`evals/reports/multimodal-baseline.md`](../../evals/reports/multimodal-baseline.md) — v002, 2026-07-05 |
+| **Финальный отчёт** | [`evals/reports/multimodal-final.md`](../../evals/reports/multimodal-final.md) — 7 конфигураций × 5 сегментов, вердикт C default (2026-07-11) |
+
+---
+
 ## Маппинг legacy v2 → eval-датасеты
 
 | Legacy `metadata.dataset_type` (v2) | Eval-датасет | Примечание |
@@ -205,6 +224,7 @@
 | **Многоходовые диалоги >4 реплик** | Короткий корпус; funnel — отдельно через user simulation |
 | **Негативный отказ «навсегда ушёл»** | Редко в данных; низкий приоритет до error analysis |
 | **Полное покрытие 72 B2C items в eval-01** | Vertical slice: только `e2e-qa` ≥20; остальное — sprint eval-02 |
+| **Multimodal slide-RAG в матрице С-1…С-11** | Отдельный R&D-трек sprint-10 (`rag/multimodal-rag`); не pre-purchase bot eval |
 
 ---
 
@@ -221,6 +241,7 @@
 | 7 | `behavior/funnel-to-lead` + `scenarios.yaml` | eval-04 | user simulation (E-23) |
 | 8 | **graphrag/multi-hop** | sprint-09, задача 02 | ✅ `v002_2026-06-26.yaml` — baseline зафиксирован |
 | 9 | **graphrag/global** | sprint-09, задача 02 | ✅ `v001_2026-06-26.yaml` — baseline зафиксирован |
+| 10 | **rag/multimodal-rag** | sprint-10, задачи 02–08 | ✅ `v002_2026-07-05.json` + [final report](../../evals/reports/multimodal-final.md) |
 
 **Зеркалирование Langfuse (E-16):** folders-as-versions — `e2e/e2e-qa/v001`, …
 

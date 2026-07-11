@@ -1,0 +1,17 @@
+config_id: multimodal-b-caption
+comment: "DEPRECATED — use multimodal-b-caption-nemotron.yaml or multimodal-b-caption-gemini.yaml"
+
+dataset: evals/datasets/multimodal/multimodal-rag/v002_2026-07-05.json
+
+indexer:
+  method: b_caption
+  corpus_dir: data/multimodal-rag
+  artifact_dir: evals/artifacts/captions/nemotron-nano-12b-v2-vl
+  caption_model: nvidia/nemotron-nano-12b-v2-vl:free
+
+retrieval:
+  collection: multimodal_caption_nemotron_v002
+  embedding_model: intfloat/multilingual-e5-base
+  embedding_dim: 768
+  top_k: 5
+  qdrant_url: http://localhost:6333

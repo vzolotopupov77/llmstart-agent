@@ -1,0 +1,13 @@
+# slide-48
+# source: OCR rapidocr (slide-48.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+CTYEHb5:CTA6WNbHbIEPENbCbI
+MVP-Hayano,HeNHan
+DESIGN
+CODE
+TEST
+DEPLOY
+MONITOR
+1 CnELNAnNCT = PE3yNbTAT KOMAHAbI
+LLMSTART.RU
+48

@@ -72,3 +72,5 @@ data/.chroma/
 *.draft.md
 
 data/real_data/
+leads.txt
+payments.json

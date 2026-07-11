@@ -1,0 +1,22 @@
+# slide-21
+# source: OCR rapidocr (slide-21.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+CTyneHb 2: CnCTeMaTN3aLNA
+HaBbIKN areHTa (SkillIs)
+aИnnaNHbI 6e3 KOna · PoneBble aCCUCTeHTbl
+CkpbIToe opy>xne
+PenakTOp
+cO3naewb onNHpa3-
+pa6oTaeT Bcerna
+AHanNTUK
+co3naewbonnpa3-
+aHHble
+AccHcTeHT
+Pe3ynbTaT
+pa6oTaeT Bcerna
+MeHeAxep
+Kon He Hy>KeH
+co3paewbonnhpa3-
+pa6oTaeT Bcerna
+LLMSTART.RU
+21

@@ -1,0 +1,26 @@
+# slide-50
+# source: OCR rapidocr (slide-50.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+3A NAJIOrOM - PRODUCTION-CNCTEMA
+AreHT CHapy>KИ — 4aT. BHyTpN — CИCTeMa.
+YAT6OT / ArEHT
+Agent
+YPOBEHb 1
+LLM
+Tools
+RAG
+Vector DB
+Aapo areHTa
+Loop
+yPOBEHb 2
+MCP
+CRM
+ERP
+teo
+VHTerpauNN
+KayeCTBO·MoHNTOpNHr·
+yPOBEHb 3
+Evaluation· Observability· Guards· Memory· Skills Library
+Be3OnaCHOcTb·aMATb
+LLMSTART.RU
+50

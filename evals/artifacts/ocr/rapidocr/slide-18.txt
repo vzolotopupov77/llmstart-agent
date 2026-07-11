@@ -1,0 +1,24 @@
+# slide-18
+# source: OCR rapidocr (slide-18.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+KeUcbI З1: ИM KaK NyHbIN aHanNTNK
+OANHpOMnT —W AaHHbIe OXИBaIOT
+Excel / CRM
+KoHBepCUA nO KOrOpTaM
+AaHHbIe
+3a OANH nPOmnT
+ΦNHaHCOBble
++ KaTeropN3aLnA Tpat
+AaHHbIe
+nO CTaTbAm: MapKeTИHr 32% · nepcOHan 45%
+Deep Research:
++ Ta6nNua KOHKypeHTOB
+5 4aCOB TyrneHNA
+12 koMnaHn · 8 napaMeTpoB
+54acOB
+AI
+Claude
+ChatGPT
+Perplexity
+LLMSTART.RU
+18

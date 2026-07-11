@@ -1,0 +1,29 @@
+# slide-10
+# source: OCR rapidocr (slide-10.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+KAK KOMnAHNN Y>KE NCnOnb3YIOT NN-ArEHTOB
+KaKHe OTAenbl
+72%
+84%
+BHeApAIOT ИИ-areHTOB?
+OAAepXKa KnNeHTOB-
+49%
+Onepaunn-
+47%
+KOMnaHNN aKTИBHO
+naHNpyIOT
+ИCnOnb3yIOT NnN
+35%
+yBenNYNTb
+Pa3pa6oTka—
+TecTHpyIOT
+NHBECTNLNN
+ИV-areHTOB
+MapkeTNHr-
+31%
+B ИИ-areHTOB B 2026
+HR —
+30%
+ZapierStateofAgenticAlSurvey,2025
+LLMSTART.RU
+10

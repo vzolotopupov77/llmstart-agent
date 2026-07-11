@@ -164,11 +164,16 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
     healthcheck:
-      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:6333/healthz || exit 1"]
+      # qdrant image has no curl/wget; TCP probe via bash /dev/tcp
+      test:
+        [
+          "CMD-SHELL",
+          "timeout 3 bash -c 'cat < /dev/null > /dev/tcp/127.0.0.1/6333' || exit 1",
+        ]
       interval: 5s
       timeout: 5s
       retries: 10
-      start_period: 10s
+      start_period: 30s
 
   pgvector:
     image: pgvector/pgvector:pg17

@@ -1,0 +1,18 @@
+# slide-64
+# source: OCR rapidocr (slide-64.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+TpN cnoco6a ABHraTbcA Bnepe
+TpeHNHrN
+TpaHcΦopmauNA
+Pa3pa6oTKa
+kypcbl
+И BHeApeHNe
+nOA KNIOY
+Al-TpaHcΦopMauna· Al-driven
+CTpaTerNg · AyANT ·
+AreHTbl·AcCMCTeHTbl·
+pa3pa6oTka·AreHTbl
+opoxHaA kapra
+Production-peweHNa
+LLMSTART.RU
+64

@@ -1,0 +1,24 @@
+# slide-25
+# source: OCR rapidocr (slide-25.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+Vibe-coding: npomnt → npoAyKT
+npoMnT
+Pa6oynN neHAnHr
+Cnena neHnИHr AnA Kypca no ИИ:
+Kypc no ИИ-pa3pa6oTke
+- TeMHaA TeMa
+- Φopma 3annc
+03:47:22
+- Taumep akuun
+3anncaTbcA
+2 MNHyTbl
+Ba3a 3HaHN
+3 uaca BMeCTo Lenoro AHA
+30 PDF-AOKyMeHTOB
+NotebookLM
+v0
+Bolt
+Lovable
+NotebookLM
+LLMSTART.RU
+25

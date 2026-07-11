@@ -1,0 +1,25 @@
+# slide-38
+# source: OCR rapidocr (slide-38.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+KopnopaTHBHaa ИИ-nnaTΦopMa
+LangFuse·Observability
+LLMGuard · Guardrails · RBAC
+LAYER O
+HR ·  MapKeTИHr · nponaXN · IT :  ΦnHaHCbl
+OpenWebUl / LibreChat
+LAYER 1
+eANHbIWHTep中eNCAIABCeXCOTPyAHNKOB
+LiteLLM Proxy
+LAYER 2
+poyTHHr
+fallback
+KOHTPOnbCTONMOCTH·HeT3aBHCHMOCTHOTBeHAOpa
+Ollama · NokanbHble Monenn +  Offline
+OpenRouter· Cloud API
+LAYER 3
+(OpenAl, Anthropic, DeepSeek)
+LAYER 4
+MCP
+CRM· ERP.C3
+LLMSTART.RU
+38

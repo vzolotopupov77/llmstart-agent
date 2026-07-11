@@ -1,0 +1,33 @@
+# Sprint-10 Task 04: OCR batch runners (not always-on services)
+# Usage: make ocr-build && make ocr-run-tesseract
+
+services:
+  ocr-tesseract:
+    build:
+      context: ./docker
+      dockerfile: ocr-tesseract/Dockerfile
+    volumes:
+      - ../data/multimodal-rag:/corpus:ro
+      - ../evals/artifacts/ocr/tesseract:/out:rw
+
+  ocr-easyocr:
+    build:
+      context: ./docker
+      dockerfile: ocr-easyocr/Dockerfile
+    volumes:
+      - ../data/multimodal-rag:/corpus:ro
+      - ../evals/artifacts/ocr/easyocr:/out:rw
+      - easyocr_models:/models
+    environment:
+      EASYOCR_MODULE_PATH: /models
+
+  ocr-rapidocr:
+    build:
+      context: ./docker
+      dockerfile: ocr-rapidocr/Dockerfile
+    volumes:
+      - ../data/multimodal-rag:/corpus:ro
+      - ../evals/artifacts/ocr/rapidocr:/out:rw
+
+volumes:
+  easyocr_models:

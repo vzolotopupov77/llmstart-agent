@@ -1,0 +1,22 @@
+# slide-51
+# source: OCR rapidocr (slide-51.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+TPAEKTOPNA LLMSTART
+OT NnoTa o production-cHcTembl
+3
+Deep
+Agents
+AreHTbl
+Al-driven
+3anyck
+MacWTa6
+Fullstack
+FoTOBHOCTbK
+ИHTEHCNB
+production
+AI-KOANHr
+OT NneN AO
+production
+Illmstart.ru/ai-agents-combo/
+LLMSTART.RU
+51

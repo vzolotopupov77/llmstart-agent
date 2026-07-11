@@ -1,0 +1,14 @@
+# slide-08
+# source: OCR rapidocr (slide-08.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+MAKCNMAnbHbIN
+CMPOC-HA TE6A
+eCnN TbI OTpacneBo Al-cneqNanNCT
+50%
+AIS
+HaYNHaIOWNX CneLNanNCTOB
+HCye3HyT C pbIHKa TpyAa
+3a1-5neT
+Dario Amodei, CEO Anthropic
+LLMSTART.RU
+8

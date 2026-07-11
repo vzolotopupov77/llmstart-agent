@@ -1,0 +1,18 @@
+config_id: multimodal-a-ocr-tesseract
+comment: "Sprint-10 Task 04: Tesseract OCR → e5 → Qdrant"
+
+dataset: evals/datasets/multimodal/multimodal-rag/v002_2026-07-05.json
+
+indexer:
+  method: a_ocr
+  corpus_dir: data/multimodal-rag
+  artifact_dir: evals/artifacts/ocr/tesseract
+  ocr_engine: tesseract
+  ocr_runtime: docker
+
+retrieval:
+  collection: multimodal_ocr_tesseract_v002
+  embedding_model: intfloat/multilingual-e5-base
+  embedding_dim: 768
+  top_k: 5
+  qdrant_url: http://localhost:6333

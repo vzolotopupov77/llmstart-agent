@@ -1,0 +1,11 @@
+# slide-17
+# source: OCR tesseract (slide-17.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+Учимся вождению,
+ане сборке автомобиля РУ | \
+Ширина важнее глубины
+Вождение
+Che от что нужно,
+(не Brae) Ch
+CSopka (не нужно) LOD Вождение (Gom что нужно) a
+Каждую задачу — сначала через ИИ

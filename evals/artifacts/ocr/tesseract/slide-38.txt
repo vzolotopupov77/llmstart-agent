@@ -1,0 +1,29 @@
+# slide-38
+# source: OCR tesseract (slide-38.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+Корпоративная ИИ-платформа
+
+1 |
+1 1
+1 1
+| LAYERO 39% НВ - № Маркетинг - М7 Продажи - ‚ИТ - & Финансы
+|
+
+| | | |
+1 В |
+ЕР OpenWebuUI / LibreChat
+| единый интерфейс для всех сотрудников ]
+1 1
+1 1
+р 7 !
+1 1
+| I Laver2 LiteLLM Proxy |
+| роутинг fallback контроль стоимости . нет зависимости от вендора |
+|
+| = ; й OpenRouter - Cloud АР! |
+LAYER3 288 + ОНата . Локальные модели + @ Offline <. АЕ Bees
+| LAYER 4 CRM - ERP - СЭД |
+1
+
+ae aR
+LLMSTART.RU

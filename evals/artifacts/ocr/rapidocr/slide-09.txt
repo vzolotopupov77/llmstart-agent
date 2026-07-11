@@ -1,0 +1,28 @@
+# slide-09
+# source: OCR rapidocr (slide-09.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+KoA y>Ke He rMaBHOe - ИИ 3aXBaTbIBaeT BeCb LHKn
+~50%
+porpeCC aBTOHOMHocTn ИN
+100%
+Kona HanNcaHo AI
+8-yac pa6 neHb
+Google, Q4 2025
+% completion
+70-100%
+AI
+ABTOHOMHOrOpeWeHNA
+Anthropic, nporH03 2026
+0
+30-40%
+2020
+202120222023202420252026
+2027
+2028
+PR c03AaHbI AI
+OT accncTeHTa-reHepaTopa →
+Microsoft/GitHub
+K aBTOHOMHOMy peWeHNIO nOnHOrO LNKna
+llmstart.ru
+VcTo4HNK:EpochAl,2025-epoch.ai/blog
+9

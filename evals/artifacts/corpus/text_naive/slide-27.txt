@@ -1,0 +1,3 @@
+# slide-27
+# source: PDF text layer (slide-01.pdf, page 27)
+# status: empty (image-only slide)

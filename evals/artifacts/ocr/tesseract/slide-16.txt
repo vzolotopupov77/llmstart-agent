@@ -1,0 +1,9 @@
+# slide-16
+# source: OCR tesseract (slide-16.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+Ступень 1: Первое знакомство
+a a
+| 4
+я Экосистема ete aa Автоматизация Vibe-coding
+Цель: за ~1 месяц — широкий кругозор и первые результаты
+LLMSTART.RU 16

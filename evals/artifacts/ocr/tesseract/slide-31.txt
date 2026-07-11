@@ -1,0 +1,9 @@
+# slide-31
+# source: OCR tesseract (slide-31.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+Кейс: Айтон
+Бриф > воркшоп: строим ИИ-ассистента
+До: брифинг ПОСЛЕ: воркшоп
+п. ты и. Ms)
+«Жизнь поделилась Ha дои после»
+LLMSTART.RU - Айтон 31

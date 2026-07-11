@@ -1,0 +1,11 @@
+# slide-14
+# source: OCR rapidocr (slide-14.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+FOHKAYKEHAYANACb
+XAOTNYHbIN
+CHCTEMHbIN
+npo6yet
+BCeOP
+o6eAHT He rpoMKn - a cHcTeMHbIN
+LLMSTART.RU
+14

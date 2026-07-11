@@ -1,0 +1,14 @@
+# slide-53
+# source: OCR rapidocr (slide-53.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+《ИN-accncTeHT onepaTopa MΦL》
+MΦL CaHkT-eTep6ypra
+1-5 mnH -> 1 cek
+1 CEK
+BpeMA nONCKa OTBeTa
+HOBNYOK = OnbITHbIN
+CHNXeHNenoporaBxona
+BeAyWne cneunanncTbl
+OCBO6oAWnNCb OT PyTNHbI
+LLMSTART.RU · MΦL CaHKT-eTep6ypra
+53

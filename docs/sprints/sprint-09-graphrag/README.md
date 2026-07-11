@@ -116,7 +116,7 @@
 
 **Цель:** синтезировать сегментные мини-датасеты (multi-hop, global) и прогнать текущий Qdrant-hybrid как baseline для последующего сравнения.
 
-> 📌 **Перед началом:** прочитать `.methodology/eval/eval-methodology.md` и `docs/eval.md`; проверить `.agents/skills/`.
+> 📌 **Перед началом:** прочитать `.methodology/eval/eval-methodology.md` и [docs/eval/README.md](../../eval/README.md); проверить `.agents/skills/`.
 
 **Состав работ:**
 
@@ -129,7 +129,7 @@
 - [ ] Создать `evals/configs/graphrag-baseline.yaml` (retriever: qdrant-hybrid, датасеты multi-hop + global).
 - [ ] Прогнать `make -C evals experiment CONFIG=configs/graphrag-baseline.yaml` на текущем Qdrant-hybrid.
 - [ ] Сохранить baseline-отчёт `evals/reports/graphrag-baseline.md`: метрики по сегментам, ожидаемые просадки на multi-hop и global.
-- [ ] Встроить ссылку на отчёт в `docs/eval.md`.
+- [ ] Встроить ссылку на отчёт в [docs/eval/README.md](../../eval/README.md).
 
 **Критерии готовности:**
 

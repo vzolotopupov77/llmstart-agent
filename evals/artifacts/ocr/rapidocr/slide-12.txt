@@ -1,0 +1,20 @@
+# slide-12
+# source: OCR rapidocr (slide-12.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+YTO NИ AAET bN3HECY
+OnTNMN3ALNA
+HOBbIE nPOYKTbI
+OnTNMN3ALNA
+HoBble
+npoueccOB
+Al-npoAyKTbl
+KoMnaHNA
+· PyTИHa → aBTOMaTN3aLNA
+· HoBble HИWN W pbIHKИ
+· Ckopoctb × 2-5
+· ИN-npoμyKT 6bIctpo
+· KoHKypeHTHoe
+· CHNXeHNe 3aTpaT
+npeNMyWeCTBO
+LLMSTART.RU
+12

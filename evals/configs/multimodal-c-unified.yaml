@@ -1,0 +1,15 @@
+config_id: multimodal-c-unified
+comment: "Sprint-10 Task 06: image embed → Qdrant (stub in Task 03)"
+
+dataset: evals/datasets/multimodal/multimodal-rag/v002_2026-07-05.json
+
+indexer:
+  method: c_unified
+  corpus_dir: data/multimodal-rag
+
+retrieval:
+  collection: multimodal_unified_vl_v002
+  embedding_model: nvidia/llama-nemotron-embed-vl-1b-v2:free
+  embedding_dim: 2048
+  top_k: 5
+  qdrant_url: http://localhost:6333

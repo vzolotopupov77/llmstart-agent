@@ -1,0 +1,12 @@
+# slide-02
+# source: OCR tesseract (slide-02.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+Кто я
+& Сергей Смирнов, к.т.н.
+д | 6
+| \ др Основатель LLMStart.ru
+к ZS PS ff 2
+\\- 7 = 20+ лет разработка : 10+ лет ИИ
+ых в, 12+ А|-проектов в production
+7 6 побед в ИИ-хакатонах
+LLMSTART.RU 2

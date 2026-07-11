@@ -1,0 +1,12 @@
+# slide-27
+# source: OCR rapidocr (slide-27.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+HoBOe MbIWneHNe npo HaNM
+KaHANnaT 6e3 NN
+KaHANAaT c NN
+OnHarOnOBa·OAHNpyKN·8yaCOB
+x10 BO3MOXHOCTeИ · KOMaHa areHTOB
+KaHAHAaT 6e3 ИИ - yKe He TOT KaHANAaT
+HaHATb 4enOBeKa WnN 3aKpbITb 3aha4y ИW?
+LLMSTART.RU
+27

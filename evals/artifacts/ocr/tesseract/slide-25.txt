@@ -1,0 +1,16 @@
+# slide-25
+# source: OCR tesseract (slide-25.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+Vibe-coding: промпт > продукт
+Промпт Рабочий лендинг
+eee ® oS eS cea
+Сделай лендинг для курса no ИИ:
+— тёмная тема => Курс по ИИ-разработке
+— форма записи ae — 03:47:22
+таймер акциий 2 минуты
+- ис К ч № ь. и x р
+| = 2 => a9) База знаний
+i 3 часа вместо целого дня
+30 РОЕ-документов NotebookLM
+vO Bolt Lovable NotebookLM
+LLMSTART.RU (25 }

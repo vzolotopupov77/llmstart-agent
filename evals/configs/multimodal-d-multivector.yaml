@@ -1,0 +1,17 @@
+config_id: multimodal-d-multivector
+comment: "Sprint-10 Task 07: Jina v4 multivector → Qdrant MAX_SIM"
+
+dataset: evals/datasets/multimodal/multimodal-rag/v002_2026-07-05.json
+
+indexer:
+  method: d_multivector
+  corpus_dir: data/multimodal-rag
+  d_max_side: 1024
+
+retrieval:
+  collection: multimodal_multivector_jina_v002
+  embedding_model: jina-embeddings-v4
+  embedding_dim: 128
+  top_k: 5
+  qdrant_url: http://localhost:6333
+  is_multivector: true

@@ -1,0 +1,14 @@
+# slide-42
+# source: OCR tesseract (slide-42.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+ws
+Ступень 4: Быстрый А!-запуск
+продуктов
+Vibe coding: создаёшь через диалог фр x
+Дашб
+Анализатор ист
+# ff ed ©, 4 & 4 ©, 4+ ©, № poroscpos (мо) *
+Design —> Code — Test —> Deploy 6? АР- интеграция c1C Фтотово
+# бт данных того
+10-50х быстрее от идеи до рабочего продукта
+LLMSTART.RU 42

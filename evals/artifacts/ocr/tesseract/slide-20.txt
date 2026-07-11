@@ -1,0 +1,14 @@
+# slide-20
+# source: OCR tesseract (slide-20.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+Бизнес как медиа
+Один вебинар — три продукта за минуты
+= Транскрипция fi 3 nocta
++ таймкоды = в соцсети
+Вебинар
+RA Товарное фото = Структура
+без фотосессии " презентации
+a
+Midjourney NotebookLM Claude
+Часовой вебинар > транскрипция + таймкоды + 3 поста
+LLMSTART.RU 20,

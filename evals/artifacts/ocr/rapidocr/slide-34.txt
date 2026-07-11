@@ -1,0 +1,17 @@
+# slide-34
+# source: OCR rapidocr (slide-34.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+KoTTep: War 4 -KoMMyHNKauNA
+"Heo6bABneHNe-
+XHBo npUmep
+KaxAyIO HeeO"
+PyKOBOANTenb
+CBuneHNeM
+3akpenneHne
+B npoLeccax
+Urgency
+pBeHNe
+TpeHNHrN
+no 3anayam
+LLMSTART.RU
+34

@@ -1,0 +1,13 @@
+# slide-15
+# source: OCR tesseract (slide-15.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+Дорожная карта Al-first
+—4
+трансформации:
+5 ступенеи Промышленный
+уровень — production
+Запуск продуктов — vibe coding
+Масштабирование — команда
+А Свой рой агентов — система
+ИГ ервые шаги — кругозор
+| LLMSTART.RU ; ре (5

@@ -1,0 +1,13 @@
+# slide-52
+# source: OCR tesseract (slide-52.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+ИИ-ассистенты с поиском по базе знаний
+Когда ИИ знает всё — сотрудник отвечает мгновенно
+а РАНЕ ИУ ТЫ rca Сейчас: 1 секунда y
+LEZ
+
+м 25 z Px fA DS $
+И) я Cas
+
+Ассистент или замена? — оба варианта работают
+LLMSTART.RU 52

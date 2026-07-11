@@ -1,0 +1,15 @@
+# slide-22
+# source: OCR rapidocr (slide-22.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+paBWno 1Ox: eCnN 3ana4a He yMHo*aeT 6u3Hec — ee nenaeT ИИ
+OT4eTbI
+ΦopMaTMpoBaHNe
+PacCbInKИ
+CBOAKИ
+CBOAKN
+CaM
+PenaKTop
+AHaNTUK·
+MeHeAxep
+LLMSTART.RU
+22

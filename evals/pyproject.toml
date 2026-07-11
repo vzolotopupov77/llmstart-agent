@@ -8,12 +8,24 @@ dependencies = [
     "httpx>=0.28.1",
     "llmstart-agent-backend",
     "pyyaml>=6.0.2",
+    "pypdf>=5.0.0",
+    "qdrant-client>=1.14.0",
+    "rapidfuzz>=3.10.0",
+    "sentence-transformers>=3.0.0",
+    "pillow>=10.0",
+    "table-recognition-metric>=0.0.4",
 ]
 
 [dependency-groups]
 dev = [
     "pytest>=8.3.0",
     "ruff>=0.8.0",
+]
+ocr-modern = [
+    "rapidocr-onnxruntime>=1.4.0",
+    "opencv-python-headless>=4.8.0",
+    "pillow>=10.0",
+    "numpy>=1.26",
 ]
 
 [tool.uv.sources]

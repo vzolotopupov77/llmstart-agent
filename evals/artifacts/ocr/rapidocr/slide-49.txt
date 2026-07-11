@@ -1,0 +1,25 @@
+# slide-49
+# source: OCR rapidocr (slide-49.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+noByWKa nNnota
+CnCTeMHbIN BbIXOn:
+88%
+epecTpoika
+U0011010I:00
+个琼
+BOpkonoy
+100Y00
+100101000
+nOnNTNKN
+MCnOnb3OBAHNA
+NN
+KOHTpOnb
+KOMnaHNN He BbIWnN
+KayeCTBa
+3a pamkn nnnota
+HaneKHocTb
+LOLNU
+N 6e3onacHocTb
+PRODUCTION
+LLMSTART.RU | McKinsey, The State of AI, 2025
+49

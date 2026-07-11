@@ -1,0 +1,16 @@
+# slide-44
+# source: OCR tesseract (slide-44.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+=> ОПЫТ В РАЗРАБОТКЕ Г К у oe
+©. eo ro] Психологи, .
+ate Я УЯ BE3 KODA 24% юристы,
+Психолог ‘Адвокат Экономист менеджеры
+a |,
+= 8 ad СМЕШАННЫЙ 52%
+>< 4,
+QA Engineer Head of Bl Senior .NET
+& | @* (0) Ge ==
+as LS =
+Маркетолог HR Предприниматель
+У каждого была своя боль. Теперь они её решили.
+LLMSTART.RU 44

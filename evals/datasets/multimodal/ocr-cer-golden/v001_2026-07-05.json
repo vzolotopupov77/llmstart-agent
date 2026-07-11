@@ -1,0 +1,19 @@
+{
+  "version": "v001",
+  "created": "2026-07-05",
+  "comment": "PNG-verified visible text for CER; not speaker notes",
+  "normalization": "lowercase, collapse whitespace; keep punctuation and %",
+  "formula": "Levenshtein(ref, hyp) / len(ref)",
+  "slides": [
+    {"slide_id": 2, "segment": "S1_text", "ref_file": "refs/slide-02.txt"},
+    {"slide_id": 6, "segment": "S1_text", "ref_file": "refs/slide-06.txt"},
+    {"slide_id": 37, "segment": "S1_text", "ref_file": "refs/slide-37.txt"},
+    {"slide_id": 45, "segment": "S1_text", "ref_file": "refs/slide-45.txt"},
+    {"slide_id": 9, "segment": "S2_chart", "ref_file": "refs/slide-09.txt"},
+    {"slide_id": 10, "segment": "S2_chart", "ref_file": "refs/slide-10.txt"},
+    {"slide_id": 11, "segment": "S2_chart", "ref_file": "refs/slide-11.txt"},
+    {"slide_id": 44, "segment": "S2_chart", "ref_file": "refs/slide-44.txt"},
+    {"slide_id": 49, "segment": "S2_chart", "ref_file": "refs/slide-49.txt"},
+    {"slide_id": 15, "segment": "S3_layout", "ref_file": "refs/slide-15.txt"}
+  ]
+}

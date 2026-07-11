@@ -1,0 +1,33 @@
+# slide-43
+# source: OCR rapidocr (slide-43.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+YTO HyKHO 3HATb И yMETb
+5 KnloyeBblx Tem· Bbl6epnTe ΦopMaT
+2
+3
+4
+5
+Al-driven
+poMnT-
+RAG
+AreHTbl
+KayecTBO
+pa3pa6oTka
+NHKUHNPNHr
+oncK no
+ABTOHOMHbIe
+TeCTMpOBaHNe
+MeTOnOO
+To4HOCTb,LenOyKИ
+3HAHNAM
+areHTbl
+ΦOPMATbl:
+1 AEHb
++ ИHTeHCUB
+1 HEE
++ yrny6néHHbi
+1 MECAL
++ onHbIn kypc
+LLMSTART.RU
+LLMSTART.RU
+43

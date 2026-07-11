@@ -1,0 +1,26 @@
+# slide-06
+# source: OCR rapidocr (slide-06.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+#00e6771
+HoBaA nornKa pocta
+#08e676
+ASI
+100%
+100%
+100%
+100%
+#00eT3112
+LAH
+100%
+100%
+100%
+100%
+#88e676
+#00e0678
+24/76e3BbIX0AHblX
+p0%
+08e676
+PoCT = HaHATb 6onbWe nIOAeN
+PocT = 6onbwe compute
+MnHnmym headcount — Makcnmym compute
+LLMSTART.RU

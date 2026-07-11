@@ -1,0 +1,14 @@
+# slide-51
+# source: OCR tesseract (slide-51.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+ТРАЕКТОРИЯ LLMSTART
+от пилота до production-cuctemb!
+ez Ge
+2] Deep
+Agents
+Oo Al-dri ae Агенты =>
+-driv
+= Fullstack 9% масштаб A
+Интенсив => production A
+llmstart.ru/ai-agents-combo/
+LLMSTART.RU 51

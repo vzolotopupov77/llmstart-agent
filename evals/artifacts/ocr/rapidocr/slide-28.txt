@@ -1,0 +1,9 @@
+# slide-28
+# source: OCR rapidocr (slide-28.png)
+# engine: rapidocr | backend: onnxruntime | lang: ru+en
+CtyneHb 3: TpaHcΦopMNpyem opraHN3aLNo
+Monenb KoTtepa - 8 waroB
+《HeMeHATbc9>
+ykeHenonyyNTca
+LLMSTART.RU
+28

@@ -1,0 +1,15 @@
+# slide-59
+# source: OCR tesseract (slide-59.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+«ИИ-агенты»
+
+Путь OT воркфлоу к автономным агентам
+а рае жо<
+Clyro Е
+
+Ио Я ® Ам Е Cy \
+
+RS Les 7 7
+Ассистент: отвечает >> Агент: действует >>
+
+ет.

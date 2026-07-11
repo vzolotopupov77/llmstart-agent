@@ -1,0 +1,11 @@
+# slide-03
+# source: OCR tesseract (slide-03.png)
+# engine: tesseract | lang: rus+eng | psm: 6
+ПРОГРАММА СЕГОДНЯ
+4 станции
+e @ Oe
+та =
+КАК
+ПОЧЕМУ ati КЕЙСЫ Е
+ЗЕЙЗАС 5 СТУПЕНЕЙ
+LLMSTART.RU 3
