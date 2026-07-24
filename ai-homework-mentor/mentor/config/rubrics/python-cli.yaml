@@ -1,0 +1,54 @@
+name: python-cli
+topic: "Python CLI"
+description: "CLI-утилита на Python: typer/click/argparse, UX, обработка ошибок"
+
+aspects:
+  - id: cli-design
+    name: "Дизайн CLI"
+    skill: null
+    prompt: null
+    criteria:
+      - "Понятная структура команд и подкоманд (typer/click/argparse)"
+      - "Справка (--help) информативна; примеры в docstring/epilog"
+      - "Exit codes по семантике (0 — успех, 1 — ошибка пользователя, 2+ — сбой)"
+      - "Rich/цветной вывод опционален, но stderr для ошибок"
+      - "Makefile или скрипт-обёртка как единая точка входа (make dev, make test)"
+
+  - id: code-quality
+    name: "Качество Python-кода"
+    skill: modern-python
+    prompt: null
+    criteria:
+      - "uv + pyproject.toml; ruff для lint/format"
+      - "Строгая типизация; аннотации на публичных функциях"
+      - "Разделение CLI-слоя и бизнес-логики (SoC)"
+      - "PEP 8, идиомы Python; нет мёртвого кода"
+
+  - id: error-handling
+    name: "Обработка ошибок"
+    skill: null
+    prompt: null
+    criteria:
+      - "Fail-fast для невалидных аргументов и конфигурации"
+      - "Понятные сообщения пользователю без traceback"
+      - "Timeout и обработка сетевых ошибок для внешних вызовов"
+      - "Не глотать исключения (except: pass)"
+
+  - id: testing
+    name: "Тестирование"
+    skill: null
+    prompt: null
+    criteria:
+      - "pytest; CliRunner (typer/click) или subprocess для E2E"
+      - "Тесты help, invalid args, happy path"
+      - "Фикстуры изолированы; моки только для внешних API"
+
+  - id: documentation
+    name: "Документация"
+    skill: null
+    prompt: null
+    criteria:
+      - "README в code/README.md с инструкцией установки и запуска"
+      - "Примеры команд с ожидаемым выводом"
+      - "Описание зависимостей и переменных окружения"
+      - "Не ссылаться на README в корне workspace — только code/README.md"

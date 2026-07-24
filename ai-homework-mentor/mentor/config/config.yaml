@@ -1,0 +1,10 @@
+# Параметры агента (секреты — только в .env)
+
+model: google/gemini-2.5-flash
+log_level: INFO
+output_mode: verbose
+context_limit: 128000
+summarization_threshold: 80000
+agent_recursion_limit: 200
+agent_max_attempts: 10
+llm_request_timeout: 600

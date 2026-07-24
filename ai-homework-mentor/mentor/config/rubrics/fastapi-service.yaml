@@ -1,0 +1,66 @@
+name: fastapi-service
+topic: "FastAPI-сервис"
+description: "REST API на FastAPI: роутеры, схемы, DI, обработка ошибок"
+
+aspects:
+  - id: api-design
+    name: "Дизайн API"
+    skill: fastapi-templates
+    prompt: null
+    criteria:
+      - "RESTful-маршруты: существительные во множественном числе, HTTP-методы по семантике"
+      - "Pydantic v2-схемы для request/response; отделение DTO от ORM-моделей"
+      - "APIRouter с префиксами и tags; версионирование при необходимости"
+      - "Dependency Injection для БД-сессий, конфига и сервисов"
+      - "OpenAPI-документация: summary, description, примеры ответов"
+
+  - id: code-quality
+    name: "Качество Python-кода"
+    skill: modern-python
+    prompt: null
+    criteria:
+      - "uv + pyproject.toml; ruff для lint/format"
+      - "Строгая типизация (mypy/ty); аннотации на публичных функциях"
+      - "SRP: роутеры тонкие, бизнес-логика в services/"
+      - "Нет дублирования; говорящие имена модулей и функций"
+
+  - id: error-handling
+    name: "Обработка ошибок"
+    skill: null
+    prompt: null
+    criteria:
+      - "HTTPException / exception handlers с JSON-ответами, не HTML"
+      - "422 для ошибок валидации Pydantic; 404/400 по семантике"
+      - "Глобальный exception handler для необработанных ошибок"
+      - "Timeout и обработка сетевых ошибок для внешних вызовов"
+      - "Fail-fast при невалидном конфиге на старте приложения"
+
+  - id: testing
+    name: "Тестирование"
+    skill: null
+    prompt: null
+    criteria:
+      - "pytest + httpx TestClient / AsyncClient"
+      - "Smoke-тесты ключевых эндпоинтов (happy path + 4xx)"
+      - "Фикстуры изолированы; моки только для внешних сервисов"
+      - "Тесты не зависят от порядка запуска"
+
+  - id: security
+    name: "Безопасность"
+    skill: null
+    prompt: null
+    criteria:
+      - "Секреты только через env; .env не в репозитории"
+      - "CORS настроен явно, не wildcard в production"
+      - "Валидация входных данных на границе API"
+      - "Не логировать токены, пароли, персональные данные"
+
+  - id: documentation
+    name: "Документация"
+    skill: null
+    prompt: null
+    criteria:
+      - "README в code/README.md с инструкцией запуска (uvicorn, make dev)"
+      - "Примеры curl/httpie для основных эндпоинтов"
+      - "Описание переменных окружения и зависимостей"
+      - "Не ссылаться на README в корне workspace — только code/README.md"

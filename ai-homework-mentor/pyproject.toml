@@ -1,0 +1,83 @@
+[project]
+name = "mentor"
+version = "0.1.0"
+description = "AI Homework Mentor — агент-ревьюер домашних заданий"
+readme = "README.md"
+authors = [
+    { name = "Vladimir Zolotopupov", email = "vzolotopupov@gmail.com" },
+]
+requires-python = ">=3.12"
+dependencies = [
+    "deepagents>=0.6.12",
+    "httpx>=0.28.0",
+    "langchain-openrouter>=0.2.6",
+    "pydantic-settings>=2.14.2",
+    "pyyaml>=6.0.3",
+    "rich>=15.0.0",
+    "typer>=0.26.8",
+]
+
+[project.scripts]
+mentor = "mentor.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["mentor"]
+
+[dependency-groups]
+dev = [
+    "mypy>=2.2.0",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "ruff>=0.15.21",
+    "types-pyyaml>=6.0.12.20260518",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D100",
+    "D104",
+    "D203",
+    "D213",
+    "COM812",
+    "ISC001",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "ANN201", "PLR2004", "D103", "INP001", "TC001", "TC002", "TC003", "RUF001", "S108"]
+"mentor/cli.py" = ["FBT001", "FBT003", "C901", "PLR0915", "PLR0912"]
+"mentor/config/__init__.py" = ["TRY003", "EM101"]
+"mentor/*.py" = ["RUF001", "RUF002", "TC001", "TC002", "TC003"]
+"mentor/agent.py" = ["PERF401", "FURB171", "ANN401", "PLR2004", "C901", "PLR0913", "TRY003", "PLR0915", "PLR0912"]
+"mentor/reviewer.py" = ["ANN401", "PLR2004", "C901", "PLR0912", "PLR0915"]
+"mentor/brief.py" = ["PLR2004", "C901", "PLR0911", "PLR0912", "PLR0913"]
+"mentor/rubric.py" = ["PLR2004", "C901", "PLR0912"]
+"mentor/skills.py" = ["PLR2004"]
+"mentor/render.py" = ["PLR2004"]
+"mentor/ce.py" = ["TC001", "RUF001"]
+"mentor/feedback_validator.py" = ["PLR2004", "C901"]
+"mentor/retrieval.py" = ["S603", "PLR2004"]
+"mentor/events.py" = ["D102"]
+"mentor/renderer.py" = ["PLR2004", "C901"]
+"mentor/tracker.py" = ["ANN401", "ARG002", "C901", "PLR2004", "PLR0913", "PLR0912", "PLR0915"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
