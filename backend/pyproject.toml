@@ -55,7 +55,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["S101", "ANN201", "PLR2004", "D103", "INP001", "E402", "ANN401", "ARG002", "D102", "RUF001"]
+"tests/**" = ["S101", "S106", "ANN201", "PLR2004", "D103", "INP001", "E402", "ANN401", "ARG002", "D102", "RUF001", "D107"]
 "app/agent/prompts.py" = ["RUF001"]
 "app/agent/react_runner.py" = ["C901", "PLR0912", "SIM102", "TC002"]
 "app/agent/streaming_callbacks.py" = ["ARG002", "ANN401", "D102", "D107"]
@@ -66,6 +66,7 @@ ignore = [
 "app/mcp_client/**" = ["TRY003", "EM101", "ANN401", "D102", "D107", "PLW0603"]
 "app/observability/**" = ["PLC0415", "TRY300", "BLE001"]
 "app/services/**" = ["D107", "TRY003", "EM101", "RSE102", "FBT001"]
+"app/security/**" = ["TRY003", "EM101", "TC001", "PLR0911"]
 "app/services/channel_formatter.py" = ["C901", "PLR0911", "PLR0912"]
 "app/mcp_client/sync_tools.py" = ["E402"]
 "tests/conftest.py" = ["D107"]

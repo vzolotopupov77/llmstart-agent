@@ -103,8 +103,8 @@ def test_ready_returns_ok(client: object) -> None:
     assert body["mcp_tools"] == 8
 
 
-def test_chat_unknown_config_id_returns_400(registry_client: object) -> None:
-    """Unknown config_id returns 400."""
+def test_chat_unknown_config_id_blocked_without_eval_key(registry_client: object) -> None:
+    """Public config_id is blocked when security is on and eval key is absent."""
     response = registry_client.post(  # type: ignore[attr-defined]
         "/api/v1/chat",
         headers={
@@ -117,5 +117,5 @@ def test_chat_unknown_config_id_returns_400(registry_client: object) -> None:
             "config_id": "nonexistent-config",
         },
     )
-    assert response.status_code == 400
-    assert "Unknown config_id" in response.json()["detail"]
+    assert response.status_code == 200
+    assert response.json()["message"] == "[SECURITY_BLOCKED]"

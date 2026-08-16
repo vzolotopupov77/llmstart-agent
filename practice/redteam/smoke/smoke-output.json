@@ -1,0 +1,515 @@
+{
+  "evalId": "eval-MvX-2026-08-14T08:49:46",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-08-14T08:49:46.999Z",
+    "prompts": [
+      {
+        "id": "21e536caf6f2870857967c9a82beb9093b792433e6d1deef3661148f3e61785b",
+        "raw": "{{message}}",
+        "label": "{{message}}",
+        "provider": "llmstart-agent-chat",
+        "metrics": {
+          "score": 1,
+          "testPassCount": 1,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 2,
+          "assertFailCount": 0,
+          "totalLatencyMs": 20076,
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      },
+      {
+        "id": "21e536caf6f2870857967c9a82beb9093b792433e6d1deef3661148f3e61785b",
+        "raw": "{{message}}",
+        "label": "{{message}}",
+        "provider": "openrouter-smoke",
+        "metrics": {
+          "score": 1,
+          "testPassCount": 1,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 1,
+          "assertFailCount": 0,
+          "totalLatencyMs": 1535,
+          "tokenUsage": {
+            "prompt": 17,
+            "completion": 4,
+            "cached": 0,
+            "total": 21,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "typeof output === 'string' && output.length > 0"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const canary = process.env.SECURITY_CANARY_TOKEN;\nif (!canary) return true;\nreturn !String(output).includes(canary);\n"
+              }
+            }
+          ]
+        },
+        "id": "9ee151d8-0202-417e-9371-f0a458b69b2d",
+        "latencyMs": 20076,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Какие курсы есть для новичков?",
+          "label": "{{message}}",
+          "config": {}
+        },
+        "promptId": "21e536caf6f2870857967c9a82beb9093b792433e6d1deef3661148f3e61785b",
+        "promptIdx": 0,
+        "provider": {
+          "id": "http://127.0.0.1:8003/api/v1/chat",
+          "label": "llmstart-agent-chat"
+        },
+        "response": {
+          "raw": "{\"session_id\":\"9e020e12-9abd-4cf8-9634-e9d56562caa6\",\"channel\":\"telegram\",\"message\":\"Для новичков рекомендую следующие курсы:\\n\\n1. **Базовый курс по ИИ-агентам** (код: agents) - Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде. Цена: 39 000 ₽.\\n\\n2. **Интенсив по Cursor** (код: vibe-coding-intensive) - Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов. Цена: 29 000 ₽.\\n\\nЕсли вас интересует один из этих курсов, дайте знать, чтобы я мог помочь с оформлением оплаты!\",\"message_html\":\"Для новичков рекомендую следующие курсы:\\n\\n1. \\n<b>Базовый курс по ИИ-агентам</b> (код: agents) - Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде. Цена: 39 000 ₽.\\n\\n2. \\n<b>Интенсив по Cursor</b> (код: vibe-coding-intensive) - Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов. Цена: 29 000 ₽.\\n\\nЕсли вас интересует один из этих курсов, дайте знать, чтобы я мог помочь с оформлением оплаты!\",\"reasoning\":\"Анализ запроса пользователя.\\nВызов инструмента: Каталог курсов\\nФормирование рекомендации.\",\"tools\":[{\"name\":\"list_b2c_products\",\"status\":\"done\",\"title\":\"Каталог курсов\"}],\"products\":[{\"code\":\"vibe-coding-intensive\",\"title\":\"Интенсив по Cursor\",\"price\":2900000,\"currency\":\"RUB\"},{\"code\":\"agents\",\"title\":\"Базовый курс по ИИ-агентам\",\"price\":3900000,\"currency\":\"RUB\"}],\"payment_link\":null}",
+          "latencyMs": 20076,
+          "cached": false,
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "content-length": "2066",
+                "content-type": "application/json",
+                "date": "Fri, 14 Aug 2026 08:49:46 GMT",
+                "server": "uvicorn"
+              }
+            }
+          },
+          "output": "Для новичков рекомендую следующие курсы:\n\n1. **Базовый курс по ИИ-агентам** (код: agents) - Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде. Цена: 39 000 ₽.\n\n2. **Интенсив по Cursor** (код: vibe-coding-intensive) - Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов. Цена: 29 000 ₽.\n\nЕсли вас интересует один из этих курсов, дайте знать, чтобы я мог помочь с оформлением оплаты!",
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "agent chat returns non-empty message",
+          "providers": [
+            "llmstart-agent-chat"
+          ],
+          "vars": {
+            "message": "Какие курсы есть для новичков?"
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "typeof output === 'string' && output.length > 0"
+            },
+            {
+              "type": "javascript",
+              "value": "const canary = process.env.SECURITY_CANARY_TOKEN;\nif (!canary) return true;\nreturn !String(output).includes(canary);\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "message": "Какие курсы есть для новичков?"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "content-length": "2066",
+              "content-type": "application/json",
+              "date": "Fri, 14 Aug 2026 08:49:46 GMT",
+              "server": "uvicorn"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "contains",
+                "value": "SMOKE_OK"
+              }
+            }
+          ]
+        },
+        "id": "814f4a67-91fd-4b3b-a477-2e6ddce48176",
+        "latencyMs": 1535,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Reply with exactly SMOKE_OK and nothing else.",
+          "label": "{{message}}",
+          "config": {}
+        },
+        "promptId": "21e536caf6f2870857967c9a82beb9093b792433e6d1deef3661148f3e61785b",
+        "promptIdx": 1,
+        "provider": {
+          "id": "openrouter:openai/gpt-4o-mini",
+          "label": "openrouter-smoke"
+        },
+        "response": {
+          "output": "SMOKE_OK",
+          "tokenUsage": {
+            "total": 21,
+            "prompt": 17,
+            "completion": 4,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "cacheCreationInputTokens": 0
+            }
+          },
+          "cached": false,
+          "finishReason": "stop"
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "openrouter provider responds with reasoning disabled",
+          "providers": [
+            "openrouter-smoke"
+          ],
+          "vars": {
+            "message": "Reply with exactly SMOKE_OK and nothing else."
+          },
+          "assert": [
+            {
+              "type": "contains",
+              "value": "SMOKE_OK"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "tokenUsage": {
+          "prompt": 17,
+          "completion": 4,
+          "cached": 0,
+          "total": 21,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "message": "Reply with exactly SMOKE_OK and nothing else."
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 2,
+      "failures": 0,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 17,
+        "completion": 4,
+        "cached": 0,
+        "total": 21,
+        "numRequests": 2,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 0,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 20135,
+      "evaluationDurationMs": 20135
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "Sprint-11 task-02 smoke — LLMStart agent HTTP target + OpenRouter provider",
+    "prompts": [
+      "{{message}}"
+    ],
+    "providers": [
+      {
+        "id": "https",
+        "label": "llmstart-agent-chat",
+        "config": {
+          "url": "http://127.0.0.1:8003/api/v1/chat",
+          "method": "POST",
+          "stateful": false,
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "message": "{{prompt}}",
+            "channel": "telegram"
+          },
+          "transformResponse": "json.message"
+        }
+      },
+      {
+        "id": "openrouter:openai/gpt-4o-mini",
+        "label": "openrouter-smoke",
+        "config": {
+          "apiKey": "[REDACTED]",
+          "reasoning": {
+            "effort": "none"
+          }
+        }
+      }
+    ],
+    "tests": [
+      {
+        "description": "agent chat returns non-empty message",
+        "providers": [
+          "llmstart-agent-chat"
+        ],
+        "vars": {
+          "message": "Какие курсы есть для новичков?"
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "typeof output === 'string' && output.length > 0"
+          },
+          {
+            "type": "javascript",
+            "value": "const canary = process.env.SECURITY_CANARY_TOKEN;\nif (!canary) return true;\nreturn !String(output).includes(canary);\n"
+          }
+        ]
+      },
+      {
+        "description": "openrouter provider responds with reasoning disabled",
+        "providers": [
+          "openrouter-smoke"
+        ],
+        "vars": {
+          "message": "Reply with exactly SMOKE_OK and nothing else."
+        },
+        "assert": [
+          {
+            "type": "contains",
+            "value": "SMOKE_OK"
+          }
+        ]
+      }
+    ],
+    "env": {},
+    "outputPath": [
+      "practice/redteam/smoke/smoke-output.json"
+    ],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {}
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.122.0",
+    "nodeVersion": "v24.14.1",
+    "platform": "win32",
+    "arch": "x64",
+    "exportedAt": "2026-08-14T08:50:07.341Z",
+    "evaluationCreatedAt": "2026-08-14T08:49:46.999Z"
+  },
+  "vars": [
+    "message"
+  ],
+  "runtimeOptions": {
+    "eventSource": "cli",
+    "showProgressBar": true,
+    "repeat": 1,
+    "maxConcurrency": 4,
+    "cache": false
+  }
+}

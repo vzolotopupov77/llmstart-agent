@@ -98,3 +98,14 @@ def confirm_payment(session_id: str, product_id: str) -> PaymentStatus:
     store.payments[key] = record
     _save_store(path, store)
     return "confirmed"
+
+
+def has_confirmed_payment(session_id: str, product_id: str | None = None) -> bool:
+    """Return whether this session has a confirmed mock payment."""
+    store = _load_store(payments_path())
+    for record in store.payments.values():
+        if record.session_id != session_id or record.status != "confirmed":
+            continue
+        if product_id is None or record.product_id == product_id:
+            return True
+    return False

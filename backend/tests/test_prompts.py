@@ -7,6 +7,8 @@ from app.agent.prompts import (
     SYSTEM_PROMPT_V2,
     SYSTEM_PROMPT_V3,
     SYSTEM_PROMPT_V4,
+    SYSTEM_PROMPT_V6,
+    get_default_system_prompt,
     get_system_prompt,
 )
 
@@ -57,3 +59,17 @@ def test_get_system_prompt_v5_generation_fixes() -> None:
 def test_get_system_prompt_unknown_raises() -> None:
     with pytest.raises(KeyError, match="Unknown prompt"):
         get_system_prompt("missing-prompt")
+
+
+def test_get_system_prompt_v6_hardens_v1() -> None:
+    v6 = get_system_prompt("agent-system-prompt-v6")
+    assert v6 == SYSTEM_PROMPT_V6
+    assert v6.startswith(SYSTEM_PROMPT_V1)
+    assert "HACKED:" in v6
+    assert "не обещай отправку email" in v6.lower() or "email" in v6.lower()
+    assert "write-tools" in v6.lower() or "Write-tools" in v6
+
+
+def test_get_default_system_prompt_follows_flag() -> None:
+    assert get_default_system_prompt(security_enabled=True) == SYSTEM_PROMPT_V6
+    assert get_default_system_prompt(security_enabled=False) == SYSTEM_PROMPT_V1

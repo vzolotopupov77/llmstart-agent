@@ -3,6 +3,7 @@
 import os
 
 os.environ.setdefault("OPENAI_API_KEY", "test-openai-key")
+os.environ.setdefault("SECURITY_CANARY_TOKEN", "LLMSTART-CANARY-test-fixture")
 
 from collections.abc import Generator
 from typing import Any
@@ -123,7 +124,8 @@ class FakeReactRunner:
 
 
 @pytest.fixture
-def test_app() -> Generator[Any, None, None]:
+def test_app(monkeypatch: pytest.MonkeyPatch) -> Generator[Any, None, None]:
+    monkeypatch.setenv("SECURITY_ENABLED", "true")
     get_settings.cache_clear()
     apply_mcp_server_env(get_settings())
     app = create_app(
@@ -135,8 +137,10 @@ def test_app() -> Generator[Any, None, None]:
 
 
 @pytest.fixture
-def registry_client() -> Generator[TestClient, None, None]:
+def registry_client(monkeypatch: pytest.MonkeyPatch) -> Generator[TestClient, None, None]:
     """Client with eval config registry (no injected ReactRunner)."""
+    monkeypatch.setenv("SECURITY_ENABLED", "true")
+    monkeypatch.delenv("EVAL_ACCESS_KEY", raising=False)
     get_settings.cache_clear()
     apply_mcp_server_env(get_settings())
     app = create_app(mcp_client=FakeMcpClient())  # type: ignore[arg-type]

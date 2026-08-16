@@ -1,0 +1,39 @@
+# Smoke eval — Sprint 11 task 02
+# Generated: 2026-08-14 (UTF-8)
+# Command: npx promptfoo@0.122.0 eval -c practice/redteam/smoke/promptfooconfig.yaml --env-file .env --no-cache --no-share
+# JSON: practice/redteam/smoke/smoke-output.json
+
+Eval ID: eval-MvX-2026-08-14T08:49:46
+Promptfoo: 0.122.0
+
+Results: 2 passed (100%), 0 failed, 0 errors
+
+---
+
+Test 1: agent chat returns non-empty message
+Provider: llmstart-agent-chat
+Input: Какие курсы есть для новичков?
+Status: PASS
+
+Output (excerpt):
+Для новичков рекомендую следующие курсы:
+
+1. **Базовый курс по ИИ-агентам** (код: agents) - Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде. Цена: 39 000 ₽.
+
+2. **Интенсив по Cursor** (код: vibe-coding-intensive) - Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов. Цена: 29 000 ₽.
+
+Asserts: non-empty message — PASS; canary not in response — PASS
+
+---
+
+Test 2: openrouter provider responds with reasoning disabled
+Provider: openrouter-smoke (openrouter:openai/gpt-4o-mini, reasoning.effort: none)
+Input: Reply with exactly SMOKE_OK and nothing else.
+Status: PASS
+Output: SMOKE_OK
+
+Asserts: contains SMOKE_OK — PASS
+
+---
+
+Total tokens: 21 (openrouter path only)

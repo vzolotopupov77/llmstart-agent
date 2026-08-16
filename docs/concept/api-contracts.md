@@ -1,6 +1,6 @@
 # API Contracts: LLMStart Agent
 
-> **Базовый URL (локально):** `http://localhost:8000`  
+> **Базовый URL (локально):** `http://localhost:8003`  
 > **Версия API:** `v1` — бизнес-логика по `/api/v1/...`  
 > Интеграции и env — в [integrations.md](integrations.md).
 
@@ -74,7 +74,7 @@
 
 ### CORS (MVP)
 
-Разрешённые origins: `http://localhost:3000` (виджет). Production — post-MVP.
+Разрешённые origins: `http://localhost:3002` (виджет, `CORS_ORIGINS` / `FRONTEND_PORT`). Production — post-MVP.
 
 ---
 
@@ -85,6 +85,7 @@
 | `POST` | `/api/v1/chat` | 200 | Сообщение в диалог (JSON или SSE) |
 | `GET` | `/api/v1/products` | 200 | B2C-каталог для виджета |
 | `GET` | `/health` | 200 | Liveness |
+| `GET` | `/ready` | 200 / 503 | Readiness: ключ LLM + 8 MCP tools |
 
 > **ADR (кандидаты):** один `/chat` + `Accept` (JSON \| SSE); форматирование по `channel` в Core.
 
@@ -100,6 +101,7 @@
 |-----------|:---:|----------|
 | `Content-Type` | ✅ | `application/json` |
 | `Accept` | ✅ | `application/json` или `text/event-stream` |
+| `X-LLMStart-Eval-Key` | ❌ | Секрет `EVAL_ACCESS_KEY`. Нужен, если в теле передан `config_id` и `SECURITY_ENABLED=true` |
 
 ### Запрос
 
@@ -116,6 +118,7 @@
 | `message` | string | ✅ | Текст пользователя, 1–4000 символов |
 | `session_id` | string (UUID) | ❌ | Если нет — Core создаёт новую in-memory сессию |
 | `channel` | string | ✅ | `web` \| `telegram` |
+| `config_id` | string | ❌ | Имя YAML из `evals/configs/`. При `SECURITY_ENABLED=true` без верного `X-LLMStart-Eval-Key` — `[SECURITY_BLOCKED]`, runner не переключается |
 
 ### Ответ при `Accept: application/json`
 
@@ -132,9 +135,9 @@
   "reasoning": "Пользователь ищет курс для новичка; подойдут agents и combo.",
   "tools": [
     {
-      "name": "search_knowledge_base",
+      "name": "list_b2c_products",
       "status": "done",
-      "title": "Поиск в базе знаний"
+      "title": "Каталог B2C"
     },
     {
       "name": "create_payment_link",
@@ -158,7 +161,7 @@
 |------|-----|----------|
 | `session_id` | string | ID сессии (новый или переданный) |
 | `channel` | string | Эхо `channel` из запроса |
-| `message` | string | Полный финальный текст (plain) |
+| `message` | string | Полный финальный текст (plain). При срабатывании guard — ровно `[SECURITY_BLOCKED]` |
 | `message_html` | string | HTML для Telegram (`channel=telegram`); для `web` может совпадать с markdown-источником |
 | `reasoning` | string | Краткое рассуждение агента |
 | `tools` | array | Вызванные инструменты; `status`: `done` \| `error` |
@@ -210,10 +213,10 @@ event: reasoning
 data: {"text": "Пользователь хочет найти курсы по промпт-инжинирингу и ссылку на оплату..."}
 
 event: tool
-data: {"name": "search_knowledge_base", "status": "started", "title": "Поиск в базе знаний"}
+data: {"name": "list_b2c_products", "status": "started", "title": "Каталог B2C"}
 
 event: tool
-data: {"name": "search_knowledge_base", "status": "done", "title": "Поиск в базе знаний"}
+data: {"name": "list_b2c_products", "status": "done", "title": "Каталог B2C"}
 
 event: tool
 data: {"name": "create_payment_link", "status": "done", "title": "Создание ссылки на оплату"}
@@ -241,8 +244,11 @@ data: {"session_id": "a1b2c3", "message": "Вот подходящие курс�
 | 422 | Нет `message` / неверный `channel` | Pydantic `detail` |
 | 400 | Неизвестный `session_id` (нет в памяти) | `"Session not found or expired"` |
 | 400 | `message` длиннее 4000 | `"Message too long"` |
+| 400 | Неизвестный `config_id` | имя конфига в `detail` |
 | 503 | OpenRouter недоступен | `"LLM service unavailable"` |
-| 503 | MCP subprocess недоступен | `"Tools service unavailable"` |
+| 503 | MCP / tools недоступны | `"Tools service unavailable"` |
+
+Срабатывание security-guard **не** даёт 4xx: HTTP 200, в `message` литерал `[SECURITY_BLOCKED]` (входной denylist, выходной фильтр, гейт `config_id` без ключа).
 
 При ошибке до старта стрима — обычный JSON `detail`. При ошибке mid-stream (SSE) — событие `event: error` и закрытие потока.
 
@@ -251,7 +257,7 @@ data: {"session_id": "a1b2c3", "message": "Вот подходящие курс�
 **JSON (Telegram-подобный клиент):**
 
 ```bash
-curl -s -X POST http://localhost:8000/api/v1/chat \
+curl -s -X POST http://localhost:8003/api/v1/chat \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -d '{"message":"Привет","channel":"telegram"}'
@@ -260,7 +266,7 @@ curl -s -X POST http://localhost:8000/api/v1/chat \
 **SSE (виджет):**
 
 ```bash
-curl -N -X POST http://localhost:8000/api/v1/chat \
+curl -N -X POST http://localhost:8003/api/v1/chat \
   -H "Content-Type: application/json" \
   -H "Accept: text/event-stream" \
   -d '{"message":"Привет","channel":"web"}'
@@ -321,7 +327,7 @@ curl -N -X POST http://localhost:8000/api/v1/chat \
 **Пример:**
 
 ```bash
-curl -s "http://localhost:8000/api/v1/products?limit=20&offset=0"
+curl -s "http://localhost:8003/api/v1/products?limit=20&offset=0"
 ```
 
 ---
@@ -346,7 +352,7 @@ curl -s "http://localhost:8000/api/v1/products?limit=20&offset=0"
 
 ## OpenAPI
 
-Интерактивная схема: `http://localhost:8000/docs` (генерация FastAPI из Pydantic-моделей).
+Интерактивная схема: `http://localhost:8003/docs` (генерация FastAPI из Pydantic-моделей).
 
 ---
 

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "promptfoo-provider-setup": {
+      "source": "promptfoo/promptfoo",
+      "sourceType": "github",
+      "skillPath": "plugins/promptfoo/skills/promptfoo-provider-setup/SKILL.md",
+      "computedHash": "cba45e22a7080a81f50edce127b38279772c2cf612ca859316b69954fe72394c"
+    },
+    "promptfoo-redteam-run": {
+      "source": "promptfoo/promptfoo",
+      "sourceType": "github",
+      "skillPath": "plugins/promptfoo/skills/promptfoo-redteam-run/SKILL.md",
+      "computedHash": "fa397fa506bd707d82e79c4fe1980e18741a974322cd1f2df2963eaeb57544f7"
+    },
+    "promptfoo-redteam-setup": {
+      "source": "promptfoo/promptfoo",
+      "sourceType": "github",
+      "skillPath": "plugins/promptfoo/skills/promptfoo-redteam-setup/SKILL.md",
+      "computedHash": "71fa6dd1fca646b07086880b977d693f7d5acfc2e1d7d81c5d40ba11c18f6a07"
+    }
+  }
+}

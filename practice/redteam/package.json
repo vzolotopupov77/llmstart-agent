@@ -1,0 +1,14 @@
+{
+  "name": "llmstart-redteam-tooling",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Pinned red-team tooling for sprint 11. Local install instead of npx: npx re-downloads the full dependency tree into %LOCALAPPDATA%\\npm-cache on every run.",
+  "scripts": {
+    "promptfoo": "promptfoo",
+    "smoke": "promptfoo eval -c smoke/promptfooconfig.yaml --env-file ../../.env -o smoke/smoke-output.json --no-cache --no-share --no-progress-bar",
+    "validate": "promptfoo validate config -c smoke/promptfooconfig.yaml"
+  },
+  "devDependencies": {
+    "promptfoo": "0.122.0"
+  }
+}

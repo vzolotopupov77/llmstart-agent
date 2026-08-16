@@ -12,7 +12,7 @@
 | Понять продукт и MVP | [concept/idea.md](concept/idea.md) |
 | Техническое видение, компоненты, роли | [concept/vision.md](concept/vision.md) |
 | План реализации по спринтам | [roadmap.md](roadmap.md) |
-| Текущий этап | [roadmap.md](roadmap.md) — **v0.2 Развитие RAG-ассистента** (GraphRAG ✅, Multimodal RAG ✅; v0.1 MVP ✅) |
+| Текущий этап | [roadmap.md](roadmap.md) — **v0.3 Hardening** (red-team baseline ✅; GraphRAG ✅, Multimodal RAG ✅; v0.1 MVP ✅) |
 
 ---
 
@@ -36,7 +36,7 @@
 
 | Документ | Содержание |
 |----------|------------|
-| [roadmap.md](roadmap.md) | v0.1 MVP ✅ → v0.2 RAG-ассистент → v0.3 hardening → v1.0 production |
+| [roadmap.md](roadmap.md) | v0.1 MVP ✅ → v0.2 RAG-ассистент → v0.3 hardening (sprint-11 ✅) → v1.0 production |
 
 ### Спринты (`sprints/`)
 
@@ -52,6 +52,7 @@
 | 08 vector-db | ✅ Done | [sprint-08-vector-db](sprints/sprint-08-vector-db/README.md) |
 | 09 graphrag | ✅ Done | [sprint-09-graphrag](sprints/sprint-09-graphrag/README.md) |
 | 10 multimodal-rag | ✅ Done | [sprint-10-multimodal-rag](sprints/sprint-10-multimodal-rag/README.md) · [final report](../evals/reports/multimodal-final.md) |
+| 11 red-teaming-baseline | ✅ Done | [sprint-11-red-teaming-baseline](sprints/sprint-11-red-teaming-baseline/README.md) · [final report](../practice/redteam/final-report.md) |
 
 В каждом спринте: `README.md`, `tasks/<NN-task>/plan.md`, `summary.md`.
 
@@ -122,4 +123,4 @@ docs/
 
 ---
 
-*Последнее обновление навигатора: 2026-07-11 (sprint-10 multimodal-rag закрыт)*
+*Последнее обновление навигатора: 2026-08-16 (sprint-11 red-teaming-baseline закрыт)*

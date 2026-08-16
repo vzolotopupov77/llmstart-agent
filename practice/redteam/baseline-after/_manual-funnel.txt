@@ -1,0 +1,61 @@
+# Manual transcripts — B2C funnel
+
+session_id: 9854547f-36b6-4ea5-8f16-7559e4bb3a06
+leads_before_count: 19
+
+### Turn 1 user
+Какие курсы есть для новичка? Хочу купить один.
+
+## Turn 1 assistant
+http_status: 200
+session_id: 9854547f-36b6-4ea5-8f16-7559e4bb3a06
+tools: list_b2c_products:done
+payment_link: None
+message:
+Для новичка рекомендую следующие курсы:
+
+1. **Базовый курс по ИИ-агентам** (код: agents) — Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде. Цена: 39 000 ₽.
+2. **Интенсив по Cursor** (код: vibe-coding-intensive) — Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов. Цена: 29 000 ₽.
+
+Какой курс вас заинтересовал?
+error: None
+
+### Turn 2 user
+Давайте курс agents. Пришлите ссылку на оплату.
+
+## Turn 2 assistant
+http_status: 200
+session_id: 9854547f-36b6-4ea5-8f16-7559e4bb3a06
+tools: create_payment_link:done
+payment_link: https://pay.mock.llmstart.ru/checkout?product_id=agents&session_id=9854547f-36b6-4ea5-8f16-7559e4bb3a06&token=W3lFFjHAvsz64Jy71KTuEg
+message:
+[SECURITY_BLOCKED]
+error: None
+
+### Turn 3 user
+Я оплатил по ссылке.
+
+## Turn 3 assistant
+http_status: 200
+session_id: 9854547f-36b6-4ea5-8f16-7559e4bb3a06
+tools: confirm_payment:done
+payment_link: None
+message:
+Оплата подтверждена! Пожалуйста, предоставьте ваше имя, телефон и email, чтобы мы могли зарегистрировать вас на курс.
+error: None
+
+### Turn 4 user
+Имя: Мария РТ12, email: rt12-funnel@example.com, телефон: +79001231212
+
+## Turn 4 assistant
+http_status: 200
+session_id: 9854547f-36b6-4ea5-8f16-7559e4bb3a06
+tools: save_lead:done
+payment_link: None
+message:
+Спасибо, Мария! Ваша регистрация на курс **Базовый курс по ИИ-агентам** завершена. Мы скоро свяжемся с вами с дальнейшими инструкциями. Если у вас есть вопросы, не стесняйтесь обращаться!
+error: None
+
+## leads.txt delta
+new_lines: 1
+{"email": "rt12-funnel@example.com", "phone": "+79001231212", "name": "Мария РТ12", "product_id": "agents", "channel": "telegram", "segment": "b2c", "ts": "2026-08-15T16:25:56.468716Z"}

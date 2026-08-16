@@ -6,9 +6,11 @@ from typing import Any
 from langchain_core.tools import StructuredTool
 from mcp.types import Tool
 
+from app.core.config import get_settings
 from app.mcp_client.context import get_turn_context
 from app.mcp_client.sync_tools import execute_tool
 from app.mcp_client.tool_schemas import TOOL_ARGS_SCHEMAS
+from app.security.tool_policy import apply_tool_policy, mark_confirm_payment_result
 
 TOOL_TITLES: dict[str, str] = {
     "vector_search": "Семантический поиск",
@@ -34,7 +36,23 @@ def _build_tool(tool: Tool) -> StructuredTool:
     def _run_sync(**kwargs: Any) -> str:
         """Sync entrypoint for LangGraph tool node."""
         arguments = _inject_context(tool.name, kwargs)
+        settings = get_settings()
+        if tool.name in {"confirm_payment", "save_lead"}:
+            context = get_turn_context()
+            policy_error = apply_tool_policy(
+                tool.name,
+                arguments,
+                context,
+                security_enabled=settings.security_enabled,
+            )
+            if policy_error is not None:
+                result = {"error": policy_error}
+                if tool.name == "confirm_payment":
+                    mark_confirm_payment_result(context, result)
+                return json.dumps(result, ensure_ascii=False)
         result = execute_tool(tool.name, arguments)
+        if tool.name == "confirm_payment":
+            mark_confirm_payment_result(get_turn_context(), result)
         return json.dumps(result, ensure_ascii=False)
 
     args_schema = TOOL_ARGS_SCHEMAS.get(tool.name)

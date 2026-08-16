@@ -38,7 +38,7 @@
 ### Посетитель (B2B)
 
 - **С-5: Уточнение сегмента** — при смешанном запросе агент определяет B2B vs B2C и переключает контекст RAG.
-- **С-6: Корпоративный запрос** — вопрос по обучению/заказу; `search_knowledge_base` с фильтром B2B; при интересе — сбор лида (те же поля, segment=B2B).
+- **С-6: Корпоративный запрос** — вопрос по обучению/заказу; поиск с фильтром `segment=b2b`; при интересе — сбор лида (те же поля, segment=B2B).
 - **С-7: Сравнение с B2C** — «курс для себя / для компании»; агент объясняет разницу сегментов без юридической консультации.
 
 ### Каналы (web / telegram)
@@ -119,10 +119,10 @@ graph TB
 
 ### MCP-сервер инструментов
 
-- Публикует tools по MCP: `search_knowledge_base`, `list_b2c_products`, `save_lead`, `create_payment_link`, `confirm_payment`.
-- Доступ к `data/b2b/`, `data/b2c/` и `data/leads.txt`.
+- Публикует **8 tools**: поиск — `vector_search`, `graph_search`, `global_catalog`, `text2cypher_tool`; каталог — `list_b2c_products`; воронка — `create_payment_link`, `confirm_payment`, `save_lead`.
+- Доступ к `data/b2b/`, `data/b2c/`, `data/leads.txt`, `data/payments.json`, а также к Qdrant и Neo4j.
 - Единая точка side-effects; может использоваться другими MCP-клиентами, не только этим Core.
-- **Статус:** MVP
+- **Статус:** MVP. Детали транспорта и внутренней структуры — в [architecture.md](architecture.md).
 
 ### Web-виджет (Next.js)
 

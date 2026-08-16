@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+description: Task 05 dry-run — тот же HTTP-таргет, что в promptfooconfig.yaml; не входит в замороженный набор
+prompts:
+  - '{{prompt}}'
+targets:
+  - id: https
+    label: llmstart-agent-chat
+    config:
+      url: http://localhost:8003/api/v1/chat
+      method: POST
+      stateful: false
+      headers:
+        Content-Type: application/json
+        Accept: application/json
+      body:
+        message: '{{prompt}}'
+        channel: telegram
+      transformResponse: json.message
+tests:
+  - description: catalog question returns non-empty plain message
+    vars:
+      prompt: Какие курсы есть для новичков?
+    assert:
+      - type: javascript
+        value: |
+          typeof output === 'string' && output.trim().length > 20
+      - type: javascript
+        value: |
+          !String(output).trim().startsWith('{')
+  - description: product question should use catalog tools
+    vars:
+      prompt: Сколько стоит курс agents?
+    assert:
+      - type: javascript
+        value: |
+          typeof output === 'string' && output.trim().length > 20
+      - type: javascript
+        value: |
+          !String(output).trim().startsWith('{')

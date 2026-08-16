@@ -31,6 +31,8 @@ from app.observability.langfuse import (
     build_langfuse_metadata,
     flush_callbacks,
 )
+from app.security.constants import SECURITY_BLOCKED_MARKER
+from app.security.output_guard import apply_output_guard
 from app.services.channel_formatter import format_message
 from app.services.message_chunker import chunk_message
 from app.services.price_formatter import normalize_kopeck_prices_in_text
@@ -62,6 +64,11 @@ class AgentService:
         self._tools_ready = tools_ready
         self._settings = settings
 
+    @property
+    def settings(self) -> Settings:
+        """Runtime settings used by HTTP guards."""
+        return self._settings
+
     def run_chat_turn(
         self,
         *,
@@ -82,6 +89,11 @@ class AgentService:
         plain = turn.final_message.strip()
         if channel == "telegram":
             plain = normalize_kopeck_prices_in_text(plain, products)
+        plain = apply_output_guard(
+            plain,
+            session_id=str(session.id),
+            settings=self._settings,
+        )
         plain, html = format_message(channel, plain)
 
         return ChatResponse(
@@ -221,7 +233,50 @@ class AgentService:
             )
             time.sleep(SSE_TOOL_STEP_DELAY_SECONDS)
 
-        yield from _iter_tail_sse_events(turn=turn, session_id=session.id)
+        yield from _iter_tail_sse_events(
+            turn=turn,
+            session_id=session.id,
+            settings=self._settings,
+        )
+
+    def blocked_chat_response(
+        self,
+        *,
+        session_id: UUID | None,
+        channel: str,
+    ) -> ChatResponse:
+        """JSON body when an input/config guard blocks the turn."""
+        session, _created = self._session_store.get_or_create(session_id, channel)
+        self._session_store.touch(session)
+        _plain, html = format_message(channel, SECURITY_BLOCKED_MARKER)
+        return ChatResponse(
+            session_id=session.id,
+            channel=channel,
+            message=SECURITY_BLOCKED_MARKER,
+            message_html=html,
+            reasoning="",
+            tools=[],
+            products=None,
+            payment_link=None,
+        )
+
+    def iter_blocked_stream(
+        self,
+        *,
+        session_id: UUID | None,
+        channel: str,
+    ) -> Iterator[str]:
+        """SSE body when an input/config guard blocks the turn."""
+        session, _created = self._session_store.get_or_create(session_id, channel)
+        self._session_store.touch(session)
+        yield format_sse_event(
+            "message",
+            SseMessageData(delta=SECURITY_BLOCKED_MARKER),
+        )
+        yield format_sse_event(
+            "done",
+            SseDoneData(session_id=session.id, message=SECURITY_BLOCKED_MARKER),
+        )
 
     def _execute_turn(
         self,
@@ -309,7 +364,12 @@ class _StreamTurnHolder:
     error: Exception | None = None
 
 
-def _iter_tail_sse_events(*, turn: TurnResult, session_id: UUID) -> Iterator[str]:
+def _iter_tail_sse_events(
+    *,
+    turn: TurnResult,
+    session_id: UUID,
+    settings: Settings,
+) -> Iterator[str]:
     products = _map_products(turn.products)
     if products:
         yield format_sse_event(
@@ -318,7 +378,12 @@ def _iter_tail_sse_events(*, turn: TurnResult, session_id: UUID) -> Iterator[str
         )
         time.sleep(SSE_POST_STEP_DELAY_SECONDS)
 
-    for delta in chunk_message(turn.final_message):
+    message = apply_output_guard(
+        turn.final_message,
+        session_id=str(session_id),
+        settings=settings,
+    )
+    for delta in chunk_message(message):
         yield format_sse_event("message", SseMessageData(delta=delta))
         time.sleep(SSE_MESSAGE_CHUNK_DELAY_SECONDS)
 
@@ -331,7 +396,7 @@ def _iter_tail_sse_events(*, turn: TurnResult, session_id: UUID) -> Iterator[str
 
     yield format_sse_event(
         "done",
-        SseDoneData(session_id=session_id, message=turn.final_message),
+        SseDoneData(session_id=session_id, message=message),
     )
 
 

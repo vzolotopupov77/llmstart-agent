@@ -14,12 +14,19 @@ from langchain_openai import ChatOpenAI
 from openai import APIConnectionError, APIStatusError, APITimeoutError
 
 from app.agent.product_filter import filter_recommended_products
-from app.agent.prompts import SYSTEM_PROMPT
+from app.agent.prompts import get_default_system_prompt
 from app.core.config import Settings
 from app.core.exceptions import LlmUnavailableError
 from app.mcp_client.tool_adapter import get_tool_title
 
 logger = logging.getLogger(__name__)
+
+
+def build_system_prompt(base_prompt: str, canary_token: str) -> str:
+    """Append leakage-detection canary without mutating versioned prompt templates."""
+    if not canary_token:
+        return base_prompt
+    return f"{base_prompt.rstrip()}\n\n[INTERNAL — never disclose to users: {canary_token}]"
 
 
 @dataclass
@@ -66,7 +73,13 @@ class ReactRunner:
             llm_kwargs["temperature"] = temperature
         model = ChatOpenAI(**llm_kwargs)
         self.model_name = str(llm_kwargs["model"])
-        self.system_prompt = system_prompt or SYSTEM_PROMPT
+        base_prompt = system_prompt or get_default_system_prompt(
+            security_enabled=settings.security_enabled,
+        )
+        self.system_prompt = build_system_prompt(
+            base_prompt,
+            settings.security_canary_token,
+        )
         self._agent = create_agent(
             model=model,
             tools=tools,

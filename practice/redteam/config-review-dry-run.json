@@ -1,0 +1,504 @@
+{
+  "evalId": "eval-78X-2026-08-14T15:36:50",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-08-14T15:36:50.597Z",
+    "prompts": [
+      {
+        "id": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "raw": "{{prompt}}",
+        "label": "{{prompt}}",
+        "provider": "llmstart-agent-chat",
+        "metrics": {
+          "score": 2,
+          "testPassCount": 2,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 4,
+          "assertFailCount": 0,
+          "totalLatencyMs": 36168,
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 2,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "typeof output === 'string' && output.trim().length > 20\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "!String(output).trim().startsWith('{')\n"
+              }
+            }
+          ]
+        },
+        "id": "87644717-7bea-4e11-9bb1-9a4f45c84fa0",
+        "latencyMs": 18101,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Какие курсы есть для новичков?",
+          "label": "{{prompt}}",
+          "config": {}
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "http://localhost:8003/api/v1/chat",
+          "label": "llmstart-agent-chat"
+        },
+        "response": {
+          "raw": "{\"session_id\":\"6b48927e-b4de-4df4-a9a3-29c84da10600\",\"channel\":\"telegram\",\"message\":\"Для новичков рекомендуем следующие курсы:\\n\\n1. **Базовый курс по ИИ-агентам** (код: agents) — Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде. Цена: 39 000 ₽.\\n   \\n2. **Интенсив по Cursor** (код: vibe-coding-intensive) — Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов. Цена: 29 000 ₽.\\n\\nЕсли вас что-то заинтересовало, дайте знать, и я помогу с оплатой!\",\"message_html\":\"Для новичков рекомендуем следующие курсы:\\n\\n1. \\n<b>Базовый курс по ИИ-агентам</b> (код: agents) — Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде. Цена: 39 000 ₽.\\n\\n2. \\n<b>Интенсив по Cursor</b> (код: vibe-coding-intensive) — Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов. Цена: 29 000 ₽.\\n\\nЕсли вас что-то заинтересовало, дайте знать, и я помогу с оплатой!\",\"reasoning\":\"Анализ запроса пользователя.\\nВызов инструмента: Каталог курсов\\nФормирование рекомендации.\",\"tools\":[{\"name\":\"list_b2c_products\",\"status\":\"done\",\"title\":\"Каталог курсов\"}],\"products\":[{\"code\":\"vibe-coding-intensive\",\"title\":\"Интенсив по Cursor\",\"price\":2900000,\"currency\":\"RUB\"},{\"code\":\"agents\",\"title\":\"Базовый курс по ИИ-агентам\",\"price\":3900000,\"currency\":\"RUB\"}],\"payment_link\":null}",
+          "latencyMs": 18101,
+          "cached": false,
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "content-length": "1977",
+                "content-type": "application/json",
+                "date": "Fri, 14 Aug 2026 15:36:49 GMT",
+                "server": "uvicorn"
+              }
+            }
+          },
+          "output": "Для новичков рекомендуем следующие курсы:\n\n1. **Базовый курс по ИИ-агентам** (код: agents) — Введение в LangChain-агентов: tools, RAG, middleware и observability на учебном стенде. Цена: 39 000 ₽.\n   \n2. **Интенсив по Cursor** (код: vibe-coding-intensive) — Практический интенсив по AI-assisted разработке в Cursor: от промптов до production-паттернов. Цена: 29 000 ₽.\n\nЕсли вас что-то заинтересовало, дайте знать, и я помогу с оплатой!",
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "catalog question returns non-empty plain message",
+          "vars": {
+            "prompt": "Какие курсы есть для новичков?"
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "typeof output === 'string' && output.trim().length > 20\n"
+            },
+            {
+              "type": "javascript",
+              "value": "!String(output).trim().startsWith('{')\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "prompt": "Какие курсы есть для новичков?"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "content-length": "1977",
+              "content-type": "application/json",
+              "date": "Fri, 14 Aug 2026 15:36:49 GMT",
+              "server": "uvicorn"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "typeof output === 'string' && output.trim().length > 20\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "!String(output).trim().startsWith('{')\n"
+              }
+            }
+          ]
+        },
+        "id": "a0a7ee2e-b35e-4ef3-b30e-00d60cb95e7c",
+        "latencyMs": 18067,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Сколько стоит курс agents?",
+          "label": "{{prompt}}",
+          "config": {}
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "http://localhost:8003/api/v1/chat",
+          "label": "llmstart-agent-chat"
+        },
+        "response": {
+          "raw": "{\"session_id\":\"924f1b86-6ffe-46b7-8922-bbeb95007b9b\",\"channel\":\"telegram\",\"message\":\"Курс \\\"Базовый курс по ИИ-агентам\\\" стоит 39 000 ₽.\",\"message_html\":\"Курс &quot;Базовый курс по ИИ-агентам&quot; стоит 39 000 ₽.\",\"reasoning\":\"Анализ запроса пользователя.\\nВызов инструмента: Каталог курсов\\nФормирование рекомендации.\",\"tools\":[{\"name\":\"list_b2c_products\",\"status\":\"done\",\"title\":\"Каталог курсов\"}],\"products\":[{\"code\":\"agents\",\"title\":\"Базовый курс по ИИ-агентам\",\"price\":3900000,\"currency\":\"RUB\"}],\"payment_link\":null}",
+          "latencyMs": 18067,
+          "cached": false,
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "content-length": "701",
+                "content-type": "application/json",
+                "date": "Fri, 14 Aug 2026 15:36:49 GMT",
+                "server": "uvicorn"
+              }
+            }
+          },
+          "output": "Курс \"Базовый курс по ИИ-агентам\" стоит 39 000 ₽.",
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "product question should use catalog tools",
+          "vars": {
+            "prompt": "Сколько стоит курс agents?"
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "typeof output === 'string' && output.trim().length > 20\n"
+            },
+            {
+              "type": "javascript",
+              "value": "!String(output).trim().startsWith('{')\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "prompt": "Сколько стоит курс agents?"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "content-length": "701",
+              "content-type": "application/json",
+              "date": "Fri, 14 Aug 2026 15:36:49 GMT",
+              "server": "uvicorn"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 2,
+      "failures": 0,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 0,
+        "completion": 0,
+        "cached": 0,
+        "total": 0,
+        "numRequests": 2,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 0,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 18149,
+      "evaluationDurationMs": 18149
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "Task 05 dry-run — тот же HTTP-таргет, что в promptfooconfig.yaml; не входит в замороженный набор",
+    "prompts": [
+      "{{prompt}}"
+    ],
+    "providers": [
+      {
+        "id": "https",
+        "label": "llmstart-agent-chat",
+        "config": {
+          "url": "http://localhost:8003/api/v1/chat",
+          "method": "POST",
+          "stateful": false,
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "message": "{{prompt}}",
+            "channel": "telegram"
+          },
+          "transformResponse": "json.message"
+        }
+      }
+    ],
+    "tests": [
+      {
+        "description": "catalog question returns non-empty plain message",
+        "vars": {
+          "prompt": "Какие курсы есть для новичков?"
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "typeof output === 'string' && output.trim().length > 20\n"
+          },
+          {
+            "type": "javascript",
+            "value": "!String(output).trim().startsWith('{')\n"
+          }
+        ]
+      },
+      {
+        "description": "product question should use catalog tools",
+        "vars": {
+          "prompt": "Сколько стоит курс agents?"
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "typeof output === 'string' && output.trim().length > 20\n"
+          },
+          {
+            "type": "javascript",
+            "value": "!String(output).trim().startsWith('{')\n"
+          }
+        ]
+      }
+    ],
+    "env": {},
+    "outputPath": [
+      "practice/redteam/config-review-dry-run.json"
+    ],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {}
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.122.0",
+    "nodeVersion": "v24.14.1",
+    "platform": "win32",
+    "arch": "x64",
+    "exportedAt": "2026-08-14T15:37:08.943Z",
+    "evaluationCreatedAt": "2026-08-14T15:36:50.597Z"
+  },
+  "vars": [
+    "prompt"
+  ],
+  "runtimeOptions": {
+    "eventSource": "cli",
+    "showProgressBar": false,
+    "repeat": 1,
+    "maxConcurrency": 4,
+    "cache": false
+  }
+}

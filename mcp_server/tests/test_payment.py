@@ -2,6 +2,7 @@
 
 import re
 
+from mcp_server.data_access.payments import has_confirmed_payment
 from mcp_server.tools.payment import handle_confirm_payment, handle_create_payment_link
 
 
@@ -35,3 +36,13 @@ def test_confirm_payment_without_link_fails(settings_env: object) -> None:
         assert "no pending payment" in str(exc)
     else:
         raise AssertionError("expected ValueError")
+
+
+def test_has_confirmed_payment(settings_env: object) -> None:
+    assert has_confirmed_payment("sess-pay-2") is False
+    handle_create_payment_link("agents", "sess-pay-2")
+    assert has_confirmed_payment("sess-pay-2") is False
+    handle_confirm_payment("sess-pay-2", "agents")
+    assert has_confirmed_payment("sess-pay-2") is True
+    assert has_confirmed_payment("sess-pay-2", "agents") is True
+    assert has_confirmed_payment("sess-pay-2", "deep-agents") is False

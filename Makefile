@@ -5,6 +5,11 @@
 COMPOSE_FILE := devops/docker-compose.yml
 OCR_COMPOSE_FILE := devops/docker-compose.ocr.yml
 REPO_ROOT := $(CURDIR)
+ifeq ($(OS),Windows_NT)
+  UV := $(REPO_ROOT)/scripts/uv.cmd
+else
+  UV ?= uv
+endif
 BACKEND_PORT ?= 8003
 FRONTEND_PORT ?= 3002
 DATASET_NAME ?= llmstart-agent-v1
@@ -72,16 +77,16 @@ help:
 	@echo   eval-validate         Pydantic + integrity tests for eval contour
 	@echo   eval-sync             Sync datasets to Langfuse (stub until task 04)
 	@echo   eval-experiment       Run experiment (CONFIG=..., DATASET=...)
-	@echo   eval-multimodal-baseline  Sprint-10 naive text baseline (PDF layer -> e5 -> Qdrant)
+	@echo   eval-multimodal-baseline  Sprint-10 naive text baseline (PDF layer to e5 to Qdrant)
 	@echo   eval-multimodal           Sprint-10 multimodal eval (CONFIG=evals/configs/multimodal-baseline.yaml)
 	@echo   eval-multimodal-a-ocr     Sprint-10 method A: Tesseract (docker) + RapidOCR (local) + CER
 	@echo   eval-multimodal-b-caption Sprint-10 method B: Nemotron + Gemini VLM caption + hallucination check
 	@echo   eval-multimodal-c-unified Sprint-10 method C: VL image embed + C vs B report
 	@echo   eval-multimodal-d-multivector Sprint-10 method D: Jina multivector + TEDS + D vs C/B
 	@echo   ocr-build                 Build OCR docker images (Tesseract; EasyOCR/RapidOCR optional)
-	@echo   ocr-run-tesseract         OCR batch via docker -> evals/artifacts/ocr/tesseract
-	@echo   ocr-run-easyocr           OCR batch via docker -> evals/artifacts/ocr/easyocr
-	@echo   ocr-run-rapidocr          OCR batch via docker -> evals/artifacts/ocr/rapidocr
+	@echo   ocr-run-tesseract         OCR batch via docker to evals/artifacts/ocr/tesseract
+	@echo   ocr-run-easyocr           OCR batch via docker to evals/artifacts/ocr/easyocr
+	@echo   ocr-run-rapidocr          OCR batch via docker to evals/artifacts/ocr/rapidocr
 	@echo   eval-graph-hybrid     GraphRAG Task 06 eval hybrid branch (CONFIG=graphrag-graph.yaml)
 	@echo   eval-graph-global     GraphRAG Task 06 smoke global branch (CONFIG=graphrag-global-branch.yaml)
 	@echo   eval-graph-routing    GraphRAG Task 08 agent routing eval (CONFIG=graphrag-routing.yaml)
@@ -108,13 +113,13 @@ dev: up
 	@$(MAKE) -j3 dev-backend dev-frontend dev-bot
 
 dev-backend:
-	cd backend && uv run uvicorn app.main:app --host 127.0.0.1 --port $(BACKEND_PORT)
+	cd backend && $(UV) run uvicorn app.main:app --host 127.0.0.1 --port $(BACKEND_PORT)
 
 dev-frontend:
 	cd frontend && pnpm dev --port $(FRONTEND_PORT)
 
 dev-bot:
-	cd bot && uv run python -m bot.main
+	cd bot && $(UV) run python -m bot.main
 
 PULL ?= 0
 
@@ -137,41 +142,41 @@ graph-status:
 	@echo === docker compose ps neo4j ===
 	docker compose --env-file .env -f $(COMPOSE_FILE) ps neo4j
 	@echo === connectivity ===
-	cd mcp_server && uv run python -m scripts.neo4j_smoke
+	cd mcp_server && $(UV) run python -m scripts.neo4j_smoke
 
 graph-shell:
-	cd mcp_server && uv run python -m scripts.neo4j_shell
+	cd mcp_server && $(UV) run python -m scripts.neo4j_shell
 
 graph-init-ro:
-	cd mcp_server && uv run python -m scripts.neo4j_init_ro
+	cd mcp_server && $(UV) run python -m scripts.neo4j_init_ro
 
 graph-seed:
-	cd mcp_server && uv run python -m scripts.neo4j_seed
+	cd mcp_server && $(UV) run python -m scripts.neo4j_seed
 
 graph-inspect:
-	cd mcp_server && uv run python -m scripts.neo4j_qa --inspect
+	cd mcp_server && $(UV) run python -m scripts.neo4j_qa --inspect
 
 graph-qa:
-	cd mcp_server && uv run python -m scripts.neo4j_qa
+	cd mcp_server && $(UV) run python -m scripts.neo4j_qa
 
 graph-extract:
-	cd mcp_server && uv run python ../scripts/graph_indexer.py
+	cd mcp_server && $(UV) run python ../scripts/graph_indexer.py
 
 graph-compare:
-	cd mcp_server && uv run python ../scripts/graph_compare.py --output ../data/graph/extraction-report.md
+	cd mcp_server && $(UV) run python ../scripts/graph_compare.py --output ../data/graph/extraction-report.md
 
 graph-index: graph-seed graph-extract
 
 lint: lint-backend lint-mcp lint-bot lint-frontend
 
 lint-backend:
-	cd backend && uv run ruff check .
+	cd backend && $(UV) run ruff check .
 
 lint-mcp:
-	cd mcp_server && uv run ruff check .
+	cd mcp_server && $(UV) run ruff check .
 
 lint-bot:
-	cd bot && uv run ruff check .
+	cd bot && $(UV) run ruff check .
 
 lint-frontend:
 	cd frontend && pnpm lint
@@ -179,24 +184,24 @@ lint-frontend:
 format: format-backend format-mcp format-bot
 
 format-backend:
-	cd backend && uv run ruff format .
+	cd backend && $(UV) run ruff format .
 
 format-mcp:
-	cd mcp_server && uv run ruff format .
+	cd mcp_server && $(UV) run ruff format .
 
 format-bot:
-	cd bot && uv run ruff format .
+	cd bot && $(UV) run ruff format .
 
 typecheck: typecheck-backend typecheck-mcp typecheck-bot typecheck-frontend
 
 typecheck-backend:
-	cd backend && uv run mypy .
+	cd backend && $(UV) run mypy .
 
 typecheck-mcp:
-	cd mcp_server && uv run mypy .
+	cd mcp_server && $(UV) run mypy .
 
 typecheck-bot:
-	cd bot && uv run mypy .
+	cd bot && $(UV) run mypy .
 
 typecheck-frontend:
 	cd frontend && pnpm typecheck
@@ -204,39 +209,39 @@ typecheck-frontend:
 test: test-backend test-mcp test-bot test-frontend
 
 test-backend:
-	cd backend && uv run pytest
+	cd backend && $(UV) run pytest
 
 test-mcp:
-	cd mcp_server && uv run pytest
+	cd mcp_server && $(UV) run pytest
 
 test-bot:
-	cd bot && uv run pytest
+	cd bot && $(UV) run pytest
 
 reindex:
-	cd mcp_server && uv run python -c "from mcp_server.rag.indexer import reindex; print(f'indexed {reindex()} chunks')"
+	cd mcp_server && $(UV) run python -c "from mcp_server.rag.indexer import reindex; print(f'indexed {reindex()} chunks')"
 
 index:
 ifdef BACKEND
 ifeq ($(BACKEND),qdrant)
-	cd mcp_server && uv run python -m mcp_server.rag.qdrant_indexer
+	cd mcp_server && $(UV) run python -m mcp_server.rag.qdrant_indexer
 else ifeq ($(BACKEND),pgvector)
-	cd mcp_server && uv run python -m mcp_server.rag.pgvector_indexer
+	cd mcp_server && $(UV) run python -m mcp_server.rag.pgvector_indexer
 else ifeq ($(BACKEND),chroma)
-	cd mcp_server && uv run python -c "from mcp_server.rag.indexer import reindex; print(f'indexed {reindex()} chunks')"
+	cd mcp_server && $(UV) run python -c "from mcp_server.rag.indexer import reindex; print(f'indexed {reindex()} chunks')"
 else
 	$(error Unknown BACKEND: $(BACKEND). Use qdrant, chroma, or pgvector)
 endif
 else
-	cd mcp_server && uv run python -m mcp_server.rag.qdrant_indexer
+	cd mcp_server && $(UV) run python -m mcp_server.rag.qdrant_indexer
 endif
 
 upload-langfuse-dataset:
-	cd backend && uv run python ../datasets/scripts/upload_langfuse_dataset.py \
+	cd backend && $(UV) run python ../datasets/scripts/upload_langfuse_dataset.py \
 		--dataset-name $(DATASET_NAME) \
 		--source ../$(DATASET_SOURCE)
 
 reload-langfuse-dataset:
-	cd backend && uv run python ../datasets/scripts/upload_langfuse_dataset.py \
+	cd backend && $(UV) run python ../datasets/scripts/upload_langfuse_dataset.py \
 		--dataset-name $(DATASET_NAME) \
 		--source ../$(DATASET_SOURCE) \
 		--reload
@@ -256,10 +261,10 @@ eval-experiment:
 	$(MAKE) -C evals experiment
 
 eval-multimodal-baseline:
-	cd evals && uv sync && uv run python -m scripts.run_multimodal_eval --config configs/multimodal-baseline.yaml
+	cd evals && $(UV) sync && $(UV) run python -m scripts.run_multimodal_eval --config configs/multimodal-baseline.yaml
 
 eval-multimodal:
-	cd evals && uv sync && uv run python -m scripts.run_multimodal_eval --config $(if $(CONFIG),$(CONFIG),configs/multimodal-baseline.yaml)
+	cd evals && $(UV) sync && $(UV) run python -m scripts.run_multimodal_eval --config $(if $(CONFIG),$(CONFIG),configs/multimodal-baseline.yaml)
 
 ocr-build:
 	docker compose -f $(OCR_COMPOSE_FILE) build
@@ -274,16 +279,16 @@ ocr-run-rapidocr:
 	docker compose -f $(OCR_COMPOSE_FILE) run --rm ocr-rapidocr
 
 eval-multimodal-a-ocr:
-	cd evals && uv sync --group ocr-modern && uv run python -m scripts.run_multimodal_a_ocr
+	cd evals && $(UV) sync --group ocr-modern && $(UV) run python -m scripts.run_multimodal_a_ocr
 
 eval-multimodal-b-caption:
-	cd evals && uv sync && uv run python -m scripts.run_multimodal_b_caption
+	cd evals && $(UV) sync && $(UV) run python -m scripts.run_multimodal_b_caption
 
 eval-multimodal-c-unified:
-	cd evals && uv sync && uv run python -m scripts.run_multimodal_c_unified
+	cd evals && $(UV) sync && $(UV) run python -m scripts.run_multimodal_c_unified
 
 eval-multimodal-d-multivector:
-	cd evals && uv sync && uv run python -m scripts.run_multimodal_d_multivector
+	cd evals && $(UV) sync && $(UV) run python -m scripts.run_multimodal_d_multivector
 
 eval-graph-hybrid:
 	@echo Before run: set RETRIEVER_BRANCH=hybrid and RAG_TOP_K=5 in .env, restart backend.
@@ -313,13 +318,13 @@ eval-backfill-runs:
 
 bench:
 ifdef RETRIEVER_BACKEND
-	cd mcp_server && uv run python -m scripts.bench \
+	cd mcp_server && $(UV) run python -m scripts.bench \
 		--config ../evals/configs/vector-db-$(RETRIEVER_BACKEND).yaml \
 		--backend $(RETRIEVER_BACKEND) \
 		--out ../evals/reports/ \
 		$(if $(BENCH_SKIP_INDEX),--skip-index,)
 else
-	cd mcp_server && uv run python -m scripts.bench_all \
+	cd mcp_server && $(UV) run python -m scripts.bench_all \
 		--backends $(BENCH_BACKENDS) \
 		--configs-dir ../evals/configs/ \
 		--reports-dir ../evals/reports/ \

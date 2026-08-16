@@ -55,6 +55,10 @@ class Settings(BaseSettings):
         alias="EVAL_CONFIGS_DIR",
     )
 
+    security_canary_token: str = Field(default="", alias="SECURITY_CANARY_TOKEN")
+    security_enabled: bool = Field(default=True, alias="SECURITY_ENABLED")
+    eval_access_key: str = Field(default="", alias="EVAL_ACCESS_KEY")
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def parse_cors_origins(cls, value: str | list[str]) -> list[str]:

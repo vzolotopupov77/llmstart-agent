@@ -6,10 +6,16 @@ import os
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
+import pytest
 from app.agent.run_config import JudgeConfigBlock
 from langfuse import Evaluation
 
-from scripts.agent_task import extract_user_messages, format_input_for_eval, format_judge_input
+from scripts.agent_task import (
+    build_chat_headers,
+    extract_user_messages,
+    format_input_for_eval,
+    format_judge_input,
+)
 from scripts.evaluators import (
     build_evaluation_steps,
     build_geval_criteria,
@@ -28,6 +34,16 @@ JUDGE = SimpleNamespace(
 
 def test_extract_user_messages_single() -> None:
     assert extract_user_messages("  hello  ") == ["hello"]
+
+
+def test_build_chat_headers_includes_eval_key(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv("EVAL_ACCESS_KEY", raising=False)
+    assert build_chat_headers() == {"Accept": "application/json"}
+    monkeypatch.setenv("EVAL_ACCESS_KEY", "  eval-secret  ")
+    assert build_chat_headers() == {
+        "Accept": "application/json",
+        "X-LLMStart-Eval-Key": "eval-secret",
+    }
 
 
 def test_extract_user_messages_multi() -> None:

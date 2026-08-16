@@ -40,6 +40,7 @@ llmstart-agent/
 ├── data/              # База знаний, каталог, leads.txt
 ├── datasets/          # Валидационные датасеты, скрипты загрузки в Langfuse
 ├── evals/             # Eval-контур: конфиги, датасеты, отчёты, скрипты
+├── practice/redteam/  # Security-baseline Promptfoo (sprint-11)
 ├── devops/            # docker-compose, Langfuse v3
 └── docs/              # Концепт, roadmap, ADR, спринты
 ```
@@ -133,16 +134,18 @@ make dev-bot
 | Этап | Статус | Описание |
 |------|--------|----------|
 | **v0.1 MVP** | ✅ Done | sprint-01…06: агент, RAG, web-виджет, Telegram, воронка |
-| **v0.2 Развитие RAG-ассистента** | 🚧 In Progress | GraphRAG, мультимодал, context-engineering |
-| **v0.3 Hardening** | 📋 Planned | Guardrails, rate limits, security |
+| **v0.2 Развитие RAG-ассистента** | 🚧 In Progress | GraphRAG ✅, мультимодал ✅; context-engineering — TBD |
+| **v0.3 Hardening** | 🚧 In Progress | Red-team baseline ✅ (sprint-11); guardrails/rate limits — TBD |
 | **v1.0 Production** | 📋 Planned | Реальные платежи, CRM, Postgres |
 
-Закрытые спринты v0.1–v0.2:
+Закрытые спринты v0.1–v0.3:
 
 | Sprint | Статус |
 |--------|--------|
 | [07 langfuse-v3](docs/sprints/sprint-07-langfuse-v3/README.md) | ✅ self-hosted Langfuse v3, трейсы в UI |
 | [08 vector-db](docs/sprints/sprint-08-vector-db/README.md) | ✅ Qdrant production, pgvector bench, retriever-абстракция |
-| [09 graphrag](docs/sprints/sprint-09-graphrag/README.md) | 📋 Neo4j KG, graph/global/text2cypher retrieval |
+| [09 graphrag](docs/sprints/sprint-09-graphrag/README.md) | ✅ Neo4j KG, graph/global/text2cypher retrieval |
+| [10 multimodal-rag](docs/sprints/sprint-10-multimodal-rag/README.md) | ✅ 5 методов индексации, вердикт — метод C |
+| [11 red-teaming-baseline](docs/sprints/sprint-11-red-teaming-baseline/README.md) | ✅ Promptfoo до/после, фиксы за `SECURITY_ENABLED` · [отчёт](practice/redteam/final-report.md) |
 
 Сводка: [`docs/roadmap.md`](docs/roadmap.md).

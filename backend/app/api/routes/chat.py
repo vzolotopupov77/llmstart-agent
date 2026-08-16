@@ -10,6 +10,9 @@ from app.core.exceptions import (
     McpUnavailableError,
     SessionNotFoundError,
 )
+from app.security.config_gate import config_id_is_authorized
+from app.security.constants import EVAL_ACCESS_KEY_HEADER
+from app.security.input_guard import input_should_block
 from app.services.agent_service import AgentService
 
 router = APIRouter(prefix="/api/v1", tags=["chat"])
@@ -42,21 +45,58 @@ def chat(
     body: ChatRequest,
     request: Request,
     accept: str = Header(default="application/json"),
+    eval_access_key: str | None = Header(default=None, alias=EVAL_ACCESS_KEY_HEADER),
 ) -> ChatResponse | StreamingResponse:
     """Process one chat turn as JSON or SSE depending on Accept."""
     normalized_accept = accept.split(",", maxsplit=1)[0].strip().lower()
     agent_service: AgentService = request.app.state.agent_service
+    settings = agent_service.settings
+    wants_sse = normalized_accept == "text/event-stream"
 
-    if normalized_accept == "text/event-stream":
-        return _chat_sse(agent_service, body)
-
-    if normalized_accept != "application/json":
+    if normalized_accept not in {"application/json", "text/event-stream"}:
         raise HTTPException(
             status_code=status.HTTP_406_NOT_ACCEPTABLE,
             detail="Only application/json or text/event-stream is supported",
         )
 
+    if input_should_block(body.message, security_enabled=settings.security_enabled):
+        return _blocked_response(agent_service, body, wants_sse=wants_sse)
+
+    if not config_id_is_authorized(body.config_id, eval_access_key, settings):
+        return _blocked_response(agent_service, body, wants_sse=wants_sse)
+
+    if wants_sse:
+        return _chat_sse(agent_service, body)
+
     return _chat_json(agent_service, body)
+
+
+def _blocked_response(
+    agent_service: AgentService,
+    body: ChatRequest,
+    *,
+    wants_sse: bool,
+) -> ChatResponse | StreamingResponse:
+    try:
+        if wants_sse:
+            stream = agent_service.iter_blocked_stream(
+                session_id=body.session_id,
+                channel=body.channel,
+            )
+            return StreamingResponse(
+                stream,
+                media_type="text/event-stream",
+                headers=SSE_HEADERS,
+            )
+        return agent_service.blocked_chat_response(
+            session_id=body.session_id,
+            channel=body.channel,
+        )
+    except SessionNotFoundError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Session not found or expired",
+        ) from exc
 
 
 def _chat_json(agent_service: AgentService, body: ChatRequest) -> ChatResponse:

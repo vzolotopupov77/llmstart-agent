@@ -1,7 +1,14 @@
 """Per-turn context injected into MCP tool calls."""
 
 from contextvars import ContextVar
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+
+
+@dataclass
+class TurnPolicyState:
+    """Mutable per-turn flags for tool policy."""
+
+    confirm_payment_failed: bool = False
 
 
 @dataclass(frozen=True)
@@ -10,6 +17,7 @@ class TurnContext:
 
     session_id: str
     channel: str
+    policy_state: TurnPolicyState = field(default_factory=TurnPolicyState)
 
 
 _turn_context: ContextVar[TurnContext | None] = ContextVar("turn_context", default=None)

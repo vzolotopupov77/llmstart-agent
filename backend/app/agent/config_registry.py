@@ -3,6 +3,7 @@
 import logging
 from pathlib import Path
 
+import yaml
 from langchain_core.tools import BaseTool
 
 from app.agent.prompts import get_system_prompt
@@ -94,6 +95,12 @@ class AgentConfigRegistry:
             logger.warning("Eval configs directory missing: %s", self._configs_dir)
             return
         for path in sorted(self._configs_dir.glob("*.yaml")):
+            if not _is_agent_run_config(path):
+                logger.debug(
+                    "Skipping non-agent config (different schema, e.g. indexer config): %s",
+                    path,
+                )
+                continue
             try:
                 config = load_run_config(path)
             except (OSError, TypeError, ValueError):
@@ -101,3 +108,17 @@ class AgentConfigRegistry:
                 continue
             self._configs[config.config_id] = config
             logger.info("Loaded eval config: %s", config.config_id)
+
+
+def _is_agent_run_config(path: Path) -> bool:
+    """Cheap pre-check for RunConfig shape.
+
+    evals/configs/ also hosts non-RunConfig YAML (e.g. sprint-10 multimodal indexer
+    configs), which share the directory but not the schema. Skipping them here avoids
+    noisy ERROR tracebacks for files this registry was never meant to load.
+    """
+    try:
+        raw = yaml.safe_load(path.read_text(encoding="utf-8"))
+    except (OSError, yaml.YAMLError):
+        return True  # let load_run_config raise and log the real error
+    return isinstance(raw, dict) and "agent" in raw and "model" in raw

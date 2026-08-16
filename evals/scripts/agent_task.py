@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import time
 import uuid
 from typing import Any
@@ -11,6 +12,16 @@ import httpx
 from app.agent.run_config import RunConfig
 
 DEFAULT_TIMEOUT_S = 120.0
+EVAL_ACCESS_KEY_HEADER = "X-LLMStart-Eval-Key"
+
+
+def build_chat_headers() -> dict[str, str]:
+    """JSON Accept plus eval key when EVAL_ACCESS_KEY is set."""
+    headers = {"Accept": "application/json"}
+    key = os.environ.get("EVAL_ACCESS_KEY", "").strip()
+    if key:
+        headers[EVAL_ACCESS_KEY_HEADER] = key
+    return headers
 
 
 def extract_user_messages(item_input: str | list[dict[str, str]]) -> list[str]:
@@ -155,7 +166,7 @@ class AgentTaskRunner:
                     response = client.post(
                         self._api_url,
                         json=payload,
-                        headers={"Accept": "application/json"},
+                        headers=build_chat_headers(),
                     )
                 if response.status_code == 503 and attempt == 0:
                     time.sleep(2.0)

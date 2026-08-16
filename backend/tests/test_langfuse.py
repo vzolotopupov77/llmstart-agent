@@ -14,7 +14,7 @@ def test_init_langfuse_creates_client() -> None:
     langfuse_module.shutdown_langfuse()
     settings = Settings(
         LANGFUSE_PUBLIC_KEY="pk-test",
-        LANGFUSE_SECRET_KEY="sk-test",  # noqa: S106
+        LANGFUSE_SECRET_KEY="sk-test",
         LANGFUSE_HOST="http://localhost:3001",
     )
     assert langfuse_module.init_langfuse(settings) is True

@@ -39,7 +39,9 @@ LLMStart Agent снимает это трение: круглосуточная 
 - Каталог B2C: все **6 позиций** (`ai-agents-combo`, `vibe-coding-intensive`, `fullstack-aidd`, `agents`, `deep-agents`, `consultation`).
 - Observability: трассировка через Langfuse (локально).
 
-**Вне MVP:** эскалация эксперту, выдача доступа, guardrails, реальные платежи, обработка возвратов и жалоб, персистентная БД.
+**Вне MVP:** эскалация эксперту, выдача доступа, полноценный тематический классификатор и rate limiting, реальные платежи, обработка возвратов и жалоб, персистентная БД.
+
+Базовый security-слой (входной/выходной guard, policy инструментов, гейт `config_id`) включён по умолчанию за флагом `SECURITY_ENABLED` — sprint-11, [final-report](../../practice/redteam/final-report.md). Это не полный guardrails-контур: ASR после фиксов 18%, open/partial и defer — в [roadmap](../roadmap.md) v0.3.
 
 ---
 

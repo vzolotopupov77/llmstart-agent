@@ -7,3 +7,16 @@
 {"email": "lead@example.com", "phone": "+79991112233", "name": "Мария", "product_id": "deep-agents", "channel": "telegram", "segment": "b2b", "ts": "2026-06-05T13:51:46.706364Z"}
 {"email": "test@example.com", "phone": "+79990000099", "name": "Test", "product_id": "agents", "channel": "web", "segment": "b2c", "ts": "2026-06-05T14:15:17.897824Z"}
 {"email": "ivan@mail.ru", "phone": "+79991234567", "name": "Иван", "product_id": "agents", "channel": "telegram", "segment": "b2c", "ts": "2026-06-06T15:48:33.158127Z"}
+{"email": "alexey.testov@gmail.com", "phone": "+7 999 123-45-67", "name": "Алексей", "product_id": "agents", "channel": "telegram", "segment": "b2c", "ts": "2026-08-14T18:02:54.159705Z"}
+{"email": "billing@company.com", "phone": "+7 900 123-45-67", "name": "Анна Смирнова", "product_id": "consultation", "channel": "telegram", "segment": "b2c", "ts": "2026-08-14T18:09:17.680616Z"}
+{"email": "test2@example.com", "phone": "+7 000 000-00-02", "name": "Иван Иванов", "product_id": "llm-implementation", "channel": "telegram", "segment": "b2b", "ts": "2026-08-14T18:23:22.853378Z"}
+{"email": "test1@example.com", "phone": "+7 000 000-00-01", "name": "Тест Тестов", "product_id": "llm-implementation", "channel": "telegram", "segment": "b2b", "ts": "2026-08-14T18:23:22.854704Z"}
+{"email": "test3@example.com", "phone": "+7 000 000-00-03", "name": "Мария Петрова", "product_id": "llm-implementation", "channel": "telegram", "segment": "b2b", "ts": "2026-08-14T18:23:22.856012Z"}
+{"email": "anna.sokolova.test@example.com", "phone": "+7 916 482-30-57", "name": "Анна Соколова", "product_id": "agents", "channel": "telegram", "segment": "b2c", "ts": "2026-08-14T18:26:18.023905Z"}
+{"email": "anna.sokolova.test@example.com", "phone": "+7 916 482-30-57", "name": "Анна Соколова", "product_id": "agents", "channel": "telegram", "segment": "b2c", "ts": "2026-08-14T18:27:07.579005Z"}
+{"email": "triage-test@example.com", "phone": "+79001112233", "name": "Триаж Тестов", "product_id": "agents", "channel": "telegram", "segment": "b2c", "ts": "2026-08-14T19:16:06.864188Z"}
+{"email": "ivan.friend@example.com", "phone": "89001234567", "name": "Иван Петров", "product_id": "agents", "channel": "telegram", "segment": "b2c", "ts": "2026-08-14T19:16:19.359009Z"}
+{"email": "test@test.ru", "phone": "+79111111111", "name": "Тестовый FIX", "product_id": "agents", "channel": "web", "segment": "b2c", "ts": "2026-08-15T16:10:19.700596Z"}
+{"email": "rt12-funnel@example.com", "phone": "+79001231212", "name": "Мария РТ12", "product_id": "agents", "channel": "telegram", "segment": "b2c", "ts": "2026-08-15T16:25:56.468716Z"}
+{"email": "ivan.ivanov@testmail.ru", "phone": "+79991234567", "name": "Иван Иванов", "product_id": "corporate-training", "channel": "telegram", "segment": "b2b", "ts": "2026-08-15T17:03:27.564436Z"}
+{"email": "maria.petrova@testmail.ru", "phone": "+79997654321", "name": "Мария Петрова", "product_id": "corporate-training", "channel": "telegram", "segment": "b2b", "ts": "2026-08-15T17:03:27.565042Z"}

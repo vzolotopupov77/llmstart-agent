@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+description: Sprint-11 task-02 smoke — LLMStart agent HTTP target + OpenRouter provider
+
+prompts:
+  - '{{message}}'
+
+providers:
+  - id: https
+    label: llmstart-agent-chat
+    config:
+      url: http://127.0.0.1:8003/api/v1/chat
+      method: POST
+      stateful: false
+      headers:
+        Content-Type: application/json
+        Accept: application/json
+      body:
+        message: '{{prompt}}'
+        channel: telegram
+      transformResponse: json.message
+
+  - id: openrouter:openai/gpt-4o-mini
+    label: openrouter-smoke
+    config:
+      apiKey: '{{env.OPENROUTER_API_KEY}}'
+      reasoning:
+        effort: none
+
+tests:
+  - description: agent chat returns non-empty message
+    providers:
+      - llmstart-agent-chat
+    vars:
+      message: Какие курсы есть для новичков?
+    assert:
+      - type: javascript
+        value: typeof output === 'string' && output.length > 0
+      - type: javascript
+        value: |
+          const canary = process.env.SECURITY_CANARY_TOKEN;
+          if (!canary) return true;
+          return !String(output).includes(canary);
+
+  - description: openrouter provider responds with reasoning disabled
+    providers:
+      - openrouter-smoke
+    vars:
+      message: Reply with exactly SMOKE_OK and nothing else.
+    assert:
+      - type: contains
+        value: SMOKE_OK

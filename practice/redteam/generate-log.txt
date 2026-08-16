@@ -1,0 +1,141 @@
+=== Task 06: redteam generate (RU-only, regen after language cut) ===
+Date: 2026-08-14 19:08:32 +03:00
+Promptfoo: 0.122.0
+Git commit: 36a94ce9ceb459e08606cee44832253da3cb3fa4
+Config SHA256: 300F1360C9AE84B6BDA331FFA6873726282AF2B9380AEA1BC6727FBCBAE5D837
+Previous config SHA256: B8F37D1D01786531B9F56DB74948C70624FE30423D6A1B86760959ADB75EF2C7
+Change: redteam.language cut from [Русский, English] to [Русский] per user decision 2026-08-14
+Backend /health: 200
+Command: echo redteam@llmstart.ru| promptfoo redteam generate -c practice/redteam/promptfooconfig.yaml -o practice/redteam/redteam-tests.yaml --env-file .env --no-cache --force --no-progress-bar --strict
+PROMPTFOO_DISABLE_SHARING=true
+---Loading environment variables from .env
+(node:1984) ExperimentalWarning: DecompressInterceptor is experimental and subject to change
+(Use `node --trace-warnings ...` to show where the warning was created)
+Cache is disabled
+Checking email...
+Synthesizing test cases for 1 prompt...
+Using plugins:
+
+contracts (3 tests)
+excessive-agency (3 tests)
+hallucination (3 tests)
+harmful:specialized-advice (3 tests)
+hijacking (3 tests)
+model-identification (3 tests)
+off-topic (3 tests)
+policy (3 tests)Агент не должен возвращать пользователю технические тексты ошибок инст...
+policy (3 tests)Агент не должен оформлять контактные данные, если они явно фиктивные, ...
+policy (3 tests)Агент не должен раскрывать, как именно он находит информацию: имена и ...
+policy (5 tests)Агент обязан считать оплату подтверждённой только тогда, когда инструм...
+prompt-extraction (5 tests) (custom config)
+system-prompt-override (3 tests)
+tool-discovery (5 tests)
+
+Using strategies:
+
+jailbreak-templates (48 additional tests)
+jailbreak:meta (48 additional tests)
+
+Test Generation Summary:
+• Total tests: 144
+• Plugin tests: 48
+• Plugins: 14
+• Strategies: 3
+• Max concurrency: 2
+
+Extracting system purpose...
+Extracting entities...
+Generating tests for contracts...
+Generating tests for excessive-agency...
+Generated 3 tests for contracts
+Generating tests for hallucination...
+Generated 3 tests for excessive-agency
+Generating tests for harmful:specialized-advice...
+Generated 3 tests for hallucination
+Generating tests for hijacking...
+Generated 3 tests for hijacking
+Generating tests for model-identification...
+Generated 3 tests for harmful:specialized-advice
+Generating tests for off-topic...
+Generated 3 tests for model-identification
+Generating tests for policy...
+Generated 3 tests for off-topic
+Generating tests for policy...
+Generated 3 tests for policy
+Generating tests for policy...
+Generated 3 tests for policy
+Generating tests for policy...
+Generated 3 tests for policy
+Generating tests for prompt-extraction...
+Generated 5 tests for prompt-extraction
+Generating tests for system-prompt-override...
+Generated 5 tests for policy
+Generating tests for tool-discovery...
+Generated 5 tests for tool-discovery
+Generated 3 tests for system-prompt-override
+
+Test Generation Report:
+┌─────┬──────────┬────────────────────────────────────────┬────────────┬────────────┬──────────────┐
+│ #   │ Type     │ ID                                     │ Requested  │ Generated  │ Status       │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 1   │ Plugin   │ contracts                              │ 3          │ 3          │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 2   │ Plugin   │ excessive-agency                       │ 3          │ 3          │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 3   │ Plugin   │ hallucination                          │ 3          │ 3          │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 4   │ Plugin   │ harmful:specialized-advice             │ 3          │ 3          │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 5   │ Plugin   │ hijacking                              │ 3          │ 3          │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 6   │ Plugin   │ model-identification                   │ 3          │ 3          │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 7   │ Plugin   │ off-topic                              │ 3          │ 3          │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 8   │ Plugin   │ policy [83497360be96]: Агент не долже… │ 3          │ 3          │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 9   │ Plugin   │ policy [b7868f8ec3df]: Агент обязан с… │ 5          │ 5          │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 10  │ Plugin   │ policy [ca7d0539ccf9]: Агент не долже… │ 3          │ 3          │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 11  │ Plugin   │ policy [f04915b7f387]: Агент не долже… │ 3          │ 3          │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 12  │ Plugin   │ prompt-extraction                      │ 5          │ 5          │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 13  │ Plugin   │ system-prompt-override                 │ 3          │ 3          │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 14  │ Plugin   │ tool-discovery                         │ 5          │ 5          │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 15  │ Strategy │ jailbreak-templates                    │ 45         │ 45         │ Success      │
+├─────┼──────────┼────────────────────────────────────────┼────────────┼────────────┼──────────────┤
+│ 16  │ Strategy │ jailbreak:meta                         │ 45         │ 45         │ Success      │
+└─────┴──────────┴────────────────────────────────────────┴────────────┴────────────┴──────────────┘
+Observed generation token usage: 9 172 total (7 950 input, 1 222 output) across 9 request(s)
+========================================================================================================================
+Wrote 138 test cases to practice\redteam\redteam-tests.yaml
+
+Run promptfoo redteam eval -c practice\redteam\redteam-tests.yaml to run the red team!
+========================================================================================================================
+
+---
+=== Post-generation verification (Task 06, RU-only regen) ===
+Date: 2026-08-14
+redteam-tests.yaml SHA256: 830B02F9B88194E9EAEC802306CDBB4F220F269D217F94C1837350907AAE938B
+promptfooconfig.yaml SHA256: 300F1360C9AE84B6BDA331FFA6873726282AF2B9380AEA1BC6727FBCBAE5D837
+Previous run (RU+EN): 276 tests, config B8F37D1D…F2C7, tests 73950242…A367 — superseded
+
+Budget vs plugin-selection.md §11.2:
+- Lower estimate (language distributes / single locale): 138 — MATCH (138 tests written)
+- Previous upper estimate (276): rejected by user — full EN duplication cut
+
+Tests per pluginId (138 total, all Русский):
+- contracts, excessive-agency, hallucination, harmful:specialized-advice, hijacking, model-identification, off-topic: 9 each
+- policy (4 instances): 42
+- prompt-extraction, tool-discovery: 15 each
+- system-prompt-override: 3 (strategy-exempt)
+
+Strategies: basic 48, jailbreak-templates 45, jailbreak:meta 45
+Generation token usage: 9,172 total across 9 requests
+
+All 14 plugin entries: SUCCESS
+Freeze rule: redteam-tests.yaml + promptfooconfig.yaml frozen until sprint end.

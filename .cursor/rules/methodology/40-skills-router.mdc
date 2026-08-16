@@ -111,6 +111,16 @@ alwaysApply: true
 | Выбор метрик (категории A–E, RAGAS, DeepEval, G-Eval) | — | `.methodology/eval/metrics-guide.md` |
 | Eval-трек: онбординг, принципы E-*, поток работы | — | `.methodology/eval/eval-methodology.md` |
 
+### Red team (Promptfoo)
+
+| Тип работы | Skill | Путь |
+|-----------|-------|------|
+| HTTP-таргет, провайдеры, transformResponse, smoke | `promptfoo-provider-setup` | `.agents/skills/promptfoo-provider-setup/SKILL.md` |
+| Плагины, стратегии, секция `redteam` в конфиге | `promptfoo-redteam-setup` | `.agents/skills/promptfoo-redteam-setup/SKILL.md` |
+| `redteam generate` / `redteam eval`, отчёты, rerun | `promptfoo-redteam-run` | `.agents/skills/promptfoo-redteam-run/SKILL.md` |
+
+> Skills приводят команды как `npx promptfoo@latest …`. В этом репозитории вместо них — локальный запинённый бинарь: `practice/redteam/node_modules/.bin/promptfoo` (установка: `npm install --prefix practice/redteam`). `npx` держит копию дерева зависимостей в `%LOCALAPPDATA%\npm-cache` на каждый прогон и забивает диск `C:`. Детали — `practice/redteam/tooling-setup.md`.
+
 ---
 
 ## Если нужного skill нет

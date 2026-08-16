@@ -1,7 +1,7 @@
 # Roadmap — LLMStart Agent
 
 > **Vision:** [concept/vision.md](concept/vision.md)  
-> **Последнее обновление:** 2026-07-11 (sprint-10 multimodal-rag закрыт)
+> **Последнее обновление:** 2026-08-16 (sprint-11 red-teaming-baseline закрыт; backlog security размещён в v0.3 / v1.0)
 
 ---
 
@@ -81,8 +81,10 @@
 |---|--------|------|--------|----------|
 | 09 | [graphrag](sprints/sprint-09-graphrag/README.md) | **GraphRAG** — KG каталога (Neo4j), graph/global/text2cypher retrieval, маршрутизация по типу вопроса, реранкер | ✅ | [sprint-09](sprints/sprint-09-graphrag/README.md) |
 | 10 | [multimodal-rag](sprints/sprint-10-multimodal-rag/README.md) | **Мультимодальный RAG** — 5 методов индексации (naive text / OCR / caption / unified image-embed / multivector) на визуально-плотном B2B-корпусе; сегментный анализ (текст/чарты/раскладка/multi-hop/unanswerable), цена (время, $, объём) на каждый метод | ✅ | [sprint-10](sprints/sprint-10-multimodal-rag/README.md) · [final report](../evals/reports/multimodal-final.md) |
-| 11 | TBD | **Context-engineering и агентное планирование** — sliding window / summarization, персистентная память (граф/БД), Plan-and-Execute, task decomposition, Skills, Subagents | 📋 | — |
-| 12 | TBD | **RAG-улучшения** — hybrid search (BM25 + dense), структурный PDF-чанкинг (заголовки, таблицы) | 📋 | — |
+| 12 | TBD | **Context-engineering и агентное планирование** — sliding window / summarization, персистентная память (граф/БД), Plan-and-Execute, task decomposition, Skills, Subagents | 📋 | — |
+| 13 | TBD | **RAG-улучшения** — hybrid search (BM25 + dense), структурный PDF-чанкинг (заголовки, таблицы) | 📋 | — |
+
+> Номер 11 занят sprint-11 red-teaming-baseline (v0.3): security-baseline нужен до наращивания агентной автономии.
 
 ---
 
@@ -93,10 +95,13 @@
 **Ключевые результаты:**
 
 - [x] **Langfuse v3 self-hosted:** апгрейд `devops/docker-compose.yml` с `langfuse:2.95.11` на v3+ (ClickHouse, Redis, S3/Blob); end-to-end трейсы LLM + tool spans в UI — sprint-07
-- [ ] Guardrails: валидация ввода, ограничение тематики, безопасные ответы
-- [ ] Rate limiting и базовая защита от DDoS / абьюза
-- [ ] Лимиты на длину диалога / стоимость запросов к LLM
-- [ ] Проверки безопасности (секреты, заголовки, CORS)
+- [x] **Red teaming baseline:** воспроизводимый прогон Promptfoo «до/после» на `POST /api/v1/chat`, модель угроз, фиксы за `SECURITY_ENABLED` — sprint-11 ✅ · [final-report](../practice/redteam/final-report.md)
+- [ ] Guardrails + policy layer в Core: тематический классификатор (D-12; open F-13/F-16–F-18/F-20/F-21/F-24, partial F-22/F-23), NLP third-party ПД (D-06 / F-09), усиление формул ложной оплаты (F-06), фильтрация Cypher/меток в `message` (D-08/D-09), изоляция инструкций в чанках RAG (D-10 / R-11), XSS/`message_html` на клиенте (D-03 / R-15)
+- [ ] Rate limiting и базовая защита от DDoS / абьюза (D-01 / R-13); лимиты на длину диалога / стоимость запросов к LLM
+- [ ] Проверки безопасности: секреты, заголовки, CORS production (D-02)
+- [ ] Redteam extended + регрессия харнесса sprint-11: crescendo/goat/`stateful`, encoding-стратегии без canary-JS (D-11); повторный `redteam eval` на замороженных yaml после hotfix denylist URL
+
+**Контекст security:** sprint-11 закрыт — baseline ASR 36.23%→18.12%, FIX-1…FIX-5 за `SECURITY_ENABLED` (default true), харнесс в `practice/redteam/` ([final-report](../practice/redteam/final-report.md)). Остаются open/partial находки и defer D-01…D-12; публичный `/chat` без auth и без rate limit — по-прежнему.
 
 **Контекст Langfuse:** backend на SDK v3 (`init_langfuse`, `CallbackHandler`); self-hosted **v3** (sprint-07) принимает OTLP. Runbook trace: `backend/README.md`, `devops/README.md`.
 
@@ -105,9 +110,11 @@
 | # | Sprint | Цель | Статус | Документ |
 |---|--------|------|--------|----------|
 | 07 | [langfuse-v3](sprints/sprint-07-langfuse-v3/README.md) | Langfuse v2→v3 compose, clean start, DoD «trace за turn» | ✅ | sprint-07 |
-| — | TBD | Guardrails + policy layer в Core | 📋 | — |
-| — | TBD | Rate limits, квоты LLM, observability алертов | 📋 | — |
-| — | TBD | Security review: CORS production, headers, secrets CI | 📋 | — |
+| 11 | [red-teaming-baseline](sprints/sprint-11-red-teaming-baseline/README.md) | **Red teaming baseline** — Promptfoo, baseline «до/после», фиксы за `SECURITY_ENABLED` | ✅ | [sprint-11](sprints/sprint-11-red-teaming-baseline/README.md) · [final-report](../practice/redteam/final-report.md) |
+| — | TBD | Guardrails + policy layer в Core (хвосты sprint-11: D-03, D-06–D-10, D-12; open/partial F-*) | 📋 | — |
+| — | TBD | Rate limits, квоты LLM, observability алертов (D-01) | 📋 | — |
+| — | TBD | Security review: CORS production, headers, secrets CI (D-02) | 📋 | — |
+| — | TBD | Redteam extended + regression harness sprint-11 (D-11; crescendo/encoding; rerun eval) | 📋 | — |
 
 ---
 
@@ -127,9 +134,10 @@
 
 | # | Sprint | Цель | Статус | Документ |
 |---|--------|------|--------|----------|
-| — | TBD | Postgres + миграции сессий/сообщений | 📋 | — |
-| — | TBD | Платёжный провайдер + webhooks | 📋 | — |
+| — | TBD | Postgres + миграции сессий/сообщений; привязка сессии / auth (D-04 / R-12) | 📋 | — |
+| — | TBD | Платёжный провайдер + webhooks; защита чужого `payment_link` (D-05 / R-14) | 📋 | — |
 | — | TBD | CRM-интеграция, эскалация, выдача доступа | 📋 | — |
+| — | TBD | Embed виджета на llmstart.ru — XSS/`message_html` в scope клиента (D-03 / R-15) | 📋 | — |
 
 ---
 
@@ -153,6 +161,8 @@ flowchart LR
 
 | Дата | Изменение |
 |------|-----------|
+| 2026-08-16 | Закрыт sprint-11 red-teaming-baseline: ASR 36.23%→18.12%, FIX-1…5, [final-report](../practice/redteam/final-report.md); backlog D-01…D-12 и open/partial влиты в TBD v0.3/v1.0 без дубликатов |
+| 2026-08-10 | Номер 11 отдан sprint-11 red-teaming-baseline (v0.3, security-трек); context-engineering → 12, RAG-улучшения → 13 |
 | 2026-07-11 | Закрыт sprint-10 multimodal-rag: 7 конфигураций × 5 сегментов, вердикт — метод C default, D — S4-upgrade; [multimodal-final.md](../evals/reports/multimodal-final.md) |
 | 2026-07-05 | Создан план sprint-10 multimodal-rag: 8 задач (анализ корпуса → датасеты/метрики → контракт индексатора → методы A/OCR, B/caption, C/unified-embed, D/multivector → сводный отчёт и вердикт) |
 | 2026-06-23 | sprint-08: payload index для `segment` в Qdrant; отдельный путь чанкинга PDF |

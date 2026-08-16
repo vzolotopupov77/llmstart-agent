@@ -12,7 +12,7 @@
 | Назначение | Единая точка диалога для виджета и Telegram-бота |
 | Направление | In (клиенты → backend) |
 | Протокол | HTTP REST; JSON или SSE (`Accept`) |
-| Базовый URL (локально) | `http://localhost:8000` |
+| Базовый URL (локально) | `http://localhost:8003` |
 | Документация | `/docs` (Swagger UI FastAPI) |
 
 Полные контракты — в [api-contracts.md](api-contracts.md).
@@ -21,14 +21,14 @@
 |----------|----------|
 | `POST /api/v1/chat` | Сообщение в диалог; JSON или SSE |
 | `GET /health` | Liveness |
-| `GET /ready` | Готовность (Core + MCP subprocess) |
+| `GET /ready` | Готовность (ключ LLM + 8 MCP tools) |
 
 **Клиенты**
 
 | Клиент | Переменная | Значение (dev) |
 |--------|------------|----------------|
-| frontend (Next.js) | `NEXT_PUBLIC_BACKEND_BASE_URL` (клиент), `BACKEND_BASE_URL` (SSR) | `http://localhost:8000` |
-| bot (aiogram) | `BACKEND_BASE_URL` | `http://localhost:8000` |
+| frontend (Next.js) | `NEXT_PUBLIC_BACKEND_BASE_URL` (клиент), `BACKEND_BASE_URL` (SSR) | `http://localhost:8003` |
+| bot (aiogram) | `BACKEND_BASE_URL` | `http://localhost:8003` |
 
 Виджет в MVP встраивается только на **localhost** (разработка); production-домен `llmstart.ru` — post-MVP.
 
@@ -40,11 +40,11 @@
 |----------|----------|
 | Назначение | RAG, каталог B2C, лиды, мок-оплата — единая граница side-effects |
 | Направление | Out (backend → mcp_server) |
-| Протокол | **MCP over stdio** (subprocess, запускается Core) |
+| Протокол | **In-process** (обработчики `mcp_server` вызываются из Core; stdio — для тестов). HTTP MCP — post-MVP, см. [architecture.md](architecture.md) |
 | Критичность | **MVP** — без MCP агент не выполняет tools |
 | Замена | HTTP MCP / отдельный контейнер — post-MVP |
 
-**Как подключается:** `backend/mcp_client/` поднимает `mcp_server` при старте приложения; LangChain ReAct вызывает tools через MCP SDK.
+**Как подключается:** `factory.py` при старте берёт определения через `mcp_client/tool_registry.py` и оборачивает их в LangChain-инструменты (`tool_adapter.py`). Отдельный MCP-процесс не поднимается.
 
 **Данные:** монтирование `data/` (read/write для `leads.txt`, Chroma в `data/.chroma/`).
 
@@ -142,7 +142,7 @@ Self-hosted stack (sprint-07): `langfuse-web` + `langfuse-worker`, Postgres, Cli
 |------------|----------|
 | `TELEGRAM_BOT_TOKEN` | Токен от @BotFather |
 | `TELEGRAM_BOT_USERNAME` | Username без `@` (для ссылок) |
-| `BACKEND_BASE_URL` | URL Agent Core, напр. `http://localhost:8000` |
+| `BACKEND_BASE_URL` | URL Agent Core, напр. `http://localhost:8003` |
 
 ### Handoff web → Telegram
 
@@ -260,7 +260,7 @@ graph LR
 
 | Компонент | Переменные |
 |-----------|------------|
-| backend | `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `OPENAI_MODEL`, `LANGFUSE_*`, MCP launch config |
+| backend | `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `OPENAI_MODEL`, `LANGFUSE_*`, `SECURITY_ENABLED`, `SECURITY_CANARY_TOKEN`, `EVAL_ACCESS_KEY` |
 | mcp_server | `OPENAI_API_KEY`, `OPENAI_BASE_URL`, (+ embedding model в config) |
 | bot | `TELEGRAM_BOT_TOKEN`, `TELEGRAM_BOT_USERNAME`, `BACKEND_BASE_URL` |
 | frontend | `NEXT_PUBLIC_BACKEND_BASE_URL`, `NEXT_PUBLIC_TELEGRAM_BOT_USERNAME` |

@@ -11,6 +11,7 @@ backend/app/
 ├── api/routes/             # chat, products, health, ready
 ├── services/               # agent_service, catalog_service, sse_formatter
 ├── agent/                  # react_runner, streaming_callbacks, prompts
+├── security/               # input/output guards, tool policy, config_id gate
 ├── mcp_client/             # in-process MCP handlers + LangChain tools
 └── observability/          # Langfuse callbacks
 ```
@@ -29,6 +30,9 @@ backend/app/
 | `LANGFUSE_PUBLIC_KEY` | ❌ | Tracing (опционально) |
 | `LANGFUSE_SECRET_KEY` | ❌ | Tracing |
 | `LANGFUSE_HOST` | ❌ | напр. `http://localhost:3001` |
+| `SECURITY_ENABLED` | ❌ | Default: `true`. Guard'ы и policy инструментов. `false` — поведение baseline «до» (промпт V1) |
+| `SECURITY_CANARY_TOKEN` | ❌ | Canary в системном промпте (вне `SECURITY_ENABLED`) |
+| `EVAL_ACCESS_KEY` | ❌ | Секрет для `config_id`: заголовок `X-LLMStart-Eval-Key`. Пустой ключ при включённой защите блокирует все `config_id` |
 
 См. корневой `.env.example`.
 
@@ -67,6 +71,18 @@ curl -s -X POST http://localhost:8003/api/v1/chat \
 ```
 
 Продолжение диалога — передать `session_id` из ответа.
+
+### Security guards (sprint-11)
+
+При `SECURITY_ENABLED=true` (default):
+
+- default-промпт — `SYSTEM_PROMPT_V6`; при `false` — замороженный V1;
+- узкий входной denylist (`HACKED:`, обёртки `<system>` / `System:` / `[SYSTEM]` в начале, форматный медтест `Диагноз:` + `Назначение:`) → ответ ровно `[SECURITY_BLOCKED]`;
+- выходной фильтр (JSON и SSE): canary, имена tools, `session_id`/`product_id` как параметры, формулы «оплата принята» без `confirmed` в сессии;
+- policy `confirm_payment` / `save_lead` до вызова инструмента;
+- публичный `config_id` исполняется только с заголовком `X-LLMStart-Eval-Key`, совпадающим с `EVAL_ACCESS_KEY`.
+
+Canary-обёртка в `ReactRunner` работает всегда, независимо от флага.
 
 ### Пример SSE-чата (виджет)
 
