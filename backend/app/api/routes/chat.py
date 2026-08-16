@@ -1,5 +1,7 @@
 """POST /api/v1/chat endpoint."""
 
+from typing import Annotated
+
 from fastapi import APIRouter, Header, HTTPException, Request, status
 from fastapi.responses import StreamingResponse
 
@@ -45,7 +47,10 @@ def chat(
     body: ChatRequest,
     request: Request,
     accept: str = Header(default="application/json"),
-    eval_access_key: str | None = Header(default=None, alias=EVAL_ACCESS_KEY_HEADER),
+    eval_access_key: Annotated[
+        str | None,
+        Header(alias=EVAL_ACCESS_KEY_HEADER),
+    ] = None,
 ) -> ChatResponse | StreamingResponse:
     """Process one chat turn as JSON or SSE depending on Accept."""
     normalized_accept = accept.split(",", maxsplit=1)[0].strip().lower()

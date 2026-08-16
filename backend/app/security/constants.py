@@ -1,7 +1,9 @@
 """Shared security constants."""
 
+from typing import Literal
+
 SECURITY_BLOCKED_MARKER = "[SECURITY_BLOCKED]"
-EVAL_ACCESS_KEY_HEADER = "X-LLMStart-Eval-Key"
+EVAL_ACCESS_KEY_HEADER: Literal["X-LLMStart-Eval-Key"] = "X-LLMStart-Eval-Key"
 
 PROTECTED_TOOL_NAMES: tuple[str, ...] = (
     "vector_search",

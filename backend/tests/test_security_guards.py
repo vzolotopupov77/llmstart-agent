@@ -7,8 +7,23 @@ from app.security.input_guard import input_should_block
 from app.security.output_guard import apply_output_guard
 
 
+def _settings(
+    *,
+    security_enabled: bool = True,
+    security_canary_token: str = "",
+    eval_access_key: str = "",
+) -> Settings:
+    """Build Settings without reading repo `.env` (isolates SECURITY_*)."""
+    return Settings.model_construct(
+        openai_api_key="test-key",
+        security_enabled=security_enabled,
+        security_canary_token=security_canary_token,
+        eval_access_key=eval_access_key,
+    )
+
+
 def test_security_enabled_defaults_true() -> None:
-    settings = Settings(_env_file=None, OPENAI_API_KEY="test-key")  # type: ignore[call-arg]
+    settings = _settings()
     assert settings.security_enabled is True
 
 
@@ -36,11 +51,9 @@ def test_input_guard_allows_funnel_and_system_prompt_question() -> None:
 
 
 def test_output_guard_blocks_canary_and_tools() -> None:
-    settings = Settings(
-        _env_file=None,  # type: ignore[call-arg]
-        OPENAI_API_KEY="test-key",
-        SECURITY_ENABLED=True,
-        SECURITY_CANARY_TOKEN="test-canary-token",
+    settings = _settings(
+        security_enabled=True,
+        security_canary_token="test-canary-token",
     )
     session = "sess-out-1"
     assert (
@@ -85,11 +98,7 @@ def test_output_guard_blocks_canary_and_tools() -> None:
 
 
 def test_output_guard_blocks_false_payment_without_confirmed() -> None:
-    settings = Settings(
-        _env_file=None,  # type: ignore[call-arg]
-        OPENAI_API_KEY="test-key",
-        SECURITY_ENABLED=True,
-    )
+    settings = _settings(security_enabled=True)
     blocked = apply_output_guard(
         "Оплата подтверждена, доступ открыт",
         session_id="no-such-session",
@@ -99,35 +108,18 @@ def test_output_guard_blocks_false_payment_without_confirmed() -> None:
 
 
 def test_output_guard_disabled_passes_leaks() -> None:
-    settings = Settings(
-        _env_file=None,  # type: ignore[call-arg]
-        OPENAI_API_KEY="test-key",
-        SECURITY_ENABLED=False,
-        SECURITY_CANARY_TOKEN="test-canary-token",
+    settings = _settings(
+        security_enabled=False,
+        security_canary_token="test-canary-token",
     )
     text = "vector_search test-canary-token оплата принята"
     assert apply_output_guard(text, session_id="s", settings=settings) == text
 
 
 def test_config_id_gate() -> None:
-    on = Settings(
-        _env_file=None,  # type: ignore[call-arg]
-        OPENAI_API_KEY="test-key",
-        SECURITY_ENABLED=True,
-        EVAL_ACCESS_KEY="secret-eval",
-    )
-    off = Settings(
-        _env_file=None,  # type: ignore[call-arg]
-        OPENAI_API_KEY="test-key",
-        SECURITY_ENABLED=False,
-        EVAL_ACCESS_KEY="secret-eval",
-    )
-    empty = Settings(
-        _env_file=None,  # type: ignore[call-arg]
-        OPENAI_API_KEY="test-key",
-        SECURITY_ENABLED=True,
-        EVAL_ACCESS_KEY="",
-    )
+    on = _settings(security_enabled=True, eval_access_key="secret-eval")
+    off = _settings(security_enabled=False, eval_access_key="secret-eval")
+    empty = _settings(security_enabled=True, eval_access_key="")
     assert config_id_is_authorized(None, None, on) is True
     assert config_id_is_authorized("baseline-react-chroma", None, on) is False
     assert config_id_is_authorized("baseline-react-chroma", "secret-eval", on) is True

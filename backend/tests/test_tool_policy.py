@@ -224,6 +224,7 @@ def test_adapter_blocks_save_lead_without_confirm(policy_data_dir: Path) -> None
             "segment": "b2c",
         },
     )
+    assert isinstance(payload, str)
     body = json.loads(payload)
     assert "error" in body
     lines = [line for line in leads_path().read_text(encoding="utf-8").splitlines() if "{" in line]
@@ -248,19 +249,21 @@ def test_confirm_without_pending_marks_turn_and_blocks_save(policy_data_dir: Pat
     )
     ctx = _context("sess-no-pending")
     set_turn_context(ctx)
-    confirm_body = json.loads(confirm_tools[0].invoke({"product_id": "agents"}))
+    confirm_payload = confirm_tools[0].invoke({"product_id": "agents"})
+    assert isinstance(confirm_payload, str)
+    confirm_body = json.loads(confirm_payload)
     assert "error" in confirm_body
-    save_body = json.loads(
-        confirm_tools[1].invoke(
-            {
-                "email": "ivan@example.com",
-                "phone": "+79990001122",
-                "name": "Иван",
-                "product_id": "agents",
-                "segment": "b2c",
-            },
-        ),
+    save_payload = confirm_tools[1].invoke(
+        {
+            "email": "ivan@example.com",
+            "phone": "+79990001122",
+            "name": "Иван",
+            "product_id": "agents",
+            "segment": "b2c",
+        },
     )
+    assert isinstance(save_payload, str)
+    save_body = json.loads(save_payload)
     assert "error" in save_body
     lines = [line for line in leads_path().read_text(encoding="utf-8").splitlines() if "{" in line]
     assert lines == []

@@ -81,4 +81,6 @@ def _is_catalog_product(product_id: str) -> bool:
 
 
 def _is_tool_error(result: object) -> bool:
-    return isinstance(result, dict) and "error" in result
+    if not isinstance(result, dict):
+        return False
+    return "error" in result
